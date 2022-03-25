@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
@@ -23,8 +24,10 @@ public class LocalisationEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NonNull
     private String nomPays;
 
+    @NonNull
     private String nomVille;
 
     @OneToMany(mappedBy = "localisation")

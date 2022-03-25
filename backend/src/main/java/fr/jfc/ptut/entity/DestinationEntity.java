@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
@@ -22,6 +23,7 @@ public class DestinationEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NonNull
     private Periode periode;
 
     private int nbPlaceSemestre;
@@ -30,6 +32,7 @@ public class DestinationEntity {
 
     private LocalDate dateFinDeContratIsis;
 
+    @NonNull
     private String nomEtablissementAccueil;
 
     private String image;
