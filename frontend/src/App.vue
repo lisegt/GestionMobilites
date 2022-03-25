@@ -1,10 +1,7 @@
 <template>
+ 
+    <Accueil/>
   
-  <div>
-    <Accueil></Accueil>
-  </div>
-  <body>
-  </body>
 </template>
 
 <style>
@@ -17,5 +14,5 @@ body {
 </style>
 
 <script setup>
-import Accueil from './views/admin/Accueil.vue';
+import Accueil from './views/admin/Accueil/Accueil.vue';
 </script>
