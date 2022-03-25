@@ -1,10 +1,18 @@
 <template>
+  
   <div>
-    <Accueil/>
+    <Accueil></Accueil>
   </div>
+  <body>
+  </body>
 </template>
 
 <style>
+
+body {
+  background: #f3f3f3;
+}
+
 
 </style>
 
