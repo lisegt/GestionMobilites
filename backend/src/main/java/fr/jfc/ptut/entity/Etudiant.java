@@ -7,13 +7,12 @@ import lombok.*;
 
 @Getter @Setter @NoArgsConstructor @RequiredArgsConstructor @ToString
 @Entity
-public class EtudiantEntity {
-    
+public class Etudiant {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NonNull
     private int numEtud;
     
     @NonNull
@@ -28,5 +27,5 @@ public class EtudiantEntity {
     @OneToMany(mappedBy="etudiant")
     @ToString.Exclude // On ne veut pas inclure la liste des mob dans le toString
     // Sinon récursivité infinie 
-    private List<MobiliteEntity> mobilites = new LinkedList<>();
+    private List<Mobilite> mobilites = new LinkedList<>();
 }

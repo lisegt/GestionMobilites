@@ -5,7 +5,7 @@ import lombok.*;
 
 @Getter @Setter @NoArgsConstructor @RequiredArgsConstructor @ToString
 @Entity
-public class DocumentEntity {
+public class Document {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private Integer id;
     

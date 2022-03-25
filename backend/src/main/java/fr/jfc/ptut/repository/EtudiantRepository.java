@@ -1,8 +1,8 @@
 package fr.jfc.ptut.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import fr.jfc.ptut.entity.EtudiantEntity;
+import fr.jfc.ptut.entity.Etudiant;
 
-public interface EtudiantRepository extends JpaRepository<EtudiantEntity, Integer> {
+public interface EtudiantRepository extends JpaRepository<Etudiant, Integer> {
     
 }
