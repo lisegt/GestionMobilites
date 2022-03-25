@@ -17,9 +17,14 @@ public class MobiliteEntity {
     @NonNull
     private int dureeEnMois;
 
+    @NonNull
     private Periode periode;
 
     @NonNull
     @ManyToOne(optional = false) //obligatoire car clé étrangère non nulle
     private EtudiantEntity etudiant;
+
+    @NonNull
+    @ManyToOne(optional = false)
+    private DestinationEntity destination;
 }

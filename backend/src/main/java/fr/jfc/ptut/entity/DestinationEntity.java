@@ -1,12 +1,15 @@
 package fr.jfc.ptut.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,7 +27,7 @@ public class DestinationEntity {
     private int id;
 
     @NonNull
-    private Periode periode;
+    private Type typeMobilite;
 
     private int nbPlaceSemestre;
 
@@ -37,7 +40,12 @@ public class DestinationEntity {
 
     private String image;
 
+    @NonNull
     @ManyToOne
     private LocalisationEntity localisation;
+
+    @OneToMany(mappedBy = "destination")
+    @ToString.Exclude
+    private List<MobiliteEntity> mobilites = new ArrayList<>();
 
 }

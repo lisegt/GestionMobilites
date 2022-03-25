@@ -5,7 +5,7 @@ import lombok.*;
 
 @Getter @Setter @NoArgsConstructor @RequiredArgsConstructor @ToString
 @Entity
-public class Document {
+public class DocumentEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private Integer id;
     
@@ -15,6 +15,5 @@ public class Document {
     @NonNull
     private String intitule;
 
-    @NonNull
     private String description;
 }
