@@ -5,7 +5,7 @@ import lombok.*;
 
 @Getter @Setter @NoArgsConstructor @RequiredArgsConstructor @ToString
 @Entity
-public class MobiliteEntity {
+public class Mobilite {
     @Id  @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private Integer id;
     
@@ -14,12 +14,16 @@ public class MobiliteEntity {
     
     private String retourExperience;
 
-    @NonNull
     private int dureeEnMois;
 
+    @NonNull
     private Periode periode;
 
     @NonNull
     @ManyToOne(optional = false) //obligatoire car clé étrangère non nulle
-    private EtudiantEntity etudiant;
+    private Etudiant etudiant;
+
+    @NonNull
+    @ManyToOne(optional = false)
+    private Destination destination;
 }

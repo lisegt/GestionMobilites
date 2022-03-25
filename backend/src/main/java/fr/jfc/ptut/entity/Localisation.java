@@ -1,12 +1,13 @@
 package fr.jfc.ptut.entity;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,28 +17,22 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Getter @Setter @NoArgsConstructor @RequiredArgsConstructor @ToString
-public class DestinationEntity {
+@Getter @Setter @RequiredArgsConstructor @NoArgsConstructor @ToString
+public class Localisation {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NonNull
-    private Periode periode;
-
-    private int nbPlaceSemestre;
-
-    private int nbPlaceAnnee;
-
-    private LocalDate dateFinDeContratIsis;
+    private String nomPays;
 
     @NonNull
-    private String nomEtablissementAccueil;
+    private String nomVille;
 
-    private String image;
+    @OneToMany(mappedBy = "localisation")
+    @ToString.Exclude
+    private List<Destination> destinations = new ArrayList<>();
 
-    @ManyToOne
-    private LocalisationEntity localisation;
 
 }

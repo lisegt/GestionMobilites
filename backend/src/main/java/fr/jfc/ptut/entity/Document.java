@@ -15,6 +15,5 @@ public class Document {
     @NonNull
     private String intitule;
 
-    @NonNull
     private String description;
 }
