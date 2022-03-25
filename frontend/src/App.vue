@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-view />
-    </div>
+    <Accueil/>
   </div>
 </template>
 
@@ -12,5 +9,5 @@
 </style>
 
 <script setup>
+import Accueil from './views/admin/Accueil.vue';
 </script>
-
