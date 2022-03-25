@@ -20,7 +20,7 @@ import lombok.ToString;
 
 @Entity
 @Getter @Setter @NoArgsConstructor @RequiredArgsConstructor @ToString
-public class DestinationEntity {
+public class Destination {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,10 +42,10 @@ public class DestinationEntity {
 
     @NonNull
     @ManyToOne
-    private LocalisationEntity localisation;
+    private Localisation localisation;
 
     @OneToMany(mappedBy = "destination")
     @ToString.Exclude
-    private List<MobiliteEntity> mobilites = new ArrayList<>();
+    private List<Mobilite> mobilites = new ArrayList<>();
 
 }

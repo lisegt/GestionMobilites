@@ -10,7 +10,7 @@
 <HeaderAdmin/>
 
 
-<Carte v-bind:nom="'Destination'" v-bind:chemin="'../views/admin/Accueil/img/img_destionations.png'"/>
+<Carte v-bind:nom="'Destination'" v-bind:chemin="'/static/img/img_destinations.06e12228.png'"/>
 </div>
     
 </template>
