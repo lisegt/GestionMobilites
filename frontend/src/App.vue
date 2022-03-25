@@ -1,7 +1,8 @@
 <template>
- 
+  <div class="container-fluid">
+    <HeaderAdmin/>
     <Accueil/>
-  
+  </div>
 </template>
 
 <style>
@@ -14,5 +15,6 @@ body {
 </style>
 
 <script setup>
+import HeaderAdmin from './components/HeaderAdmin.vue';
 import Accueil from './views/admin/Accueil/Accueil.vue';
 </script>

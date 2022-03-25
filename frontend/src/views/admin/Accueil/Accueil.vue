@@ -1,5 +1,5 @@
 <template>
-<div class="container-fluid h-100 border border-2 border-red ">
+<div class="container-fluid">
 <!-- 
 <div id="nav">
       <router-link to="/">Home</router-link> |
@@ -7,8 +7,6 @@
       
 </div>
 -->
-<HeaderAdmin/>
-
 
 <Carte v-bind:nom="'Destination'" v-bind:chemin="'/static/img/img_destinations.06e12228.png'"/>
 </div>
