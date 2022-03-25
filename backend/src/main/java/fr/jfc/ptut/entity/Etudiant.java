@@ -13,7 +13,8 @@ public class Etudiant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private int numEtud;
+    @NonNull
+    private Integer numEtud;
     
     @NonNull
     private String nom;
@@ -22,7 +23,7 @@ public class Etudiant {
     private String prenom;
 
     @NonNull
-    private String promo;
+    private Integer promo;
 
     @OneToMany(mappedBy="etudiant")
     @ToString.Exclude // On ne veut pas inclure la liste des mob dans le toString
