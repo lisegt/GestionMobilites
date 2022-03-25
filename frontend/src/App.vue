@@ -1,15 +1,13 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid mb-0 border">
     <HeaderAdmin/>
-    <Accueil/>
+    <Accueil />
+    <Footer class="footer" />
   </div>
 </template>
 
 <style>
 
-body {
-  background: #f3f3f3;
-}
 
 
 </style>
@@ -17,4 +15,5 @@ body {
 <script setup>
 import HeaderAdmin from './components/HeaderAdmin.vue';
 import Accueil from './views/admin/Accueil/Accueil.vue';
+import Footer from './components/Footer.vue';
 </script>

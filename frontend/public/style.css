@@ -7,3 +7,19 @@
     font-weight: normal;
     font-style: normal;
 }
+
+.body {
+    background: #f3f3f3;
+    min-height: 95vh;
+    width:100%;        
+   
+
+
+    border: 2px black ridge;
+   
+  }
+.footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
