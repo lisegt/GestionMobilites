@@ -1,7 +1,7 @@
 <template>
-  <div class="container-fluid mb-0 border">
+  <div class="container-fluid h-100">
     <HeaderAdmin/>
-    <Accueil />
+    <Accueil  />
     <Footer class="footer" />
   </div>
 </template>

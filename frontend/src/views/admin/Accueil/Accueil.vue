@@ -1,20 +1,33 @@
 <template>
-<div>
+<div id="accueil" class=" d-flex flex-column justify-content-around  row">
 <div class="row">
 
 </div>
-<div class="row border  justify-content-around g-5 gx-md-1">
+<div class="row h-25 w-100   justify-content-around g-5 gx-md-1">
      <!-- pas beau <Carousel/> -->
-<div class="col-12 col-md-1"></div>
+<div class="col-1"></div>
 <Carte v-bind:nom="'ETUDIANTS'" v-bind:chemin="etudiants"/>
 <Carte v-bind:nom="'DESTINATIONS'" v-bind:chemin="destinations"/>
 <Carte v-bind:nom="'MOBILITES'" v-bind:chemin="mobilites"/>
 <Carte v-bind:nom="'DOCUMENTS ADMIN.'" v-bind:chemin="doc"/>
-<div class="col-12 col-md-1"></div>
+<div class="col-1"></div>
 </div>
 </div>
     
 </template>
+
+<style>
+#accueil{
+      height: 85%;
+      overflow-y:auto;
+     
+
+}
+
+
+
+</style>
+
 
 <script setup>
 
@@ -27,9 +40,5 @@ import destinations from "./img/img_destinations.png"
 import mobilites from "./img/img_mobilités.png" 
 import doc from "./img/img_docsadmin.png" 
 
-
-
-
-
-
 </script>
+
