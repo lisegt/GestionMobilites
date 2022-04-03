@@ -20,6 +20,6 @@
 {
     background-color: #022e51;
     font-family: 'Montserrat', sans-serif;
-    
+    font-size: small;
 }
 </style>

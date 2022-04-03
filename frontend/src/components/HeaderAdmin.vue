@@ -2,7 +2,7 @@
 
     <nav class="navbar navbar-expand row">
         
-        <a class="navbar-brand col-1 ms-4" href="#">
+        <a class="navbar-brand col ms-4" href="#">
             <img src="../views/admin/Accueil/img/ISIS-logo.png" alt="logo ISIS" height="60em"/>
         </a>
         <div class="navbar-nav col-10 titres">
@@ -14,8 +14,17 @@
             <a class="nav-item" href="#">Site public</a>
         </div>
 
-        <div class="col-1">
-            <img src="../views/admin/Accueil/img/utilisateur.png" alt="logo ISIS" height="30em"/>
+        <div class="col text-center dropdown">
+            
+
+            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="../views/admin/Accueil/img/utilisateur.png" alt="utilisateur" height="30em"/>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+            </div>
         </div>
         
 
@@ -33,6 +42,15 @@ nav
     background-color: #022e51;
     font-family: 'Bebas Neue', sans-serif;
     
+}
+
+.nav-item:hover{
+    text-decoration: underline #b74803 ;
+    color: #f3f3f3 ;
+}
+
+.active{
+    text-decoration: underline #b74803 ;
 }
 
 div a {
