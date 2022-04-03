@@ -5,7 +5,7 @@
         <a class="navbar-brand col ms-4" href="#">
             <img src="../views/admin/accueil/img/ISIS-logo.png" alt="logo ISIS" height="60em"/>
         </a>
-        <div class="navbar-nav col-10 titres">
+        <div class="navbar-nav col-9 titres">
             <a class="nav-item active" href="#">Accueil</a>
             <a class="nav-item" href="#">Etudiants</a>
             <a class="nav-item" href="#">Destinations</a>
