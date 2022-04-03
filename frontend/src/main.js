@@ -4,5 +4,7 @@ import router from "./router";
 import store from "./store";
 // bootstrap 5
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
+
 import "bootstrap";
 createApp(App).use(store).use(router).mount("#app");
