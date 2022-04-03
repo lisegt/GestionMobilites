@@ -1,23 +1,25 @@
 <template>
-    <div id="carouselExampleControls"  class="carousel slide border" data-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-            <img class="d-block w-100" width=100 height=100 src="../views/admin/Accueil/img/img_destinations.png" alt="First slide">
-            </div>
-            <div class="carousel-item">
-            <img class="d-block w-100" alt="Second slide">
-            </div>
-            <div class="carousel-item">
-            <img class="d-block w-100"  alt="Third slide">
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+<div class="col h-100">
+ <div id="carouselExampleSlidesOnly" class="carousel slide h-100 " data-bs-ride="carousel">
+  <div class="carousel-inner h-100 ">
+    <div class="carousel-item h-100 active">
+      <img class="d-block w-100 h-100 round" src="../views/admin/Accueil/img/paysage6.jpg" alt="...">
     </div>
+    <div class="carousel-item h-100">
+      <img  class="d-block w-100 h-100 round" src="../views/admin/Accueil/img/paysage5.jpg" alt="...">
+    </div>
+    <div class="carousel-item h-100">
+      <img  class="d-block w-100 h-100 round" src="../views/admin/Accueil/img/paysage4.jpg" alt="...">
+    </div>
+  </div>
+</div>
+</div>
 </template>
+
+<style>
+.round{
+    
+    border-radius: 40px;
+}
+
+</style>

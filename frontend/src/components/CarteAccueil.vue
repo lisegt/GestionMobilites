@@ -1,6 +1,6 @@
 <template>
-<div class="col-12 col-md-2 ">
-<a type="button" class=" text-white py-3  mx-2  bg-color d-flex flex-column justify-content-center align-items-center border-0 ">
+<div class="col-6 col-xl-3 ">
+<a type="button" class=" text-white py-3 paddingX px-md-0 mx-2  bg-color d-flex flex-column justify-content-center align-items-center border-0 ">
 
     <img v-bind:src="chemin" width="70" height="65" alt="image ">
     <div class="h4 mt-3"> {{nom}}</div>
@@ -20,6 +20,10 @@ defineProps(["chemin","nom"])
     color: #fefefe;
     font-family: "Bebas Neue";
 }
+.paddingX{
 
+    padding-left: 20px;
+    padding-right: 20px;
+}
 
 </style>
