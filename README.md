@@ -41,3 +41,7 @@ npm run serve
 ## Browser developer tools extension
 
 Installer vue-devtools Browser extension https://devtools.vuejs.org/  dans votre navigateur pour débugger plus facilement le front-end.
+
+## Accès à Swagger
+
+http://localhost:8989/swagger-ui/#/ 
