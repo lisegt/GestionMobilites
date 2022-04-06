@@ -1,7 +1,8 @@
 <template>
   <div class="container-fluid h-100">
     <HeaderAdmin/>
-    <Accueil  />
+
+    <router-view />
     <Footer class="footer" />
   </div>
 </template>

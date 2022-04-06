@@ -1,6 +1,5 @@
 <template>
-  <h1>Etudiant</h1>
-  <FormAddEtud/>
+  <h1>Gestion des destinations</h1>
 </template>
 
 <script>
