@@ -2,9 +2,10 @@
 
     <nav class="navbar navbar-expand-lg row">
         
-        <a class="navbar-brand col ms-4" href="#">
+        
+        <router-link class="navbar-brand col ms-4" to="/admin">
             <img src="../views/admin/accueil/img/ISIS-logo.png" alt="logo ISIS" height="60em"/>
-        </a>
+        </router-link>
         
         <div class="navbar-nav col-9 titres">
             <!--
@@ -15,12 +16,13 @@
             <a class="nav-item" href="#">Documents administratifs</a>
             <a class="nav-item" href="#">Site public</a>
             -->
-            <a class="nav-item active" href="#">Accueil</a>
-            <a class="nav-item" href="#">Etudiants</a>
-            <a class="nav-item" href="#">Destinations</a>
-            <a class="nav-item" href="#">Mobilités</a>
-            <a class="nav-item" href="#">Documents administratifs</a>
-            <a class="nav-item" href="#">Site public</a>
+            <router-link class="nav-item active" to="/admin">Accueil</router-link>
+            <router-link class="nav-item" to="/admin/etudiants">Etudiants</router-link>
+            <router-link class="nav-item" to="/admin/destinations">Destinations</router-link>
+            <router-link class="nav-item" to="/admin/mobilites">Mobilités</router-link>
+            <router-link class="nav-item" to="/admin/documents">Documents administratifs</router-link>
+            <router-link class="nav-item" to="#">Site public</router-link>
+
         </div>
 
         <div class="col text-center dropdown btn-group">
@@ -31,7 +33,7 @@
             <div class="dropdown-menu dropdown-menu-right text-center" id="menuDeroulant" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="#">Nom Prénom</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item text-wrap" href="#"><img class="mr-2" src="../views/admin/accueil/img/ajoutAdmin.svg" alt="logo d'ajout d'un admin"/>Ajouter un administrateur</a>
+                <router-link class="dropdown-item text-wrap" to="/admin/docsAdmin"><img class="mr-2" src="../views/admin/accueil/img/ajoutAdmin.svg" alt="logo d'ajout d'un admin"/>Ajouter un administrateur</router-link>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#"><img class="mr-2" src="../views/admin/accueil/img/deconnexion.svg" alt="logo deconnexion"/>Déconnexion</a>
             </div>
@@ -41,7 +43,6 @@
 </template>
 
 <script>
-
 </script>
 
 <style>
