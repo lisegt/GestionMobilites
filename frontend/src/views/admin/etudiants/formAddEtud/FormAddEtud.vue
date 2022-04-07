@@ -1,7 +1,7 @@
 <template>
 <h2>Ajouter un étudiant</h2>
 <div id="form">
-    <form @submit.prevent="$emit('add', nom, prenom, ine, promotion)">
+    <form @submit.prevent="AddEtud">
         <label>Nom :</label>
         <br>
         <input id="nom" name="nom" type="text" v-model="nom" placeholder="Entrez le nom de l'étudiant ..." required/>
@@ -23,23 +23,15 @@
 </div>
 </template>
 
-<script>
+<script setup>
 //Variables
 let nom;
 let prenom;
 let ine;
 let promotion;
 
-function AddEtud() {
-    const url = `/api/etudiants` // l’url de la ressource
-    let myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    const fetchOptions = {method:"POST", headers: myHeaders, body: JSON.stringify({nom:nom, prenom:prenom, ine:ine, promotion:promotion})};
-    fetch(url,fetchOptions)
-    .then((response) => {return response.json()})
-    .then((dataJSON) => {
-    })
-    .catch((error) => console.log(error));
+let AddEtud = function() {
+    console.log("test")
 }
 </script>
 
