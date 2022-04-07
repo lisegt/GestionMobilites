@@ -1,5 +1,6 @@
 <template>
-  <div class="container-fluid h-100">
+
+  <div class="container-fluid overflow-scroll h-100">
     <HeaderAdmin/>
     <router-view />
     <Footer class="footer" />
