@@ -1,7 +1,7 @@
 <template>
 <h2>Ajouter un étudiant</h2>
 <div id="form">
-    <form @submit.prevent="$emit('add', nom, prenom, ine, promotion)">
+    <form @submit.prevent="addEtud()">
         <label>Nom :</label>
         <br>
         <input id="nom" name="nom" type="text" v-model="nom" placeholder="Entrez le nom de l'étudiant ..." required/>
@@ -23,18 +23,26 @@
 </div>
 </template>
 
-<script>
-//Variables
-let nom;
-let prenom;
-let ine;
-let promotion;
+<script setup>
 
-function AddEtud() {
-    const url = `/api/etudiants` // l’url de la ressource
+/**
+ * 
+ * @param
+ * @return
+ * Fonction qui ajoute un étudiant par méthode POST
+ */
+function addEtud() {
+    //Paramètres
+    let nom = document.getElementById("nom").value
+    let prenom = document.getElementById("prenom").value
+    let ine = document.getElementById("ine").value
+    let promotion = document.getElementById("promotion").value
+
+    const url = `http://localhost:8989/api/etudiants` // l’url de l'API
+
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    const fetchOptions = {method:"POST", headers: myHeaders, body: JSON.stringify({nom:nom, prenom:prenom, ine:ine, promotion:promotion})};
+    const fetchOptions = {method:"POST", headers: myHeaders, body: JSON.stringify({nom:nom, numEtud:ine, prenom:prenom, promo:promotion})};
     fetch(url,fetchOptions)
     .then((response) => {return response.json()})
     .then((dataJSON) => {
