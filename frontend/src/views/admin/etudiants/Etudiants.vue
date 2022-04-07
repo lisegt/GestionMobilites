@@ -3,8 +3,8 @@
   <FormAddEtud/>
 </template>
 
-<script>
-
+<script setup>
+  import FormAddEtud from './formAddEtud/FormAddEtud.vue'
 </script>
 
 <style>

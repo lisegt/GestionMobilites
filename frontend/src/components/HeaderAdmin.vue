@@ -1,11 +1,11 @@
 <template>
+    
 
     <nav class="navbar navbar-expand-lg row">
         
-        
-        <router-link class="navbar-brand col ms-4" to="/admin">
-            <img src="../views/admin/accueil/img/ISIS-logo.png" alt="logo ISIS" height="60em"/>
+        <router-link tag="img" src="../views/admin/accueil/img/ISIS-logo.png" class="navbar-brand col ms-4" to="/admin">
         </router-link>
+        
         
         <div class="navbar-nav col-9 titres">
             <!--

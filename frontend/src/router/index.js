@@ -7,7 +7,7 @@ import DocsAdmin from "@/views/admin/docsAdmin/DocsAdmin.vue";
 
 const routes = [
   {
-    path: "/admin",
+    path: "/",
     name: "Accueil",
     component: Accueil ,
   },
