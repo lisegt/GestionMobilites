@@ -61,8 +61,8 @@
                 return diff;
     }
     function getDestinations(){
-        let len = listeDestinations.length
-        listeDestinations.splice(0,len)         //On vide la liste des destinations avant de la remplir afin d'éviter les doublons
+        
+        listeDestinations.splice(0,listeDestinations.length)         //On vide la liste des destinations avant de la remplir afin d'éviter les doublons
     
         let url = `http://localhost:8989/api/destinations`
         fetch(url)
