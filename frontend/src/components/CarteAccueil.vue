@@ -14,6 +14,7 @@ defineProps(["chemin","nom"])
 </script>
 
 <style>
+
 .bg-color{
     background-color: #B74803;
     border-radius: 50px;
