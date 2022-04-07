@@ -27,7 +27,6 @@ public class Mobilite {
     @ManyToOne(optional = false)
     private Destination destination;
 
-   
 
     
 }
