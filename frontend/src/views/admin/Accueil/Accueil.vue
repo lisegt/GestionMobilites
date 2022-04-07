@@ -1,6 +1,6 @@
 <template>
 
-      <div id="accueil" class="overflow-scroll mb-0 d-flex flex-column justify-content-around  ">
+      <div id="accueil" class="overflow-auto mb-0 d-flex flex-column justify-content-around  ">
             <div class="col-12 col-md-6 m-auto hauteur">
                   <Carousel/>
             </div>
@@ -21,7 +21,7 @@
 
 #accueil{
       height: 85%;
-      overflow: scroll;
+      overflow: auto;
      
 
 }

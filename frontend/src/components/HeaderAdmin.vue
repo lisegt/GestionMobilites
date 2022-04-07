@@ -1,13 +1,17 @@
 <template>
     
-
-    <nav class="navbar navbar-expand-lg row">
+    <div class="row">
+    <nav class="navbar navbar-expand-lg col">
         
         <router-link tag="img" src="../views/admin/accueil/img/ISIS-logo.png" class="navbar-brand col ms-4" to="/admin">
         </router-link>
         
         
-        <div class="navbar-nav col-9 titres">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div id="navbarContent" class="collapse navbar-collapse w-100 titres">
             <!--
             <a class="nav-item active" href="#">Accueil</a>
             <a class="nav-item" href="#">Etudiants</a>
@@ -16,30 +20,40 @@
             <a class="nav-item" href="#">Documents administratifs</a>
             <a class="nav-item" href="#">Site public</a>
             -->
-            <router-link class="nav-item active" to="/admin">Accueil</router-link>
-            <router-link class="nav-item" to="/admin/etudiants">Etudiants</router-link>
-            <router-link class="nav-item" to="/admin/destinations">Destinations</router-link>
-            <router-link class="nav-item" to="/admin/mobilites">Mobilités</router-link>
-            <router-link class="nav-item" to="/admin/documents">Documents administratifs</router-link>
-            <router-link class="nav-item" to="#">Site public</router-link>
+            <ul class="navbar-nav titres w-100 ">
+            
+            <li> <router-link class="nav-item active" to="/admin">Accueil</router-link> </li>
+            <li> <router-link class="nav-item" to="/admin/etudiants">Etudiants</router-link> </li>
+            <li> <router-link class="nav-item" to="/admin/destinations">Destinations</router-link> </li>
+            <li> <router-link class="nav-item" to="/admin/mobilites">Mobilités</router-link> </li>
+            <li> <router-link class="nav-item" to="/admin/documents">Documents administratifs</router-link> </li>
+            <li> <router-link class="nav-item" to="#">Site public</router-link> </li>
+            <li>
+                    <div class="col text-center dropdown btn-group">
 
-        </div>
-
-        <div class="col text-center dropdown btn-group">
-
-            <button class="btn dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img src="../views/admin/accueil/img/utilisateur.png" alt="utilisateur" height="30em"/>
-            </button>
-            <div class="dropdown-menu dropdown-menu-right text-center" id="menuDeroulant" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Nom Prénom</a>
-                <div class="dropdown-divider"></div>
-                <router-link class="dropdown-item text-wrap" to="/admin/docsAdmin"><img class="mr-2" src="../views/admin/accueil/img/ajoutAdmin.svg" alt="logo d'ajout d'un admin"/>Ajouter un administrateur</router-link>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#"><img class="mr-2" src="../views/admin/accueil/img/deconnexion.svg" alt="logo deconnexion"/>Déconnexion</a>
+                    <button class="btn dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="../views/admin/accueil/img/utilisateur.png" alt="utilisateur" height="30em"/>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right text-center" id="menuDeroulant" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Nom Prénom</a>
+                        <div class="dropdown-divider"></div>
+                        <router-link class="dropdown-item text-wrap" to="/admin/docsAdmin"><img class="mr-2" src="../views/admin/accueil/img/ajoutAdmin.svg" alt="logo d'ajout d'un admin"/>Ajouter un administrateur</router-link>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#"><img class="mr-2" src="../views/admin/accueil/img/deconnexion.svg" alt="logo deconnexion"/>Déconnexion</a>
+                    </div>
+                    
+                    </div>
+            </li>
+            </ul>
+            
             </div>
-        </div>                      
+            
 
+                             
+        
     </nav>
+    
+    </div>
 </template>
 
 <script>
