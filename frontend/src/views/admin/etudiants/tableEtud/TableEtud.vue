@@ -2,8 +2,8 @@
   
 </template>
 
-<script>
-
+<script setup>
+    defineProps(["etudiants"])
 </script>
 
 <style>

@@ -1,16 +1,27 @@
 <template>
   <h1>Gestion des étudiants</h1>
-  <button @click="test">test</button>
   <FormAddEtud/>
+  
 </template>
 
 <script setup>
   import FormAddEtud from './formAddEtud/FormAddEtud.vue'
+  import {onMounted, reactive} from 'vue'
+
+  let etudiants = reactive([])
+
+  function fetchEtudiants(){
+    fetch("/api/etudiants", {method: 'GET'})
+    .then((response)=>response.json())
+    .then((dataJson)=> etudiants = dataJson._embedded.etudiants)
+  }
+
+  onMounted(()=>{
+    fetchEtudiants()
+  })
 
   function test(){
-    fetch("/api/etudiant/mobilite/1", {method: 'GET'})
-    .then((response)=>response.json())
-    .then((dataJson)=> console.log(dataJson))
+    console.log(etudiants)
   }
   
 </script>
