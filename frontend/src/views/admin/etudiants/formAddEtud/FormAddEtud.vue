@@ -1,4 +1,5 @@
 <template>
+<div>
 <h2>Ajouter un étudiant</h2>
 <div id="form">
     <form @submit.prevent="addEtud()">
@@ -20,6 +21,7 @@
         <br>
         <input id="Bouton" type="submit" value="Valider" />
     </form>
+</div>
 </div>
 </template>
 

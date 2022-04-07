@@ -1,7 +1,9 @@
 <template>
+  <div>
   <h1>Gestion des étudiants</h1>
   <button @click="test">test</button>
   <FormAddEtud/>
+  </div>
 </template>
 
 <script setup>
