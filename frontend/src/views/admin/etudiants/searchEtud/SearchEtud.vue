@@ -1,8 +1,9 @@
 <template>
 <div id="form">
     <form @submit.prevent="search()">
-        <input id="search" type="text" v-model="nom" placeholder="Rechercher un étudiant ..." required/>
-        <br>
+        <div class="form-group">
+            <input id="search" class="form-control" name="nom" type="text" v-model="nom" placeholder="Entrez le nom de l'étudiant ..." required/>
+        </div>
         <input id="Bouton" type="submit" value="Search" />
     </form>
 </div>
@@ -12,7 +13,7 @@
 /**
  * @param
  * @return
- * Fonction qui recherche un étudiant par méthode GET avec son nom
+ * Fonction qui recherche un étudiant avec son nom
  */
 
 import { reactive } from 'vue';
@@ -20,7 +21,7 @@ import { reactive } from 'vue';
 const etudiantSearch = reactive([]);
 
 let etudiants= defineProps(["etudiants"]);
-console.log(etudiants.etudiants)
+
 function search(){
     etudiantSearch.splice(0,etudiantSearch.length)
     let nom = document.getElementById("search").value
