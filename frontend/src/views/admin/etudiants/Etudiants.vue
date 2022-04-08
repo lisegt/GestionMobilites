@@ -1,44 +1,19 @@
 <template>
-  
-  <h1>Gestion des étudiants</h1>
-<<<<<<< HEAD
-  <TableEtud :etudiants="etudiants"/>
-  <FormAddEtud />
-=======
+  <div>
+    <h1>Gestion des étudiants</h1>
 
-  <!-- Button trigger modal -->
-  <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#ajout">
-    Ajouter un étudiant
-  </button>
-  <FormAddEtud/>
-  
-  <SearchEtud v-bind:etudiants="listeEtudiants"/>
-
->>>>>>> 2c70a52845744a3534d5dbd5166d979bea5d9e9a
+    <!-- Button trigger modal -->
+    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#ajout">
+      Ajouter un étudiant
+    </button>
+    <FormAddEtud/>
+    
+    <SearchEtud v-bind:etudiants="listeEtudiants"/>
+  </div>
 </template>
 
 <script setup>
   import FormAddEtud from './formAddEtud/FormAddEtud.vue'
-<<<<<<< HEAD
-  import TableEtud from './tableEtud/TableEtud.vue'
-  import {onMounted, reactive} from 'vue'
-
-  let etudiants = reactive([])
-
-  function fetchEtudiants(){
-    fetch("/api/etudiants", {method: 'GET'})
-    .then((response)=>response.json())
-    .then((dataJson)=> etudiants = dataJson._embedded.etudiants)
-  }
-
-  onMounted(()=>{
-    fetchEtudiants()
-  })
-
-  function test(){
-    console.log(etudiants)
-  }
-=======
   import FormModifEtud from './formModifEtud/FormModifEtud.vue'
   import SearchEtud from './searchEtud/SearchEtud.vue'
 
@@ -63,7 +38,6 @@ function getToDos(){
     })
     .catch((error) => console.log(error));
 }
->>>>>>> 2c70a52845744a3534d5dbd5166d979bea5d9e9a
   
 </script>
 

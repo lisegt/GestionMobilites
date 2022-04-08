@@ -1,8 +1,13 @@
 package fr.jfc.ptut.entity;
+import java.time.Duration;
 import java.time.LocalDate;
 import javax.persistence.*;
+
+import org.springframework.context.annotation.Lazy;
+
 import lombok.*;
 
+@Lazy
 @Getter @Setter @NoArgsConstructor @RequiredArgsConstructor @ToString
 @Entity
 public class Mobilite {
@@ -20,13 +25,28 @@ public class Mobilite {
     private Periode periode;
 
     @NonNull
-    @ManyToOne(optional = false) //obligatoire car clé étrangère non nulle
+    @ManyToOne(fetch=FetchType.LAZY, optional = false) //obligatoire car clé étrangère non nulle
     private Etudiant etudiant;
 
     @NonNull
     @ManyToOne(optional = false)
     private Destination destination;
 
-
+    public EtatMobilite etatMobilite(){        
+        EtatMobilite res = EtatMobilite.NON_VALIDEE;
+        //date de fin
+        LocalDate dateFin = dateDepart.plusMonths(dureeEnMois);
+        //Si mobilité en cours
+        if(LocalDate.now().isAfter(dateDepart) && LocalDate.now().isBefore(dateFin)){
+            //on renvoie etat en cour
+            res = EtatMobilite.EN_COURS;
+        }
+        //Si mobilité fini
+        else if(LocalDate.now().isAfter(dateFin)){
+            //on renvoie etat validé
+            res = EtatMobilite.VALIDEE;
+        }
+        return res;
+    }
     
 }
