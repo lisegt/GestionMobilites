@@ -1,7 +1,6 @@
 <template>
-  
+  <div>
   <h1>Gestion des étudiants</h1>
-
   <button type="button" class="btnOrange " data-bs-toggle="modal" data-bs-target="#ajout">
     Ajouter un étudiant
   </button>
@@ -12,12 +11,15 @@
   
   <SearchEtud v-bind:etudiants="listeEtudiants"/>
 
+  <TableEtud :etudiants="listeEtudiants"/>
+  </div>
 </template>
 
 <script setup>
   import FormAddEtud from './formAddEtud/FormAddEtud.vue'
   import FormModifEtud from './formModifEtud/FormModifEtud.vue'
   import SearchEtud from './searchEtud/SearchEtud.vue'
+  import TableEtud from './tableEtud/TableEtud.vue'
   import poubelle from '../../../img/poubelle.png'
   import edit from '../../../img/edit.png'
 
@@ -30,6 +32,10 @@
   onMounted(() => {
     getEtud()
 });
+
+function test(){
+  console.log(listeEtudiants)
+}
 
 /**
  * 
