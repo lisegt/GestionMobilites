@@ -9,13 +9,6 @@
 
   <a data-bs-toggle="modal" data-bs-target="#modif" class="btn" type="button" > <img v-bind:src="edit" alt="edit"></a>
   <FormModifEtud/>
-
-  <!--
-  <button type="button" class="btnOrange " data-bs-toggle="modal" data-bs-target="#modif">
-    Modifier un étudiant
-  </button>
-  <FormModifEtud/>
-  -->
   
   <SearchEtud v-bind:etudiants="listeEtudiants"/>
 
@@ -35,10 +28,16 @@
   const listeEtudiants = reactive([]);
 
   onMounted(() => {
-    getToDos()
+    getEtud()
 });
 
-function getToDos(){
+/**
+ * 
+ * @param
+ * @return
+ * Fonction qui remplit la liste listeEtudiants
+ */
+function getEtud(){
     const fetchOptions = {method:"GET"};
     fetch("http://localhost:8989/api/etudiants/",fetchOptions)
     .then((response) => {return response.json()})

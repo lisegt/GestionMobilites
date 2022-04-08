@@ -42,11 +42,10 @@ defineProps(["etudiant"]);
 
 /**
  * 
- * @param
+ * @param etudiant
  * @return
- * Fonction qui modifie un étudiant par méthode PUT
+ * Fonction qui récupère les données pas encore modifiées
  */
-
 function setEtud(etudiant){
     let nom = document.getElementById("nom").value = etudiant.nom
     let prenom = document.getElementById("prenom").value = etudiant.prenom
@@ -59,6 +58,12 @@ function setEtud(etudiant){
     })
 }
 
+/**
+ * 
+ * @param etudiant
+ * @return
+ * Fonction qui modifie un étudiant par méthode PUT
+ */
 function updateEtud(etudiant) {
     let nom = document.getElementById("nom").value
     let prenom = document.getElementById("prenom").value
