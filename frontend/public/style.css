@@ -39,3 +39,33 @@ html {
     width: 100%;
    
   }
+
+  h1{
+    font-family: 'Bebas Neue', sans-serif;
+  }
+
+  .btnOrange{
+    background-color: #B74803;
+    border-radius: 30px;
+    font-family: 'Bebas Neue';
+    text-transform: uppercase;
+    color: white;
+    font-size: 24px;
+    border: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.inputFiltre{
+  background-color: #A3B4C859;
+  border-radius: 10px;
+  border: 0px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.filtreTab{
+  background-color: #A3B4C859;
+  border-radius: 10px;
+  border: 0px;
+}

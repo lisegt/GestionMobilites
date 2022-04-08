@@ -3,7 +3,7 @@
   <h1>Gestion des étudiants</h1>
 
   <!-- Button trigger modal -->
-  <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#ajout">
+  <button type="button" class="btnOrange " data-bs-toggle="modal" data-bs-target="#ajout">
     Ajouter un étudiant
   </button>
   <FormAddEtud/>
@@ -42,12 +42,5 @@ function getToDos(){
 </script>
 
 <style scoped>
-.btn{
-    background-color: #B74803;
-    border-radius: 30px;
-    font-family: 'Bebas Neue';
-    text-transform: uppercase;
-    color: white;
-    font-size: 24px;
-}
+
 </style>
