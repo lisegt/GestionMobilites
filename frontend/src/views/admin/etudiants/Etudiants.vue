@@ -1,4 +1,5 @@
 <template>
+  
   <h1>Gestion des étudiants</h1>
 
   <FormAddEtud/>
