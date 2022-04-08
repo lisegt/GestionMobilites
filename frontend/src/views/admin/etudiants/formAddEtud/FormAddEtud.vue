@@ -26,8 +26,8 @@
                     <input id="promotion" class="form-control" name="promo" type="number" v-model="promotion" placeholder="Sélectionnez une promotion ..." required/>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
-                    <input id="Bouton" type="submit" class="btn" value="Ajouter" />
+                    <button type="button" class="btnOrange" data-bs-dismiss="modal">Close</button>
+                    <input id="Bouton" type="submit" class="btnOrange" value="Ajouter" />
                  </div>
             </form>
         </div>
@@ -66,14 +66,6 @@ function addEtud() {
 </script>
 
 <style scoped>
-.btn{
-    background-color: #B74803;
-    border-radius: 30px;
-    font-family: 'Bebas Neue';
-    text-transform: uppercase;
-    color: white;
-    font-size: 24px;
-}
 h5{
     font-size: 30px;
     line-height: 36px;

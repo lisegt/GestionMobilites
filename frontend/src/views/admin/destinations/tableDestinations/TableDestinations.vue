@@ -1,6 +1,6 @@
 <template>
-<div>
-  <table class="table table-striped">
+<div class="  container table-responsive  ">
+  <table class="table table-striped mh-75  table-bordered overflow-scroll ">
    <thead>
     <tr>
     <th class="text-center ">NOM ETABLISSEMENT </th>
@@ -161,6 +161,7 @@
             let isValide;
             let date;
             let actuelDate = new Date();
+            console.log(json)
             console.log(actuelDate)
             for(let d of json._embedded.destinations){
 
@@ -253,4 +254,13 @@
 
 <style>
 
+    .styleTab{
+        border-radius: 1000px;
+        border: 5px ridge #022e51;
+    }
+    thead{
+        font-family: 'Bebas Neue', sans-serif;
+        color: white;
+        background-color: #022e51;
+    }
 </style>

@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <div>
     <h1>Gestion des étudiants</h1>
 
@@ -10,12 +11,36 @@
     
     <SearchEtud v-bind:etudiants="listeEtudiants"/>
   </div>
+=======
+  
+  <h1>Gestion des étudiants</h1>
+
+  <button type="button" class="btnOrange " data-bs-toggle="modal" data-bs-target="#ajout">
+    Ajouter un étudiant
+  </button>
+  <FormAddEtud/>
+
+  <a data-bs-toggle="modal" data-bs-target="#modif" class="btn" type="button" > <img v-bind:src="edit" alt="edit"></a>
+  <FormModifEtud/>
+
+  <!--
+  <button type="button" class="btnOrange " data-bs-toggle="modal" data-bs-target="#modif">
+    Modifier un étudiant
+  </button>
+  <FormModifEtud/>
+  -->
+  
+  <SearchEtud v-bind:etudiants="listeEtudiants"/>
+
+>>>>>>> 01a13ee47c1ad4b88528c04c1faf6ff8c266df43
 </template>
 
 <script setup>
   import FormAddEtud from './formAddEtud/FormAddEtud.vue'
   import FormModifEtud from './formModifEtud/FormModifEtud.vue'
   import SearchEtud from './searchEtud/SearchEtud.vue'
+  import poubelle from '../../../img/poubelle.png'
+  import edit from '../../../img/edit.png'
 
   import { onMounted, onUpdated } from "vue";
 
@@ -42,12 +67,5 @@ function getToDos(){
 </script>
 
 <style scoped>
-.btn{
-    background-color: #B74803;
-    border-radius: 30px;
-    font-family: 'Bebas Neue';
-    text-transform: uppercase;
-    color: white;
-    font-size: 24px;
-}
+
 </style>

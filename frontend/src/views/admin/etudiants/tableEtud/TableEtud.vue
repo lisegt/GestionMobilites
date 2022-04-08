@@ -1,5 +1,6 @@
 <template>
-<button value="test" @click="test"/>
+<div>
+  <button value="test" @click="test"/>
   <table>
       <thead>
           <tr>
@@ -24,6 +25,7 @@
           </tr>
       </tbody>
   </table>
+</div>
 </template>
 
 <script setup>
