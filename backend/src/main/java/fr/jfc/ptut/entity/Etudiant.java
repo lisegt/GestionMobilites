@@ -1,5 +1,6 @@
 package fr.jfc.ptut.entity;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.*;
@@ -26,7 +27,7 @@ public class Etudiant {
     private Integer promo;
 
     @OneToMany(mappedBy="etudiant")
-    @ToString.Exclude // On ne veut pas inclure la liste des mob dans le toString
-    // Sinon récursivité infinie 
-    private List<Mobilite> mobilites = new LinkedList<>();
+    @ToString.Exclude
+    private List<Mobilite> mobilites = new ArrayList<>();
+
 }

@@ -1,9 +1,12 @@
 <template>
-  <h1>Gestion des destinations</h1>
+  <h1>Gestion des documents administratifs</h1>
+
+  <TableDocsAdmin/>
+
 </template>
 
-<script>
-
+<script setup>
+import TableDocsAdmin from "./tableDocsAdmin/TableDocsAdmin.vue";
 </script>
 
 <style>
