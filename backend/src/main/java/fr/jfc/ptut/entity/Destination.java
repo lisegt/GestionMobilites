@@ -41,8 +41,10 @@ public class Destination {
     private String image;
 
     @NonNull
-    @ManyToOne
-    private Localisation localisation;
+    private String ville;
+
+    @NonNull
+    private String pays;
 
     @OneToMany(mappedBy = "destination")
     @ToString.Exclude

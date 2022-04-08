@@ -1,4 +1,5 @@
 <template>
+<div>
   <table class="table table-striped">
    <thead>
     <tr>
@@ -14,19 +15,20 @@
   <tbody>
     <tr v-for="(destination,index) in listeDestinations" :key=index :produit=produit   >
     <td class="text-center ">{{destination[0].nomEtablissementAccueil}}</td>
-    <td class="text-center ">{{destination[1].nomVille}}</td>
-    <td class="text-center ">{{destination[1].nomPays}}</td>
+    <td class="text-center ">{{destination[0].ville}}</td>
+    <td class="text-center ">{{destination[0].pays}}</td>
     <td class="text-center ">{{destination[0].typeMobilite}}</td>
     <td style="d-flex ">
         <div class="text-center ">{{destination[0].nbPlaceAnnee}}/an </div>
         <div class="text-center ">{{destination[0].nbPlaceSemestre}}/semestre </div>
     </td>
-    <td class="text-center ">{{destination[2]}}</td>
+    <td class="text-center ">{{destination[1]}}</td>
     <td class="text-center"> 
         <div class="text-center d-flex flex-row w-75 justify-content-around ">
-        <a @click="deleteDestination(destination[0].id)" class="btn" type="btn" > <img v-bind:src="edit" alt="edit"></a>
+           
+        <a @click="setDestination(destination)" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn" type="button" > <img v-bind:src="edit" alt="edit"></a>
         
-        <a @click="deleteDestination(destination[0].id)" class="btn" type="btn"> <img v-bind:src="poubelle" alt="trash"></a>
+        <a @click="deleteDestination(destination[0].id)" class="btn" type="button"> <img v-bind:src="poubelle" alt="trash"></a>
         </div> 
     </td>
     </tr>
@@ -34,6 +36,94 @@
     
   </tbody>
 </table>
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">MODIFIER UNE DESTINATION</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="container-fluid" >
+          <div class="w-75 row m-auto " >
+                <div class="mb-3 row">
+                    <div class="col">
+                    <label for="nomEtablissement" class="form-label">NOM DE L'ETABLISSEMENT:</label>
+                    <input type="text" class="form-control " id="nomEtablissement">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-6 ">
+                        <label for="nomVille" class="form-label">VILLE:</label>
+                        <input type="text" class="form-control w-75 " name="nomVille" id="nomVille">
+                    </div>
+
+                    <div class="col-6 d-flex flex-row justify-content-end ">
+                      
+                        <div class=" w-75">
+                        <label for="nomPays" class="form-label">PAYS:</label>
+                        <input type="text" class="form-control " name="nomPays" id="nomPays">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <div class="col">
+                    <label for="typeMobilite">TYPE DE MOBILITE:</label>
+                    <select id="typeMobilite" name="typeMobilite" class="form-select">
+                            <option id="ETUDE" value="ETUDE">Etude</option>
+                            <option id="STAGE" value="STAGE">Stage</option>
+                            <option id="HUMANITAIRE" value="HUMANITAIRE">Humanitaire</option>
+                    </select>
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <div class="col">
+                    <label for="semestres" class="form-label">NOMBRE DE PLACE PAR SEMESTRE:</label>
+                    <input type="number" min="0" class="form-control" name="semestres" id="semestres">
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <div class="col">
+                    <label for="nbPlaceAnnee" class="form-label">NOMBRE DE PLACE PAR ANNEE:</label>
+                    <input type="number" min="0" class="form-control " name="nbPlaceAnnee" id="nbPlaceAnnee">
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <div class="col">
+                    <label for="dateFinContrat" class="form-label">DATE DE FIN DE CONTRAT:</label>
+                    <input type="date"  class="form-control " name="dateFinContrat" id="dateFinContrat">
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <div class="col">
+                    <label for="image" class="form-label">CHOISIR/MODIFIER L'IMAGE:</label>
+                    <input type="file"  class="form-control " name="image" id="image">
+                    </div>
+                </div>
+                
+        
+        </div>
+                  
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" id="btnSub" class="btn btn-primary">Save changes</button>
+      </div>
+    </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+</div>
 </template>
 
 <script setup>
@@ -74,9 +164,7 @@
             console.log(actuelDate)
             for(let d of json._embedded.destinations){
 
-                 fetch(d._links.localisation.href)
-                .then((res)=>{return(res.json())})
-                .then((json)=>{
+                
                     date=new Date(d.dateFinDeContratIsis)
                     dateDiff(actuelDate,date).day
                     if(dateDiff(actuelDate,date).day<385){
@@ -86,9 +174,9 @@
 
                         isValide = "Valide"
                     }
-                    listeDestinations.push([d,json,isValide])
+                    listeDestinations.push([d,isValide])
                     
-                    })
+                    
 
             }
             console.log(listeDestinations)
@@ -106,10 +194,58 @@
                 };
         let url = `http://localhost:8989/api/destinations/${id}`
         fetch(url,fetchOptions)
-        .then((res)=>{getDestinations()})
-        .catch((err)=>{console.log("message d'erreur : ",err)})
+        .then(()=>{getDestinations()})
+        .catch((err)=>{
+            window.alert("Vous ne pouvez pas supprimer une destination qui est liée à une ou plusieurs mobilités")
+            console.log("message d'erreur : ",err)})
     }
     
+
+    function setDestination(destination){
+        document.getElementById("nomEtablissement").value=destination[0].nomEtablissementAccueil
+        document.getElementById("nomVille").value=destination[0].ville
+        document.getElementById("nomPays").value=destination[0].pays
+        document.getElementById(`${destination[0].typeMobilite}`).selected = true
+        document.getElementById("semestres").value= parseInt(destination[0].nbPlaceSemestre)
+        document.getElementById("nbPlaceAnnee").value=parseInt(destination[0].nbPlaceAnnee)
+        document.getElementById("dateFinContrat").value=destination[0].dateFinDeContratIsis
+
+        document.getElementById("btnSub").addEventListener('click',()=>{
+            console.log(destination)
+            updateDestination(destination)
+        })
+    }
+
+    function updateDestination(destination){
+
+           let nomEtablissement = document.getElementById("nomEtablissement").value
+           let nomVille = document.getElementById("nomVille").value
+           let nomPays = document.getElementById("nomPays").value
+           let typeMobilite = document.getElementById("typeMobilite").value
+           let nbPlaceSemestre = document.getElementById("semestres").value
+           let nbPlaceAnnee= document.getElementById("nbPlaceAnnee").value
+           let date = document.getElementById("dateFinContrat").value
+
+            const url = `http://localhost:8989/api/destinations/${destination[0].id}` // l’url de l'API
+
+            let myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            const fetchOptions = {  method:"PUT", 
+                                    headers: myHeaders, 
+                                    body: JSON.stringify({
+                                        nomEtablissementAccueil:nomEtablissement,
+                                        dateFinDeContratIsis:date,
+                                        nbPlaceAnnee:nbPlaceAnnee,
+                                        nbPlaceSemestre:nbPlaceSemestre,
+                                        typeMobilite:typeMobilite,
+                                        ville:nomVille,
+                                        pays:nomPays
+                                        })};
+            fetch(url,fetchOptions)
+            .catch((error) => console.log(error));
+
+    }
+
     onMounted(()=>{
         getDestinations()
     })

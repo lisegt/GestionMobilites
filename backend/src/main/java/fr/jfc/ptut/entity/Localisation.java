@@ -30,9 +30,6 @@ public class Localisation {
     @NonNull
     private String nomVille;
 
-    @OneToMany(mappedBy = "localisation")
-    @ToString.Exclude
-    private List<Destination> destinations = new ArrayList<>();
 
 
 }
