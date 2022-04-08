@@ -66,7 +66,6 @@ function addEtud() {
 </script>
 
 <style scoped>
-
 h5{
     font-size: 30px;
     line-height: 36px;
