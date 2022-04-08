@@ -1,11 +1,12 @@
 <template>
   <h1>Gestion des étudiants</h1>
-  <FormAddEtud/>
-  
+  <TableEtud :etudiants="etudiants"/>
+  <FormAddEtud />
 </template>
 
 <script setup>
   import FormAddEtud from './formAddEtud/FormAddEtud.vue'
+  import TableEtud from './tableEtud/TableEtud.vue'
   import {onMounted, reactive} from 'vue'
 
   let etudiants = reactive([])
