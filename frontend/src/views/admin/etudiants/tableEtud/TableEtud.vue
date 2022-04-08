@@ -1,38 +1,35 @@
 <template>
-<div>
-  <button value="test" @click="test"/>
-  <table>
-      <thead>
-          <tr>
-              <th>INE</th>
-              <th>NOM</th>
-              <th>PRENOM</th>
-              <th>PROMOTION</th>
-              <th>ETAT MOBILITE</th>
-              <th>TYPE MOBILITE</th>
-              <th>ACTIONS</th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr v-for="etud in etudiants">
-              <td>{{etud.numEtud}}</td>
-              <td>{{etud.nom}}</td>
-              <td>{{etud.prenom}}</td>
-              <td>{{etud.promo}}</td>
-              <td>null</td>
-              <td>null</td>
-              <td>null</td>
-          </tr>
-      </tbody>
+<table>
+    <thead>
+      <tr>
+        <th>INE</th>
+        <th>Nom</th>
+        <th>Prenom</th>
+        <th>Promotion</th>
+        <th>Etat mobilité</th>
+        <th>Type mobilité</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="etud in etudiants">
+        <td>{{etud.numEtud}}</td>
+        <td>{{etud.nom}}</td>
+        <td>{{etud.prenom}}</td>
+        <td>{{etud.promo}}</td>
+        <td>null</td>
+        <td>null</td>
+        <td>null</td>
+      </tr>
+    </tbody>
   </table>
-</div>
 </template>
 
 <script setup>
+import { onMounted } from "@vue/runtime-core"
     defineProps(["etudiants"])
-    let test = () => {
-        console.log(etudiants)
-    }
+
+  
 </script>
 
 <style>

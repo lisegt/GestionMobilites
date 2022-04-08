@@ -1,20 +1,6 @@
 <template>
-<<<<<<< HEAD
   <div>
-    <h1>Gestion des étudiants</h1>
-
-    <!-- Button trigger modal -->
-    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#ajout">
-      Ajouter un étudiant
-    </button>
-    <FormAddEtud/>
-    
-    <SearchEtud v-bind:etudiants="listeEtudiants"/>
-  </div>
-=======
-  
   <h1>Gestion des étudiants</h1>
-
   <button type="button" class="btnOrange " data-bs-toggle="modal" data-bs-target="#ajout">
     Ajouter un étudiant
   </button>
@@ -25,13 +11,15 @@
   
   <SearchEtud v-bind:etudiants="listeEtudiants"/>
 
->>>>>>> 01a13ee47c1ad4b88528c04c1faf6ff8c266df43
+  <TableEtud :etudiants="listeEtudiants"/>
+  </div>
 </template>
 
 <script setup>
   import FormAddEtud from './formAddEtud/FormAddEtud.vue'
   import FormModifEtud from './formModifEtud/FormModifEtud.vue'
   import SearchEtud from './searchEtud/SearchEtud.vue'
+  import TableEtud from './tableEtud/TableEtud.vue'
   import poubelle from '../../../img/poubelle.png'
   import edit from '../../../img/edit.png'
 
@@ -44,6 +32,10 @@
   onMounted(() => {
     getEtud()
 });
+
+function test(){
+  console.log(listeEtudiants)
+}
 
 /**
  * 
