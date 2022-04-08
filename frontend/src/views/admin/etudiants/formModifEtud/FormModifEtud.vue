@@ -8,7 +8,7 @@
       </div>
       <div class="modal-body">
         <div id="form">
-            <form @submit.prevent="modifEtud()">
+            <form @submit.prevent="setEtud()">
                 <div class="form-group">
                     <label for="nom" class="font-weight-bold">Nom :</label>
                     <input id="nom" class="form-control" name="nom" type="text" v-model="nom" placeholder="Entrez le nom de l'étudiant ..." required/>
@@ -27,7 +27,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btnOrange" data-bs-dismiss="modal">Close</button>
-                    <input id="Bouton" type="submit" class="btnOrange" value="Ajouter" />
+                    <input id="Bouton" type="submit" class="btnOrange" value="Modifier" />
                  </div>
             </form>
         </div>
@@ -52,10 +52,7 @@ function setEtud(etudiant){
     let ine = document.getElementById("ine").value = etudiant.ine
     let promotion = document.getElementById("promotion").value = etudiant.promotion
 
-    document.getElementById("Bouton").addEventListener('click',()=>{
-        console.log(etudiant)
-        updateEtud(etudiant)
-    })
+    document.getElementById("Bouton").addEventListener('click',()=>{updateEtud(etudiant)})
 }
 
 /**
