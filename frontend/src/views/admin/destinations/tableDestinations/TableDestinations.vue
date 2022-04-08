@@ -161,7 +161,7 @@
             let isValide;
             let date;
             let actuelDate = new Date();
-        
+            console.log(json)
             console.log(actuelDate)
             for(let d of json._embedded.destinations){
 
