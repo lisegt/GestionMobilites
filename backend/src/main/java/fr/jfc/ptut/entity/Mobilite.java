@@ -1,11 +1,12 @@
 package fr.jfc.ptut.entity;
-import java.time.Duration;
 import java.time.LocalDate;
 import javax.persistence.*;
+
 
 import org.springframework.context.annotation.Lazy;
 
 import lombok.*;
+import net.minidev.json.annotate.JsonIgnore;
 
 @Lazy
 @Getter @Setter @NoArgsConstructor @RequiredArgsConstructor @ToString
@@ -25,7 +26,8 @@ public class Mobilite {
     private Periode periode;
 
     @NonNull
-    @ManyToOne(fetch=FetchType.LAZY, optional = false) //obligatoire car clé étrangère non nulle
+    @JsonIgnore
+    @ManyToOne(optional = false) //obligatoire car clé étrangère non nulle
     private Etudiant etudiant;
 
     @NonNull

@@ -4,7 +4,7 @@
   <button type="button" class="btnOrange " data-bs-toggle="modal" data-bs-target="#ajout">
     Ajouter un étudiant
   </button>
-  <FormAddEtud/>
+  <FormAddEtud @post="test"/>
 
   <a data-bs-toggle="modal" data-bs-target="#modif" class="btn" type="button" > <img v-bind:src="edit" alt="edit"></a>
   <FormModifEtud/>
