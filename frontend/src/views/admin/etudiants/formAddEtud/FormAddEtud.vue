@@ -27,7 +27,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btnOrange" data-bs-dismiss="modal">Close</button>
-                    <input id="Bouton" type="submit" class="btnOrange" value="Ajouter" />
+                    <input @click="$emit('post')" id="Bouton" type="submit" class="btnOrange" value="Ajouter" />
                  </div>
             </form>
         </div>
