@@ -4,14 +4,14 @@
   <button type="button" class="btnOrange " data-bs-toggle="modal" data-bs-target="#ajout">
     Ajouter un étudiant
   </button>
-  <FormAddEtud/>
+  <FormAddEtud @post="addEtud"/>
 
   <a data-bs-toggle="modal" data-bs-target="#modif" class="btn" type="button" > <img v-bind:src="edit" alt="edit"></a>
   <FormModifEtud/>
   
   <SearchEtud v-bind:etudiants="listeEtudiants"/>
 
-  <TableEtud :etudiants="listeEtudiants"/>
+  <TableEtud :etudiants="listeEtudiants" @delete="deleteEtud"/>
   </div>
 </template>
 
@@ -29,13 +29,20 @@
   //Liste d'étudiants
   const listeEtudiants = reactive([]);
 
-  onMounted(() => {
-    getEtud()
-});
+  function addEtud(nom, prenom, promotion, ine){
+    const url = `/api/etudiants` 
+    let myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    const fetchOptions = {method:"POST", headers: myHeaders, body: JSON.stringify({nom:nom, numEtud:ine, prenom:prenom, promo:promotion})};
+    fetch(url,fetchOptions)
+    .then((response) => getEtud())
+    .catch((error) => console.log(error));
+  }
 
-function test(){
-  console.log(listeEtudiants)
-}
+  function deleteEtud(id){
+    fetch(`/api/etudiants/${id}`,{method:'DELETE'})
+    .then(getEtud())
+  }
 
 /**
  * 
@@ -45,7 +52,7 @@ function test(){
  */
 function getEtud(){
     const fetchOptions = {method:"GET"};
-    fetch("http://localhost:8989/api/etudiants/",fetchOptions)
+    fetch("/api/etudiants/",fetchOptions)
     .then((response) => {return response.json()})
     .then((dataJSON) => {
       listeEtudiants.splice(0,listeEtudiants.length)
@@ -54,6 +61,10 @@ function getEtud(){
     })
     .catch((error) => console.log(error));
 }
+
+ onMounted(() => {
+    getEtud()
+  });
   
 </script>
 

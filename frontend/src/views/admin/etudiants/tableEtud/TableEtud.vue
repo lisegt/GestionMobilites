@@ -19,7 +19,9 @@
         <td>{{etud.promo}}</td>
         <td>null</td>
         <td>null</td>
-        <td>null</td>
+        <td>
+          <a @click="$emit('delete',etud.id)" ><img :src="Poubelle" alt="à la poubelle l'etudiant"/></a>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -27,6 +29,7 @@
 
 <script setup>
 import { onMounted } from "@vue/runtime-core"
+import Poubelle from '../../../../img/poubelle.png'
     defineProps(["etudiants"])
 
   
