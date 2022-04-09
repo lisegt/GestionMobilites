@@ -4,7 +4,7 @@
   <button type="button" class="btnOrange " data-bs-toggle="modal" data-bs-target="#ajout">
     Ajouter un étudiant
   </button>
-  <FormAddEtud @post="test"/>
+  <FormAddEtud @post="addEtud"/>
 
   <a data-bs-toggle="modal" data-bs-target="#modif" class="btn" type="button" > <img v-bind:src="edit" alt="edit"></a>
   <FormModifEtud/>
@@ -33,9 +33,15 @@
     getEtud()
 });
 
-function test(){
-  console.log(listeEtudiants)
-}
+  function addEtud(nom, prenom, promotion, ine){
+    const url = `http://localhost:8989/api/etudiants` 
+    let myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    const fetchOptions = {method:"POST", headers: myHeaders, body: JSON.stringify({nom:nom, numEtud:ine, prenom:prenom, promo:promotion})};
+    fetch(url,fetchOptions)
+    .then((response) => getEtud())
+    .catch((error) => console.log(error));
+  }
 
 /**
  * 

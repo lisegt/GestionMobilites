@@ -8,26 +8,26 @@
       </div>
       <div class="modal-body">
         <div id="form">
-            <form @submit.prevent="addEtud()">
+            <form @submit.prevent="">
                 <div class="form-group">
                     <label for="nom" class="font-weight-bold">Nom :</label>
-                    <input id="nom" class="form-control" name="nom" type="text" v-model="nom" placeholder="Entrez le nom de l'étudiant ..." required/>
+                    <input v-model="nom" id="nom" class="form-control" name="nom" type="text" placeholder="Entrez le nom de l'étudiant ..." required/>
                 </div>
                 <div class="form-group">
                     <label for="prenom" class="font-weight-bold">Prénom :</label>
-                    <input id="prenom" class="form-control" name="prenom" type="text" v-model="prenom" placeholder="Entrez le prénom de l'étudiant ..." required/>
+                    <input v-model="prenom" id="prenom" class="form-control" name="prenom" type="text" placeholder="Entrez le prénom de l'étudiant ..." required/>
                 </div>
                 <div class="form-group">
                     <label for="ine" class="font-weight-bold">INE :</label>
-                    <input id="ine" class="form-control" name="numEtud" type="number" v-model="ine" placeholder="Entrez l'INE de l'étudiant ..." required/>
+                    <input v-model="ine" id="ine" class="form-control" name="numEtud" type="number" placeholder="Entrez l'INE de l'étudiant ..." required/>
                 </div>
                 <div class="form-group">
                     <label for="promotion" class="font-weight-bold">Promotion :</label>
-                    <input id="promotion" class="form-control" name="promo" type="number" v-model="promotion" placeholder="Sélectionnez une promotion ..." required/>
+                    <input v-model="promotion" id="promotion" class="form-control" name="promo" type="number" placeholder="Sélectionnez une promotion ..." required/>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btnOrange" data-bs-dismiss="modal">Close</button>
-                    <input @click="$emit('post')" id="Bouton" type="submit" class="btnOrange" value="Ajouter" />
+                    <input @click="$emit('post', nom, prenom, promotion, ine)" id="Bouton" type="submit" class="btnOrange" value="Ajouter"  data-bs-dismiss="modal"/>
                  </div>
             </form>
         </div>
@@ -38,31 +38,13 @@
 </template>
 
 <script setup>
+    import {ref} from 'vue'
 
-/**
- * 
- * @param
- * @return
- * Fonction qui ajoute un étudiant par méthode POST
- */
-function addEtud() {
-    //Paramètres
-    let nom = document.getElementById("nom").value
-    let prenom = document.getElementById("prenom").value
-    let ine = document.getElementById("ine").value
-    let promotion = document.getElementById("promotion").value
+    let nom = ref('')
+    let prenom = ref('')
+    let promotion=ref(0)
+    let ine = ref(0)
 
-    const url = `http://localhost:8989/api/etudiants` //Url de l'API
-
-    let myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    const fetchOptions = {method:"POST", headers: myHeaders, body: JSON.stringify({nom:nom, numEtud:ine, prenom:prenom, promo:promotion})};
-    fetch(url,fetchOptions)
-    .then((response) => {return response.json()})
-    .then((dataJSON) => {
-    })
-    .catch((error) => console.log(error));
-}
 </script>
 
 <style scoped>
