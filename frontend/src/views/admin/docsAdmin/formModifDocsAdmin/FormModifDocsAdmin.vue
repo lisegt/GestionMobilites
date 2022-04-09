@@ -8,7 +8,7 @@
       </div>
       <div class="modal-body">
         <div id="form">
-            <form @submit.prevent="setDoc()">
+            <form>
                 <div class="form-group">
                     <label for="intitule" class="font-weight-bold">Nom du document :</label>
                     <input id="intitule" class="form-control" name="intitule" type="text" v-model="intitule" placeholder="Entrez le nom du document ..." required/>
@@ -30,40 +30,6 @@
 </template>
 
 <script setup>
-
-defineProps(["doc"]);
-
-/**
- * 
- * @param doc
- * @return
- * Fonction qui récupère les données pas encore modifiées
- */
-function setDoc(doc){
-    let intitule = document.getElementById("intitule").value = doc.nom
-    let description = document.getElementById("description").value = doc.prenom
-
-    document.getElementById("Bouton").addEventListener('click',()=>{updateEtud(doc)})
-}
-
-/**
- * 
- * @param doc
- * @return
- * Fonction qui modifie un étudiant par méthode PUT
- */
-function updateEtud(doc) {
-    let intitule = document.getElementById("intitule").value
-    let description = document.getElementById("description").value
-
-    const url = `http://localhost:8989/api/documents/` //l’url de l'API
-
-    let myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    const fetchOptions = {method:"PUT", headers: myHeaders, body: JSON.stringify({intitule:doc.nom, description:doc.ine})};
-    fetch(url+`${doc.id}`,fetchOptions)
-    .catch((error) => console.log(error));
-}
 </script>
 
 <style>
