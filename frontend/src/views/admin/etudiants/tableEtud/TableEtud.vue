@@ -19,7 +19,9 @@
         <td>{{etud.promo}}</td>
         <td>null</td>
         <td>null</td>
-        <td>null</td>
+        <td>
+          
+        </td>
       </tr>
     </tbody>
   </table>
