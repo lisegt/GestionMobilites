@@ -8,23 +8,24 @@
       </div>
       <div class="modal-body">
         <div id="form">
-            <form @submit.prevent="setEtud()">
+            <form @submit.prevent="updateEtud">
                 <div class="form-group">
                     <label for="nom" class="font-weight-bold">Nom :</label>
-                    <input id="nom" class="form-control" name="nom" type="text" v-model="nom" placeholder="Entrez le nom de l'étudiant ..." required/>
+                    <input id="nomEtudToEdit" class="form-control" name="nom" type="text" v-model="nom" placeholder="Entrez le nom de l'étudiant ..." required/>
                 </div>
                 <div class="form-group">
                     <label for="prenom" class="font-weight-bold">Prénom :</label>
-                    <input id="prenom" class="form-control" name="prenom" type="text" v-model="prenom" placeholder="Entrez le prénom de l'étudiant ..." required/>
+                    <input id="prenomEtudToEdit" class="form-control" name="prenom" type="text" v-model="prenom" placeholder="Entrez le prénom de l'étudiant ..." required/>
                 </div>
                 <div class="form-group">
                     <label for="ine" class="font-weight-bold">INE :</label>
-                    <input id="ine" class="form-control" name="numEtud" type="number" v-model="ine" placeholder="Entrez l'INE de l'étudiant ..." required/>
+                    <input id="ineEtudToEdit" class="form-control" name="numEtud" type="number" v-model="ine" placeholder="Entrez l'INE de l'étudiant ..." required/>
                 </div>
                 <div class="form-group">
                     <label for="promotion" class="font-weight-bold">Promotion :</label>
-                    <input id="promotion" class="form-control" name="promo" type="number" v-model="promotion" placeholder="Sélectionnez une promotion ..." required/>
+                    <input id="promotionEtudToEdit" class="form-control" name="promo" type="number" v-model="promotion" placeholder="Saisir une promotion ..." required/>
                 </div>
+                <input id="idEtudToEdit" style="display: none;"/>
                 <div class="modal-footer">
                     <button type="button" class="btnOrange" data-bs-dismiss="modal">Close</button>
                     <input id="Bouton" type="submit" class="btnOrange" value="Modifier" />
@@ -38,43 +39,32 @@
 </template>
 
 <script setup>
-defineProps(["etudiant"]);
+    import {ref, defineEmits} from 'vue'
 
-/**
- * 
- * @param etudiant
- * @return
- * Fonction qui récupère les données pas encore modifiées
- */
-function setEtud(etudiant){
-    let nom = document.getElementById("nom").value = etudiant.nom
-    let prenom = document.getElementById("prenom").value = etudiant.prenom
-    let ine = document.getElementById("ine").value = etudiant.ine
-    let promotion = document.getElementById("promotion").value = etudiant.promotion
+    defineProps(["etudiant"]);
+    const emit = defineEmits(['update_ok'])
 
-    document.getElementById("Bouton").addEventListener('click',()=>{updateEtud(etudiant)})
-}
-
-/**
- * 
- * @param etudiant
- * @return
- * Fonction qui modifie un étudiant par méthode PUT
- */
-function updateEtud(etudiant) {
-    let nom = document.getElementById("nom").value
-    let prenom = document.getElementById("prenom").value
-    let ine = document.getElementById("ine").value
-    let promotion = document.getElementById("promotion").value
-
-    const url = `http://localhost:8989/api/etudiants/` //l’url de l'API
-
-    let myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    const fetchOptions = {method:"PUT", headers: myHeaders, body: JSON.stringify({nom:etudiant.nom, numEtud:etudiant.ine, prenom:etudiant.prenom, promo:etudiant.promotion})};
-    fetch(url+`${etudiant.id}`,fetchOptions)
-    .catch((error) => console.log(error));
-}
+    /**
+     * 
+     * @param etudiant
+     * @return
+     * Fonction qui modifie un étudiant par méthode PUT
+     */
+    function updateEtud() {
+        let nom = document.getElementById("nomEtudToEdit").value
+        let prenom = document.getElementById("prenomEtudToEdit").value
+        let ine = document.getElementById("ineEtudToEdit").value
+        let promotion = document.getElementById("promotionEtudToEdit").value
+        let id = document.getElementById("idEtudToEdit").value
+        const url = `/api/etudiants/${id}`
+     
+        let myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        const fetchOptions = {method:"PUT", headers: myHeaders, body: JSON.stringify({nom:nom, numEtud:ine, prenom:prenom, promo:promotion})};
+        fetch(url,fetchOptions)
+        .then(()=>{emit('update_ok')})
+        .catch((error) => console.log(error));
+    }
 </script>
 
 <style scoped>
