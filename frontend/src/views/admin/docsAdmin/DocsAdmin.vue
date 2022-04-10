@@ -52,8 +52,8 @@ function deleteDocument(id){
  * Fonction qui récupère les données pas encore modifiées
  */
 function setDoc(doc){
-  let intitule = document.getElementById("intitule").value = doc.nom
-  let description = document.getElementById("description").value = doc.prenom
+  let intitule = document.getElementById("intitule").value = doc.intitule
+  let description = document.getElementById("description").value = doc.description
 
   document.getElementById("Bouton").addEventListener('click',()=>{updateEtud(doc)})
 }
@@ -72,7 +72,7 @@ function updateEtud(doc) {
 
   let myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
-  const fetchOptions = {method:"PUT", headers: myHeaders, body: JSON.stringify({intitule:doc.nom, description:doc.ine})};
+  const fetchOptions = {method:"PUT", headers: myHeaders, body: JSON.stringify({intitule:doc.intitule, description:doc.description})};
   fetch(url+`${doc.id}`,fetchOptions)
   .catch((error) => console.log(error));
 }
