@@ -1,19 +1,17 @@
 <template>
+  <h1>Gestion des étudiants</h1>
+  
+  <FormAddEtud @post="addEtud"/>
+  <FormModifEtud @update_ok="getEtud"/>
+
   <div class="h-100 container">
     <div class="row h-25 align-items-center">
 
       <div class="col-4 h-50  d-flex flex-column justify-content-around align-items-left">
-<<<<<<< HEAD
         <SearchEtud v-bind:etudiants="listeEtudiants"/>
         <div class="filtreTab w-100 d-flex  ">
           <div class="dropdown">
             <FiltreEtud @searchByEtatMobilite="searchByEtatMobilite"/>
-=======
-        <SearchEtud v-bind:etudiants="listeEtudiants" class="w-100"/>
-        <div class="filtreTab w-100 d-flex  ">
-          <div class="dropdown w-100">
-            <FiltreEtud/>
->>>>>>> 989dbe6ed1922f19246044f04bda89222ffd56ab
           </div>
         </div>
       </div>
@@ -22,19 +20,13 @@
 
     <div class="col-4 text-right">
         <button type="button" class="btnOrange " data-bs-toggle="modal" data-bs-target="#ajout">
-          <img src="../../../img/ajoutEtudiant.png" alt="logo ajout étudiant" height="20"/>
-           Ajouter un étudiant
+          Ajouter un étudiant
         </button>
     </div>
       
       <FormAddEtud @post="addEtud"/>
       <FormModifEtud @update_ok="getEtud"/>
-<<<<<<< HEAD
     
-=======
-      
-      
->>>>>>> 989dbe6ed1922f19246044f04bda89222ffd56ab
     </div>
 
     <TableEtud :etudiants="listeEtudiants" @delete="deleteEtud" @update="editEtud"/>
@@ -42,7 +34,7 @@
   <!--
     Dans etudiant
     <SearchEtud v-bind:etudiants="listeEtudiants"/>
-    Dans search etud
+    Dans search
     <input type="text" id="search"  v-model="nom" placeholder="RECHERCHER UNE DESTINATION..." class="w-100 inputFiltre" />
   -->
 </template>

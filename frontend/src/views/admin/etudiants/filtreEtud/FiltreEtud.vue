@@ -8,15 +8,14 @@
                 <li v-for="promo of data.promotions" :value="promo" :key="promo" class="text-center">{{promo}}</li>
             </ul>
         </div>
-        <div>
-            <select id="etat_mobilite" @change="searchByEtatMobilite">
-                <option value="tous">Etat mobilité</option>
-                <option value="val">Validée</option>
-                <option value="cours">En cours</option>
-                <option value="nVal">Non validée</option>
+        <div class="dropdown">
+            <select style="background-color:rgba(163, 180, 200, 0.35);"  id="etat_mobilite" class="form-select inputFiltre" @change="searchByEtatMobilite">
+                <option style="background-color: #A3B4C8;" value="tous">Etat mobilité</option>
+                <option style="background-color: #A3B4C8;" value="val">Validée</option>
+                <option style="background-color: #A3B4C8;" value="cours">En cours</option>
+                <option style="background-color: #A3B4C8;" value="nVal">Non validée</option>
             </select>
-
-        
+        </div>
 
         <div class="dropdown">
             <button class="btn dropdown-toggle" type="button" id="dropdownTypeMobilite" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -69,7 +68,6 @@ import {defineEmits} from 'vue'
 .filtresEtudiants{
     font-family: 'Bebas Neue', sans-serif;
     display: flex;
-    justify-content: space-around;
 }
 
 </style>
