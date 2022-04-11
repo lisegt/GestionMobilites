@@ -48,7 +48,7 @@ html {
 
 #app {
     background: #f3f3f3;
-    font-family: Arial sans-serif;
+    font-family: 'Montserrat', sans-serif;
     margin: auto;
     padding: 0;
     width: 100%;
@@ -57,10 +57,6 @@ html {
     flex-direction: column;
     justify-content: space-between;
     
-   
-
-   
-   
   }
 
 .footer{
