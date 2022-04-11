@@ -1,4 +1,9 @@
 <template>
+  <h1>Gestion des étudiants</h1>
+  
+  <FormAddEtud @post="addEtud"/>
+  <FormModifEtud @update_ok="getEtud"/>
+
   <div class="h-100 container">
     <div class="row h-25 align-items-center">
 
@@ -6,7 +11,7 @@
         <input type="text" placeholder="RECHERCHER UNE DESTINATION..." class="w-100 inputFiltre" />
         <div class="filtreTab w-100 d-flex  ">
           <div class="dropdown">
-            <!-- Composant FiltreEtudiants-->
+            <FiltreEtud/>
           </div>
         </div>
       </div>
@@ -32,6 +37,7 @@
 <script setup>
   import FormAddEtud from './formAddEtud/FormAddEtud.vue'
   import FormModifEtud from './formModifEtud/FormModifEtud.vue'
+  import FiltreEtud from './filtreEtud/FiltreEtud.vue'
   import SearchEtud from './searchEtud/SearchEtud.vue'
   import TableEtud from './tableEtud/TableEtud.vue'
   import poubelle from '../../../img/poubelle.png'
