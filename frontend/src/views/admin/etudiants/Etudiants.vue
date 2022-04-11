@@ -5,13 +5,11 @@
     Ajouter un étudiant
   </button>
   <FormAddEtud @post="addEtud"/>
-
-  <a data-bs-toggle="modal" data-bs-target="#modif" class="btn" type="button" > <img v-bind:src="edit" alt="edit"></a>
-  <FormModifEtud/>
+  <FormModifEtud :etudiant="etudToEdit" @update_ok="getEtud"/>
   
   <SearchEtud v-bind:etudiants="listeEtudiants"/>
 
-  <TableEtud :etudiants="listeEtudiants" @delete="deleteEtud"/>
+  <TableEtud :etudiants="listeEtudiants" @delete="deleteEtud" @update="editEtud"/>
   </div>
 </template>
 
@@ -22,10 +20,9 @@
   import TableEtud from './tableEtud/TableEtud.vue'
   import poubelle from '../../../img/poubelle.png'
   import edit from '../../../img/edit.png'
-
-  import { onMounted, onUpdated } from "vue";
-
+  import { onMounted, onUpdated} from "vue";
   import { reactive } from 'vue';
+
   //Liste d'étudiants
   const listeEtudiants = reactive([]);
 
@@ -44,28 +41,30 @@
     .then(getEtud())
   }
 
-/**
- * 
- * @param
- * @return
- * Fonction qui remplit la liste listeEtudiants
- */
-function getEtud(){
+  function getEtud(){
     const fetchOptions = {method:"GET"};
     fetch("/api/etudiants/",fetchOptions)
     .then((response) => {return response.json()})
     .then((dataJSON) => {
       listeEtudiants.splice(0,listeEtudiants.length)
       dataJSON._embedded.etudiants.forEach((e)=>listeEtudiants.push(e))
-      console.log(listeEtudiants)
     })
     .catch((error) => console.log(error));
-}
+  }
 
- onMounted(() => {
-    getEtud()
+
+  function editEtud(etud){
+    document.getElementById('nomEtudToEdit').value=etud.nom
+    document.getElementById('prenomEtudToEdit').value=etud.prenom
+    document.getElementById('ineEtudToEdit').value=etud.numEtud
+    document.getElementById('promotionEtudToEdit').value=etud.promo
+    document.getElementById('idEtudToEdit').value= etud.id
+  }
+
+  onMounted(() => {
+      getEtud()
   });
-  
+
 </script>
 
 <style scoped>

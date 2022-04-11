@@ -21,6 +21,7 @@
         <td>null</td>
         <td>
           <a @click="$emit('delete',etud.id)" ><img :src="Poubelle" alt="à la poubelle l'etudiant"/></a>
+          <a @click="$emit('update', etud)" data-bs-toggle="modal" data-bs-target="#modif" class="btn" type="button" > <img v-bind:src="edit" alt="edit"></a>
         </td>
       </tr>
     </tbody>
@@ -28,8 +29,9 @@
 </template>
 
 <script setup>
-import { onMounted } from "@vue/runtime-core"
-import Poubelle from '../../../../img/poubelle.png'
+    import { onMounted } from "@vue/runtime-core"
+    import Poubelle from '../../../../img/poubelle.png'
+    import edit from '../../../../img/edit.png'
     defineProps(["etudiants"])
 
   
