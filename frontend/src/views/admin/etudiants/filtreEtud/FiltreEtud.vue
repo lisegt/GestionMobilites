@@ -1,30 +1,38 @@
 <template>
-  <div style="display:flex; justify-content: space-between;">
-        <div>
-            <select>
-                <option>Promotion</option>
-                <option v-for="promo of data.promotions" :value="promo">
-                    {{promo}}
-                </option>
-            </select>
+    <div class="filtresEtudiants w-100 justify-content-around">
+        <div class="dropdown">
+            <button class="btn dropdown-toggle" type="button" id="dropdownPromotion" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                PROMOTION
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownPromotion">
+                <li v-for="promo of data.promotions" :value="promo" :key="promo" class="text-center">{{promo}}</li>
+            </ul>
         </div>
-        <div>
-            <select>
-                <option>Etat mobilité</option>
-                <option>Validée</option>
-                <option>En cours</option>
-                <option>Non validée</option>
-            </select>
+
+        <div class="dropdown">
+            <button class="btn dropdown-toggle" type="button" id="dropdownEtatMobilite" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                ETAT MOBILITE
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownEtatMobilite">
+                <li class="text-center">Validée</li>
+                <li class="text-center">En cours</li>
+                <li class="text-center">Non Validée</li>
+            </ul>
         </div>
-        <div>
-            <select>
-                <option>Type mobilité</option>
-                <option>Etude</option>
-                <option>Stage</option>
-                <option>Humanitaire</option>
-            </select>
+
+        <div class="dropdown">
+            <button class="btn dropdown-toggle" type="button" id="dropdownTypeMobilite" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                TYPE MOBILITE
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownTypeMobilite">
+                <li class="text-center">Etude</li>
+                <li class="text-center">Stage</li>
+                <li class="text-center">Humanitaire</li>
+            </ul>
         </div>
     </div>
+    
+
 </template>
 
 <script setup>
@@ -48,6 +56,12 @@ import { onMounted, reactive } from "@vue/runtime-core";
     
 </script>
 
-<style>
+<style scoped>
+
+.filtresEtudiants{
+    font-family: 'Bebas Neue', sans-serif;
+    display: flex;
+    justify-content: space-around;
+}
 
 </style>
