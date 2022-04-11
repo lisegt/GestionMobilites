@@ -7,8 +7,9 @@
   <FormAddEtud @post="addEtud"/>
   <FormModifEtud @update_ok="getEtud"/>
   
-  <SearchEtud v-bind:etudiants="listeEtudiants"/>
 
+  <SearchEtud v-bind:etudiants="listeEtudiants"/>
+  <FiltreEtud/>
   <TableEtud :etudiants="listeEtudiants" @delete="deleteEtud" @update="editEtud"/>
   </div>
 </template>
@@ -16,6 +17,7 @@
 <script setup>
   import FormAddEtud from './formAddEtud/FormAddEtud.vue'
   import FormModifEtud from './formModifEtud/FormModifEtud.vue'
+  import FiltreEtud from './filtreEtud/FiltreEtud.vue'
   import SearchEtud from './searchEtud/SearchEtud.vue'
   import TableEtud from './tableEtud/TableEtud.vue'
   import poubelle from '../../../img/poubelle.png'
