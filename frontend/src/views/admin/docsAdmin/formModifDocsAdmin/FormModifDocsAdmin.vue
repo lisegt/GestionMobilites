@@ -75,12 +75,14 @@ h5,label{
     text-align: center;
 }
 .form-control{
-    background: rgba(163, 180, 200, 0.35);
     border-radius: 10px;
     font-family: 'Montserrat';
     font-weight: 400;
     font-size: 20px;
     color: #022E51;
+}
+#description, #intitule{
+  background: rgba(163, 180, 200, 0.35);
 }
 #modif{
     border-radius: 10px;
