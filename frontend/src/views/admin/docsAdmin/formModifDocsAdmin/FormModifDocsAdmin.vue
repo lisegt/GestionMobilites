@@ -8,7 +8,7 @@
       </div>
       <div class="modal-body">
         <div id="form">
-            <form>
+            <form @submit.prevent="updateDoc">
                 <div class="form-group">
                     <label for="intitule" class="font-weight-bold">Nom du document :</label>
                     <input id="intitule" class="form-control" name="intitule" type="text" v-model="intitule" placeholder="Entrez le nom du document ..." required/>
@@ -17,10 +17,11 @@
                     <label for="description" class="font-weight-bold">Desciption :</label>
                     <input id="description" class="form-control" name="description" type="text" v-model="description" placeholder="Entrez une description du document ..." required/>
                 </div>
+                <input id="idDocToEdit" style="display: none;"/>
                 <div class="modal-footer">
                     <button type="button" class="btnOrange" data-bs-dismiss="modal">Close</button>
-                    <input id="btnSub" type="submit" class="btnOrange" value="Modifier" />
-                 </div>
+                    <input id="btnSub" type="submit" class="btnOrange" value="Modifier" data-bs-dismiss="modal"/>
+                </div>
             </form>
         </div>
       </div>
@@ -30,6 +31,30 @@
 </template>
 
 <script setup>
+
+import {ref, defineEmits} from 'vue'
+const emit = defineEmits(['update_ok'])
+
+/**
+ * 
+ * @param
+ * @return
+ * Fonction qui modifie un étudiant par méthode PUT
+ */
+function updateDoc() {
+  let intitule = document.getElementById("intitule").value
+  let description = document.getElementById("description").value
+  let id = document.getElementById("idDocToEdit").value
+
+  const url = `http://localhost:8989/api/documents/${id}` //l’url de l'API
+
+  let myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  const fetchOptions = {method:"PUT", headers: myHeaders, body: JSON.stringify({intitule:intitule, description:description})};
+  fetch(url,fetchOptions)
+  .then(()=>{emit('update_ok')})
+  .catch((error) => console.log(error));
+}
 </script>
 
 <style>

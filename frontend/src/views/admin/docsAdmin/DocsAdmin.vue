@@ -1,12 +1,14 @@
 <template>
   <h1>Gestion des documents administratifs</h1>
 
-  <TableDocsAdmin @set="setDoc" @delete="deleteDocument" v-bind:documents="listeDocuments"/>
+  <FormModifDocsAdmin @update_ok="getDoc"/>
+  <TableDocsAdmin @update="setDoc" @delete="deleteDocument" v-bind:documents="listeDocuments"/>
 
 </template>
 
 <script setup>
 import TableDocsAdmin from "./tableDocsAdmin/TableDocsAdmin.vue";
+import FormModifDocsAdmin from './formModifDocsAdmin/FormModifDocsAdmin.vue'
 import { onMounted, onUpdated } from "vue";
 import { reactive } from 'vue';
 //Liste de documents
@@ -52,30 +54,9 @@ function deleteDocument(id){
  * Fonction qui récupère les données pas encore modifiées
  */
 function setDoc(doc){
-  console.log("test")
-  let intitule = document.getElementById("intitule").value = doc.intitule
-  let description = document.getElementById("description").value = doc.description
-
-  document.getElementById("btnSub").addEventListener('click',()=>{updateEtud(doc)})
-}
-
-/**
- * 
- * @param doc
- * @return
- * Fonction qui modifie un étudiant par méthode PUT
- */
-function updateEtud(doc) {
-  let intitule = document.getElementById("intitule").value
-  let description = document.getElementById("description").value
-
-  const url = `http://localhost:8989/api/documents/` //l’url de l'API
-
-  let myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-  const fetchOptions = {method:"PUT", headers: myHeaders, body: JSON.stringify({intitule:doc.intitule, description:doc.description})};
-  fetch(url+`${doc.id}`,fetchOptions)
-  .catch((error) => console.log(error));
+  document.getElementById("intitule").value = doc.intitule
+  document.getElementById("description").value = doc.description
+  document.getElementById('idDocToEdit').value= doc.id
 }
 </script>
 

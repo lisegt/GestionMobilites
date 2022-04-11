@@ -14,7 +14,7 @@
             <td class="text-center ">{{document.description}}</td>
             <td class="text-center"> 
                 <div class="text-center d-flex flex-row w-75 justify-content-around ">
-                <a @click="$emit('set',document)" data-bs-toggle="modal" data-bs-target="#modif" class="btn" type="button" > <img v-bind:src="edit" alt="edit"></a>
+                <a @click="$emit('update',document)" data-bs-toggle="modal" data-bs-target="#modif" class="btn" type="button" > <img v-bind:src="edit" alt="edit"></a>
                 <a @click="$emit('delete',document.id)" class="btn" type="button"> <img v-bind:src="poubelle" alt="trash"></a>
                 </div> 
             </td>

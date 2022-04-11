@@ -5,7 +5,7 @@
     Ajouter un étudiant
   </button>
   <FormAddEtud @post="addEtud"/>
-  <FormModifEtud :etudiant="etudToEdit" @update_ok="getEtud"/>
+  <FormModifEtud @update_ok="getEtud"/>
   
   <SearchEtud v-bind:etudiants="listeEtudiants"/>
 
