@@ -3,8 +3,9 @@
     <div class="row">
     <nav class="navbar navbar-expand-lg col">
         
-        <router-link tag="img" src="../views/admin/accueil/img/ISIS-logo.png" class="navbar-brand col ms-4" to="/admin">
-        </router-link>
+        <a tag="img"  class="navbar-brand col ms-4" href="/admin">
+        <img src="../views/admin/accueil/img/ISIS-logo.png"  alt=" w-50 h-50">
+        </a>
         
         
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
@@ -20,24 +21,24 @@
             <a class="nav-item" href="#">Documents administratifs</a>
             <a class="nav-item" href="#">Site public</a>
             -->
-            <ul class="navbar-nav titres w-100 ">
+            <ul class="navbar-nav  align-items-center titres w-100 ">
             
-            <li> <router-link class="nav-item active" to="/admin">Accueil</router-link> </li>
-            <li> <router-link class="nav-item" to="/admin/etudiants">Etudiants</router-link> </li>
-            <li> <router-link class="nav-item" to="/admin/destinations">Destinations</router-link> </li>
-            <li> <router-link class="nav-item" to="/admin/mobilites">Mobilités</router-link> </li>
-            <li> <router-link class="nav-item" to="/admin/documents">Documents administratifs</router-link> </li>
-            <li> <router-link class="nav-item" to="#">Site public</router-link> </li>
-            <li>
-                    <div class="col text-center dropdown btn-group">
+            <li class="flex-fill text-center"> <a class="nav-item active" href="/admin">Accueil</a> </li>
+            <li class="flex-fill text-center"> <a class="nav-item" href="/admin/etudiants">Etudiants</a> </li>
+            <li class="flex-fill text-center"> <a class="nav-item" href="/admin/destinations">Destinations</a> </li>
+            <li class="flex-fill text-center"> <a class="nav-item" href="/admin/mobilites">Mobilités</a> </li>
+            <li class="flex-fill text-center"> <a class="nav-item" href="/admin/documents">Documents administratifs</a> </li>
+            <li class="flex-fill text-center"> <a class="nav-item" href="#">Site public</a> </li>
+            <li class=" flex-fill text-center">
+                    <div class="col text-center text-center dropdown btn-group">
 
-                    <button class="btn dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="../views/admin/accueil/img/utilisateur.png" alt="utilisateur" height="30em"/>
+                    <button class="btn dropdown-toggle text-center" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="../views/admin/accueil/img/utilisateur.png" alt="utilisateur" />
                     </button>
                     <div class="dropdown-menu dropdown-menu-right text-center" id="menuDeroulant" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="#">Nom Prénom</a>
                         <div class="dropdown-divider"></div>
-                        <router-link class="dropdown-item text-wrap" to="/admin/docsAdmin"><img class="mr-2" src="../views/admin/accueil/img/ajoutAdmin.svg" alt="logo d'ajout d'un admin"/>Ajouter un administrateur</router-link>
+                        <a class="dropdown-item text-wrap" href="/admin/docsAdmin"><img class="mr-2" src="../views/admin/accueil/img/ajoutAdmin.svg" alt="logo d'ajout d'un admin"/>Ajouter un administrateur</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#"><img class="mr-2" src="../views/admin/accueil/img/deconnexion.svg" alt="logo deconnexion"/>Déconnexion</a>
                     </div>

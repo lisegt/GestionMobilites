@@ -1,6 +1,6 @@
 <template>
-<div class="  container table-responsive  ">
-  <table class="table table-striped mh-75  table-bordered overflow-scroll ">
+<div class="  container table-responsive h-50 ">
+  <table class="table table-striped  table-bordered ">
    <thead>
     <tr>
     <th class="text-center ">NOM ETABLISSEMENT </th>
@@ -12,7 +12,7 @@
     <th class="text-center ">ACTIONS</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody >
     <tr v-for="(destination,index) of destinations" :key=index :produit=produit   >
     <td class="text-center ">{{destination[0].nomEtablissementAccueil}}</td>
     <td class="text-center ">{{destination[0].ville}}</td>
