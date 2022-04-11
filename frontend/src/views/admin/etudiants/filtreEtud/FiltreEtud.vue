@@ -9,11 +9,11 @@
             </select>
         </div>
         <div>
-            <select>
-                <option>Etat mobilité</option>
-                <option>Validée</option>
-                <option>En cours</option>
-                <option>Non validée</option>
+            <select id="etat_mobilite" @change="searchByEtatMobilite">
+                <option value="tous">Etat mobilité</option>
+                <option value="val">Validée</option>
+                <option value="cours">En cours</option>
+                <option value="nVal">Non validée</option>
             </select>
         </div>
         <div>
@@ -29,13 +29,17 @@
 
 <script setup>
 import { onMounted, reactive } from "@vue/runtime-core";
+import {defineEmits} from 'vue'
 
+    //on definit les evenements
+    const emit = defineEmits(['searchByEtatMobilite'])
+
+    //liste des promotions
     let data = reactive(
         {
             promotions:[]
         }
     )
-    //liste des promotions
 
     //Pour récupérer toutes les promotions existantes
     function getPromotions(){
@@ -45,7 +49,13 @@ import { onMounted, reactive } from "@vue/runtime-core";
     onMounted(()=>{
         data.promotions = getPromotions()
     })
-    
+
+    //Pour envoyer un evenement au parent en fonction de l'etat de la mobilité choisie
+    function searchByEtatMobilite(event){
+        emit('searchByEtatMobilite', event.target.value)
+    }
+
+
 </script>
 
 <style>

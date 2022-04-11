@@ -2,7 +2,7 @@
 
   <div class="container-fluid overflow-scroll h-100">
     <HeaderAdmin/>
-    <button style="background-color:red; color: white" @click="recupererTousLesPays">Erreur pour Monsieur Bastide</button>
+    <button style="background-color:red; color: white; padding: 10px;" @click="recupererTousLesPays">Erreur pour Monsieur Bastide</button>
     <router-view />
     <Footer class="footer" />
   </div>

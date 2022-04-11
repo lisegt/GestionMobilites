@@ -2,7 +2,8 @@
 <div id="form">
     <form @submit.prevent="search()">
         <div class="form-group">
-            <input id="search" class="form-control" name="nom" type="text" v-model="nom" placeholder="Entrez le nom de l'étudiant ..." required/>
+            <input type="text" id="search"  v-model="nom" placeholder="RECHERCHER UNE DESTINATION..." class="w-100 inputFiltre" />
+            
         </div>
         <input id="Bouton" type="submit" value="Search" />
     </form>
