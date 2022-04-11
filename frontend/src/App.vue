@@ -2,10 +2,30 @@
 
   <div class="container-fluid overflow-scroll h-100">
     <HeaderAdmin/>
+    <button style="background-color:red; color: white" @click="recupererTousLesPays">Erreur pour Monsieur Bastide</button>
     <router-view />
     <Footer class="footer" />
   </div>
 </template>
+
+<script setup>
+  import HeaderAdmin from './components/HeaderAdmin.vue';
+  import Accueil from './views/admin/accueil/Accueil.vue';
+  import Footer from './components/Footer.vue';
+
+  function recupererTousLesPays(){
+
+    const fetchOptions = { method: "GET" }; //on utilise l'opération GET car on veut récupérer le pays des destinations
+    fetch(url, fetchOptions)
+        .then((response) => { return response.json(); })
+        .then((dataJSON) => {
+            console.log(dataJSON)
+            console.log('test')
+        })
+        .catch((error) => console.log(error));
+    }
+</script>
+
 
 <style>
 @font-face
@@ -81,8 +101,4 @@ html {
 }
 </style>
 
-<script setup>
-import HeaderAdmin from './components/HeaderAdmin.vue';
-import Accueil from './views/admin/accueil/Accueil.vue';
-import Footer from './components/Footer.vue';
-</script>
+
