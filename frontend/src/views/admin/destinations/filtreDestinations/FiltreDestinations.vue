@@ -6,7 +6,11 @@
             </ul>
         <button aria-expanded="false" type="button" id="dropdownType" data-toggle="dropdown" class="btn flex-fill dropdown-toggle">TYPE MOBILITE</button>
             <ul class="dropdown-menu" aria-labelledby="dropdownType" id="typeSelector">
-                <li v-for="destination in destinations" :key="destination[0].typeMobilite" :id="destination[0].typeMobilite">{{ destination[0].typeMobilite }}</li>
+                <li v-for="type in types" :key="type">{{ type }}</li>
+            </ul>
+        <button aria-expanded="false" type="button" id="dropdownContrat" data-toggle="dropdown" class="btn flex-fill dropdown-toggle">STATUT CONTRAT</button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownContrat" id="contratSelector">
+                <li v-for="contrat in contrats" :key="contrat">{{ contrat }}</li>
             </ul>
 </template>
 
@@ -17,6 +21,8 @@ defineProps(['destinations'])
 
 const url = "http://localhost:8989/destinations/pays"
 const listePays = reactive([]);
+const types = reactive([]);
+const contrats = reactive([]);
 
 onMounted(()=>{
         recupererTousLesPays()
