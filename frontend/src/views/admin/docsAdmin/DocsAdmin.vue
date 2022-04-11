@@ -52,10 +52,11 @@ function deleteDocument(id){
  * Fonction qui récupère les données pas encore modifiées
  */
 function setDoc(doc){
+  console.log("test")
   let intitule = document.getElementById("intitule").value = doc.intitule
   let description = document.getElementById("description").value = doc.description
 
-  document.getElementById("Bouton").addEventListener('click',()=>{updateEtud(doc)})
+  document.getElementById("btnSub").addEventListener('click',()=>{updateEtud(doc)})
 }
 
 /**
