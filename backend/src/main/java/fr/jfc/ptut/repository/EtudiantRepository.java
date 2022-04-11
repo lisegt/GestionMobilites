@@ -9,8 +9,11 @@ import org.springframework.data.jpa.repository.Query;
 import fr.jfc.ptut.entity.Etudiant;
 
 public interface EtudiantRepository extends JpaRepository<Etudiant, Integer> {
-    Optional<Etudiant> findByNom(String nom);
-    List<Etudiant> findByPromo(Integer annee);
-
+    
+    @Query(
+        value="SELECT promo FROM etudiant",
+        nativeQuery = true
+    )
+    List<String> promo();
 
 }
