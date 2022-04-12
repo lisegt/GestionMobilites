@@ -10,19 +10,11 @@
             <select id="etat_mobilite" class="form-select inputFiltre" @change="searchByEtatMobilite">
                 <option value="tous">Etat mobilité</option>
                 <option value="val">Validée</option>
-                <option value="cours">En cours</option>
                 <option value="nVal">Non validée</option>
             </select>
         </div>
 
-        <div>
-            <select style="background-color:rgba(163, 180, 200, 0.35);"  id="type_mobilite" class="form-select inputFiltre" @change="searchByEtatMobilite">
-                <option style="background-color: #A3B4C8;" value="tous">Type mobilité</option>
-                <option style="background-color: #A3B4C8;" value="val">Etude</option>
-                <option style="background-color: #A3B4C8;" value="cours">Stage</option>
-                <option style="background-color: #A3B4C8;" value="nVal">Humanitaire</option>
-            </select>
-        </div>
+        
     </div>
     
 

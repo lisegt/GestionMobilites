@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import fr.jfc.ptut.entity.EtatMobilite;
 import fr.jfc.ptut.entity.Etudiant;
+import fr.jfc.ptut.entity.Mobilite;
+import fr.jfc.ptut.entity.Type;
 import fr.jfc.ptut.repository.EtudiantRepository;
 
 @RestController
@@ -34,7 +37,7 @@ public class EtudiantController {
         return res;
     }
 
-    @GetMapping("/findEtudiant/{promo}")
+    @GetMapping("/findEtudiant/promo/{promo}")
     public Set<Etudiant> getEtudiantByPromo(@PathVariable String promo){
         Integer promoEtud = Integer.valueOf(promo);
         Set<Etudiant> res = new HashSet<>();
@@ -47,5 +50,28 @@ public class EtudiantController {
         return res;
     }
 
+    @GetMapping("/findEtudiant/etatMobilite/{etat}")
+    public Set<Etudiant> getEtudiantByEtatMobilite(@PathVariable String etat){
+        Set<Etudiant> res = new HashSet<>();
+        List<Etudiant> etudiants = etudiantRepository.findAll();
+        //Requete pour étudiantayant validé mobilté
+        if(etat.equals("val")){
+            for(Etudiant etud : etudiants){
+                if(!etud.getMobilites().isEmpty()){
+                    res.add(etud);
+                }
+            }
+        }
+        //Requete pour étudiant n'ayant pas validé mobilité
+        if(etat.equals("nVal")){
+            for(Etudiant etud : etudiants){
+                if(etud.getMobilites().isEmpty()){
+                    res.add(etud);
+                }
+            }
+        }
+        return res;
+    }
 
+   
 }
