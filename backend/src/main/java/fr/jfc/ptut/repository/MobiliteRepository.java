@@ -15,4 +15,6 @@ public interface MobiliteRepository extends JpaRepository<Mobilite, Integer> {
         nativeQuery = true
     )
     List<Mobilite> mobiliteByIdEtudiant(int id);
+
+    
 }

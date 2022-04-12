@@ -21,12 +21,15 @@
 
     <div class="col-4 text-right">
         <button type="button" class="btnOrange " data-bs-toggle="modal" data-bs-target="#exempleModalD">
+            <img img v-bind:src="world" alt="world" class="mr-1">
             Ajouter une destination
         </button>
     </div>
 
   </div>
   
+  <div id="log">
+      </div>
 
   <TableDestinations @set="setDestination" @delete="deleteDestination" v-bind:destinations="listeDestinationsTab"/>
   <FormAddDestination @ajouter="addDest" />
@@ -39,12 +42,21 @@
     import {reactive, onMounted} from 'vue'
     import TableDestinations from './tableDestinations/TableDestinations.vue'
     import FormAddDestination from './formAddDestination/FormAddDestination.vue';
+    import world from '../../../img/world.png'
+
+    //navabr active
+    let listeNav = ["accueilNav","etudiantNav","destinationsNav","mobilitesNav","docNav","siteNav"]
+    for(let l of listeNav){
+    document.getElementById(l).classList.remove("active")
+    }
+    document.getElementById("destinationsNav").classList.add("active")
+
     const listeDestinations =  reactive([])
     const listeDestinationsTab = reactive([])
     function dateDiff(date1, date2){
                 var diff = {}                           // Initialisation du retour
                 var tmp = date2 - date1;
-            
+                
                 tmp = Math.floor(tmp/1000);             // Nombre de secondes entre les 2 dates
                 diff.sec = tmp % 60;                    // Extraction du nombre de secondes
             
@@ -56,7 +68,7 @@
                 
                 tmp = Math.floor((tmp-diff.hour)/24);   // Nombre de jours restants
                 diff.day = tmp;
-                
+                console.log(diff)
                 return diff;
     }
     function getDestinations(){
@@ -77,9 +89,12 @@
 
                 
                     date=new Date(d.dateFinDeContratIsis)
-                    dateDiff(actuelDate,date).day
-                    if(dateDiff(actuelDate,date).day<385){
+                    
+                    if(dateDiff(actuelDate,date).day<365 && dateDiff(actuelDate,date).day>0 ){
                                 isValide = "Bientôt Expiré"
+                    }
+                    else if(dateDiff(actuelDate,date).day<0){
+                        isValide = "Expiré"
                     }
                     else{
 
@@ -90,7 +105,7 @@
                     
 
             }
-            console.log(listeDestinations)
+            console.log("liste dest",listeDestinations)
         })
     }
 
@@ -156,8 +171,44 @@
             .catch((error) => console.log(error));
 
     }
+    async function Uploaded() {
+        
+        var base64String=""
+	    var file = document.querySelector(
+		'input[type=file]')['files'][0];
+	    var reader = new FileReader();
+        
+	    reader.onload = function () {
+            alert("on passe")
+		base64String = reader.result.replace("data:", "")
+			.replace(/^.+,/, "");
+		imageBase64Stringsep = base64String;
+	    }
+	    reader.readAsDataURL(file);
+        
+        return base64String 
+}
+  
 
-    function addDest() {
+    //image base64 en image 
+
+    function Base64ToImage(base64img, callback) {
+    var img = new Image();
+    img.onload = function() {
+        callback(img);
+    };
+    img.src = base64img;
+    }
+    let data;
+    Base64ToImage(data, function(img) {
+        document.getElementById('log').appendChild(img);
+        var log = "w=" + img.width + " h=" + img.height;
+        document.getElementById('log').value = log;
+    });
+
+    //fin 
+
+    async function addDest() {
     let nomEtablissement = document.getElementById("addNomEtablissement").value
     let nomVille = document.getElementById("addNomVille").value
     let nomPays = document.getElementById("addNomPays").value
@@ -165,7 +216,11 @@
     let nbPlaceSemestre = document.getElementById("addSemestres").value
     let nbPlaceAnnee= document.getElementById("addNbPlaceAnnee").value
     let date = document.getElementById("addDateFinContrat").value
-    if(nomEtablissement==""|| nomVille==""||nomPays==""){
+    let img = document.getElementById("addImage").value
+
+    
+    function postDestination(data){
+            if(nomEtablissement==""|| nomVille==""||nomPays==""){
       window.alert("Veuillez remplir les 4 premiers champs!")
     }
     else{
@@ -182,11 +237,29 @@
                                 nbPlaceSemestre:nbPlaceSemestre,
                                 typeMobilite:typeMobilite,
                                 ville:nomVille,
-                                pays:nomPays
+                                pays:nomPays,
+                                image:data
+                                
                                 })};
     fetch(url,fetchOptions)
     .then(()=>{getDestinations()})
     .catch((error) => console.log(error));}
+    }
+
+   
+    if(document.getElementById("addImage").value!=""){
+     
+     postDestination(Uploaded())
+     
+     }
+    
+    else{
+        postDestination("")
+    }
+    
+    console.log("img", img)
+
+   
 }
 
     onMounted(()=>{

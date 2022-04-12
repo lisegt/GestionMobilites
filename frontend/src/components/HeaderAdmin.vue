@@ -8,7 +8,7 @@
         </a>
         
         
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         
@@ -23,12 +23,12 @@
             -->
             <ul class="navbar-nav  align-items-center titres w-100 ">
             
-            <li class="flex-fill text-center"> <a class="nav-item active" href="/admin">Accueil</a> </li>
-            <li class="flex-fill text-center"> <a class="nav-item" href="/admin/etudiants">Etudiants</a> </li>
-            <li class="flex-fill text-center"> <a class="nav-item" href="/admin/destinations">Destinations</a> </li>
-            <li class="flex-fill text-center"> <a class="nav-item" href="/admin/mobilites">Mobilités</a> </li>
-            <li class="flex-fill text-center"> <a class="nav-item" href="/admin/documents">Documents administratifs</a> </li>
-            <li class="flex-fill text-center"> <a class="nav-item" href="#">Site public</a> </li>
+            <li class="flex-fill text-center"> <a class="nav-item active" id="accueilNav" href="/admin">Accueil</a> </li>
+            <li class="flex-fill text-center"> <a class="nav-item" id="etudiantNav" href="/admin/etudiants">Etudiants</a> </li>
+            <li class="flex-fill text-center"> <a class="nav-item" id="destinationsNav" href="/admin/destinations">Destinations</a> </li>
+            <li class="flex-fill text-center"> <a class="nav-item" id="mobilitesNav" href="/admin/mobilites">Mobilités</a> </li>
+            <li class="flex-fill text-center"> <a class="nav-item" id="docNav" href="/admin/documents">Documents administratifs</a> </li>
+            <li class="flex-fill text-center"> <a class="nav-item" id="siteNav" href="#">Site public</a> </li>
             <li class=" flex-fill text-center">
                     <div class="col text-center text-center dropdown btn-group">
 

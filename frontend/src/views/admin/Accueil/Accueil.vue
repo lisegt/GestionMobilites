@@ -60,6 +60,14 @@ import destinations from "./img/img_destinations.png"
 import mobilites from "./img/img_mobilités.png" 
 import doc from "./img/img_docsadmin.png"
 
+//navabr active
+    let listeNav = ["accueilNav","etudiantNav","destinationsNav","mobilitesNav","docNav","siteNav"]
+    for(let l of listeNav){
+    document.getElementById(l).classList.remove("active")
+    }
+    document.getElementById("accueilNav").classList.add("active")
+
+
 let nomDoc= "DOCUMENTS ADMIN."
 if(window.innerWidth < window.innerHeight  ){
       nomDoc="DOCUMENTS"

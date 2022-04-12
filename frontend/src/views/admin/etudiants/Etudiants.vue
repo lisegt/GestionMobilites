@@ -2,6 +2,7 @@
   <div>
   <h1>Gestion des étudiants</h1>
   <button type="button" class="btnOrange " data-bs-toggle="modal" data-bs-target="#ajout">
+    <img img v-bind:src="userAdd" alt="etudiant" class="mr-1">
     Ajouter un étudiant
   </button>
   <FormAddEtud @post="addEtud"/>
@@ -20,6 +21,8 @@
   import TableEtud from './tableEtud/TableEtud.vue'
   import poubelle from '../../../img/poubelle.png'
   import edit from '../../../img/edit.png'
+  import userAdd from '../../../img/user-add.png'
+
   import { onMounted, onUpdated} from "vue";
   import { reactive } from 'vue';
 
