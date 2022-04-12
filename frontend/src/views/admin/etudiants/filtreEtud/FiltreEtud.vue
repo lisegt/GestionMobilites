@@ -10,21 +10,11 @@
             <select id="etat_mobilite" class="form-select inputFiltre" @change="searchByEtatMobilite">
                 <option value="tous">Etat mobilité</option>
                 <option value="val">Validée</option>
-                <option value="cours">En cours</option>
                 <option value="nVal">Non validée</option>
             </select>
         </div>
 
-        <div class="dropdown">
-            <button class="btn dropdown-toggle" type="button" id="dropdownTypeMobilite" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                TYPE MOBILITE
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownTypeMobilite">
-                <li class="text-center">Etude</li>
-                <li class="text-center">Stage</li>
-                <li class="text-center">Humanitaire</li>
-            </ul>
-        </div>
+        
     </div>
     
 
@@ -72,11 +62,14 @@ import {defineEmits} from 'vue'
 
 </script>
 
-<style scoped>
+<style>
 
 .filtresEtudiants{
     font-family: 'Bebas Neue', sans-serif;
-    display: flex;
+}
+
+select{
+    font-family: 'Bebas Neue', sans-serif;
 }
 
 </style>

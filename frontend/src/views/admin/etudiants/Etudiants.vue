@@ -1,17 +1,5 @@
 <template>
-<div>
-  <h1>Gestion des étudiants</h1>
-  <button type="button" class="btnOrange " data-bs-toggle="modal" data-bs-target="#ajout">
-    <img img v-bind:src="userAdd" alt="etudiant" class="mr-1">
-    Ajouter un étudiant
-  </button>
-  <FormAddEtud @post="addEtud"/>
-  <FormModifEtud :etudiant="etudToEdit" @update_ok="getEtud"/>
-  
-  <FormAddEtud @post="addEtud"/>
-  <FormModifEtud @update_ok="getEtud"/>
-
-  <div class="h-100 container">
+  <div class="container">
     <div class="row h-25 align-items-center">
 
       <div class="col-4 h-50  d-flex flex-column justify-content-around align-items-left">
@@ -27,24 +15,28 @@
 
     <div class="col-4 text-right">
         <button type="button" class="btnOrange " data-bs-toggle="modal" data-bs-target="#ajout">
+          <img img v-bind:src="userAdd" alt="etudiant" class="mr-1">
           Ajouter un étudiant
         </button>
     </div>
-      
-      <FormAddEtud @post="addEtud"/>
-      <FormModifEtud @update_ok="getEtud"/>
     
     </div>
 
-    <TableEtud :etudiants="listeEtudiants" @delete="deleteEtud" @update="editEtud"/>
+    <TableEtud :etudiants="listeEtudiants" @delete="deleteEtud" @update="editEtud" class="mt-4"/>
+
+      
+    <FormAddEtud @post="addEtud"/>
+    <FormModifEtud @update_ok="getEtud"/>
   </div>
   <!--
     Dans etudiant
     <SearchEtud v-bind:etudiants="listeEtudiants"/>
     Dans search
     <input type="text" id="search"  v-model="nom" placeholder="RECHERCHER UNE DESTINATION..." class="w-100 inputFiltre" />
-  -->
+  
   </div>
+
+  -->
 </template>
 
 <script setup>
@@ -106,16 +98,24 @@
 
   function searchByEtatMobilite(etat){
     if(etat === "val"){
-      listeEtudiants.splice(0, listeEtudiants.length)
-      listeEtudiants.push({nom:"val", prenom:"val", promo: 1, ine: 1})
-    }
-    if(etat === "cours"){
-      listeEtudiants.splice(0, listeEtudiants.length)
-      listeEtudiants.push({nom:"cours", prenom:"cours", promo: 1, ine: 1})
+      fetch('/api/findEtudiant/etatMobilite/val', {method: 'GET'})
+      .then((result)=>{
+        return result.json()
+      })
+      .then((dataJson)=>{
+        listeEtudiants.splice(0, listeEtudiants.length)
+        dataJson.forEach((item)=>{listeEtudiants.push(item)})
+      })      
     }
     if(etat === "nVal"){
-      listeEtudiants.splice(0, listeEtudiants.length)
-      listeEtudiants.push({nom:"nVal", prenom:"nVal", promo: 1, ine: 1})
+      fetch('/api/findEtudiant/etatMobilite/nVal', {method: 'GET'})
+      .then((result)=>{
+        return result.json()
+      })
+      .then((dataJson)=>{
+        listeEtudiants.splice(0, listeEtudiants.length)
+        dataJson.forEach((item)=>{listeEtudiants.push(item)})
+      })    
     }
     if(etat === "tous"){
       getEtud()
@@ -124,7 +124,7 @@
 
   function searchByPromo(promo){
     if(promo != 0){
-      fetch(`/api/findEtudiant/${promo}`,{method: 'GET'})
+      fetch(`/api/findEtudiant/promo/${promo}`,{method: 'GET'})
       .then((result)=>{
         return result.json()
       })
@@ -141,9 +141,15 @@
   
 
   //Fonction pour recherche
-  function seachEtud(etud){
-      listeEtudiants.splice(0, listeEtudiants.length)
-      listeEtudiants.push(etud)
+  function searchEtud(etud){
+      fetch(`/api/etudiants/search/findByNomContaining?mot=${etud}`, {method: 'GET'})
+      .then((result)=>{
+        return result.json()
+      })
+      .then((dataJson)=>{
+        listeEtudiants.splice(0, listeEtudiants.length)
+        dataJson._embedded.etudiants.forEach((item)=>{listeEtudiants.push(item)})
+      })
   }
 
 

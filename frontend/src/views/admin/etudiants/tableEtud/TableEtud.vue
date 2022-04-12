@@ -7,8 +7,6 @@
             <th class="text-center">Nom</th>
             <th class="text-center">Prenom</th>
             <th class="text-center">Promotion</th>
-            <th class="text-center">Etat mobilité</th>
-            <th class="text-center">Type mobilité</th>
             <th class="text-center">Actions</th>
           </tr>
         </thead>
@@ -18,8 +16,6 @@
             <td class="text-center">{{etud.nom}}</td>
             <td class="text-center">{{etud.prenom}}</td>
             <td class="text-center">{{etud.promo}}</td>
-            <td class="text-center">null</td>
-            <td class="text-center">null</td>
             <td class="text-center">
               <div class="text-center d-flex justify-content-around w-75 m-auto">
               <a @click="$emit('update', etud)" data-bs-toggle="modal" data-bs-target="#modif" class="btn" type="button" > <img v-bind:src="edit" alt="edit"></a>

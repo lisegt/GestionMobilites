@@ -2,7 +2,7 @@
 <div id="form">
     <form @submit.prevent="search()">
         <div class="form-group formRecherche">
-            <input id="search" class="form-control w-75" name="nom" type="text" v-model="nom" placeholder="Rechercher un étudiant..." required/>
+            <input id="search" class="form-control w-75" name="nom" type="text" v-model="etud" placeholder="Rechercher un étudiant..." required/>
             <input id="boutonRecherche" type="submit" value="Rechercher" />
         </div>
         
@@ -11,26 +11,14 @@
 </template>
 
 <script setup>
-import { reactive, defineEmits } from 'vue';
+import { ref, defineEmits } from 'vue';
 
 const emit = defineEmits(['searchEtud'])
 
-//Liste reactive pour la recherche :
-const etudiantSearch = reactive([]);
-
-let etudiants= defineProps(["etudiants"]);
+const etud = ref('');
 
 function search(){
-    etudiantSearch.splice(0,etudiantSearch.length)
-    let nom = document.getElementById("search").value
-    
-    for(let e of etudiants.etudiants){
-        if(e.nom.includes(nom)){
-            etudiantSearch.push(e)
-        }
-    }
-    emit('searchEtud',etudiantSearch)
-    console.log(etudiantSearch)
+    emit('searchEtud',etud._value.toUpperCase())
 }
 </script>
 
