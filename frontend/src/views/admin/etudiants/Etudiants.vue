@@ -1,10 +1,7 @@
 <template>
 <div>
   <h1>Gestion des étudiants</h1>
-  <button type="button" class="btnOrange " data-bs-toggle="modal" data-bs-target="#ajout">
-    <img img v-bind:src="userAdd" alt="etudiant" class="mr-1">
-    Ajouter un étudiant
-  </button>
+  
   <FormAddEtud @post="addEtud"/>
   <FormModifEtud :etudiant="etudToEdit" @update_ok="getEtud"/>
   
@@ -27,6 +24,7 @@
 
     <div class="col-4 text-right">
         <button type="button" class="btnOrange " data-bs-toggle="modal" data-bs-target="#ajout">
+          <img img v-bind:src="userAdd" alt="etudiant" class="mr-1">
           Ajouter un étudiant
         </button>
     </div>
