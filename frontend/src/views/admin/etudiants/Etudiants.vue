@@ -33,6 +33,9 @@
     <SearchEtud v-bind:etudiants="listeEtudiants"/>
     Dans search
     <input type="text" id="search"  v-model="nom" placeholder="RECHERCHER UNE DESTINATION..." class="w-100 inputFiltre" />
+  
+  </div>
+
   -->
 </template>
 
@@ -44,6 +47,8 @@
   import TableEtud from './tableEtud/TableEtud.vue'
   import poubelle from '../../../img/poubelle.png'
   import edit from '../../../img/edit.png'
+  import userAdd from '../../../img/user-add.png'
+
   import { onMounted, onUpdated} from "vue";
   import { reactive } from 'vue';
 

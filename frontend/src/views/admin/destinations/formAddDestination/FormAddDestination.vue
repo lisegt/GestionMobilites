@@ -35,7 +35,7 @@
                 <div class="mb-3 row">
                     <div class="col">
                     <label for="typeMobilite">TYPE DE MOBILITE:</label>
-                    <select id="addTypeMobilite" name="addTypeMobilite" class="form-select">
+                    <select id="addTypeMobilite"  name="addTypeMobilite" class="form-select">
                             <option id="ETUDE" value="ETUDE">Etude</option>
                             <option id="STAGE" value="STAGE">Stage</option>
                             <option id="HUMANITAIRE" value="HUMANITAIRE">Humanitaire</option>

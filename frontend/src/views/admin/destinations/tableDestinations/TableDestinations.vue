@@ -13,7 +13,7 @@
     </tr>
   </thead>
   <tbody >
-    <tr v-for="(destination,index) of destinations" :key=index :produit=produit   >
+    <tr v-for="(destination,index) of destinations" :key=index    >
     <td class="text-center ">{{destination[0].nomEtablissementAccueil}}</td>
     <td class="text-center ">{{destination[0].ville}}</td>
     <td class="text-center ">{{destination[0].pays}}</td>

@@ -66,8 +66,7 @@ html {
     color: white;
     font-size: 24px;
     border: 0px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 10px;
 }
 
 .inputFiltre{

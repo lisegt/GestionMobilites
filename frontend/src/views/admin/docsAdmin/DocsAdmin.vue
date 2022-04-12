@@ -69,8 +69,15 @@ function setDoc(doc){
   document.getElementById('idDocToEdit').value= doc.id
 }
 
+/**
+ * 
+ * @param intitule
+ * @param description
+ * @return
+ * Fonction qui permet d'ajouter un étudiant
+ */
 function addDoc(intitule, description){
-  const url = `/api/documents` 
+  const url = `/api/documents`
   let myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
   const fetchOptions = {method:"POST", headers: myHeaders, body: JSON.stringify({intitule:intitule, description:description})};
