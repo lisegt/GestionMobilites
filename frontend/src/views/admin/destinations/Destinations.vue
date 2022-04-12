@@ -66,12 +66,12 @@
                 console.log(diff)
                 return diff;
     }
-    function getDestinations(){
-        
-        listeDestinations.splice(0,listeDestinations.length)         //On vide la liste des destinations avant de la remplir afin d'éviter les doublons
-        listeDestinationsTab.splice(0,listeDestinationsTab.length) 
 
-        let url = `http://localhost:8989/api/destinations`
+    const urlAllDestinations = '/api/destinations';
+    function getDestinations(url){
+           
+        listeDestinationsTab.splice(0,listeDestinationsTab.length) //On vide la liste des destinations avant de la remplir afin d'éviter les doublons
+
         fetch(url)
         .then((res)=>{return res.json()})
         .then((json)=>{
@@ -85,10 +85,10 @@
                     date=new Date(d.dateFinDeContratIsis)
                     
                     if(dateDiff(actuelDate,date).day<365 && dateDiff(actuelDate,date).day>0 ){
-                                isValide = "Bientôt Expiré"
+                                isValide = "Bientot"
                     }
                     else if(dateDiff(actuelDate,date).day<0){
-                        isValide = "Expiré"
+                        isValide = "Expire"
                     }
                     else{
                         isValide = "Valide"
@@ -98,7 +98,6 @@
                     
 
             }
-            console.log("liste dest",listeDestinations)
         })
     }
 
@@ -111,7 +110,7 @@
                 method: "DELETE",
                 headers: myHeaders
                 };
-        let url = `http://localhost:8989/api/destinations/${id}`
+        let url = `/api/destinations/${id}`
         fetch(url,fetchOptions)
         .then(()=>{getDestinations()})
         .catch((err)=>{
@@ -145,7 +144,7 @@
            let nbPlaceAnnee= document.getElementById("nbPlaceAnnee").value
            let date = document.getElementById("dateFinContrat").value
 
-            const url = `http://localhost:8989/api/destinations/${destination[0].id}` // l’url de l'API
+            const url = `/api/destinations/${destination[0].id}` // l’url de l'API
 
             let myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
@@ -235,7 +234,7 @@
                                 
                                 })};
     fetch(url,fetchOptions)
-    .then(()=>{getDestinations()})
+    .then(()=>{getDestinations(urlAllDestinations)})
     .catch((error) => console.log(error));}
     }
 
@@ -254,44 +253,90 @@
 
    
 }
-
-//fonction qui permet de récupérer toutes les destinations dans le pays sélectionné
+/**
+ * @param pays sélectionné dans la liste déroulante
+ * fonction qui permet de récupérer toutes les destinations dans le pays sélectionné
+ */
 function searchByPays(pays){
 
-  const fetchOptions = { method: "GET" }; //on utilise l'opération GET car on veut récupérer le pays des destinations
+  const fetchOptions = { method: "GET" }; //on utilise l'opération GET car on veut récupérer les destinations filtrées par pays
+  const url = '/api/destinations/search/findByPays?pays='+pays //url permettant d'accéder aux destinations filtrées par pays
 
-  if(pays != 'tous'){ //si on sélectionne n'importe quel pays de la liste déroulante
-    fetch('/api/destinations/search/findByPays?pays='+pays, fetchOptions)
+  if(pays != 'tous'){ //si on sélectionne n'importe quel pays de la liste déroulante, on filtre
+    fetch(url, fetchOptions)
       .then((response) => { return response.json();})
       .then((dataJSON) => {
+          getDestinations(url)
+      })
+      .catch((error) => console.log(error));
+  } else { // on sélectionne l'option permettant d'afficher toutes les destinations
+    getDestinations(urlAllDestinations)
+  }
+}
+
+/**
+ * @param type sélectionné dans la liste déroulante
+ * fonction qui permet de récupérer toutes les destinations associées à un type de mobilité sélectionné
+ */
+function searchByTypeMobilite(type){
+
+  const fetchOptions = { method: "GET" }; //on utilise l'opération GET car on veut récupérer les destinations filtrées par type de mobilité
+  const url = '/api/destinations/search/findByTypeMobilite?type='+type //url permettant d'accéder aux destinations filtrées par type de mobilité
+
+  if(type != 'tous'){ //si on sélectionne n'importe quel type de mobilité de la liste déroulante, on filtre
+    fetch(url, fetchOptions)
+      .then((response) => { return response.json();})
+      .then((dataJSON) => {
+          getDestinations(url)
+
+      })
+      .catch((error) => console.log(error));
+  } else { // on sélectionne l'option permettant d'afficher toutes les destinations
+    getDestinations(urlAllDestinations)
+  }
+}
+
+/**
+ * @param statut sélectionné dans la liste déroulante
+ * fonction qui permet de récupérer toutes les destinations associées à un statut de contrat sélectionné
+ */
+function searchByStatutContrat(statut){
+
+  const fetchOptions = { method: "GET" }; //on utilise l'opération GET car on veut récupérer les destinations filtrées par statut de contrat
+  const url = '/api/destinations/findByStatutContrat?statut='+statut //url permettant d'accéder aux destinations filtrées par statut de contrat
+
+  if(statut != 'tous'){ //si on sélectionne n'importe quel statut de la liste déroulante, on filtre
+    fetch(url, fetchOptions)
+      .then((response) => { return response.json();})
+      .then((dataJSON)=>{
+        listeDestinationsTab.splice(0, listeDestinationsTab.length)
+        dataJSON.forEach((destination)=>{
           let isValide;
           let date;
           let actuelDate = new Date();
 
-          listeDestinationsTab.splice(0, listeDestinationsTab.length)
-          console.log(dataJSON)
-          dataJSON._embedded.destinations.forEach((destination)=>{
-            date=new Date(destination.dateFinDeContratIsis)
-            dateDiff(actuelDate,date).day
-            if (dateDiff(actuelDate,date).day < 365){
-              isValide = "Bientôt Expiré"
-            }
-            else {
+          date=new Date(destination.dateFinDeContratIsis)
+                    
+          if(dateDiff(actuelDate,date).day<365 && dateDiff(actuelDate,date).day>0 ){
+            isValide = "bientot"
+          }
+          else if(dateDiff(actuelDate,date).day<0){
+            isValide = "Expire"
+          }
+          else{
               isValide = "Valide"
-            }
-            listeDestinationsTab.push([destination,isValide])
-          })
+          }
+          listeDestinationsTab.push([destination,isValide])
+        })
       })
       .catch((error) => console.log(error));
   } else { // on sélectionne l'option permettant d'afficher toutes les destinations
-    getDestinations()
+    getDestinations(urlAllDestinations)
   }
-
 }
 
-
     onMounted(()=>{
-        getDestinations()
+        getDestinations(urlAllDestinations)
     })
 </script>
 
