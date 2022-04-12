@@ -22,32 +22,18 @@
 #accueil{
       height: 85%;
       overflow: auto;
-     
-
 }
 .hauteur{
-
  height: 50vh;
- 
 }
 
 @media all and (orientation: portrait) {
       .hauteur{
-
             height: 28vh;
-      }
-
-      
-
-     
-
+      }  
 }
 
-
-
-
 </style>
-
 
 <script setup>
 import "bootstrap/dist/js/bootstrap.min.js";
@@ -72,6 +58,5 @@ let nomDoc= "DOCUMENTS ADMIN."
 if(window.innerWidth < window.innerHeight  ){
       nomDoc="DOCUMENTS"
 }
-
 </script>
 
