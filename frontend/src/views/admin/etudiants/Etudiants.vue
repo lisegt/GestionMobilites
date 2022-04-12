@@ -3,7 +3,7 @@
     <div class="row h-25 align-items-center">
 
       <div class="col-4 h-50  d-flex flex-column justify-content-around align-items-left">
-        <SearchEtud v-bind:etudiants="listeEtudiants"/>
+        <SearchEtud v-bind:etudiants="listeEtudiants" @searchEtud="searchEtud"/>
         <div class="filtreTab w-100 d-flex  ">
           <div class="dropdown">
             <FiltreEtud @searchByEtatMobilite="searchByEtatMobilite"/>
@@ -107,6 +107,12 @@
     if(etat === "tous"){
       getEtud()
     }
+  }
+
+  //Fonction pour recherche
+  function seachEtud(etud){
+      listeEtudiants.splice(0, listeEtudiants.length)
+      listeEtudiants.push(etud)
   }
 
 </script>
