@@ -11,13 +11,10 @@
 </template>
 
 <script setup>
-/**
- * @param
- * @return
- * Fonction qui recherche un étudiant avec son nom
- */
+import { reactive, defineEmits } from 'vue';
 
-import { reactive } from 'vue';
+const emit = defineEmits(['searchEtud'])
+
 //Liste reactive pour la recherche :
 const etudiantSearch = reactive([]);
 
@@ -32,6 +29,7 @@ function search(){
             etudiantSearch.push(e)
         }
     }
+    emit('searchEtud',etudiantSearch)
     console.log(etudiantSearch)
 }
 </script>
