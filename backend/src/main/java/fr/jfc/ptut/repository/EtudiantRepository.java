@@ -9,4 +9,5 @@ import fr.jfc.ptut.entity.Etudiant;
 
 public interface EtudiantRepository extends JpaRepository<Etudiant, Integer> {
     
+    List<Etudiant> findByNomContaining(String mot);
 }

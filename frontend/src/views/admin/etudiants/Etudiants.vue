@@ -1,6 +1,7 @@
 <template>
+
 <div class="h-100 container ">
-  
+
   <FormAddEtud @post="addEtud"/>
   <FormModifEtud :etudiant="etudToEdit" @update_ok="getEtud"/>
   
@@ -147,8 +148,14 @@
 
   //Fonction pour recherche
   function searchEtud(etud){
-      listeEtudiants.splice(0, listeEtudiants.length)
-      etud.forEach((item)=>{listeEtudiants.push(item)})
+      fetch(`/api/etudiants/search/findByNomContaining?mot=${etud}`, {method: 'GET'})
+      .then((result)=>{
+        return result.json()
+      })
+      .then((dataJson)=>{
+        listeEtudiants.splice(0, listeEtudiants.length)
+        dataJson._embedded.etudiants.forEach((item)=>{listeEtudiants.push(item)})
+      })
   }
 
 
