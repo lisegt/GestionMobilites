@@ -1,6 +1,5 @@
 <template>
-<div>
-  <h1>Gestion des étudiants</h1>
+<div class="h-100 container ">
   
   <FormAddEtud @post="addEtud"/>
   <FormModifEtud :etudiant="etudToEdit" @update_ok="getEtud"/>
