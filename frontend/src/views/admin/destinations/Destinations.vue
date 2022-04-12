@@ -26,14 +26,14 @@
       </div>
 
   <TableDestinations @set="setDestination" @delete="deleteDestination" v-bind:destinations="listeDestinationsTab"/>
-  <FormAddDestination @ajouter="addDest" />
+  <FormAddDestination @ajouter="postDestination" @changePicture="encodeImageFileAsURL" />
   </div>
   
 </template>
 
 <script setup>
 
-    import {reactive, onMounted} from 'vue'
+    import {reactive, onMounted,ref} from 'vue'
     import TableDestinations from './tableDestinations/TableDestinations.vue'
     import FormAddDestination from './formAddDestination/FormAddDestination.vue';
     import FiltreDestinations from './filtreDestinations/FiltreDestinations.vue'
@@ -46,8 +46,10 @@
     document.getElementById(l).classList.remove("active")
     }
     document.getElementById("destinationsNav").classList.add("active")
-    const listeDestinations =  reactive([])
+   
     const listeDestinationsTab = reactive([])
+    let img = ref("")
+    
     function dateDiff(date1, date2){
                 var diff = {}                           // Initialisation du retour
                 var tmp = date2 - date1;
@@ -68,8 +70,8 @@
     }
     function getDestinations(){
         
-        listeDestinations.splice(0,listeDestinations.length)         //On vide la liste des destinations avant de la remplir afin d'éviter les doublons
-        listeDestinationsTab.splice(0,listeDestinationsTab.length) 
+                 
+        listeDestinationsTab.splice(0,listeDestinationsTab.length) //On vide la liste des destinations avant de la remplir afin d'éviter les doublons
 
         let url = `http://localhost:8989/api/destinations`
         fetch(url)
@@ -95,12 +97,12 @@
 
                         isValide = "Valide"
                     }
-                    listeDestinations.push([d,isValide])
+                   
                     listeDestinationsTab.push([d,isValide])
                     
 
             }
-            console.log("liste dest",listeDestinations)
+           
         })
     }
 
@@ -166,55 +168,40 @@
             .catch((error) => console.log(error));
 
     }
-    async function Uploaded() {
-        
-        var base64String=""
-	    var file = document.querySelector(
-		'input[type=file]')['files'][0];
-	    var reader = new FileReader();
-        
-	    reader.onload = function () {
-            alert("on passe")
-		base64String = reader.result.replace("data:", "")
-			.replace(/^.+,/, "");
-		imageBase64Stringsep = base64String;
-	    }
-	    reader.readAsDataURL(file);
-        
-        return base64String 
-}
+    
   
 
-    //image base64 en image 
-
-    function Base64ToImage(base64img, callback) {
-    var img = new Image();
-    img.onload = function() {
-        callback(img);
-    };
-    img.src = base64img;
-    }
-    let data;
-    Base64ToImage(data, function(img) {
-        document.getElementById('log').appendChild(img);
-        var log = "w=" + img.width + " h=" + img.height;
-        document.getElementById('log').value = log;
-    });
+   
 
     //fin 
+    function encodeImageFileAsURL(event) {
+        alert(event.target.files[0])
+        let file = event.target.files[0];
+        let reader = new FileReader();
+        reader.onloadend = function() {
+          
+          img.value=reader.result
+          
+          
+        }
+        reader.readAsDataURL(file);
 
-    async function addDest() {
-    let nomEtablissement = document.getElementById("addNomEtablissement").value
-    let nomVille = document.getElementById("addNomVille").value
-    let nomPays = document.getElementById("addNomPays").value
-    let typeMobilite = document.getElementById("addTypeMobilite").value
-    let nbPlaceSemestre = document.getElementById("addSemestres").value
-    let nbPlaceAnnee= document.getElementById("addNbPlaceAnnee").value
-    let date = document.getElementById("addDateFinContrat").value
-    let img = document.getElementById("addImage").value
+      }
+
 
     
-    function postDestination(data){
+    
+    
+    function postDestination(){
+        let nomEtablissement = document.getElementById("addNomEtablissement").value
+        let nomVille = document.getElementById("addNomVille").value
+        let nomPays = document.getElementById("addNomPays").value
+        let typeMobilite = document.getElementById("addTypeMobilite").value
+        let nbPlaceSemestre = document.getElementById("addSemestres").value
+        let nbPlaceAnnee= document.getElementById("addNbPlaceAnnee").value
+        let date = document.getElementById("addDateFinContrat").value
+        
+
             if(nomEtablissement==""|| nomVille==""||nomPays==""){
       window.alert("Veuillez remplir les 4 premiers champs!")
     }
@@ -233,7 +220,7 @@
                                 typeMobilite:typeMobilite,
                                 ville:nomVille,
                                 pays:nomPays,
-                                image:data
+                                image:img.value
                                 
                                 })};
     fetch(url,fetchOptions)
@@ -242,20 +229,12 @@
     }
 
    
-    if(document.getElementById("addImage").value!=""){
-     
-     postDestination(Uploaded())
-     
-     }
+   
     
-    else{
-        postDestination("")
-    }
     
-    console.log("img", img)
 
    
-}
+
 
     onMounted(()=>{
         getDestinations()
