@@ -1,10 +1,5 @@
 <template>
-  <h1>Gestion des étudiants</h1>
-  
-  <FormAddEtud @post="addEtud"/>
-  <FormModifEtud @update_ok="getEtud"/>
-
-  <div class="h-100 container">
+  <div class="container">
     <div class="row h-25 align-items-center">
 
       <div class="col-4 h-50  d-flex flex-column justify-content-around align-items-left">
@@ -20,16 +15,18 @@
 
     <div class="col-4 text-right">
         <button type="button" class="btnOrange " data-bs-toggle="modal" data-bs-target="#ajout">
+          <img src="../../../img/ajoutEtudiant.png" alt="logo ajout etudiant" height="20"/>
           Ajouter un étudiant
         </button>
     </div>
-      
-      <FormAddEtud @post="addEtud"/>
-      <FormModifEtud @update_ok="getEtud"/>
     
     </div>
 
-    <TableEtud :etudiants="listeEtudiants" @delete="deleteEtud" @update="editEtud"/>
+    <TableEtud :etudiants="listeEtudiants" @delete="deleteEtud" @update="editEtud" class="mt-4"/>
+
+      
+    <FormAddEtud @post="addEtud"/>
+    <FormModifEtud @update_ok="getEtud"/>
   </div>
   <!--
     Dans etudiant

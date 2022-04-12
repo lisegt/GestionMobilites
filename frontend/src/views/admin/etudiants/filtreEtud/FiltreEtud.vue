@@ -1,14 +1,13 @@
 <template>
-    <div class="filtresEtudiants w-100 justify-content-around">
-        <div class="dropdown">
-            <button class="btn dropdown-toggle" type="button" id="dropdownPromotion" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                PROMOTION
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownPromotion">
-                <li v-for="promo of data.promotions" :value="promo" :key="promo" class="text-center">{{promo}}</li>
-            </ul>
+    <div class="filtresEtudiants w-100">
+        <div >
+            <select style="background-color:rgba(163, 180, 200, 0.35);"  id="promotionEtud" class="form-select inputFiltre">
+                <option style="background-color: #A3B4C8;" value="tous">Promotion</option>
+                <option v-for="promo of data.promotions" :value="promo" :key="promo" class="text-center">{{promo}}</option>
+            </select>
         </div>
-        <div class="dropdown">
+
+        <div>
             <select style="background-color:rgba(163, 180, 200, 0.35);"  id="etat_mobilite" class="form-select inputFiltre" @change="searchByEtatMobilite">
                 <option style="background-color: #A3B4C8;" value="tous">Etat mobilité</option>
                 <option style="background-color: #A3B4C8;" value="val">Validée</option>
@@ -17,15 +16,13 @@
             </select>
         </div>
 
-        <div class="dropdown">
-            <button class="btn dropdown-toggle" type="button" id="dropdownTypeMobilite" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                TYPE MOBILITE
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownTypeMobilite">
-                <li class="text-center">Etude</li>
-                <li class="text-center">Stage</li>
-                <li class="text-center">Humanitaire</li>
-            </ul>
+        <div>
+            <select style="background-color:rgba(163, 180, 200, 0.35);"  id="type_mobilite" class="form-select inputFiltre" @change="searchByEtatMobilite">
+                <option style="background-color: #A3B4C8;" value="tous">Type mobilité</option>
+                <option style="background-color: #A3B4C8;" value="val">Etude</option>
+                <option style="background-color: #A3B4C8;" value="cours">Stage</option>
+                <option style="background-color: #A3B4C8;" value="nVal">Humanitaire</option>
+            </select>
         </div>
     </div>
     
@@ -67,7 +64,10 @@ import {defineEmits} from 'vue'
 
 .filtresEtudiants{
     font-family: 'Bebas Neue', sans-serif;
-    display: flex;
+}
+
+select{
+    font-family: 'Bebas Neue', sans-serif;
 }
 
 </style>
