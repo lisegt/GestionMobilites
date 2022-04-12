@@ -1,53 +1,82 @@
 <template>
-  <div style="display:flex; justify-content: space-between;">
-        <div>
-            <select>
-                <option>Promotion</option>
-                <option v-for="promo of data.promotions" :value="promo">
-                    {{promo}}
-                </option>
+    <div class="filtresEtudiants w-100 justify-content-around">
+        <div id="promotion" class="dropdown">
+            <select class="form-select inputFiltre" @change="searchByPromo">
+                <option :value="0">PROMOTION</option>
+                <option v-for="promo of data.promotions" :value="promo" :key="promo">{{promo}}</option>
             </select>
         </div>
-        <div>
-            <select>
-                <option>Etat mobilité</option>
-                <option>Validée</option>
-                <option>En cours</option>
-                <option>Non validée</option>
+        <div class="dropdown">
+            <select id="etat_mobilite" class="form-select inputFiltre" @change="searchByEtatMobilite">
+                <option value="tous">Etat mobilité</option>
+                <option value="val">Validée</option>
+                <option value="cours">En cours</option>
+                <option value="nVal">Non validée</option>
             </select>
         </div>
-        <div>
-            <select>
-                <option>Type mobilité</option>
-                <option>Etude</option>
-                <option>Stage</option>
-                <option>Humanitaire</option>
-            </select>
+
+        <div class="dropdown">
+            <button class="btn dropdown-toggle" type="button" id="dropdownTypeMobilite" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                TYPE MOBILITE
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownTypeMobilite">
+                <li class="text-center">Etude</li>
+                <li class="text-center">Stage</li>
+                <li class="text-center">Humanitaire</li>
+            </ul>
         </div>
     </div>
+    
+
 </template>
 
 <script setup>
 import { onMounted, reactive } from "@vue/runtime-core";
+import {defineEmits} from 'vue'
 
+    //on definit les evenements
+    const emit = defineEmits(['searchByEtatMobilite', 'searchByPromo'])
+
+    //liste des promotions
     let data = reactive(
         {
             promotions:[]
         }
     )
-    //liste des promotions
 
     //Pour récupérer toutes les promotions existantes
     function getPromotions(){
-        return [2020, 2021, 2022, 2023, 2024]
+        fetch('/api/etudiant/promo', {method: 'GET'})
+        .then((result)=>
+            result.json()
+        )
+        .then((dataJson)=>{
+            data.promotions = dataJson
+        })
     }
 
     onMounted(()=>{
-        data.promotions = getPromotions()
+        getPromotions()
     })
-    
+
+    //Pour envoyer un evenement au parent en fonction de l'etat de la mobilité choisie
+    function searchByEtatMobilite(event){
+        emit('searchByEtatMobilite', event.target.value)
+    }
+
+    //Pour envoyer un evenement au parent en fonction de la promotion
+    function searchByPromo(event){
+        emit('searchByPromo', event.target.value)
+    }
+
+
 </script>
 
-<style>
+<style scoped>
+
+.filtresEtudiants{
+    font-family: 'Bebas Neue', sans-serif;
+    display: flex;
+}
 
 </style>

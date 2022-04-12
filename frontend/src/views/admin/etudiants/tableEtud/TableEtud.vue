@@ -1,28 +1,30 @@
 <template>
   <div class="container table-responsive h-50" >
-    <table>
+    <table class="table table-striped  table-bordered ">
         <thead>
           <tr>
-            <th>INE</th>
-            <th>Nom</th>
-            <th>Prenom</th>
-            <th>Promotion</th>
-            <th>Etat mobilité</th>
-            <th>Type mobilité</th>
-            <th>Actions</th>
+            <th class="text-center">INE</th>
+            <th class="text-center">Nom</th>
+            <th class="text-center">Prenom</th>
+            <th class="text-center">Promotion</th>
+            <th class="text-center">Etat mobilité</th>
+            <th class="text-center">Type mobilité</th>
+            <th class="text-center">Actions</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="etud in etudiants">
-            <td>{{etud.numEtud}}</td>
-            <td>{{etud.nom}}</td>
-            <td>{{etud.prenom}}</td>
-            <td>{{etud.promo}}</td>
-            <td>null</td>
-            <td>null</td>
-            <td>
-              <a @click="$emit('delete',etud.id)" ><img :src="Poubelle" alt="à la poubelle l'etudiant"/></a>
+            <td class="text-center">{{etud.numEtud}}</td>
+            <td class="text-center">{{etud.nom}}</td>
+            <td class="text-center">{{etud.prenom}}</td>
+            <td class="text-center">{{etud.promo}}</td>
+            <td class="text-center">null</td>
+            <td class="text-center">null</td>
+            <td class="text-center">
+              <div class="text-center d-flex justify-content-around w-75 m-auto">
               <a @click="$emit('update', etud)" data-bs-toggle="modal" data-bs-target="#modif" class="btn" type="button" > <img v-bind:src="edit" alt="edit"></a>
+              <a @click="$emit('delete',etud.id)" ><img :src="Poubelle" alt="à la poubelle l'etudiant"/></a>
+              </div>
             </td>
           </tr>
         </tbody>
@@ -39,6 +41,13 @@
   
 </script>
 
-<style>
+<style scoped>
+
+  th{
+    font-size: 1.2em;
+  }
+
+  td{
+  }
 
 </style>

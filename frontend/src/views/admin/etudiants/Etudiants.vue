@@ -8,10 +8,10 @@
     <div class="row h-25 align-items-center">
 
       <div class="col-4 h-50  d-flex flex-column justify-content-around align-items-left">
-        <input type="text" placeholder="RECHERCHER UNE DESTINATION..." class="w-100 inputFiltre" />
+        <SearchEtud v-bind:etudiants="listeEtudiants" @searchEtud="searchEtud"/>
         <div class="filtreTab w-100 d-flex  ">
           <div class="dropdown">
-            <FiltreEtud/>
+            <FiltreEtud @searchByEtatMobilite="searchByEtatMobilite" @searchByPromo="searchByPromo"/>
           </div>
         </div>
       </div>
@@ -26,12 +26,17 @@
       
       <FormAddEtud @post="addEtud"/>
       <FormModifEtud @update_ok="getEtud"/>
-      
-      <SearchEtud v-bind:etudiants="listeEtudiants"/>
+    
     </div>
 
     <TableEtud :etudiants="listeEtudiants" @delete="deleteEtud" @update="editEtud"/>
   </div>
+  <!--
+    Dans etudiant
+    <SearchEtud v-bind:etudiants="listeEtudiants"/>
+    Dans search
+    <input type="text" id="search"  v-model="nom" placeholder="RECHERCHER UNE DESTINATION..." class="w-100 inputFiltre" />
+  -->
 </template>
 
 <script setup>
@@ -46,7 +51,7 @@
   import { reactive } from 'vue';
 
   //Liste d'étudiants
-  const listeEtudiants = reactive([]);
+  let listeEtudiants = reactive([]);
 
   function addEtud(nom, prenom, promotion, ine){
     const url = `/api/etudiants` 
@@ -87,8 +92,54 @@
       getEtud()
   });
 
+  //Fonction pour filtrage
+
+  function searchByEtatMobilite(etat){
+    if(etat === "val"){
+      listeEtudiants.splice(0, listeEtudiants.length)
+      listeEtudiants.push({nom:"val", prenom:"val", promo: 1, ine: 1})
+    }
+    if(etat === "cours"){
+      listeEtudiants.splice(0, listeEtudiants.length)
+      listeEtudiants.push({nom:"cours", prenom:"cours", promo: 1, ine: 1})
+    }
+    if(etat === "nVal"){
+      listeEtudiants.splice(0, listeEtudiants.length)
+      listeEtudiants.push({nom:"nVal", prenom:"nVal", promo: 1, ine: 1})
+    }
+    if(etat === "tous"){
+      getEtud()
+    }
+  }
+
+  function searchByPromo(promo){
+    if(promo != 0){
+      fetch(`/api/findEtudiant/${promo}`,{method: 'GET'})
+      .then((result)=>{
+        return result.json()
+      })
+      .then((dataJson)=>{
+        listeEtudiants.splice(0, listeEtudiants.length)
+        dataJson.forEach((item)=>{listeEtudiants.push(item)})
+      })
+    }
+    else{
+      getEtud()
+    }
+    
+  }
+  
+
+  //Fonction pour recherche
+  function seachEtud(etud){
+      listeEtudiants.splice(0, listeEtudiants.length)
+      listeEtudiants.push(etud)
+  }
+
+
+
 </script>
 
-<style scoped>
+<style>
 
 </style>

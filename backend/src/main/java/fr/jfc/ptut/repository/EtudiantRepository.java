@@ -9,9 +9,4 @@ import fr.jfc.ptut.entity.Etudiant;
 
 public interface EtudiantRepository extends JpaRepository<Etudiant, Integer> {
     
-    @Query(
-        value="SELECT promo FROM etudiant",
-        nativeQuery= true
-    )
-    List<String> promo();
 }
