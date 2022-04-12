@@ -1,5 +1,12 @@
 <template>
+<div>
   <h1>Gestion des étudiants</h1>
+  <button type="button" class="btnOrange " data-bs-toggle="modal" data-bs-target="#ajout">
+    <img img v-bind:src="userAdd" alt="etudiant" class="mr-1">
+    Ajouter un étudiant
+  </button>
+  <FormAddEtud @post="addEtud"/>
+  <FormModifEtud :etudiant="etudToEdit" @update_ok="getEtud"/>
   
   <FormAddEtud @post="addEtud"/>
   <FormModifEtud @update_ok="getEtud"/>
@@ -37,6 +44,7 @@
     Dans search
     <input type="text" id="search"  v-model="nom" placeholder="RECHERCHER UNE DESTINATION..." class="w-100 inputFiltre" />
   -->
+  </div>
 </template>
 
 <script setup>
@@ -47,6 +55,8 @@
   import TableEtud from './tableEtud/TableEtud.vue'
   import poubelle from '../../../img/poubelle.png'
   import edit from '../../../img/edit.png'
+  import userAdd from '../../../img/user-add.png'
+
   import { onMounted, onUpdated} from "vue";
   import { reactive } from 'vue';
 
