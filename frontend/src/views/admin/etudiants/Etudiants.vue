@@ -96,16 +96,24 @@
 
   function searchByEtatMobilite(etat){
     if(etat === "val"){
-      listeEtudiants.splice(0, listeEtudiants.length)
-      listeEtudiants.push({nom:"val", prenom:"val", promo: 1, ine: 1})
-    }
-    if(etat === "cours"){
-      listeEtudiants.splice(0, listeEtudiants.length)
-      listeEtudiants.push({nom:"cours", prenom:"cours", promo: 1, ine: 1})
+      fetch('/api/findEtudiant/etatMobilite/val', {method: 'GET'})
+      .then((result)=>{
+        return result.json()
+      })
+      .then((dataJson)=>{
+        listeEtudiants.splice(0, listeEtudiants.length)
+        dataJson.forEach((item)=>{listeEtudiants.push(item)})
+      })      
     }
     if(etat === "nVal"){
-      listeEtudiants.splice(0, listeEtudiants.length)
-      listeEtudiants.push({nom:"nVal", prenom:"nVal", promo: 1, ine: 1})
+      fetch('/api/findEtudiant/etatMobilite/nVal', {method: 'GET'})
+      .then((result)=>{
+        return result.json()
+      })
+      .then((dataJson)=>{
+        listeEtudiants.splice(0, listeEtudiants.length)
+        dataJson.forEach((item)=>{listeEtudiants.push(item)})
+      })    
     }
     if(etat === "tous"){
       getEtud()
@@ -114,7 +122,7 @@
 
   function searchByPromo(promo){
     if(promo != 0){
-      fetch(`/api/findEtudiant/${promo}`,{method: 'GET'})
+      fetch(`/api/findEtudiant/promo/${promo}`,{method: 'GET'})
       .then((result)=>{
         return result.json()
       })
@@ -131,9 +139,9 @@
   
 
   //Fonction pour recherche
-  function seachEtud(etud){
+  function searchEtud(etud){
       listeEtudiants.splice(0, listeEtudiants.length)
-      listeEtudiants.push(etud)
+      etud.forEach((item)=>{listeEtudiants.push(item)})
   }
 
 
