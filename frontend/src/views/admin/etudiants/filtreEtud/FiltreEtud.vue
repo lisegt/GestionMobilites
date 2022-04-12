@@ -1,18 +1,17 @@
 <template>
-    <div class="filtresEtudiants w-100">
-        <div >
-            <select style="background-color:rgba(163, 180, 200, 0.35);"  id="promotionEtud" class="form-select inputFiltre">
-                <option style="background-color: #A3B4C8;" value="tous">Promotion</option>
-                <option v-for="promo of data.promotions" :value="promo" :key="promo" class="text-center">{{promo}}</option>
+    <div class="filtresEtudiants w-100 justify-content-around">
+        <div id="promotion" class="dropdown">
+            <select class="form-select inputFiltre" @change="searchByPromo">
+                <option :value="0">PROMOTION</option>
+                <option v-for="promo of data.promotions" :value="promo" :key="promo">{{promo}}</option>
             </select>
         </div>
-
-        <div>
-            <select style="background-color:rgba(163, 180, 200, 0.35);"  id="etat_mobilite" class="form-select inputFiltre" @change="searchByEtatMobilite">
-                <option style="background-color: #A3B4C8;" value="tous">Etat mobilité</option>
-                <option style="background-color: #A3B4C8;" value="val">Validée</option>
-                <option style="background-color: #A3B4C8;" value="cours">En cours</option>
-                <option style="background-color: #A3B4C8;" value="nVal">Non validée</option>
+        <div class="dropdown">
+            <select id="etat_mobilite" class="form-select inputFiltre" @change="searchByEtatMobilite">
+                <option value="tous">Etat mobilité</option>
+                <option value="val">Validée</option>
+                <option value="cours">En cours</option>
+                <option value="nVal">Non validée</option>
             </select>
         </div>
 
@@ -34,7 +33,7 @@ import { onMounted, reactive } from "@vue/runtime-core";
 import {defineEmits} from 'vue'
 
     //on definit les evenements
-    const emit = defineEmits(['searchByEtatMobilite'])
+    const emit = defineEmits(['searchByEtatMobilite', 'searchByPromo'])
 
     //liste des promotions
     let data = reactive(
@@ -45,16 +44,27 @@ import {defineEmits} from 'vue'
 
     //Pour récupérer toutes les promotions existantes
     function getPromotions(){
-        return [2020, 2021, 2022, 2023, 2024]
+        fetch('/api/etudiant/promo', {method: 'GET'})
+        .then((result)=>
+            result.json()
+        )
+        .then((dataJson)=>{
+            data.promotions = dataJson
+        })
     }
 
     onMounted(()=>{
-        data.promotions = getPromotions()
+        getPromotions()
     })
 
     //Pour envoyer un evenement au parent en fonction de l'etat de la mobilité choisie
     function searchByEtatMobilite(event){
         emit('searchByEtatMobilite', event.target.value)
+    }
+
+    //Pour envoyer un evenement au parent en fonction de la promotion
+    function searchByPromo(event){
+        emit('searchByPromo', event.target.value)
     }
 
 

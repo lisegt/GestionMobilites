@@ -6,7 +6,7 @@
         <SearchEtud v-bind:etudiants="listeEtudiants" @searchEtud="searchEtud"/>
         <div class="filtreTab w-100 d-flex  ">
           <div class="dropdown">
-            <FiltreEtud @searchByEtatMobilite="searchByEtatMobilite"/>
+            <FiltreEtud @searchByEtatMobilite="searchByEtatMobilite" @searchByPromo="searchByPromo"/>
           </div>
         </div>
       </div>
@@ -109,11 +109,31 @@
     }
   }
 
+  function searchByPromo(promo){
+    if(promo != 0){
+      fetch(`/api/findEtudiant/${promo}`,{method: 'GET'})
+      .then((result)=>{
+        return result.json()
+      })
+      .then((dataJson)=>{
+        listeEtudiants.splice(0, listeEtudiants.length)
+        dataJson.forEach((item)=>{listeEtudiants.push(item)})
+      })
+    }
+    else{
+      getEtud()
+    }
+    
+  }
+  
+
   //Fonction pour recherche
   function seachEtud(etud){
       listeEtudiants.splice(0, listeEtudiants.length)
       listeEtudiants.push(etud)
   }
+
+
 
 </script>
 
