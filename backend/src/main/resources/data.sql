@@ -2,7 +2,9 @@ INSERT INTO ETUDIANT (nom, num_etud, prenom, promo) VALUES
     ( 'GAUTHIER',4,'Lise', 2024),
     ('MATTON',3,'Hugo',2024),
     ('BEN',2,'Rayane',2024),
-    ('LAMULA',1,'Kilian',2024);
+    ('LAMULA',1,'Kilian',2024),
+    ('VILLEDIEU',9,'Baptiste',2023),
+    ('GAY',10,'Colin',2023);
 
 
 
