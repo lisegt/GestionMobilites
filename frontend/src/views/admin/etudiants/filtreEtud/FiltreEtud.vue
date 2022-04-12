@@ -62,11 +62,14 @@ import {defineEmits} from 'vue'
 
 </script>
 
-<style scoped>
+<style>
 
 .filtresEtudiants{
     font-family: 'Bebas Neue', sans-serif;
-    display: flex;
+}
+
+select{
+    font-family: 'Bebas Neue', sans-serif;
 }
 
 </style>

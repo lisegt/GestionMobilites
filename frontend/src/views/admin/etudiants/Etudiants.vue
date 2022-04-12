@@ -1,14 +1,5 @@
 <template>
-
-<div class="h-100 container ">
-
-  <FormAddEtud @post="addEtud"/>
-  <FormModifEtud :etudiant="etudToEdit" @update_ok="getEtud"/>
-  
-  <FormAddEtud @post="addEtud"/>
-  <FormModifEtud @update_ok="getEtud"/>
-
-  <div class="h-100 container">
+  <div class="container">
     <div class="row h-25 align-items-center">
 
       <div class="col-4 h-50  d-flex flex-column justify-content-around align-items-left">
@@ -28,21 +19,24 @@
           Ajouter un étudiant
         </button>
     </div>
-      
-      <FormAddEtud @post="addEtud"/>
-      <FormModifEtud @update_ok="getEtud"/>
     
     </div>
 
-    <TableEtud :etudiants="listeEtudiants" @delete="deleteEtud" @update="editEtud"/>
+    <TableEtud :etudiants="listeEtudiants" @delete="deleteEtud" @update="editEtud" class="mt-4"/>
+
+      
+    <FormAddEtud @post="addEtud"/>
+    <FormModifEtud @update_ok="getEtud"/>
   </div>
   <!--
     Dans etudiant
     <SearchEtud v-bind:etudiants="listeEtudiants"/>
     Dans search
     <input type="text" id="search"  v-model="nom" placeholder="RECHERCHER UNE DESTINATION..." class="w-100 inputFiltre" />
-  -->
+  
   </div>
+
+  -->
 </template>
 
 <script setup>
