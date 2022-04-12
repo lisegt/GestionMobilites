@@ -67,7 +67,6 @@ public class DestinationController {
         //on parcourt chaque destination et on récupère la date de fin de contrat dans la Set
         for (Destination d : destinations){
             long differenceEntreDates = ChronoUnit.DAYS.between(LocalDate.now(), d.getDateFinDeContratIsis());
-            System.out.println(differenceEntreDates);
 
             if (differenceEntreDates > 365){
                 statutsContrat.add("Valide");

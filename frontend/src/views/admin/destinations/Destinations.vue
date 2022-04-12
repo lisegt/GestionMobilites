@@ -6,7 +6,7 @@
       <input type="text" placeholder="RECHERCHER UNE DESTINATION..." class="w-100 inputFiltre">
       <div class="filtreTab w-100 d-flex  ">
         <div class="dropdown">
-          <FiltreDestinations :destinations="listeDestinations"/>
+          <FiltreDestinations @searchByPays="searchByPays" @searchByTypeMobilite="searchByTypeMobilite" @searchByStatutContrat="searchByStatutContrat"/>
         </div>
       </div>
     </div>
@@ -71,14 +71,12 @@
             console.log(actuelDate)
             for(let d of json._embedded.destinations){
 
-                
                     date=new Date(d.dateFinDeContratIsis)
                     dateDiff(actuelDate,date).day
-                    if(dateDiff(actuelDate,date).day<385){
+                    if(dateDiff(actuelDate,date).day<365){
                                 isValide = "Bientôt Expiré"
                     }
                     else{
-
                         isValide = "Valide"
                     }
                     listeDestinations.push([d,isValide])
@@ -184,6 +182,41 @@
     .then(()=>{getDestinations()})
     .catch((error) => console.log(error));}
 }
+
+//fonction qui permet de récupérer toutes les destinations dans le pays sélectionné
+function searchByPays(pays){
+
+  const fetchOptions = { method: "GET" }; //on utilise l'opération GET car on veut récupérer le pays des destinations
+
+  if(pays != 'tous'){ //si on sélectionne n'importe quel pays de la liste déroulante
+    fetch('/api/destinations/search/findByPays?pays='+pays, fetchOptions)
+      .then((response) => { return response.json();})
+      .then((dataJSON) => {
+          let isValide;
+          let date;
+          let actuelDate = new Date();
+
+          listeDestinationsTab.splice(0, listeDestinationsTab.length)
+          console.log(dataJSON)
+          dataJSON._embedded.destinations.forEach((destination)=>{
+            date=new Date(destination.dateFinDeContratIsis)
+            dateDiff(actuelDate,date).day
+            if (dateDiff(actuelDate,date).day < 365){
+              isValide = "Bientôt Expiré"
+            }
+            else {
+              isValide = "Valide"
+            }
+            listeDestinationsTab.push([destination,isValide])
+          })
+      })
+      .catch((error) => console.log(error));
+  } else { // on sélectionne l'option permettant d'afficher toutes les destinations
+    getDestinations()
+  }
+
+}
+
 
     onMounted(()=>{
         getDestinations()

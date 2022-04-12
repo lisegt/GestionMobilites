@@ -1,23 +1,23 @@
 <template>
         <div class="filtresEtudiants w-100">
         <div >
-            <select id="paysSelector" class="form-select inputFiltre">
+            <select id="paysSelector" class="form-select inputFiltre" @change="searchByPays">
                 <option value="tous">PAYS</option>
-                <option v-for="pays in listePays" :key="pays">{{pays}}</option>
+                <option v-for="pays in listePays" :key="pays" :value="pays">{{pays}}</option>
             </select>
         </div>
 
         <div>
-            <select id="type_mobilite" class="form-select inputFiltre">
+            <select id="type_mobilite" class="form-select inputFiltre" @change="searchByTypeMobilite">
                 <option value="tous">TYPE MOBILITE</option>
-                <option v-for="type in types" :key="type">{{type}}</option>
+                <option v-for="type in types" :key="type" :value="type">{{type}}</option>
             </select>
         </div>
 
         <div>
-            <select id="statut-contrat" class="form-select inputFiltre">
+            <select id="statut-contrat" class="form-select inputFiltre" @change="searchByStatutContrat">
                 <option value="tous">STATUT CONTRAT</option>
-                <option v-for="contrat in contrats" :key="contrat">{{contrat}}</option>
+                <option v-for="contrat in contrats" :key="contrat" :value="contrat">{{contrat}}</option>
             </select>
         </div>
     </div>
@@ -25,12 +25,15 @@
 
 <script setup>
 
-import { reactive, onMounted } from 'vue'
-defineProps(['destinations'])
+import { reactive, onMounted, defineEmits } from 'vue'
 
 const listePays = reactive([]); // liste qui contient les différents pays des destinations
 const types = reactive([]); // liste qui contient les différents types de mobilité des destinations
 const contrats = reactive([]); // liste qui contient les différents statuts de contrat des destinations
+
+//on definit les evenements
+    const emit = defineEmits(['searchByPays', 'searchByTypeMobilite', 'searchByStatutContrat'])
+
 
 onMounted(()=>{
         recupererTousLesPays()
@@ -82,6 +85,21 @@ function recupererTousStatutsContrat(){
             })
         })
         .catch((error) => console.log(error));
+}
+
+//Pour envoyer un evenement au parent en fonction du pays choisi
+function searchByPays(event){
+    emit('searchByPays', event.target.value)
+}
+
+//Pour envoyer un evenement au parent en fonction du type de mobilité
+function searchByTypeMobilite(event){
+    emit('searchByTypeMobilite', event.target.value)
+}
+
+//Pour envoyer un evenement au parent en fonction du statut du contrat
+function searchByStatutContrat(event){
+    emit('searchByStatutContrat', event.target.value)
 }
 
 </script>
