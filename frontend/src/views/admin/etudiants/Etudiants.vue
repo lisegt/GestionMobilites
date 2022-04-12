@@ -1,5 +1,5 @@
 <template>
-  <div>
+<div>
   <h1>Gestion des étudiants</h1>
   <button type="button" class="btnOrange " data-bs-toggle="modal" data-bs-target="#ajout">
     <img img v-bind:src="userAdd" alt="etudiant" class="mr-1">
@@ -8,15 +8,49 @@
   <FormAddEtud @post="addEtud"/>
   <FormModifEtud :etudiant="etudToEdit" @update_ok="getEtud"/>
   
-  <SearchEtud v-bind:etudiants="listeEtudiants"/>
+  <FormAddEtud @post="addEtud"/>
+  <FormModifEtud @update_ok="getEtud"/>
 
-  <TableEtud :etudiants="listeEtudiants" @delete="deleteEtud" @update="editEtud"/>
+  <div class="h-100 container">
+    <div class="row h-25 align-items-center">
+
+      <div class="col-4 h-50  d-flex flex-column justify-content-around align-items-left">
+        <SearchEtud v-bind:etudiants="listeEtudiants" @searchEtud="searchEtud"/>
+        <div class="filtreTab w-100 d-flex  ">
+          <div class="dropdown">
+            <FiltreEtud @searchByEtatMobilite="searchByEtatMobilite" @searchByPromo="searchByPromo"/>
+          </div>
+        </div>
+      </div>
+
+    <h1 class="col-4 text-center">GESTION DES ETUDIANTS</h1>
+
+    <div class="col-4 text-right">
+        <button type="button" class="btnOrange " data-bs-toggle="modal" data-bs-target="#ajout">
+          Ajouter un étudiant
+        </button>
+    </div>
+      
+      <FormAddEtud @post="addEtud"/>
+      <FormModifEtud @update_ok="getEtud"/>
+    
+    </div>
+
+    <TableEtud :etudiants="listeEtudiants" @delete="deleteEtud" @update="editEtud"/>
+  </div>
+  <!--
+    Dans etudiant
+    <SearchEtud v-bind:etudiants="listeEtudiants"/>
+    Dans search
+    <input type="text" id="search"  v-model="nom" placeholder="RECHERCHER UNE DESTINATION..." class="w-100 inputFiltre" />
+  -->
   </div>
 </template>
 
 <script setup>
   import FormAddEtud from './formAddEtud/FormAddEtud.vue'
   import FormModifEtud from './formModifEtud/FormModifEtud.vue'
+  import FiltreEtud from './filtreEtud/FiltreEtud.vue'
   import SearchEtud from './searchEtud/SearchEtud.vue'
   import TableEtud from './tableEtud/TableEtud.vue'
   import poubelle from '../../../img/poubelle.png'
@@ -27,7 +61,7 @@
   import { reactive } from 'vue';
 
   //Liste d'étudiants
-  const listeEtudiants = reactive([]);
+  let listeEtudiants = reactive([]);
 
   function addEtud(nom, prenom, promotion, ine){
     const url = `/api/etudiants` 
@@ -68,8 +102,54 @@
       getEtud()
   });
 
+  //Fonction pour filtrage
+
+  function searchByEtatMobilite(etat){
+    if(etat === "val"){
+      listeEtudiants.splice(0, listeEtudiants.length)
+      listeEtudiants.push({nom:"val", prenom:"val", promo: 1, ine: 1})
+    }
+    if(etat === "cours"){
+      listeEtudiants.splice(0, listeEtudiants.length)
+      listeEtudiants.push({nom:"cours", prenom:"cours", promo: 1, ine: 1})
+    }
+    if(etat === "nVal"){
+      listeEtudiants.splice(0, listeEtudiants.length)
+      listeEtudiants.push({nom:"nVal", prenom:"nVal", promo: 1, ine: 1})
+    }
+    if(etat === "tous"){
+      getEtud()
+    }
+  }
+
+  function searchByPromo(promo){
+    if(promo != 0){
+      fetch(`/api/findEtudiant/${promo}`,{method: 'GET'})
+      .then((result)=>{
+        return result.json()
+      })
+      .then((dataJson)=>{
+        listeEtudiants.splice(0, listeEtudiants.length)
+        dataJson.forEach((item)=>{listeEtudiants.push(item)})
+      })
+    }
+    else{
+      getEtud()
+    }
+    
+  }
+  
+
+  //Fonction pour recherche
+  function seachEtud(etud){
+      listeEtudiants.splice(0, listeEtudiants.length)
+      listeEtudiants.push(etud)
+  }
+
+
+
 </script>
 
-<style scoped>
+<style>
 
 </style>

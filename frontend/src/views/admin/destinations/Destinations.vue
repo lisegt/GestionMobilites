@@ -6,14 +6,8 @@
       <input type="text" placeholder="RECHERCHER UNE DESTINATION..." class="w-100 inputFiltre">
       <div class="filtreTab w-100 d-flex  ">
         <div class="dropdown">
-          <button aria-expanded="false" type="button" id="dropdownMenuButton" data-toggle="dropdown" class="btn flex-fill dropdown-toggle "> PAYS</button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <li ><a class="dropdown-item btn" type="button" href="#">Action</a></li>
-          
-        </ul>
+          <FiltreDestinations :destinations="listeDestinations"/>
         </div>
-          <a type="button" class="btn flex-fill"> TYPE MOBILITE</a>
-          <a type="button" class="btn flex-fill "> STATUT CONTRAT</a>
       </div>
     </div>
 
@@ -42,6 +36,8 @@
     import {reactive, onMounted} from 'vue'
     import TableDestinations from './tableDestinations/TableDestinations.vue'
     import FormAddDestination from './formAddDestination/FormAddDestination.vue';
+    import FiltreDestinations from './filtreDestinations/FiltreDestinations.vue'
+
     import world from '../../../img/world.png'
 
     //navabr active
@@ -50,7 +46,6 @@
     document.getElementById(l).classList.remove("active")
     }
     document.getElementById("destinationsNav").classList.add("active")
-
     const listeDestinations =  reactive([])
     const listeDestinationsTab = reactive([])
     function dateDiff(date1, date2){

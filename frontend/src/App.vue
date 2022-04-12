@@ -7,6 +7,14 @@
   </div>
 </template>
 
+<script setup>
+  import HeaderAdmin from './components/HeaderAdmin.vue';
+  import Accueil from './views/admin/accueil/Accueil.vue';
+  import Footer from './components/Footer.vue';
+    
+</script>
+
+
 <style>
 @font-face
 {
@@ -28,7 +36,7 @@ html {
 
 #app {
     background: #f3f3f3;
-    font-family: Arial sans-serif;
+    font-family: 'Montserrat', sans-serif;
     margin: auto;
     padding: 0;
     width: 100%;
@@ -37,10 +45,6 @@ html {
     flex-direction: column;
     justify-content: space-between;
     
-   
-
-   
-   
   }
 
 .footer{
@@ -80,8 +84,4 @@ html {
 }
 </style>
 
-<script setup>
-import HeaderAdmin from './components/HeaderAdmin.vue';
-import Accueil from './views/admin/accueil/Accueil.vue';
-import Footer from './components/Footer.vue';
-</script>
+
