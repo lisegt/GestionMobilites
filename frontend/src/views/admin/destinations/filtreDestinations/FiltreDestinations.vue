@@ -1,5 +1,5 @@
 <template>
-
+        <div class="">
         <button aria-expanded="false" type="button" id="dropdownPays" data-toggle="dropdown" class="btn flex-fill dropdown-toggle">PAYS</button>
             <ul class="dropdown-menu" aria-labelledby="dropdownPays" id="paysSelector">
                 <li v-for="pays in listePays" :key="pays">{{pays}}</li>
@@ -12,6 +12,7 @@
             <ul class="dropdown-menu" aria-labelledby="dropdownContrat" id="contratSelector">
                 <li v-for="contrat in contrats" :key="contrat">{{ contrat }}</li>
             </ul>
+    </div> 
 </template>
 
 <script setup>
@@ -23,7 +24,7 @@ const url = "http://localhost:8989/destinations/pays"
 const listePays = reactive([]);
 const types = reactive([]);
 const contrats = reactive([]);
-
+/*
 onMounted(()=>{
         recupererTousLesPays()
     })
@@ -44,7 +45,7 @@ function recupererTousLesPays(){
         })
         .catch((error) => console.log(error));
 }
-
+*/
 </script>
 
 <style>

@@ -98,7 +98,7 @@ const listeDestinationsFiltres = reactive([])
 
   function getEtud(){
     const fetchOptions = {method:"GET"};
-    fetch("/api/etudiants/",fetchOptions)
+    fetch("http://localhost:8989/api/etudiants/",fetchOptions)
     .then((response) => {return response.json()})
     .then((dataJSON) => {
       let listePromoDoublons=[]
