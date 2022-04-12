@@ -24,7 +24,7 @@ public class Mobilite {
 
     @NonNull
     private Periode periode;
-
+    
     @NonNull
     @JsonIgnore
     @ManyToOne(optional = false) //obligatoire car clé étrangère non nulle
