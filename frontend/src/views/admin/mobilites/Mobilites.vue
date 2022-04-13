@@ -213,8 +213,7 @@
     const url = `http://localhost:8989/api/` // l’url de l'API
     let idDestination = document.getElementById("addDestination").value
     let idEtudiant = document.getElementById("selectEtud").value
-    alert(idDestination)
-    alert(idEtudiant)
+  
     let date = document.getElementById("addDepart").value
     let duree = document.getElementById("addDuree").value
     let periode = document.getElementById("periode").value

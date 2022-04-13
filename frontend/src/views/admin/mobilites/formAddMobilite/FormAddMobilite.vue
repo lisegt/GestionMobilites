@@ -107,7 +107,7 @@ const listeDestinationsFiltres = reactive([])
           listeEtudiants.push(e)
           listePromoDoublons.push(e.promo)
           })
-      listePromoDoublons.push(2025)
+      
       listePromoDoublons = [...new Set(listePromoDoublons)]  
       listePromo.push(listePromoDoublons)
       listeEtudiants.forEach((e)=>{

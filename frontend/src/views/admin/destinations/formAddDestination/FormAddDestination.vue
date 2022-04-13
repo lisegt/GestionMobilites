@@ -67,7 +67,7 @@
                 <div class="mb-3 row">
                     <div class="col">
                     <label for="image" class="form-label">CHOISIR/MODIFIER L'IMAGE:</label>
-                    <input type="file"  class="form-control " name="addImage" id="addImage">
+                    <input type="file"  @change="sendFile" class="form-control " name="addImage" id="addImage">
                     </div>
                 </div>
                 
@@ -88,13 +88,14 @@
 </template>
 
 <script setup>
+import { defineEmits} from 'vue'
 
-/**
- * 
- * @param
- * @return
- * Fonction qui ajoute un étudiant par méthode POST
- */
+const emit = defineEmits(['changePicture'])
+
+function sendFile(event){
+    emit('changePicture',event)
+}
+
 
 </script>
 
