@@ -3,13 +3,20 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>frontend</artifactId>
-
+	<!-- test download-->
 	<parent>
 		<groupId>fr.jfc</groupId>
 		<artifactId>ptut</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
+	<groupId>org.o7planning</groupId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>SpringBootDownload</name>
+    <description>Spring Boot +Download Example</description>
+	<!--fin download-->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

@@ -1,5 +1,7 @@
 package fr.jfc.ptut.entity;
 
+import java.io.File;
+
 import javax.persistence.*;
 import lombok.*;
 
@@ -10,7 +12,7 @@ public class Document {
     private Integer id;
     
     @NonNull
-    private String fichier;
+    private File fichier;
 
     @NonNull
     private String intitule;
