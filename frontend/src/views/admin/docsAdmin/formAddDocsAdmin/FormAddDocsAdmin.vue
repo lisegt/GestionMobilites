@@ -22,7 +22,7 @@
                   <form method="POST" enctype="multipart/form-data" action="/upload">
                     <div class="form-group">
                       <label for="file" class="font-weight-bold">Fichier à télécharger :</label>
-                      <input class="form-control" id="file" type="file" name="file" />
+                      <input class="form-control" id="file" type="file" name="fichier" />
                     </div>
                     <div class="form-group">
                       <label class="font-weight-bold">Télécharger :</label>

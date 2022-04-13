@@ -23,7 +23,7 @@
                   <form method="POST" enctype="multipart/form-data" action="/upload">
                     <div class="form-group">
                       <label for="file" class="font-weight-bold">Fichier à télécharger :</label>
-                      <input class="form-control" id="file" type="file" name="file" />
+                      <input class="form-control" id="file" type="file" name="fichier" />
                     </div>
                     <div class="form-group">
                       <label class="font-weight-bold">Télécharger :</label>
@@ -76,7 +76,7 @@ function updateDoc() {
 }
 </script>
 
-<style>
+<style scoped>
 h5{
     font-size: 30px;
     line-height: 36px;
@@ -99,6 +99,8 @@ h5,label{
     font-weight: 400;
     font-size: 20px;
     color: #022E51;
+    background-color: rgba(163, 180, 200, 0.35);
+;
 }
 #description, #intitule{
   background: rgba(163, 180, 200, 0.35);
