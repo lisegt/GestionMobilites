@@ -190,7 +190,8 @@
     
     
     
-    function postDestination(){
+    function postDestination(event){
+        event.preventDefault()
         let nomEtablissement = document.getElementById("addNomEtablissement").value
         let nomVille = document.getElementById("addNomVille").value
         let nomPays = document.getElementById("addNomPays").value
