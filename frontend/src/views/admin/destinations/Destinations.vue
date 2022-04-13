@@ -49,7 +49,7 @@
    
     const listeDestinationsTab = reactive([])
     let img = ref("")
-    
+    const url = 'api/destinations'
     function dateDiff(date1, date2){
                 var diff = {}                           // Initialisation du retour
                 var tmp = date2 - date1;
@@ -180,7 +180,8 @@
 
       }
     
-    function postDestination(){
+    function postDestination(event){
+        event.preventDefault()
         let nomEtablissement = document.getElementById("addNomEtablissement").value
         let nomVille = document.getElementById("addNomVille").value
         let nomPays = document.getElementById("addNomPays").value
