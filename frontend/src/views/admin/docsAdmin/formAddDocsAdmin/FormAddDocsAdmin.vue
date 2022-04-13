@@ -17,7 +17,25 @@
                     <label for="prenom" class="font-weight-bold">Description :</label>
                     <input v-model="description" id="description" class="form-control" name="description" type="text" placeholder="Entrez une description du document ..." required/>
                 </div>
-
+                <!--Upload de fichier :-->
+                <div>
+                  <form method="POST" enctype="multipart/form-data" action="/upload">
+                    <div class="form-group">
+                      <label for="file" class="font-weight-bold">Fichier à télécharger :</label>
+                      <input class="form-control" id="file" type="file" name="file" />
+                    </div>
+                    <div class="form-group">
+                      <label class="font-weight-bold">Télécharger :</label>
+                      <input class="form-control" type="submit" value="Upload" />
+                    </div>
+                  </form>
+                </div>
+                <div>
+                  <div th:each="file : ${files}">
+                    <a th:href="${file}" th:text="${file}" />
+                  </div>
+                </div>
+                <!---->
                 <div class="modal-footer">
                     <button type="button" class="btnOrange" data-bs-dismiss="modal">Close</button>
                     <input @click="$emit('post', intitule, description)" id="bouton" type="submit" class="btnOrange" value="Ajouter"  data-bs-dismiss="modal"/>

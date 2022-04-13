@@ -18,6 +18,25 @@
                     <input id="description" class="form-control" name="description" type="text" v-model="description" placeholder="Entrez une description du document ..." required/>
                 </div>
                 <input id="idDocToEdit" style="display: none;"/>
+                <!--Upload de fichier :-->
+                <div>
+                  <form method="POST" enctype="multipart/form-data" action="/upload">
+                    <div class="form-group">
+                      <label for="file" class="font-weight-bold">Fichier à télécharger :</label>
+                      <input class="form-control" id="file" type="file" name="file" />
+                    </div>
+                    <div class="form-group">
+                      <label class="font-weight-bold">Télécharger :</label>
+                      <input class="form-control" type="submit" value="Upload" />
+                    </div>
+                  </form>
+                </div>
+                <div>
+                  <div th:each="file : ${files}">
+                    <a th:href="${file}" th:text="${file}" />
+                  </div>
+                </div>
+                <!---->
                 <div class="modal-footer">
                     <button type="button" class="btnOrange" data-bs-dismiss="modal">Close</button>
                     <input id="btnSub" type="submit" class="btnOrange" value="Modifier" data-bs-dismiss="modal"/>
