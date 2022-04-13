@@ -2,21 +2,21 @@
         <div class="filtresEtudiants w-100">
         <div >
             <select id="paysSelector" class="form-select inputFiltre" @change="searchByPays">
-                <option value="tous">PAYS</option>
+                <option value="tous" id="paysTous">PAYS</option>
                 <option v-for="pays in listePays" :key="pays" :value="pays">{{pays}}</option>
             </select>
         </div>
 
         <div>
             <select id="type_mobilite" class="form-select inputFiltre" @change="searchByTypeMobilite">
-                <option value="tous">TYPE MOBILITE</option>
+                <option value="tous" id="typesTous">TYPE MOBILITE</option>
                 <option v-for="type in types" :key="type" :value="type">{{type}}</option>
             </select>
         </div>
 
         <div>
             <select id="statut-contrat" class="form-select inputFiltre" @change="searchByStatutContrat">
-                <option value="tous">STATUT CONTRAT</option>
+                <option value="tous" id="contratsTous">STATUT CONTRAT</option>
                 <option v-for="contrat in contrats" :key="contrat" :value="contrat">{{contrat}}</option>
             </select>
         </div>
@@ -80,8 +80,7 @@ function recupererTousStatutsContrat(){
         .then((dataJSON) => {
             contrats.splice(0, contrats.length) //on vide la liste avant de la reremplir
             dataJSON.forEach((contrat) => {
-            contrats.push(contrat) 
-            console.log(contrats)
+            contrats.push(contrat)
             })
         })
         .catch((error) => console.log(error));
@@ -90,16 +89,26 @@ function recupererTousStatutsContrat(){
 //Pour envoyer un evenement au parent en fonction du pays choisi
 function searchByPays(event){
     emit('searchByPays', event.target.value)
+    //on désactive les 2 autres filtres si le filtre pays est activé
+    document.getElementById('typesTous').selected = true; 
+    document.getElementById('contratsTous').selected = true; 
 }
 
 //Pour envoyer un evenement au parent en fonction du type de mobilité
 function searchByTypeMobilite(event){
     emit('searchByTypeMobilite', event.target.value)
+    //on désactive les 2 autres filtres si le filtre type de mobilité est activé
+    document.getElementById('paysTous').selected = true; 
+    document.getElementById('contratsTous').selected = true; 
 }
 
 //Pour envoyer un evenement au parent en fonction du statut du contrat
 function searchByStatutContrat(event){
     emit('searchByStatutContrat', event.target.value)
+    console.log(event.target.value)
+    //on désactive les 2 autres filtres si le filtre statut du contrat est activé
+    document.getElementById('paysTous').selected = true; 
+    document.getElementById('typesTous').selected = true;
 }
 
 </script>

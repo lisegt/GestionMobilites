@@ -76,7 +76,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btnOrange" data-bs-dismiss="modal">Close</button>
-                    <input id="Bouton" @click="$emit('ajouter')" type="submit" class="btnOrange" value="Ajouter" />
+                    <input id="Bouton" @click="addDestination" data-bs-dismiss="modal" type="submit" class="btnOrange" value="Ajouter" />
                  </div>
                  
             </form>
@@ -90,10 +90,14 @@
 <script setup>
 import { defineEmits} from 'vue'
 
-const emit = defineEmits(['changePicture'])
+const emit = defineEmits(['changePicture','ajouter'])
 
 function sendFile(event){
     emit('changePicture',event)
+}
+function addDestination(event){
+
+    emit('ajouter',event)
 }
 
 
