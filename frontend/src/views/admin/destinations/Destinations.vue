@@ -114,7 +114,7 @@
                 };
         let url = `/api/destinations/${id}`
         fetch(url,fetchOptions)
-        .then(()=>{getDestinations()})
+        .then(()=>{getDestinations(urlAllDestinations)})
         .catch((err)=>{
             window.alert("Vous ne pouvez pas supprimer une destination qui est liée à une ou plusieurs mobilités")
             console.log("message d'erreur : ",err)})
@@ -134,7 +134,7 @@
             console.log(destination)
             updateDestination(destination)
         })
-    }
+      }
 
     function updateDestination(destination){
 
@@ -165,10 +165,6 @@
             .catch((error) => console.log(error));
 
     }
-    
-  
-
-   
 
     //fin 
     function encodeImageFileAsURL(event) {
@@ -179,15 +175,10 @@
           
           img.value=reader.result
           
-          
         }
         reader.readAsDataURL(file);
 
       }
-
-
-    
-    
     
     function postDestination(){
         let nomEtablissement = document.getElementById("addNomEtablissement").value
@@ -203,7 +194,7 @@
       window.alert("Veuillez remplir les 4 premiers champs!")
     }
     else{
-    const url = `http://localhost:8989/api/destinations` // l’url de l'API
+    const url = `/api/destinations` // l’url de l'API
 
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -222,16 +213,10 @@
                                 })};
     fetch(url,fetchOptions)
     .then(()=>{getDestinations(urlAllDestinations)})
-    .catch((error) => console.log(error));}
+    .catch((error) => console.log(error));
     }
-
+    }
    
-   
-    
-    
-
-   
-}
 /**
  * @param pays sélectionné dans la liste déroulante
  * fonction qui permet de récupérer toutes les destinations dans le pays sélectionné
