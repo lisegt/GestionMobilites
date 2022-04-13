@@ -13,18 +13,18 @@
                             <div class="mb-3 row">
                                 <div class="col">
                                     <label for="nomEtablissement" class="form-label">NOM DE L'ETABLISSEMENT:</label>
-                                    <input type="text" required class="form-control "  name="addNomEtablissement" id="addNomEtablissement">
+                                    <input type="text" required class="form-control "  name="addNomEtablissement" id="addNomEtablissement" placeholder="Entrez le nom de l'établissement ...">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-6 ">
                                     <label for="nomVille" class="form-label">VILLE:</label>
-                                    <input type="text" required class="form-control w-75 " name="addNomVille" id="addNomVille">
+                                    <input type="text" required class="form-control w-75 " name="addNomVille" id="addNomVille" placeholder="Entrez la ville ...">
                                 </div>
                                 <div class="col-6 d-flex flex-row justify-content-end ">
                                     <div class=" w-75">
                                         <label for="nomPays" class="form-label">PAYS:</label>
-                                        <input type="text" required class="form-control " name="addNomPays" id="addNomPays">
+                                        <input type="text" required class="form-control " name="addNomPays" id="addNomPays" placeholder="Entrez le pays ...">
                                     </div>
                                 </div>
                             </div>
@@ -32,6 +32,7 @@
                                 <div class="col">
                                     <label for="typeMobilite">TYPE DE MOBILITE:</label>
                                     <select id="addTypeMobilite"  name="addTypeMobilite" class="form-select">
+                                            <option value="" disabled selected>Sélectionnez un type ...</option>
                                             <option id="ETUDE" value="ETUDE">Etude</option>
                                             <option id="STAGE" value="STAGE">Stage</option>
                                             <option id="HUMANITAIRE" value="HUMANITAIRE">Humanitaire</option>
@@ -40,27 +41,27 @@
                             </div>
                             <div class="mb-3 row">
                                 <div class="col">
-                                    <label for="semestres" class="form-label">NOMBRE DE PLACE PAR SEMESTRE:</label>
-                                    <input type="number"  min="0" class="form-control" name="addSemestres" id="addSemestres">
+                                    <label for="semestres" class="form-label">NOMBRE DE PLACES PAR SEMESTRE:</label>
+                                    <input type="number"  min="0" class="form-control" name="addSemestres" id="addSemestres" placeholder="Entrez un chiffre ...">
                                 </div>
                             </div>
                             <div class="mb-3 row">
                                 <div class="col">
-                                    <label for="nbPlaceAnnee" class="form-label">NOMBRE DE PLACE PAR ANNEE:</label>
-                                    <input type="number"  min="0" class="form-control " name="addNbPlaceAnnee" id="addNbPlaceAnnee">
+                                    <label for="nbPlaceAnnee" class="form-label">NOMBRE DE PLACES PAR ANNEE:</label>
+                                    <input type="number"  min="0" class="form-control " name="addNbPlaceAnnee" id="addNbPlaceAnnee" placeholder="Entrez un chiffre ...">
                                 </div>
                             </div>
 
                             <div class="mb-3 row">
                                 <div class="col">
                                     <label for="dateFinContrat" class="form-label">DATE DE FIN DE CONTRAT:</label>
-                                    <input type="date"   class="form-control " name="addDateFinContrat" id="addDateFinContrat">
+                                    <input type="date"   class="form-control " name="addDateFinContrat" id="addDateFinContrat" placeholder="Entrez une date ...">
                                 </div>
                             </div>
 
                             <div class="mb-3 row">
                                 <div class="col">
-                                    <label for="image" class="form-label">CHOISIR/MODIFIER L'IMAGE:</label>
+                                    <label for="image" class="form-label">CHOISIR L'IMAGE:</label>
                                     <input type="file"  @change="sendFile" class="form-control " name="addImage" id="addImage">
                                 </div>
                             </div>
@@ -114,6 +115,9 @@ h5,label{
     font-weight: 400;
     font-size: 20px;
     color: #022E51;
+}
+#addTypeMobilite{
+    background: rgba(163, 180, 200, 0.35);
 }
 #ajout{
     border-radius: 10px;
