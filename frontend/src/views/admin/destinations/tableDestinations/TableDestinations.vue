@@ -1,5 +1,5 @@
 <template>
-<div class="  container table-responsive h-50 ">
+<div class="container table-responsive h-50 ">
   <table class="table table-striped  table-bordered ">
    <thead>
     <tr>
@@ -13,7 +13,7 @@
     </tr>
   </thead>
   <tbody >
-    <tr v-for="(destination,index) of destinations" :key=index    >
+    <tr v-for="(destination,index) of destinations" :key=index >
     <td class="text-center ">{{destination[0].nomEtablissementAccueil}}</td>
     <td class="text-center ">{{destination[0].ville}}</td>
     <td class="text-center ">{{destination[0].pays}}</td>
@@ -24,7 +24,7 @@
     </td>
     <td class="text-center ">{{destination[1]}}</td>
     <td class="text-center"> 
-        <div class="text-center d-flex flex-row w-75 justify-content-around ">
+        <div class="text-center d-flex flex-row w-75 justify-content-around m-auto">
            
         <a @click="$emit('set',destination)" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn" type="button" > <img v-bind:src="edit" alt="edit"></a>
         
