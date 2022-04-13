@@ -70,11 +70,11 @@ public class DestinationController {
             long differenceEntreDates = ChronoUnit.DAYS.between(LocalDate.now(), d.getDateFinDeContratIsis()); //on calcule le nombre de jours séparant la date actuelle et la date de fin de contrat
 
             if (differenceEntreDates > 365){
-                statutsContrat.add("valide");
+                statutsContrat.add("Valide");
             } else if (differenceEntreDates > 0){
-                statutsContrat.add("bientot");
+                statutsContrat.add("Bientôt Expiré");
             } else {
-                statutsContrat.add("expire");
+                statutsContrat.add("Expiré");
             }
         }
         return statutsContrat;
@@ -97,11 +97,11 @@ public class DestinationController {
 
             //on attribue un statut à une destination en fonction du nombre de jours restant
             if (differenceEntreDates > 365){
-                statutContrat = "valide";
+                statutContrat = "Valide";
             } else if (differenceEntreDates > 0){
-                statutContrat = "bientot";
+                statutContrat = "Bientôt Expiré";
             } else {
-                statutContrat = "expire";
+                statutContrat = "Expiré";
             }
 
             //si le statut de la destination correspond au statut passé en paramètre, on l'ajoute à la liste à afficher

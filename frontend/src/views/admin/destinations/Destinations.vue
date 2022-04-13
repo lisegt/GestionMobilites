@@ -85,10 +85,10 @@
                     date=new Date(d.dateFinDeContratIsis)
                     
                     if(dateDiff(actuelDate,date).day<365 && dateDiff(actuelDate,date).day>0 ){
-                                isValide = "Bientot"
+                                isValide = "Bientôt Expiré"
                     }
                     else if(dateDiff(actuelDate,date).day<0){
-                        isValide = "Expire"
+                        isValide = "Expiré"
                     }
                     else{
                         isValide = "Valide"
@@ -318,10 +318,10 @@ function searchByStatutContrat(statut){
           date=new Date(destination.dateFinDeContratIsis)
                     
           if(dateDiff(actuelDate,date).day<365 && dateDiff(actuelDate,date).day>0 ){
-            isValide = "bientot"
+            isValide = "Bientôt Expiré"
           }
           else if(dateDiff(actuelDate,date).day<0){
-            isValide = "Expire"
+            isValide = "Expiré"
           }
           else{
               isValide = "Valide"

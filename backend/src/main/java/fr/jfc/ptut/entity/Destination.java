@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -46,6 +48,7 @@ public class Destination {
     @NonNull
     private String pays;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "destination")
     @ToString.Exclude
     private List<Mobilite> mobilites = new ArrayList<>();
