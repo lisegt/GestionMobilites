@@ -79,7 +79,7 @@
   }
 
   function getEtud(){
-    const fetchOptions = {method:"GET"};
+    const fetchOptions = {method:"GET", headers: {"Authorization": localStorage.getItem('jwt')}};
     fetch("/api/etudiants/",fetchOptions)
     .then((response) => {return response.json()})
     .then((dataJSON) => {
