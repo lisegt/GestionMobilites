@@ -36,14 +36,14 @@ import { emit } from 'process';
 
 
     defineProps(['documents'])
-    defineEmits(['updateFile','updateDoc'])
+    const emits = defineEmits(['updateFile','updateDoc'])
     function updateFile(event){
-            emit('updateFile',event)
+            emits('updateFile',event)
 
     }
 
     function updateDoc(event){
-        emit('updateDoc',event)
+        emits('updateDoc',event)
 
     }
 </script>

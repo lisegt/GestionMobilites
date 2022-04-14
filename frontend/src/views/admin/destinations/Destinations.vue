@@ -18,12 +18,11 @@
         </button>
     </div>
 
-  <TableDestinations @set="setDestination" @delete="deleteDestination" v-bind:destinations="listeDestinationsTab" class="mt-4"/>
   
-  </div>
   
-  <div id="log">
-      </div>
+  
+  
+ 
 
   <TableDestinations 
               @set="setDestination" 
@@ -31,6 +30,7 @@
               v-bind:destinations="listeDestinationsTab" 
               @updateImage="encodeImageFileAsURL"
               @updateDestination="updateDestination"/>
+  </div>
   <FormAddDestination @ajouter="postDestination" @changePicture="encodeImageFileAsURL" />
   </div>
   
@@ -144,7 +144,9 @@
       }
 
     function updateDestination(event){
+          console.log("cc")
            event.preventDefault()
+           alert(document.getElementById("nomEtablissement").value)
            let nomEtablissement = document.getElementById("nomEtablissement").value
            let nomVille = document.getElementById("nomVille").value
            let nomPays = document.getElementById("nomPays").value
@@ -170,6 +172,7 @@
                                         image:img.value
                                         })};
             fetch(url,fetchOptions)
+            .then(()=>{getDestinations(urlAllDestinations)})
             .catch((error) => console.log(error));
 
     }

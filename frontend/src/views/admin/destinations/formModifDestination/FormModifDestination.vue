@@ -67,12 +67,12 @@
                     <input type="file" @change="changeImage"  class="form-control " name="image" id="image">
                     </div>
                 </div>
-            </div>
+          
           </div>
         </div>         
         <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" id="btnSub" @click="updateDestination" data-bs-dismiss="modal" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btnOrange" data-bs-dismiss="modal">Close</button>
+        <button type="submit" id="btnSub" @click="updateDestination" data-bs-dismiss="modal" class="btnOrange">Save changes</button>
       </div>
     </form>
       
@@ -94,8 +94,42 @@ function changeImage(event){
 }
 
 function updateDestination(event){
+  
     emits('updateDestination',event)
 
 }
 
 </script>
+
+<style>
+#nomEtablissement, #nomVille, #nomPays, #typeMobilite, #semestres, #nbPlaceAnnee, #dateFinContrat, #image{
+ background: rgba(163, 180, 200, 0.35); 
+}
+#Label{
+    font-size: 30px;
+    line-height: 36px;
+}
+label{
+    font-size: 24px;
+    line-height: 29px;
+}
+h5,label{
+    text-transform: uppercase;
+    color: #022E51;
+    font-family: 'Bebas Neue';
+    font-weight: 400;
+    font-style: normal;
+    text-align: center;
+}
+.form-control{
+    background: rgba(163, 180, 200, 0.35);
+    border-radius: 10px;
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 20px;
+    color: #022E51;
+}
+#exampleModal{
+    border-radius: 10px;
+}
+</style>

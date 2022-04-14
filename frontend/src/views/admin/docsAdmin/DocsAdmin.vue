@@ -1,7 +1,7 @@
 <template>
 <div>
   <h1>Gestion des documents administratifs</h1>
-  <FormModifDocsAdmin @update_ok="getDoc"/>
+  
 
   <button type="button" class="btnOrange " data-bs-toggle="modal" data-bs-target="#ajout">
     Ajouter un document
@@ -40,7 +40,7 @@ let idDoc = ref(0)
  */
 function getDoc(){
   const fetchOptions = {method:"GET"};
-  fetch("http://localhost:8989/api/documents/",fetchOptions)
+  fetch("/api/documents/",fetchOptions)
   .then((response) => {return response.json()})
   .then((dataJSON) => {
   listeDocuments.splice(0,listeDocuments.length)
@@ -74,18 +74,18 @@ function deleteDocument(id){
  * Fonction qui modifie les données
  */
 function setDoc(doc){
-
+  console.log(doc)
   idDoc.value = doc.id
-
+ 
   document.getElementById("updateIntitule").value = doc.intitule
   document.getElementById("updateDescription").value = doc.description
-  document.getElementById('updateFile').value= doc.fichier
+  
 }
 
 function updateDoc(event){
   event.preventDefault()
-  let intitule = document.getElementById("updateIntitule").value = doc.intitule
-  let description = document.getElementById("updateDescription").value = doc.description
+  let intitule = document.getElementById("updateIntitule").value 
+  let description = document.getElementById("updateDescription").value
 
   let myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
@@ -96,7 +96,7 @@ function updateDoc(event){
                                         description:description,
                                         fichier: file.value
                                         })};
-  fetch(`http://localhost:8989/api/documents/${idDoc}`,fetchOptions)
+  fetch(`/api/documents/${idDoc.value}`,fetchOptions)
   .then(()=>{
     getDoc()
   })   
@@ -128,7 +128,7 @@ function setFile(event){
 
 function addDoc(event){
   event.preventDefault()
-  const urlPost = `http://localhost:8989/api/documents
+  const urlPost = `/api/documents
 `
   let intitule = document.getElementById("addIntitule").value
   let desc = document.getElementById("addDescription").value
