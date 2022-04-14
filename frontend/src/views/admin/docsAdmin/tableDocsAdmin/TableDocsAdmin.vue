@@ -23,7 +23,7 @@
     </table>
 
     <!-- Modal -->
-    <FormModifDocsAdmin/>
+    <FormModifDocsAdmin @updateFile="updateFile" @updateDoc="updateDoc"/>
 </div>
 </template>
 
@@ -31,8 +31,21 @@
     import FormModifDocsAdmin from '../../docsAdmin/formModifDocsAdmin/FormModifDocsAdmin.vue'
     import edit from '../../../../img/edit2.png'
     import poubelle from '../../../../img/poubelle.png'
+    import { defineEmits} from 'vue'
+import { emit } from 'process';
+
 
     defineProps(['documents'])
+    defineEmits(['updateFile','updateDoc'])
+    function updateFile(event){
+            emit('updateFile',event)
+
+    }
+
+    function updateDoc(event){
+        emit('updateDoc',event)
+
+    }
 </script>
 
 <style>

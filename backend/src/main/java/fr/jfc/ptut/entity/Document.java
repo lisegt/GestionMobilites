@@ -12,7 +12,8 @@ public class Document {
     private Integer id;
     
     @NonNull
-    private File fichier;
+    @Column(columnDefinition="LONGTEXT")
+    private String fichier;
 
     @NonNull
     private String intitule;

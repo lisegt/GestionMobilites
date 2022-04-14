@@ -6,9 +6,9 @@
   <button type="button" class="btnOrange " data-bs-toggle="modal" data-bs-target="#ajout">
     Ajouter un document
   </button>
-  <FormAddDocsAdmin @post="addDoc"/>
+  <FormAddDocsAdmin @post="addDoc" @changeFile="setFile"/>
 
-  <TableDocsAdmin @update="setDoc" @delete="deleteDocument" v-bind:documents="listeDocuments"/>
+  <TableDocsAdmin @update="setDoc" @updateFile="setFile" @updateDoc="updateDoc" @delete="deleteDocument" v-bind:documents="listeDocuments"/>
 
 </div>
 </template>
@@ -18,7 +18,7 @@ import TableDocsAdmin from "./tableDocsAdmin/TableDocsAdmin.vue";
 import FormModifDocsAdmin from './formModifDocsAdmin/FormModifDocsAdmin.vue'
 import FormAddDocsAdmin from './formAddDocsAdmin/FormAddDocsAdmin.vue'
 import { onMounted, onUpdated } from "vue";
-import { reactive } from 'vue';
+import { reactive,ref } from 'vue';
 
 //navabr active
     let listeNav = ["accueilNav","etudiantNav","destinationsNav","mobilitesNav","docNav","siteNav"]
@@ -29,6 +29,8 @@ import { reactive } from 'vue';
 
 //Liste de documents
 const listeDocuments = reactive([]);
+let file = ref("")
+let idDoc = ref(0)
 
 /**
  * 
@@ -72,24 +74,76 @@ function deleteDocument(id){
  * Fonction qui modifie les données
  */
 function setDoc(doc){
-  document.getElementById("intitule").value = doc.intitule
-  document.getElementById("description").value = doc.description
-  document.getElementById('idDocToEdit').value= doc.id
+
+  idDoc.value = doc.id
+
+  document.getElementById("updateIntitule").value = doc.intitule
+  document.getElementById("updateDescription").value = doc.description
+  document.getElementById('updateFile').value= doc.fichier
+}
+
+function updateDoc(event){
+  event.preventDefault()
+  let intitule = document.getElementById("updateIntitule").value = doc.intitule
+  let description = document.getElementById("updateDescription").value = doc.description
+
+  let myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  const fetchOptions = {  method:"PUT", 
+                                    headers: myHeaders, 
+                                    body: JSON.stringify({
+                                        intitule:intitule,
+                                        description:description,
+                                        fichier: file.value
+                                        })};
+  fetch(`http://localhost:8989/api/documents/${idDoc}`,fetchOptions)
+  .then(()=>{
+    getDoc()
+  })   
+  .catch((err)=>{ console.log("erreur: ",err)}) 
+
 }
 
 /**
  * 
- * @param intitule
- * @param description
- * @return
- * Fonction qui permet d'ajouter un étudiant
+ * @param event 
+ * evenement du @change
+ * Fonction qui convertis un fichier pdf en string base64
  */
-function addDoc(intitule, description){
-  const url = `/api/documents`
+
+function setFile(event){
+  
+  
+  let reader = new FileReader();
+  reader.onloadend = function() {
+        
+        file.value=reader.result
+        console.log(file.value)
+      }
+  reader.readAsDataURL(event.target.files[0]);
+
+}
+
+
+
+function addDoc(event){
+  event.preventDefault()
+  const urlPost = `http://localhost:8989/api/documents
+`
+  let intitule = document.getElementById("addIntitule").value
+  let desc = document.getElementById("addDescription").value
+  
+
   let myHeaders = new Headers();
+
   myHeaders.append("Content-Type", "application/json");
-  const fetchOptions = {method:"POST", headers: myHeaders, body: JSON.stringify({intitule:intitule, description:description})};
-  fetch(url,fetchOptions)
+
+  const fetchOptions = {method:"POST", headers: myHeaders, body: JSON.stringify({
+    intitule:intitule, 
+    description:desc,
+    fichier:file.value})};
+
+  fetch(urlPost,fetchOptions)
   .then((response) => getDoc())
   .catch((error) => console.log(error));
 }

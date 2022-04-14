@@ -66,7 +66,7 @@
                 <div class="mb-3 row">
                     <div class="col">
                     <label for="image" class="form-label">CHOISIR/MODIFIER L'IMAGE:</label>
-                    <input type="file"  class="form-control " name="image" id="image">
+                    <input type="file" @change="changeImage"  class="form-control " name="image" id="image">
                     </div>
                 </div>
                 
@@ -75,7 +75,7 @@
          </div>         
         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" id="btnSub" class="btn btn-primary">Save changes</button>
+        <button type="submit" id="btnSub" @click="updateDestination" data-bs-dismiss="modal" class="btn btn-primary">Save changes</button>
       </div>
     </form>
       
@@ -86,5 +86,19 @@
 </template>
 
 <script setup>
+
+
+import {  defineEmits } from 'vue';
+
+const emits = defineEmits(['updateImage','updateDestination'])
+
+function changeImage(event){
+  emits('updateImage', event )
+}
+
+function updateDestination(event){
+    emits('updateDestination',event)
+
+}
 
 </script>

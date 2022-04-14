@@ -96,7 +96,7 @@ function sendFile(event){
     emit('changePicture',event)
 }
 function addDestination(event){
-
+ 
     emit('ajouter',event)
 }
 

@@ -8,25 +8,21 @@
       </div>
       <div class="modal-body">
         <div id="form">
-            <form>
+            <form> 
                 <div class="form-group">
-                    <label for="nom" class="font-weight-bold">Nom du document :</label>
-                    <input v-model="intitule" id="intitule" class="form-control" name="intitule" type="text" placeholder="Entrez le nom du document ..." required/>
+                    <label for="addIntitule" class="font-weight-bold">Nom du document :</label>
+                    <input  id="addIntitule" class="form-control" name="addIntitule" type="text" placeholder="Entrez le nom du document ..." required/>
                 </div>
                 <div class="form-group">
-                    <label for="prenom" class="font-weight-bold">Description :</label>
-                    <input v-model="description" id="description" class="form-control" name="description" type="text" placeholder="Entrez une description du document ..." required/>
+                    <label for="addDescription" class="font-weight-bold">Description :</label>
+                    <input id="addDescription" class="form-control" name="addDescription" type="text" placeholder="Entrez une description du document ..." required/>
                 </div>
                 <!--Upload de fichier :-->
                 <div>
                   <form method="POST" enctype="multipart/form-data" action="/upload">
                     <div class="form-group">
                       <label for="file" class="font-weight-bold">Fichier à télécharger :</label>
-                      <input class="form-control" id="file" type="file" name="file" />
-                    </div>
-                    <div class="form-group">
-                      <label class="font-weight-bold">Télécharger :</label>
-                      <input class="form-control" type="submit" value="Upload" />
+                      <input class="form-control" @change="majFile" id="file" type="file" name="file" />
                     </div>
                   </form>
                 </div>
@@ -38,7 +34,7 @@
                 <!---->
                 <div class="modal-footer">
                     <button type="button" class="btnOrange" data-bs-dismiss="modal">Close</button>
-                    <input @click="$emit('post', intitule, description)" id="bouton" type="submit" class="btnOrange" value="Ajouter"  data-bs-dismiss="modal"/>
+                    <input @click="ajouter" id="bouton" type="submit"  class="btnOrange" value="Ajouter"  data-bs-dismiss="modal"/>
                  </div>
             </form>
         </div>
@@ -49,10 +45,22 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
 
-let intitule = ref('')
-let description = ref('')
+import { defineEmits} from 'vue'
+
+
+const emit = defineEmits(['changeFile','post'])
+
+function ajouter(event){
+  emit('post',event)
+}
+
+function majFile(event){
+    console.log("event",event)
+    emit('changeFile',event)
+}
+
+
 </script>
 
 <style scoped>

@@ -25,7 +25,12 @@
   <div id="log">
       </div>
 
-  <TableDestinations @set="setDestination" @delete="deleteDestination" v-bind:destinations="listeDestinationsTab"/>
+  <TableDestinations 
+              @set="setDestination" 
+              @delete="deleteDestination" 
+              v-bind:destinations="listeDestinationsTab" 
+              @updateImage="encodeImageFileAsURL"
+              @updateDestination="updateDestination"/>
   <FormAddDestination @ajouter="postDestination" @changePicture="encodeImageFileAsURL" />
   </div>
   
@@ -49,6 +54,7 @@
    
     const listeDestinationsTab = reactive([])
     let img = ref("")
+    let idDestination = ref(0)
     const url = 'api/destinations'
     function dateDiff(date1, date2){
                 var diff = {}                           // Initialisation du retour
@@ -122,6 +128,9 @@
     
 
     function setDestination(destination){
+
+        idDestination.value = destination[0].id
+
         document.getElementById("nomEtablissement").value=destination[0].nomEtablissementAccueil
         document.getElementById("nomVille").value=destination[0].ville
         document.getElementById("nomPays").value=destination[0].pays
@@ -130,14 +139,11 @@
         document.getElementById("nbPlaceAnnee").value=parseInt(destination[0].nbPlaceAnnee)
         document.getElementById("dateFinContrat").value=destination[0].dateFinDeContratIsis
 
-        document.getElementById("btnSub").addEventListener('click',()=>{
-            console.log(destination)
-            updateDestination(destination)
-        })
+    
       }
 
-    function updateDestination(destination){
-
+    function updateDestination(event){
+           event.preventDefault()
            let nomEtablissement = document.getElementById("nomEtablissement").value
            let nomVille = document.getElementById("nomVille").value
            let nomPays = document.getElementById("nomPays").value
@@ -146,7 +152,7 @@
            let nbPlaceAnnee= document.getElementById("nbPlaceAnnee").value
            let date = document.getElementById("dateFinContrat").value
 
-            const url = `/api/destinations/${destination[0].id}` // l’url de l'API
+            const url = `/api/destinations/${idDestination.value}` // l’url de l'API
 
             let myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
@@ -159,16 +165,17 @@
                                         nbPlaceSemestre:nbPlaceSemestre,
                                         typeMobilite:typeMobilite,
                                         ville:nomVille,
-                                        pays:nomPays
+                                        pays:nomPays,
+                                        image:img.value
                                         })};
             fetch(url,fetchOptions)
             .catch((error) => console.log(error));
 
     }
 
-    //fin 
+    
     function encodeImageFileAsURL(event) {
-        alert(event.target.files[0])
+        
         let file = event.target.files[0];
         let reader = new FileReader();
         reader.onloadend = function() {
@@ -192,7 +199,8 @@
         
 
             if(nomEtablissement==""|| nomVille==""||nomPays==""){
-      window.alert("Veuillez remplir les 4 premiers champs!")
+            window.alert("Veuillez remplir les 4 premiers champs!")
+            console.log(date)
     }
     else{
     const url = `/api/destinations` // l’url de l'API

@@ -40,16 +40,28 @@
 
 
 <!-- Modal -->
-<FormModifDestination/>
+<FormModifDestination @updateImage="updateImage" @updateDestination="updateDestination"/>
 </div>
 </template>
 
 <script setup>
+
+    import {defineEmits} from 'vue'
    
     import poubelle from '../../../../img/poubelle.png'
     import edit from '../../../../img/edit.png'
     import FormModifDestination from '../formModifDestination/FormModifDestination.vue'
+
     defineProps(['destinations'])
+    const emits = defineEmits(['updateImage','updateDestination'])
+    function updateImage(event){
+        emits('updateImage',event)
+    }
+
+    function updateDestination(event){
+        emits('updateDestination',event)
+
+    }
 </script>
 
 <style>
