@@ -1,21 +1,21 @@
 <template>
-        <div class="filtresEtudiants w-100">
-        <div >
-            <select id="paysSelector" class="form-select inputFiltre" @change="searchByPays">
+    <div class="filtresEtudiants w-100 row m-auto py-2">
+        <div class="col-3 px-0 text-center">
+            <select id="paysSelector" class="formSelect" @change="searchByPays">
                 <option value="tous" id="paysTous">PAYS</option>
                 <option v-for="pays in listePays" :key="pays" :value="pays">{{pays}}</option>
             </select>
         </div>
 
-        <div>
-            <select id="type_mobilite" class="form-select inputFiltre" @change="searchByTypeMobilite">
+        <div class="col px-0 text-center">
+            <select id="type_mobilite" class="formSelect" @change="searchByTypeMobilite">
                 <option value="tous" id="typesTous">TYPE MOBILITE</option>
                 <option v-for="type in types" :key="type" :value="type">{{type}}</option>
             </select>
         </div>
 
-        <div>
-            <select id="statut-contrat" class="form-select inputFiltre" @change="searchByStatutContrat">
+        <div class="col px-0  text-center">
+            <select id="statut-contrat" class="formSelect" @change="searchByStatutContrat">
                 <option value="tous" id="contratsTous">STATUT CONTRAT</option>
                 <option v-for="contrat in contrats" :key="contrat" :value="contrat">{{contrat}}</option>
             </select>
@@ -27,7 +27,6 @@
 
 import { reactive, onMounted, defineEmits } from 'vue'
 
-const url = "http://localhost:8989/destinations/pays"
 const listePays = reactive([]); // liste qui contient les différents pays des destinations
 const types = reactive([]); // liste qui contient les différents types de mobilité des destinations
 const contrats = reactive([]); // liste qui contient les différents statuts de contrat des destinations

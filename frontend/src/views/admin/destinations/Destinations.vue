@@ -1,14 +1,12 @@
 <template>
-  <div class="h-100 container ">
+  <div class=" mt-5 container ">
   <div class="row h-25  align-items-center">
 
     <div class="col-4 h-50  d-flex flex-column justify-content-around align-items-left">
-      <input type="text" placeholder="RECHERCHER UNE DESTINATION..." class="w-100 inputFiltre">
-      <div class="filtreTab w-100 d-flex  ">
-        <div class="dropdown">
-          <FiltreDestinations @searchByPays="searchByPays" @searchByTypeMobilite="searchByTypeMobilite" @searchByStatutContrat="searchByStatutContrat"/>
-        </div>
-      </div>
+      <SearchDestination v-bind:destinations="listeDestinationsTab" @searchDestination="searchDestination"/>
+      
+      <FiltreDestinations @searchByPays="searchByPays" @searchByTypeMobilite="searchByTypeMobilite" @searchByStatutContrat="searchByStatutContrat"/>
+      
     </div>
 
     <h1 class="col-4 text-center">GESTION DES DESTINATIONS</h1>
@@ -20,6 +18,8 @@
         </button>
     </div>
 
+  <TableDestinations @set="setDestination" @delete="deleteDestination" v-bind:destinations="listeDestinationsTab" class="mt-4"/>
+  
   </div>
   
   <div id="log">
@@ -40,8 +40,9 @@
 
     import {reactive, onMounted,ref} from 'vue'
     import TableDestinations from './tableDestinations/TableDestinations.vue'
-    import FormAddDestination from './formAddDestination/FormAddDestination.vue';
+    import FormAddDestination from './formAddDestination/FormAddDestination.vue'
     import FiltreDestinations from './filtreDestinations/FiltreDestinations.vue'
+    import SearchDestination from './searchDestination/SearchDestination.vue'
 
     import world from '../../../img/world.png'
 
@@ -308,9 +309,25 @@ function searchByStatutContrat(statut){
   }
 }
 
-    onMounted(()=>{
-        getDestinations(urlAllDestinations)
-    })
+/**
+ * Fonction qui filtre les destinations en fonction d'une chaîne de caractères saisie par l'utilisateur
+ */
+
+function searchDestination(inputUser){
+  const url = `/api/destinations/search/findAllByNomEtablissementAccueilContainingIgnoreCaseOrVilleContainingIgnoreCase?nom=${inputUser}&ville=${inputUser}`
+  fetch(url, {method: 'GET'})
+  .then((result)=>{
+    return result.json()
+  })
+  .then((dataJson)=>{
+    getDestinations(url) //on récupère les destinations filtrées
+  })
+}
+
+/**
+ * lorsqu'on crée le composant Destinations, on exécute la fonction getDestinations(url) qui charge toutes les destinations de la BDD
+ */
+onMounted(()=>{ getDestinations(urlAllDestinations) })
 </script>
 
 <style>

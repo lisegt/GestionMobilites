@@ -55,7 +55,7 @@ function majDoc(event){
 
 </script>
 
-<style>
+<style scoped>
 h5{
     font-size: 30px;
     line-height: 36px;
@@ -78,6 +78,8 @@ h5,label{
     font-weight: 400;
     font-size: 20px;
     color: #022E51;
+    background-color: rgba(163, 180, 200, 0.35);
+;
 }
 #description, #intitule{
   background: rgba(163, 180, 200, 0.35);

@@ -82,6 +82,12 @@ html {
   border-radius: 10px;
   border: 0px;
 }
+
+.scrollTableau{
+    height: 40em;
+    overflow-y: scroll ;
+  }
+
 </style>
 
 

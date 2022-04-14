@@ -1,14 +1,12 @@
 <template>
-  <div class="container">
+  <div class="mt-5 container">
     <div class="row h-25 align-items-center">
 
       <div class="col-4 h-50  d-flex flex-column justify-content-around align-items-left">
         <SearchEtud v-bind:etudiants="listeEtudiants" @searchEtud="searchEtud"/>
-        <div class="filtreTab w-100 d-flex  ">
-          <div class="dropdown">
-            <FiltreEtud @searchByEtatMobilite="searchByEtatMobilite" @searchByPromo="searchByPromo"/>
-          </div>
-        </div>
+        
+        <FiltreEtud @searchByEtatMobilite="searchByEtatMobilite" @searchByPromo="searchByPromo"/>
+        
       </div>
 
     <h1 class="col-4 text-center">GESTION DES ETUDIANTS</h1>
@@ -19,24 +17,16 @@
           Ajouter un étudiant
         </button>
     </div>
-    
-    </div>
 
     <TableEtud :etudiants="listeEtudiants" @delete="deleteEtud" @update="editEtud" class="mt-4"/>
 
+    </div>
+
+    
       
     <FormAddEtud @post="addEtud"/>
     <FormModifEtud @update_ok="getEtud"/>
   </div>
-  <!--
-    Dans etudiant
-    <SearchEtud v-bind:etudiants="listeEtudiants"/>
-    Dans search
-    <input type="text" id="search"  v-model="nom" placeholder="RECHERCHER UNE DESTINATION..." class="w-100 inputFiltre" />
-  
-  </div>
-
-  -->
 </template>
 
 <script setup>
@@ -147,17 +137,19 @@
     
   }
   
-
-  //Fonction pour recherche
-  function searchEtud(etud){
-      fetch(`/api/etudiants/search/findByNomContaining?mot=${etud}`, {method: 'GET'})
-      .then((result)=>{
-        return result.json()
-      })
-      .then((dataJson)=>{
-        listeEtudiants.splice(0, listeEtudiants.length)
-        dataJson._embedded.etudiants.forEach((item)=>{listeEtudiants.push(item)})
-      })
+  /**
+   * Fonction qui filtre les étudiants en fonction d'une chaîne de caractères saisie par l'utilisateur
+   */
+  function searchEtud(inputUser){
+    const url = `/api/etudiants/search/findByNomContainingIgnoreCaseOrPrenomContainingIgnoreCase?nom=${inputUser}&prenom=${inputUser}`
+    fetch(url, {method: 'GET'})
+    .then((result)=>{
+      return result.json()
+    })
+    .then((dataJson)=>{
+      listeEtudiants.splice(0, listeEtudiants.length)
+      dataJson._embedded.etudiants.forEach((item)=>{listeEtudiants.push(item)})
+    })
   }
 
 
@@ -165,5 +157,5 @@
 </script>
 
 <style>
-
+  
 </style>

@@ -1,20 +1,10 @@
 <template>
-  <div class="h-100 container ">
+  <div class=" mt-5 container ">
   <div class="row h-25  align-items-center">
 
     <div class="col-4 h-50  d-flex flex-column justify-content-around align-items-left">
-      <input type="text" placeholder="RECHERCHER UN ETUDIANT..." class="w-100 inputFiltre">
-      <div class="filtreTab w-100 d-flex  ">
-        <div class="dropdown">
-          <button aria-expanded="false" type="button" id="dropdownMenuButton" data-toggle="dropdown" class="btn flex-fill dropdown-toggle "> PROMOTION</button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <li ><a class="dropdown-item btn" type="button" href="#">Action</a></li>
-          
-        </ul>
-        </div>
-          <a type="button" class="btn flex-fill"> DESTINATION</a>
-          <a type="button" class="btn flex-fill ">ETAT MOBILITE</a>
-      </div>
+    <SearchMobilite v-bind:mobilites="listeMobilitesTab" @searchMobilite="searchMobilite"/>
+    <FiltreMobilites @searchByPromo="searchByPromo" @searchByDestination="searchByDestination" @searchByEtatMobilite="searchByEtatMobilite" />
     </div>
 
     <h1 class="col-4 text-center">GESTION DES MOBILITES</h1>
@@ -26,10 +16,10 @@
         </button>
     </div>
 
+  <TableMobilites @set="setMobilite" @delete="deleteMobilite" v-bind:mobilites="listeMobilitesTab" class="mt-4"/>
+
   </div>
   
-
-  <TableMobilites @set="setMobilite" @delete="deleteMobilite" v-bind:mobilites="listeMobilitesTab"/>
   <FormAddMobilites @ajouter="addMobilite" />
   </div>
   
@@ -40,6 +30,8 @@
     import {reactive, onMounted} from 'vue'
     import TableMobilites from './tableMobilites/TableMobilites.vue'
     import FormAddMobilites from './formAddMobilite/FormAddMobilite.vue';
+    import SearchMobilite from './searchMobilite/SearchMobilite.vue'
+    import FiltreMobilites from './filtreMobilites/FiltreMobilites.vue'
     import globe from '../../../img/globe.png'
 
     //navabr active
@@ -79,13 +71,13 @@
                 console.log(diff)
                 return diff.day;
     }
-
-    function getMobilites(){
+  const urlAllMobilites = `http://localhost:8989/api/mobilites`
+    function getMobilites(url){
         
         listeMobilites.splice(0,listeMobilites.length)         //On vide la liste des destinations avant de la remplir afin d'éviter les doublons
         listeMobilitesTab.splice(0,listeMobilitesTab.length) 
 
-        let url = `http://localhost:8989/api/mobilites`
+        
         fetch(url)
         .then((res)=>{return res.json()})
         .then((json)=>{
@@ -127,20 +119,9 @@
                         listeMobilites.push([d,etudiant,destination,"En cours"])
                         listeMobilitesTab.push([d,etudiant,destination,"En cours"])
                       }}
-                   
-                    
                     })
-
-                  })
-                  
-                    
-                    
-                 
-                   
-                    
-
+                  })  
             }
-            
         })
     }
 
@@ -239,21 +220,93 @@
       console.log(error)
       window.alert(date)});
 
+/**
+ * @param promo sélectionné dans la liste déroulante
+ * fonction qui permet de récupérer toutes les mobilités concernant les étudiants de la promotion sélectionnée
+ */
+function searchByPromo(promo){
 
-  
+  /* A COMPLETER
+  const fetchOptions = { method: "GET" }; //on utilise l'opération GET car on veut récupérer les mobilités filtrées par promotion
+  const url = '' //url permettant d'accéder aux mobilités filtrées par promo
 
+  if(promo != 'tous'){ //si on sélectionne n'importe quelle promo de la liste déroulante, on filtre
+    fetch(url, fetchOptions)
+      .then((response) => { return response.json();})
+      .then((dataJSON) => {
+          getMobilites(url)
+      })
+      .catch((error) => console.log(error));
+  } else { // on sélectionne l'option permettant d'afficher toutes les mobilités
+    getMobilites(urlAllMobilites)
+  }
+  */
+}
 
+/**
+ * @param destination sélectionné dans la liste déroulante
+ * fonction qui permet de récupérer toutes les mobilités associées à la destination sélectionnée
+ */
+function searchByDestination(destination){
+  /* COMPLETER URL
+  const fetchOptions = { method: "GET" }; //on utilise l'opération GET car on veut récupérer les mobilités filtrées par destination
+  const url = '' //url permettant d'accéder aux mobilités filtrées par destination
 
-    
-    
+  if(destination != 'tous'){ //si on sélectionne n'importe quelle destination de la liste déroulante, on filtre
+    fetch(url, fetchOptions)
+      .then((response) => { return response.json();})
+      .then((dataJSON) => {
+          getMobilites(url)
+      })
+      .catch((error) => console.log(error));
+  } else { // on sélectionne l'option permettant d'afficher toutes les mobilités
+    getMobilites(urlAllMobilites)
+  }
+  */
+}
 
+/**
+ * @param etat sélectionné dans la liste déroulante
+ * fonction qui permet de récupérer toutes les mobilités associées à un état de mobilité
+ */
+function searchByEtatMobilite(etat){
+  /*
+  const fetchOptions = { method: "GET" }; //on utilise l'opération GET car on veut récupérer les mobilités filtrées par état de mobilité
+  const url = '' //url permettant d'accéder aux mobilitées filtrées par leur état
 
-    
+  if(etat != 'tous'){ //si on sélectionne n'importe quel état de la liste déroulante, on filtre
+    fetch(url, fetchOptions)
+      .then((response) => { return response.json();})
+      .then((dataJSON) => {
+          getMobilites(url)
+      })
+      .catch((error) => console.log(error));
+  } else { // on sélectionne l'option permettant d'afficher toutes les mobilités
+    getMobilites(urlAllMobilites)
+  */
+}
+
+/** A COMPLETER
+ * Fonction qui filtre les mobilités en fonction d'une chaîne de caractères saisie par l'utilisateur
+ */
+
+function searchDestination(inputUser){
+  /*
+  const url = `${inputUser}`
+  fetch(url, {method: 'GET'})
+  .then((result)=>{
+    return result.json()
+  })
+  .then((dataJson)=>{
+    getMobilites(url) //on récupère les destinations filtrées
+  })
+  */
+}
     
 }
 
     onMounted(()=>{
-        getMobilites()
+        getMobilites(urlAllMobilites)
         
     })
 </script>

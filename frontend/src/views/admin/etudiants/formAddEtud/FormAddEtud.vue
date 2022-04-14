@@ -42,8 +42,8 @@
 
     let nom = ref('')
     let prenom = ref('')
-    let promotion=ref(0)
-    let ine = ref(0)
+    let promotion=ref()
+    let ine = ref()
 
 </script>
 
