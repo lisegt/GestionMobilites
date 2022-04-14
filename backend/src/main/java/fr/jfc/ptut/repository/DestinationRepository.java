@@ -13,4 +13,13 @@ public interface DestinationRepository extends JpaRepository<Destination, Intege
     
     List<Destination> findByPays(String pays);
     List<Destination> findByTypeMobilite(Type type);
+
+    /**
+     * 
+     * @param nom entré par l'utilisateur
+     * @param ville entrée par l'utilisateur
+     * @return la liste des destinations dont le nom et/ou la ville correspondent 
+     * à la chaine de caractères entrée par l'utilisateur
+     */
+    List<Destination> findAllByNomEtablissementAccueilContainingIgnoreCaseOrVilleContainingIgnoreCase(String nom, String ville);
 }

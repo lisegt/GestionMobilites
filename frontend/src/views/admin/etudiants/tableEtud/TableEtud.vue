@@ -1,25 +1,25 @@
 <template>
-  <div class="container table-responsive h-50" >
-    <table class="table table-striped  table-bordered ">
+  <div class="container table-responsive scrollTableau" >
+    <table class="table table-striped  table-bordered">
         <thead>
           <tr>
-            <th class="text-center">INE</th>
-            <th class="text-center">Nom</th>
-            <th class="text-center">Prenom</th>
-            <th class="text-center">Promotion</th>
-            <th class="text-center">Actions</th>
+            <th class="text-center align-middle">INE</th>
+            <th class="text-center align-middle">Nom</th>
+            <th class="text-center align-middle">Prenom</th>
+            <th class="text-center align-middle">Promotion</th>
+            <th class="text-center align-middle">Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="etud in etudiants">
-            <td class="text-center">{{etud.numEtud}}</td>
-            <td class="text-center">{{etud.nom}}</td>
-            <td class="text-center">{{etud.prenom}}</td>
-            <td class="text-center">{{etud.promo}}</td>
-            <td class="text-center">
-              <div class="text-center d-flex justify-content-around w-75 m-auto">
+          <tr v-for="etud in etudiants" :key="etud" class="align-self-center">
+            <td class="text-center align-middle">{{etud.numEtud}}</td>
+            <td class="text-center align-middle">{{etud.nom}}</td>
+            <td class="text-center align-middle">{{etud.prenom}}</td>
+            <td class="text-center align-middle">{{etud.promo}}</td>
+            <td class="text-center align-middle">
+              <div class="text-center d-flex justify-content-around w-75 m-auto align-middle">
               <a @click="$emit('update', etud)" data-bs-toggle="modal" data-bs-target="#modif" class="btn" type="button" > <img v-bind:src="edit" alt="edit"></a>
-              <a @click="$emit('delete',etud.id)" ><img :src="Poubelle" alt="à la poubelle l'etudiant"/></a>
+              <a @click="$emit('delete',etud.id)"  class="btn" type="button" ><img :src="Poubelle" alt="à la poubelle l'etudiant"/></a>
               </div>
             </td>
           </tr>
@@ -40,10 +40,7 @@
 <style scoped>
 
   th{
-    font-size: 1.2em;
-  }
-
-  td{
+    font-size: 1.3em;
   }
 
 </style>
