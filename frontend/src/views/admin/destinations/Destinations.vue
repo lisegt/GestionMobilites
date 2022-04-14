@@ -22,8 +22,6 @@
   
   </div>
   
-
-  
   <FormAddDestination @ajouter="postDestination" @changePicture="encodeImageFileAsURL" />
   </div>
   

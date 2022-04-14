@@ -27,7 +27,6 @@
 
 import { reactive, onMounted, defineEmits } from 'vue'
 
-const url = "http://localhost:8989/destinations/pays"
 const listePays = reactive([]); // liste qui contient les différents pays des destinations
 const types = reactive([]); // liste qui contient les différents types de mobilité des destinations
 const contrats = reactive([]); // liste qui contient les différents statuts de contrat des destinations

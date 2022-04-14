@@ -53,17 +53,10 @@
 
 <style>
 
-    .styleTab{
-        border-radius: 1000px;
-        border: 5px ridge #022e51;
-    }
     thead{
         font-family: 'Bebas Neue', sans-serif;
         color: white;
         background-color: #022e51;
-    }
-
-    #enteteTabDest{
         font-size: 1.3em;
     }
 </style>

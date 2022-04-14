@@ -2,7 +2,7 @@
 <div id="form">
     <form @submit.prevent="searchDestination()">
         <div class="form-group formRecherche">
-            <input id="searchDestination" class="form-control w-75" name="nom" type="text" v-model="destination" placeholder="Rechercher une destination..."/>
+            <input id="searchDestination" class="form-control w-75" name="nom" type="text" v-model="destination" placeholder="Rechercher un établissement, une ville..."/>
             <input id="boutonRecherche" type="submit" value="Rechercher" />
         </div>
         
@@ -19,7 +19,7 @@ const destination = ref('');
 
 /**
  * fonction qui émet l'événement 'searchDestination' vers le composant parent Destination, 
- * lui passant an paramètre l'entrée saisie par l'utilisateur, en minuscules
+ * lui passant an paramètre l'entrée saisie par l'utilisateur
  */
 function searchDestination(){
     emit('searchDestination',destination.value)
