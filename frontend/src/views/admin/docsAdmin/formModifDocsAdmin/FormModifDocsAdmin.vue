@@ -18,6 +18,25 @@
                     <input id="description" class="form-control" name="description" type="text" v-model="description" placeholder="Entrez une description du document ..." required/>
                 </div>
                 <input id="idDocToEdit" style="display: none;"/>
+                <!--Upload de fichier :-->
+                <div>
+                  <form method="POST" enctype="multipart/form-data" action="/upload">
+                    <div class="form-group">
+                      <label for="file" class="font-weight-bold">Fichier à télécharger :</label>
+                      <input class="form-control" id="file" type="file" name="fichier" />
+                    </div>
+                    <div class="form-group">
+                      <label class="font-weight-bold">Télécharger :</label>
+                      <input class="form-control" type="submit" value="Upload" />
+                    </div>
+                  </form>
+                </div>
+                <div>
+                  <div th:each="file : ${files}">
+                    <a th:href="${file}" th:text="${file}" />
+                  </div>
+                </div>
+                <!---->
                 <div class="modal-footer">
                     <button type="button" class="btnOrange" data-bs-dismiss="modal">Close</button>
                     <input id="btnSub" type="submit" class="btnOrange" value="Modifier" data-bs-dismiss="modal"/>
@@ -57,7 +76,7 @@ function updateDoc() {
 }
 </script>
 
-<style>
+<style scoped>
 h5{
     font-size: 30px;
     line-height: 36px;
@@ -80,6 +99,8 @@ h5,label{
     font-weight: 400;
     font-size: 20px;
     color: #022E51;
+    background-color: rgba(163, 180, 200, 0.35);
+;
 }
 #description, #intitule{
   background: rgba(163, 180, 200, 0.35);

@@ -1,6 +1,6 @@
 <template>
 <div class="col-6 col-xl-3 ">
-<a type="button" class=" text-white py-3 paddingX px-md-0 mx-2  bg-color d-flex flex-column justify-content-center align-items-center border-0 ">
+<a type="button" v-bind:href="lien"  class=" text-white py-3 paddingX px-md-0 mx-2  bg-color d-flex flex-column justify-content-center align-items-center border-0 ">
 
     <img v-bind:src="chemin" width="70" height="65" alt="image ">
     <div class="h4 mt-3"> {{nom}}</div>
@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-defineProps(["chemin","nom"])
+defineProps(["chemin","nom","lien"])
 </script>
 
 <style>

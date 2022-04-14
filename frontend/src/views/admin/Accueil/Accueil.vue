@@ -7,10 +7,10 @@
             <div class="col-12 col-md-6  m-auto">
                   <div class=" row largeur  pb-5 pt-0 pb-md-5  justify-content-around g-3 gy-xl-0 gx-md-1">    
 
-                        <Carte v-bind:nom="'ETUDIANTS'" v-bind:chemin="etudiants"/>
-                        <Carte v-bind:nom="'DESTINATIONS'" v-bind:chemin="destinations"/>
-                        <Carte v-bind:nom="'MOBILITES'" v-bind:chemin="mobilites"/>
-                        <Carte v-bind:nom="nomDoc" v-bind:chemin="doc"/>
+                        <Carte v-bind:nom="'ETUDIANTS'" v-bind:lien="'/admin/etudiants'" v-bind:chemin="etudiants"/>
+                        <Carte v-bind:nom="'DESTINATIONS'" v-bind:lien="'/admin/destinations'" v-bind:chemin="destinations"/>
+                        <Carte v-bind:nom="'MOBILITES'" v-bind:lien="'/admin/mobilites'" v-bind:chemin="mobilites"/>
+                        <Carte v-bind:nom="nomDoc" v-bind:lien="'/admin/documents'" v-bind:chemin="doc"/>
                   </div>
             </div>
       </div>
