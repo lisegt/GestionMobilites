@@ -13,7 +13,8 @@ L’application permet aux administrateurs de gérer :
 
 Les administrateurs peuvent gérer les destinations proposées c'est-à-dire en ajouter, les modifier, les supprimer.
 
-Cette application est également dédiée aux étudiants. Ces derniers peuvent se renseigner sur les destinations proposées par l’école pour effectuer un semestre, une année, un stage à l’étranger ou une mission humanitaire. 
+Cette application est également dédiée aux étudiants. 
+Ces derniers peuvent se renseigner sur les destinations proposées par l’école pour effectuer un semestre, une année, un stage à l’étranger ou une mission humanitaire. 
 Sont renseignés :
 -	le type de mobilité
 - la liste et les détails des campus
