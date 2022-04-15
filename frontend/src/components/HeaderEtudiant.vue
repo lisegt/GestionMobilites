@@ -1,7 +1,7 @@
 <template>
 <div class="row">
     <nav class="navbar navbar-expand-lg col">
-        <a tag="img" class="navbar-brand col ms-4" href="/admin">
+        <a tag="img" class="navbar-brand col ms-4" href="/etudiant">
             <img src="../views/admin/accueil/img/ISIS-logo.png" alt=" w-50 h-50">
         </a>
         
@@ -16,9 +16,9 @@
             <a class="nav-item" href="#">Documents administratifs</a>
             -->
             <ul class="navbar-nav  align-items-center titres w-100 ">
-                <li class="flex-fill text-center"> <a class="nav-item active" id="accueilNav" href="/admin">Accueil</a> </li>
-                <li class="flex-fill text-center"> <a class="nav-item" id="destinationsNav" href="/admin/destinations">Destinations</a> </li>
-                <li class="flex-fill text-center"> <a class="nav-item" id="docNav" href="/admin/documents">Documents administratifs</a> </li>
+                <li class="flex-fill text-center"> <a class="nav-item active" id="accueilNav" href="/etudiant">Accueil</a> </li>
+                <li class="flex-fill text-center"> <a class="nav-item" id="destinationsNav" href="/etudiant/destinations">Destinations</a> </li>
+                <li class="flex-fill text-center"> <a class="nav-item" id="docNav" href="/etudiant/documents">Documents administratifs</a> </li>
                 <li class=" flex-fill text-center">
                     <div class="col text-center text-center dropdown btn-group">
                         <button class="btn dropdown-toggle text-center" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
