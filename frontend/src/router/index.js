@@ -1,24 +1,36 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 //Admin :
+import Login from '@/views/admin/login/Login.vue'
 import Accueil from "@/views/admin/accueil/Accueil.vue";
 import Etudiants from "@/views/admin/etudiants/Etudiants.vue";
 import Destinations from "@/views/admin/destinations/Destinations.vue";
 import Mobilites from "@/views/admin/mobilites/Mobilites.vue";
 import DocsAdmin from "@/views/admin/docsAdmin/DocsAdmin.vue";
+import Administrateurs from "@/views/admin/administrateurs/Administrateurs.vue";
 
 //Etudiant :
 import AccueilEtud from "@/views/etudiant/accueil/Accueil.vue";
 import DestinationsEtud from "@/views/etudiant/destinations/Destinations.vue";
 import DocsAdminEtud from "@/views/etudiant/docsAdmin/DocsAdmin.vue";
 
+
 const routes = [
+  {
+    path: "/",
+    name: "Login",
+    component: Login,
+  },
   {
     path: "/admin",
     name: "Accueil",
     component: Accueil,
   },
-
+  {
+    path: '/admin/administrateurs',
+    name: "Administrateurs",
+    component: Administrateurs,
+  },
   { path: "/admin/etudiants",
     name: "Etudiants",
     component: Etudiants,

@@ -1,5 +1,5 @@
 <template>
-
+  <!-- Authentification Branch -->
   <div class="container-fluid overflow-scroll h-100">
     <HeaderAdmin/>
     <router-view />
@@ -11,7 +11,7 @@
   import HeaderAdmin from './components/HeaderAdmin.vue';
   import Accueil from './views/admin/accueil/Accueil.vue';
   import Footer from './components/Footer.vue';
-    
+  
 </script>
 
 

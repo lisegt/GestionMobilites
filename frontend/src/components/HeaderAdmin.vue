@@ -33,9 +33,9 @@
                         <div class="dropdown-menu dropdown-menu-right text-center" id="menuDeroulant" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="#">Nom Prénom</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-wrap" href="/admin/docsAdmin"><img class="mr-2" src="../views/admin/accueil/img/ajoutAdmin.svg" alt="logo d'ajout d'un admin"/>Ajouter un administrateur</a>
+                            <a  class="dropdown-item text-wrap" href="/admin/administrateurs"><img class="mr-2" src="../views/admin/accueil/img/ajoutAdmin.svg" alt="logo d'ajout d'un admin"/>Ajouter un administrateur</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#"><img class="mr-2" src="../views/admin/accueil/img/deconnexion.svg" alt="logo deconnexion"/>Déconnexion</a>
+                            <a @click="logout" class="dropdown-item" href="#"><img class="mr-2" src="../views/admin/accueil/img/deconnexion.svg" alt="logo deconnexion"/>Déconnexion</a>
                         </div>
                     </div>
                 </li>
@@ -43,9 +43,17 @@
         </div>  
     </nav>
 </div>
+
 </template>
 
-<script>
+<script setup>
+    import {useRouter} from 'vue-router'
+
+    const router = useRouter()
+    function logout(){
+            localStorage.removeItem('jwt')
+            router.push({name:'Login'})
+    }
 </script>
 
 <style>

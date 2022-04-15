@@ -18,6 +18,15 @@ INSERT INTO MOBILITE (date_depart, duree_en_mois, periode, destination_id, etudi
 /*
 INSERT INTO DOCUMENT (description, fichier, intitule) VALUES
     ('Meilleur fichier ever', 'fichier','Le fichier a valider avec validation');
+<<<<<<< HEAD
 */
+=======
+
+INSERT INTO roles(name) VALUES('ROLE_USER');
+INSERT INTO roles(name) VALUES('ROLE_MODERATOR');
+INSERT INTO roles(name) VALUES('ROLE_ADMIN');
+
+
+>>>>>>> 9339f7acf6cc5083df11c4c16f90f37eaf31ad94
 
 
