@@ -24,7 +24,7 @@
                 <li class="flex-fill text-center"> <a class="nav-item" id="destinationsNav" href="/admin/destinations">Destinations</a> </li>
                 <li class="flex-fill text-center"> <a class="nav-item" id="mobilitesNav" href="/admin/mobilites">Mobilités</a> </li>
                 <li class="flex-fill text-center"> <a class="nav-item" id="docNav" href="/admin/documents">Documents administratifs</a> </li>
-                <li class="flex-fill text-center"> <a class="nav-item" id="siteNav" href="#">Site public</a> </li>
+                <li class="flex-fill text-center"> <a class="nav-item" id="siteNav" href="/etudiant">Site public</a> </li>
                 <li class=" flex-fill text-center">
                     <div class="col text-center text-center dropdown btn-group">
                         <button class="btn dropdown-toggle text-center" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
