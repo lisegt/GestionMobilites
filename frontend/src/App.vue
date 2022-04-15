@@ -1,9 +1,7 @@
 <template>
   <!-- Authentification Branch -->
   <div class="container-fluid overflow-scroll h-100">
-    <div v-if="connecte">
-      <HeaderAdmin/>
-    </div>
+    <HeaderAdmin/>
     <router-view />
     <Footer class="footer" />
   </div>
@@ -16,7 +14,7 @@
 
   import {ref} from 'vue'
   
-  let connecte = ref(true)
+  let jwt = ref(localStorage.getItem('jwt'))
 
 </script>
 

@@ -45,6 +45,7 @@ import etudiants from "./img/etudiants.png"
 import destinations from "./img/img_destinations.png" 
 import mobilites from "./img/img_mobilités.png" 
 import doc from "./img/img_docsadmin.png"
+import { onMounted } from "@vue/runtime-core";
 
 //navabr active
     let listeNav = ["accueilNav","etudiantNav","destinationsNav","mobilitesNav","docNav","siteNav"]
@@ -54,9 +55,10 @@ import doc from "./img/img_docsadmin.png"
     document.getElementById("accueilNav").classList.add("active")
 
 
-let nomDoc= "DOCUMENTS ADMIN."
-if(window.innerWidth < window.innerHeight  ){
-      nomDoc="DOCUMENTS"
-}
+      let nomDoc= "DOCUMENTS ADMIN."
+      if(window.innerWidth < window.innerHeight  ){
+            nomDoc="DOCUMENTS"
+      }
+
 </script>
 

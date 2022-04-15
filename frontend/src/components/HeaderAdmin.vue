@@ -1,5 +1,5 @@
 <template>
-<div v-if="jwt" class="row">
+<div class="row">
     <nav class="navbar navbar-expand-lg col">
         <a tag="img"  class="navbar-brand col ms-4" href="/admin">
             <img src="../views/admin/accueil/img/ISIS-logo.png"  alt=" w-50 h-50">
@@ -47,10 +47,8 @@
 </template>
 
 <script setup>
-    import { ref } from '@vue/reactivity'
-import {useRouter} from 'vue-router'
-
-    let jwt = ref(localStorage.getItem('jwt'))
+    import {useRouter} from 'vue-router'
+    import {inject} from 'vue'
 
     const router = useRouter()
     function logout(){

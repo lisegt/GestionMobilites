@@ -34,6 +34,8 @@
         })
         .then((dataJson)=>{
             localStorage.setItem('jwt','Bearer '+dataJson.accessToken)
+        })
+        .then(()=>{
             router.push({name: 'Accueil'})
         })
         .catch((error)=>{
@@ -57,6 +59,8 @@
     form{
         display: flex;
         flex-direction: column;
+        padding: 50px;
+        border: 1px solid black;
     }
 
     form div{
