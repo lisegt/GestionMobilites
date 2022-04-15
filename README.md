@@ -2,7 +2,8 @@
 
 ## Résumé et contexte du projet
 ```
-Ce projet s'inscrit dans le cadre de la première année du cycle ingénieur ISIS (Informatique et Système d’Information pour la Santé). S'adressant à notre client, M. Laurent GREGOIRE, il consiste en la création d’une application web pour la gestion des mobilités internationales à ISIS. 
+Ce projet s'inscrit dans le cadre de la première année du cycle ingénieur ISIS (Informatique et Système d’Information pour la Santé). 
+S'adressant à notre client, M. Laurent GREGOIRE, il consiste en la création d’une application web pour la gestion des mobilités internationales à ISIS. 
 
 L’application permet aux administrateurs de gérer : 
 - une base de données contenant des informations concernant : 
