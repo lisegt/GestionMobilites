@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import Carte from "../../../components/CartePage.vue"
+import Carte from "../../../components/CarteDocsAdminEtud.vue"
 import doc from "./img/img_docsadmin.png"
 import PopUp from './popUpDocsAdmin/PopUpDocsAdmin.vue'
 

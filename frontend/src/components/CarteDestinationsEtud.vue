@@ -1,6 +1,6 @@
 <template>
-    <a type="button" id="carte" class=" carte col-12 col-xl-4 px-md-0 mx-2 bg-color d-flex flex-column pt-3 align-items-center border-0">
-        <img v-bind:id="index" v-bind:src="img" class="img" width="176" height="165" alt="image ">
+    <a type="button" class="carte col-12 col-xl-4 px-md-0 mx-2 bg-color d-flex flex-column pt-3 align-items-center border-0">
+        <img v-bind:id="index" v-bind:src="img" class="img" width="170" height="190" alt="image ">
         <div  class="h4 mt-3 txt"> {{nom}} <br> <div id="lieu">{{ville}}, {{pays}}</div></div>
     </a>
 </template>
@@ -36,13 +36,13 @@ onMounted(()=>{Base64ToImage(props.img)})
 
 <style>
 .img{
-    width: 85%;
+    width: 90%;
     border-radius: 30px;
 }
 .carte{
     background-color: #B74803;
     border-radius: 30px;
- 
+    height: 75%;
 }
 .txt{
     color: #FFFFFF;
