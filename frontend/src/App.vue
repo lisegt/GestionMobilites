@@ -1,7 +1,9 @@
 <template>
   <!-- Authentification Branch -->
   <div class="container-fluid overflow-scroll h-100">
-    <HeaderAdmin/>
+    <div v-if="connecte">
+      <HeaderAdmin/>
+    </div>
     <router-view />
     <Footer class="footer" />
   </div>
@@ -11,7 +13,11 @@
   import HeaderAdmin from './components/HeaderAdmin.vue';
   import Accueil from './views/admin/accueil/Accueil.vue';
   import Footer from './components/Footer.vue';
+
+  import {ref} from 'vue'
   
+  let connecte = ref(true)
+
 </script>
 
 

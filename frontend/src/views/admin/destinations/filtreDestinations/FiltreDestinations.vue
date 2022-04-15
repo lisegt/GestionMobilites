@@ -43,7 +43,7 @@ onMounted(()=>{
 //fonction qui permet de récupérer les pays de toutes les destinations à partir de l'API
 function recupererTousLesPays(){
 
-    const fetchOptions = { method: "GET" }; //on utilise l'opération GET car on veut récupérer le pays des destinations
+    const fetchOptions = { method: "GET", headers: {"Authorization": localStorage.getItem('jwt')} }; //on utilise l'opération GET car on veut récupérer le pays des destinations
     fetch('/api/destinations/pays', fetchOptions)
         .then((response) => { return response.json(); })
         .then((dataJSON) => {
@@ -57,7 +57,7 @@ function recupererTousLesPays(){
 //fonction qui permet de récupérer les types de mobilité de toutes les destinations à partir de l'API
 function recupererTousTypesMobilite(){
 
-    const fetchOptions = { method: "GET" }; //on utilise l'opération GET car on veut récupérer le pays des destinations
+    const fetchOptions = { method: "GET", headers: {"Authorization": localStorage.getItem('jwt')} }; //on utilise l'opération GET car on veut récupérer le pays des destinations
     fetch('/api/destinations/typesMobilite', fetchOptions)
         .then((response) => { return response.json(); })
         .then((dataJSON) => {
@@ -73,7 +73,7 @@ function recupererTousTypesMobilite(){
 //fonction qui permet de récupérer les statuts des contrats de toutes les destinations à partir de l'API
 function recupererTousStatutsContrat(){
 
-    const fetchOptions = { method: "GET" }; //on utilise l'opération GET car on veut récupérer le pays des destinations
+    const fetchOptions = { method: "GET", headers: {"Authorization": localStorage.getItem('jwt')} }; //on utilise l'opération GET car on veut récupérer le pays des destinations
     fetch('/api/destinations/statutsContrat', fetchOptions)
         .then((response) => { return response.json(); })
         .then((dataJSON) => {

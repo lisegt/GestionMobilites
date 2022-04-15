@@ -78,7 +78,7 @@
         listeMobilitesTab.splice(0,listeMobilitesTab.length) 
 
         
-        fetch(url)
+        fetch(url, {method:'GET',headers: {"Authorization": localStorage.getItem('jwt')}})
         .then((res)=>{return res.json()})
         .then((json)=>{
        
@@ -89,14 +89,14 @@
             for(let d of json._embedded.mobilites){
                   console.log(d)
                   
-                  fetch(d._links.etudiant.href)
+                  fetch(d._links.etudiant.href, {method:'GET',headers: {"Authorization": localStorage.getItem('jwt')}})
                   .then((res)=>{return res.json()})
                   .then((json)=>{
                     return json
                   })
                   .then((etudiant)=>{
                     console.log(etudiant)
-                    fetch(d._links.destination.href)
+                    fetch(d._links.destination.href, {method:'GET',headers: {"Authorization": localStorage.getItem('jwt')}})
                     .then((res)=>{return res.json()})
                     .then((destination)=>{
                         return destination
@@ -132,7 +132,7 @@
 
         const fetchOptions = {
                 method: "DELETE",
-                headers: myHeaders
+                headers: {"Authorization": localStorage.getItem('jwt')}
                 };
         let url = `http://localhost:8989/api/mobilites/${id}`
         fetch(url,fetchOptions)
@@ -170,10 +170,8 @@
 
             const url = `http://localhost:8989/api/destinations/${destination[0].id}` // l’url de l'API
 
-            let myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
             const fetchOptions = {  method:"PUT", 
-                                    headers: myHeaders, 
+                                    headers: {"Authorization": localStorage.getItem('jwt')},
                                     body: JSON.stringify({
                                         nomEtablissementAccueil:nomEtablissement,
                                         dateFinDeContratIsis:date,
@@ -200,10 +198,8 @@
     let periode = document.getElementById("periode").value
     
       
-    let myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
     const fetchOptions = {  method:"POST", 
-                            headers: myHeaders, 
+                            headers: {"Authorization": localStorage.getItem('jwt')},
                             body: JSON.stringify({
                                 dateDepart:date,
                                 dureeEnMois:duree,

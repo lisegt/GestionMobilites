@@ -15,18 +15,26 @@ INSERT INTO DESTINATION (date_fin_de_contrat_isis,image,nb_place_annee,nb_place_
 INSERT INTO MOBILITE (date_depart, duree_en_mois, periode, destination_id, etudiant_id) VALUES
     ('2023-04-10', 5, 1, SELECT ID FROM DESTINATION WHERE nom_etablissement_accueil = 'European University Of Cyprus', SELECT ID FROM ETUDIANT WHERE nom = 'BEN' );
 
-/*
+
 INSERT INTO DOCUMENT (description, fichier, intitule) VALUES
-    ('Meilleur fichier ever', 'fichier','Le fichier a valider avec validation');
-<<<<<<< HEAD
-*/
-=======
+    ('Meilleur fichie', 'fichier','Le fichier a valider sans validation'),
+    ('Meilleur fichier ever', 'fichier','Le fichier a valider avec validation'),
+    ('Rayane à tord', 'Kilian aussi', 'Et lise parfois');
+
+INSERT INTO USERS (username, email, password) VALUES 
+    ('admin','admin','$2y$10$6aP8DVtO4oEFuJ2gFjNjH.Zz8JvSaQG2wZlL7stsmdI23Iz0cRFPS');
 
 INSERT INTO roles(name) VALUES('ROLE_USER');
 INSERT INTO roles(name) VALUES('ROLE_MODERATOR');
 INSERT INTO roles(name) VALUES('ROLE_ADMIN');
 
+INSERT INTO USER_ROLES VALUES 
+(SELECT id FROM users WHERE username = 'admin', SELECT id FROM roles WHERE name = 'ROLE_USER' ),
+(SELECT id FROM users WHERE username = 'admin', SELECT id FROM roles WHERE name = 'ROLE_MODERATOR'),
+(SELECT id FROM users WHERE username = 'admin', SELECT id FROM roles WHERE name = 'ROLE_ADMIN');
 
->>>>>>> 9339f7acf6cc5083df11c4c16f90f37eaf31ad94
+
+
+
 
 

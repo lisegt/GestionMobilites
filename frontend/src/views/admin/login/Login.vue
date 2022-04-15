@@ -1,12 +1,17 @@
 <template>
-    <h1>Login</h1>
+<div class="main">
     <form @submit.prevent="signin">
-        <label>Username</label>
-        <input type="text" v-model="username"/>
-        <label>Password</label>
-        <input type="password" v-model="password"/>
-        <input type="submit" value="signin"/>
+        <div>
+            <label>Username</label>
+            <input type="text" v-model="username"/>
+        </div>
+        <div>
+            <label>Password</label>
+            <input type="password" v-model="password"/>
+        </div>
+        <input type="submit" value="Login"/>
     </form>
+</div>
 </template>
 
 <script setup>
@@ -41,5 +46,23 @@
 </script>
 
 <style scoped>
+    .main{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 60vh;
+    }
 
+    form{
+        display: flex;
+        flex-direction: column;
+    }
+
+    form div{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 10px;
+    }
 </style>

@@ -34,7 +34,7 @@ import {defineEmits} from 'vue'
 
     //Pour récupérer toutes les promotions existantes
     function getPromotions(){
-        fetch('/api/etudiant/promo', {method: 'GET'})
+        fetch('/api/etudiant/promo', {method: 'GET', headers: {"Authorization": localStorage.getItem('jwt')}})
         .then((result)=>
             result.json()
         )

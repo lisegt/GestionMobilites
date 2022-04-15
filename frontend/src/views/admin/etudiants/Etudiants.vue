@@ -55,16 +55,14 @@
 
   function addEtud(nom, prenom, promotion, ine){
     const url = `/api/etudiants` 
-    let myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    const fetchOptions = {method:"POST", headers: myHeaders, body: JSON.stringify({nom:nom, numEtud:ine, prenom:prenom, promo:promotion})};
+    const fetchOptions = {method:"POST", headers:{"Authorization": localStorage.getItem('jwt')}, body: JSON.stringify({nom:nom, numEtud:ine, prenom:prenom, promo:promotion})};
     fetch(url,fetchOptions)
     .then((response) => getEtud())
     .catch((error) => console.log(error));
   }
 
   function deleteEtud(id){
-    fetch(`/api/etudiants/${id}`,{method:'DELETE'})
+    fetch(`/api/etudiants/${id}`,{method:'DELETE', headers: {"Authorization": localStorage.getItem('jwt')}})
     .then(getEtud())
   }
 
@@ -96,7 +94,7 @@
 
   function searchByEtatMobilite(etat){
     if(etat === "val"){
-      fetch('/api/findEtudiant/etatMobilite/val', {method: 'GET'})
+      fetch('/api/findEtudiant/etatMobilite/val', {method: 'GET', headers: {"Authorization": localStorage.getItem('jwt')}})
       .then((result)=>{
         return result.json()
       })
@@ -106,7 +104,7 @@
       })      
     }
     if(etat === "nVal"){
-      fetch('/api/findEtudiant/etatMobilite/nVal', {method: 'GET'})
+      fetch('/api/findEtudiant/etatMobilite/nVal', {method: 'GET', headers: {"Authorization": localStorage.getItem('jwt')}})
       .then((result)=>{
         return result.json()
       })
@@ -122,7 +120,7 @@
 
   function searchByPromo(promo){
     if(promo != 0){
-      fetch(`/api/findEtudiant/promo/${promo}`,{method: 'GET'})
+      fetch(`/api/findEtudiant/promo/${promo}`,{method: 'GET', headers: {"Authorization": localStorage.getItem('jwt')}})
       .then((result)=>{
         return result.json()
       })
@@ -142,7 +140,7 @@
    */
   function searchEtud(inputUser){
     const url = `/api/etudiants/search/findByNomContainingIgnoreCaseOrPrenomContainingIgnoreCase?nom=${inputUser}&prenom=${inputUser}`
-    fetch(url, {method: 'GET'})
+    fetch(url, {method: 'GET', headers: {"Authorization": localStorage.getItem('jwt')}})
     .then((result)=>{
       return result.json()
     })

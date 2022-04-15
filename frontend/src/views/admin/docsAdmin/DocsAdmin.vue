@@ -39,7 +39,7 @@ let idDoc = ref(0)
  * Fonction qui remplit la liste listeDocuments
  */
 function getDoc(){
-  const fetchOptions = {method:"GET"};
+  const fetchOptions = {method:"GET", headers: {"Authorization": localStorage.getItem('jwt')}};
   fetch("/api/documents/",fetchOptions)
   .then((response) => {return response.json()})
   .then((dataJSON) => {
@@ -59,9 +59,7 @@ function getDoc(){
 function deleteDocument(id){
   let url = `http://localhost:8989/api/documents/`
   
-  let myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-  const fetchOptions = {method: "DELETE", headers: myHeaders};
+  const fetchOptions = {method: "DELETE", headers: {"Authorization": localStorage.getItem('jwt')}};
   fetch(url+`${id}`,fetchOptions)
   .then(()=>{getDoc()})
   .catch((error)=>{console.log(error)})

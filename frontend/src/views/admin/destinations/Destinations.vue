@@ -81,7 +81,7 @@
            
         listeDestinationsTab.splice(0,listeDestinationsTab.length) //On vide la liste des destinations avant de la remplir afin d'éviter les doublons
 
-        fetch(url)
+        fetch(url, {method:'GET', headers: {"Authorization": localStorage.getItem('jwt')}})
         .then((res)=>{return res.json()})
         .then((json)=>{
             let isValide;
@@ -111,13 +111,9 @@
     }
 
     function deleteDestination(id){
-        console.log('delete',id)
-        let myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-
-        const fetchOptions = {
+         const fetchOptions = {
                 method: "DELETE",
-                headers: myHeaders
+                headers: {"Authorization": localStorage.getItem('jwt')}
                 };
         let url = `/api/destinations/${id}`
         fetch(url,fetchOptions)
@@ -156,11 +152,8 @@
            let date = document.getElementById("dateFinContrat").value
 
             const url = `/api/destinations/${idDestination.value}` // l’url de l'API
-
-            let myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
             const fetchOptions = {  method:"PUT", 
-                                    headers: myHeaders, 
+                                    headers: {"Authorization": localStorage.getItem('jwt')}, 
                                     body: JSON.stringify({
                                         nomEtablissementAccueil:nomEtablissement,
                                         dateFinDeContratIsis:date,
@@ -209,10 +202,8 @@
     else{
     const url = `/api/destinations` // l’url de l'API
 
-    let myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
     const fetchOptions = {  method:"POST", 
-                            headers: myHeaders, 
+                            headers: {"Authorization": localStorage.getItem('jwt')}, 
                             body: JSON.stringify({
                                 nomEtablissementAccueil:nomEtablissement,
                                 dateFinDeContratIsis:date,
@@ -236,7 +227,7 @@
  */
 function searchByPays(pays){
 
-  const fetchOptions = { method: "GET" }; //on utilise l'opération GET car on veut récupérer les destinations filtrées par pays
+  const fetchOptions = { method: "GET",headers: {"Authorization": localStorage.getItem('jwt')} }; //on utilise l'opération GET car on veut récupérer les destinations filtrées par pays
   const url = '/api/destinations/search/findByPays?pays='+pays //url permettant d'accéder aux destinations filtrées par pays
 
   if(pays != 'tous'){ //si on sélectionne n'importe quel pays de la liste déroulante, on filtre
@@ -257,7 +248,7 @@ function searchByPays(pays){
  */
 function searchByTypeMobilite(type){
 
-  const fetchOptions = { method: "GET" }; //on utilise l'opération GET car on veut récupérer les destinations filtrées par type de mobilité
+  const fetchOptions = { method: "GET", headers: {"Authorization": localStorage.getItem('jwt')} }; //on utilise l'opération GET car on veut récupérer les destinations filtrées par type de mobilité
   const url = '/api/destinations/search/findByTypeMobilite?type='+type //url permettant d'accéder aux destinations filtrées par type de mobilité
 
   if(type != 'tous'){ //si on sélectionne n'importe quel type de mobilité de la liste déroulante, on filtre
@@ -279,7 +270,7 @@ function searchByTypeMobilite(type){
  */
 function searchByStatutContrat(statut){
 
-  const fetchOptions = { method: "GET" }; //on utilise l'opération GET car on veut récupérer les destinations filtrées par statut de contrat
+  const fetchOptions = { method: "GET", headers: {"Authorization": localStorage.getItem('jwt')} }; //on utilise l'opération GET car on veut récupérer les destinations filtrées par statut de contrat
   const url = '/api/destinations/findByStatutContrat?statut='+statut //url permettant d'accéder aux destinations filtrées par statut de contrat
 
   if(statut != 'tous'){ //si on sélectionne n'importe quel statut de la liste déroulante, on filtre
@@ -318,7 +309,7 @@ function searchByStatutContrat(statut){
 
 function searchDestination(inputUser){
   const url = `/api/destinations/search/findAllByNomEtablissementAccueilContainingIgnoreCaseOrVilleContainingIgnoreCase?nom=${inputUser}&ville=${inputUser}`
-  fetch(url, {method: 'GET'})
+  fetch(url, {method: 'GET', headers: {"Authorization": localStorage.getItem('jwt')}})
   .then((result)=>{
     return result.json()
   })
