@@ -1,4 +1,4 @@
-# Un "MonoRepo" avec Spring Boot, vue.js et Bootstrap
+# Projet Tuteuré sur la gestion des mobilités internationales ISIS
 
 ## Project setup
 
