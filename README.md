@@ -1,7 +1,7 @@
 # Projet Tuteuré sur la gestion des mobilités internationales ISIS
 
 ## Résumé et contexte du projet
-```
+
 Ce projet s'inscrit dans le cadre de la première année du cycle ingénieur ISIS (Informatique et Système d’Information pour la Santé). 
 S'adressant à notre client, M. Laurent GREGOIRE, il consiste en la création d’une application web pour la gestion des mobilités internationales à ISIS. 
 
@@ -24,13 +24,13 @@ Sont renseignés :
 
 Ils devront également pouvoir y retrouver l’ensemble des documents administratifs afin de préparer leur départ. 
 
-```
+
 
 ## Documents annexes
 
-```
+
 Le rapport technique, le support de présentation, le manuel d'utilisation ainsi que les documents générés tout au long de ce projet (outils de gestion de projet, otuils techniques et méthodologiques d'ingénierie) sont disponibles dans le dossier doc, à la racine de notre dépôt GIT.
-```
+
 ## Architecture Logicielle
 
 ```
