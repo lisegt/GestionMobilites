@@ -8,7 +8,7 @@ L’application permet aux administrateurs de gérer :
 - une base de données contenant des informations concernant : 
     •	Les mobilités des étudiants
     •	Les organisations étrangères qui les accueillent
--	un tableau de bord permettant de suivre rapidement les obligations de séjours internationaux des étudiants.
+- un tableau de bord permettant de suivre rapidement les obligations de séjours internationaux des étudiants.
 
 Les administrateurs peuvent gérer les destinations proposées c'est-à-dire en ajouter, les modifier, les supprimer.
 
