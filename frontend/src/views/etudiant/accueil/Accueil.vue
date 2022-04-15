@@ -1,10 +1,10 @@
 <template>
-<div id="accueil" class="overflow-auto mb-0 d-flex flex-column justify-content-around ">
-    <div class="col-12 col-md-6 m-auto hauteur">
+<div id="accueil" class="overflow-auto mb-0 d-flex flex-column justify-content-center ">
+    <div class="col-12 col-md-6 m-auto">
         <Carousel/>
     </div>
-    <div class="col-12 col-md-6 m-auto ">
-        <div class="row largeur  pb-5 pt-0 pb-md-5  justify-content-around g-3 gy-xl-0 gx-md-1">    
+    <div class="col-12">
+        <div class="row d-flex justify-content-center pb-5 pt-0 pb-md-5 gy-xl-0 gx-md-1">    
             <Carte v-bind:nom="'DESTINATIONS'" v-bind:lien="'/etudiant/destinations'" v-bind:chemin="destinations"/>
             <Carte v-bind:nom="nomDoc" v-bind:lien="'/etudiant/documents'" v-bind:chemin="doc"/>
         </div>
@@ -27,17 +27,4 @@ if(window.innerWidth < window.innerHeight  ){
 </script>
 
 <style>
-#accueil{
-    height: 85%;
-    overflow: auto;
-}
-.hauteur{
-    height: 50vh;
-}
-
-@media all and (orientation: portrait) {
-    .hauteur{
-        height: 28vh;
-    }  
-}
 </style>
