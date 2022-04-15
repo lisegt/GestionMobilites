@@ -185,7 +185,7 @@
         reader.onloadend = function() {
           
           img.value=reader.result
-          
+          console.log(img.value)
         }
         reader.readAsDataURL(file);
 
