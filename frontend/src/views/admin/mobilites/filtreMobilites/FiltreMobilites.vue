@@ -10,8 +10,8 @@
 
             <div class="col px-0  text-center">
                 <select id="destination" class="formSelect" @change="searchByDestination">
-                    <option value="tous" id="destinationsTous">DESTINATION</option>
-                    <option v-for="destination in listeDestinations" :key="destination" :value="destination">{{destination}}</option>
+                    <option value="0" id="destinationsTous">DESTINATION</option>
+                    <option v-for="destination in listeDestinations" :key="destination" :value="destination.id">{{destination.nomEtablissementAccueil}} ({{destination.pays}})</option>
                 </select>
             </div>
         </div>

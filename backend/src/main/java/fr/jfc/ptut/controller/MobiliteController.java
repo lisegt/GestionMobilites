@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import fr.jfc.ptut.entity.Destination;
 import fr.jfc.ptut.entity.EtatMobilite;
 import fr.jfc.ptut.entity.Etudiant;
 import fr.jfc.ptut.entity.Mobilite;
@@ -26,7 +27,10 @@ public class MobiliteController {
     private MobiliteRepository mobiliteRepository;
 
     @GetMapping(value="/mobilites/promotions")
-    //fonction qui renvoie une liste contenant toutes les promotions des étudiants ayant effectué une mobilité
+    /**
+     * 
+     * @return une liste contenant toutes les promotions des étudiants ayant effectué une mobilité
+     */
     public Set<Integer> findAllPromo(){
 
         //On initialise la liste de promotions qu'on renvoie, c'est une Set car on ne veut pas de doublons
@@ -44,25 +48,31 @@ public class MobiliteController {
     }
 
     @GetMapping(value="/mobilites/destinations")
-    //fonction qui renvoie une liste contenant toutes les destinations des mobilités effectuées
-    public Set<String> findAllDestinations(){
+    /**
+     * 
+     * @return une liste contenant toutes les destinations des mobilités effectuées
+     */
+    public Set<Destination> findAllDestinations(){
 
         //On initialise la liste des destinations qu'on renvoie, c'est une Set car on ne veut pas de doublons
-        Set<String> destinations = new HashSet<>();
+        Set<Destination> destinations = new HashSet<>();
 
         //On récupère toutes les destinations
         List<Mobilite> mobilites = mobiliteRepository.findAll();
 
         //on parcourt chaque mobilité et on récupère la destination (nom de lé'établissement + ville) dans la Set
         for (Mobilite m : mobilites){
-            destinations.add(m.getDestination().getNomEtablissementAccueil() + " (" +m.getDestination().getVille()+ ")");
+            destinations.add(m.getDestination());
         }
         return destinations;
     }
 
     
     @GetMapping(value="/mobilites/etatsMobilite")
-    //fonction qui renvoie une liste contenant tous les états de mobilité des mobilités existantes
+    /**
+     * @return une liste contenant tous les états de mobilité des mobilités existantes
+     */
+    
     public Set<String> findAllEtatsMobilite(){
 
         //On initialise la liste des statuts de contrat qu'on renvoie, c'est une Set car on ne veut pas de doublons
@@ -94,7 +104,11 @@ public class MobiliteController {
     }
 
     @GetMapping(value="/mobilites/findByPromo")
-    //fonction qui renvoie une liste contenant toutes les mobilités associées à une promotion
+    /**
+     * 
+     * @param promo la promotion sélectionnée, servant à filtrer les mobilités
+     * @return une liste de toutes les mobilités associées à une promotion
+     */
     public List<Mobilite> findByPromo(Integer promo){
 
         //On initialise la liste des mobilités qu'on renvoie
@@ -113,37 +127,66 @@ public class MobiliteController {
         return listeMobilitesByPromo;
     }
 
-    /*
-    @GetMapping(value="/destinations/findByStatutContrat")
-    //fonction qui renvoie une liste contenant tous les pays des destinations existantes
-    public List<Destination> findByStatutContrat(String statut){
+    @GetMapping(value="/mobilites/findByIdDestination")
+    /**
+     * 
+     * @param destination la destination sélectionnée, servant à filtrer les mobilités
+     * @return une liste de toutes les mobilités associées à une destination
+     */
+    
+    public List<Mobilite> findByIdDestination(Destination destination){
 
-        String statutContrat;
-        //On initialise la liste des destinations qu'on renvoie
-        List<Destination> listeDestinations = new ArrayList<>();
+        //On initialise la liste des mobilités qu'on renvoie
+        List<Mobilite> listeMobilitesByDestination = new ArrayList<>();
 
-        //On recupère toutes les destinations
-        List<Destination> destinations = destinationRepository.findAll();
+        //On recupère toutes les moblités
+        List<Mobilite> allMobilites = mobiliteRepository.findAll();
 
-        //on parcourt chaque destination et on l'ajoute à listeDestinationByStatutContrat si le statut de la mobilite correpons au statut sélectionné
-        for (Destination destination : destinations){
-            long differenceEntreDates = ChronoUnit.DAYS.between(LocalDate.now(), destination.getDateFinDeContratIsis());
-
-            //on attribue un statut à une destination en fonction du nombre de jours restant
-            if (differenceEntreDates > 365){
-                statutContrat = "Valide";
-            } else if (differenceEntreDates > 0){
-                statutContrat = "Bientôt Expiré";
-            } else {
-                statutContrat = "Expiré";
-            }
-
-            //si le statut de la destination correspond au statut passé en paramètre, on l'ajoute à la liste à afficher
-            if (statutContrat.equals(statut)){
-                listeDestinations.add(destination);
+        //on parcourt chaque mobilité et on l'ajoute à listeMobilitesByDestination 
+        //si la destination associée à la mobilité correspond à la destination sélectionnée
+        for (Mobilite mobilite : allMobilites){
+            if (mobilite.getDestination().getId() == destination.getId()){
+                listeMobilitesByDestination.add(mobilite);
             }
         }
-        return listeDestinations;
+        return listeMobilitesByDestination;
     }
-    */
+    
+    @GetMapping(value="/mobilites/findByEtatMobilite")
+    /**
+     * 
+     * @param statut le statut sélectionné, servant à filtrer les mobilités
+     * @return une liste de toutes les mobilités associées à un état de mobilité
+     */
+    public List<Mobilite> findByEtatMobilite(String etat){
+
+        //On crée une String qui va stocker l'état de chaque mobilité et que l'on va comparer à la String passée en paramètre
+        String etatMobilite;
+
+        //On initialise la liste des mobilités qu'on renvoie
+        List<Mobilite> listeMobilitesByEtat = new ArrayList<>();
+
+        //On recupère toutes les mobilités
+        List<Mobilite> mobilites = mobiliteRepository.findAll();
+
+        //on parcourt chaque mobilité et on l'ajoute à listeMobilitesByEtat 
+        //si l'état de la mobilité correpond à l'état sélectionné
+        for (Mobilite mobilite : mobilites){
+            if (mobilite.etatMobilite() == EtatMobilite.NON_VALIDEE){
+                etatMobilite = "Non Validée"; //on attribue la valeur "Non Validée" à etatMobilite pour la comparer à l'état passé en paramètre (de type String)
+            } else if (mobilite.etatMobilite() == EtatMobilite.EN_COURS){
+                etatMobilite = "En Cours";
+            } else {
+                etatMobilite = "Validée";
+            }
+
+            //on compare l'état de chaque mobilité à l'état passé en paramètre
+            if (etatMobilite.equals(etat)){
+                listeMobilitesByEtat.add(mobilite);
+            }
+        }
+
+        return listeMobilitesByEtat;
+    }
+    
 }
