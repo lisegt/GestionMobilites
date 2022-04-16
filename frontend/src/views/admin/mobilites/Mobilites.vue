@@ -72,7 +72,8 @@
                 return diff.day;
     }
   const urlAllMobilites = `http://localhost:8989/api/mobilites`
-    function getMobilites(url){
+
+  function getMobilites(url){
         
         listeMobilites.splice(0,listeMobilites.length)         //On vide la liste des destinations avant de la remplir afin d'éviter les doublons
         listeMobilitesTab.splice(0,listeMobilitesTab.length) 
@@ -105,14 +106,14 @@
                     
                     if(dateActuel.getTime()<new Date(d.dateDepart).getTime()){
                       
-                      listeMobilites.push([d,etudiant,destination,"Pas commencée"])
-                      listeMobilitesTab.push([d,etudiant,destination,"Pas commencée"])
+                      listeMobilites.push([d,etudiant,destination,"Non Validée"])
+                      listeMobilitesTab.push([d,etudiant,destination,"Non Validée"])
                     }
                     else{
                       if(dateDiff(d.dateDepart,d.dureeEnMois)<0){
                           
-                          listeMobilites.push([d,etudiant,destination,"Terminée"])
-                          listeMobilitesTab.push([d,etudiant,destination,"Terminée"])
+                          listeMobilites.push([d,etudiant,destination,"Validée"])
+                          listeMobilitesTab.push([d,etudiant,destination,"Validée"])
                       }
                       else{
                         
@@ -123,7 +124,7 @@
                   })  
             }
         })
-    }
+  }
 
     function deleteMobilite(id){
         console.log('delete',id)
@@ -219,50 +220,64 @@
     .catch((error) =>{ 
       console.log(error)
       window.alert(date)});
+  }
+
+function getMobilitesFiltrees(url){      
+        listeMobilitesTab.splice(0,listeMobilitesTab.length) //On vide la liste des mobilités avant de la remplir afin d'éviter les doublons
+
+        fetch(url)
+        .then((response)=>{return response.json()})
+        .then((dataJSON)=>{
+           
+            let dateActuel = new Date()
+
+            dataJSON.forEach((mobilite)=>{ // on parcourt toutes les mobilités de la base de données
+              
+              let etud = mobilite.etudiant //on récupère l'étudiant associé à chaque mobilité
+              let dest = mobilite.destination //on récupère la destination associé à chaque mobilité
+
+              if(dateActuel.getTime()<new Date(mobilite.dateDepart).getTime()){ 
+                //si la date actuelle se situe avant la date de départ, l'état de la mobilité est "Non Validée"
+                listeMobilitesTab.push([mobilite,etud,dest,"Non Validée"])
+              } else if (dateDiff(mobilite.dateDepart,mobilite.dureeEnMois)<0) { //si la mobilité est terminée
+                listeMobilitesTab.push([mobilite,etud,dest,"Validée"])
+              } else { //si la mobilité est en cours
+                listeMobilitesTab.push([mobilite,etud,dest,"En Cours"])
+              }
+            })
+        })
+  }
 
 /**
  * @param promo sélectionné dans la liste déroulante
  * fonction qui permet de récupérer toutes les mobilités concernant les étudiants de la promotion sélectionnée
  */
 function searchByPromo(promo){
-
-  /* A COMPLETER
-  const fetchOptions = { method: "GET" }; //on utilise l'opération GET car on veut récupérer les mobilités filtrées par promotion
-  const url = '' //url permettant d'accéder aux mobilités filtrées par promo
+  const url = `/api/mobilites/findByPromo?promo=${promo}` //url permettant d'accéder aux mobilités filtrées par promo
 
   if(promo != 'tous'){ //si on sélectionne n'importe quelle promo de la liste déroulante, on filtre
-    fetch(url, fetchOptions)
-      .then((response) => { return response.json();})
-      .then((dataJSON) => {
-          getMobilites(url)
-      })
-      .catch((error) => console.log(error));
+
+    getMobilitesFiltrees(url) //on récupère les mobilités filtrées
+
   } else { // on sélectionne l'option permettant d'afficher toutes les mobilités
+
     getMobilites(urlAllMobilites)
   }
-  */
 }
 
 /**
  * @param destination sélectionné dans la liste déroulante
  * fonction qui permet de récupérer toutes les mobilités associées à la destination sélectionnée
  */
-function searchByDestination(destination){
-  /* COMPLETER URL
-  const fetchOptions = { method: "GET" }; //on utilise l'opération GET car on veut récupérer les mobilités filtrées par destination
-  const url = '' //url permettant d'accéder aux mobilités filtrées par destination
+function searchByDestination(idDestination){
 
-  if(destination != 'tous'){ //si on sélectionne n'importe quelle destination de la liste déroulante, on filtre
-    fetch(url, fetchOptions)
-      .then((response) => { return response.json();})
-      .then((dataJSON) => {
-          getMobilites(url)
-      })
-      .catch((error) => console.log(error));
+  const url = `/api/mobilites/findByIdDestination?id=${idDestination}` //url permettant d'accéder aux mobilités filtrées par destination
+  
+  if(idDestination != '0'){ //si on sélectionne n'importe quelle destination de la liste déroulante, on filtre
+    getMobilitesFiltrees(url) //on récupère les mobilités filtrées
   } else { // on sélectionne l'option permettant d'afficher toutes les mobilités
     getMobilites(urlAllMobilites)
   }
-  */
 }
 
 /**
@@ -270,45 +285,20 @@ function searchByDestination(destination){
  * fonction qui permet de récupérer toutes les mobilités associées à un état de mobilité
  */
 function searchByEtatMobilite(etat){
-  /*
-  const fetchOptions = { method: "GET" }; //on utilise l'opération GET car on veut récupérer les mobilités filtrées par état de mobilité
-  const url = '' //url permettant d'accéder aux mobilitées filtrées par leur état
+  
+  const url = `/api/mobilites/findByEtatMobilite?etat=${etat}` //url permettant d'accéder aux mobilitées filtrées par leur état
 
-  if(etat != 'tous'){ //si on sélectionne n'importe quel état de la liste déroulante, on filtre
-    fetch(url, fetchOptions)
-      .then((response) => { return response.json();})
-      .then((dataJSON) => {
-          getMobilites(url)
-      })
-      .catch((error) => console.log(error));
+  if (etat != 'tous'){ //si on sélectionne n'importe quel état de la liste déroulante, on filtre
+    getMobilitesFiltrees(url)
   } else { // on sélectionne l'option permettant d'afficher toutes les mobilités
     getMobilites(urlAllMobilites)
-  */
+  }
 }
 
-/** A COMPLETER
- * Fonction qui filtre les mobilités en fonction d'une chaîne de caractères saisie par l'utilisateur
- */
-
-function searchDestination(inputUser){
-  /*
-  const url = `${inputUser}`
-  fetch(url, {method: 'GET'})
-  .then((result)=>{
-    return result.json()
-  })
-  .then((dataJson)=>{
-    getMobilites(url) //on récupère les destinations filtrées
-  })
-  */
-}
+onMounted(()=>{
+    getMobilites(urlAllMobilites)
     
-}
-
-    onMounted(()=>{
-        getMobilites(urlAllMobilites)
-        
-    })
+})
 </script>
 
 <style>

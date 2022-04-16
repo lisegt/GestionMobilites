@@ -18,18 +18,13 @@
         </button>
     </div>
 
-  
-  
-  
-  
- 
-
   <TableDestinations 
               @set="setDestination" 
               @delete="deleteDestination" 
               v-bind:destinations="listeDestinationsTab" 
               @updateImage="encodeImageFileAsURL"
-              @updateDestination="updateDestination"/>
+              @updateDestination="updateDestination"
+              class="mt-4"/>
   </div>
   <FormAddDestination @ajouter="postDestination" @changePicture="encodeImageFileAsURL" />
   </div>

@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.Query;
 import fr.jfc.ptut.entity.Mobilite;
 
 public interface MobiliteRepository extends JpaRepository<Mobilite, Integer> {
-   
+    
 }

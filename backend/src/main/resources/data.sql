@@ -13,7 +13,9 @@ INSERT INTO DESTINATION (date_fin_de_contrat_isis,image,nb_place_annee,nb_place_
     ('2022-09-02', '', 4, 2, 'European University Of Cyprus', 1,'Nicosia','Chypre');
 
 INSERT INTO MOBILITE (date_depart, duree_en_mois, periode, destination_id, etudiant_id) VALUES
-    ('2023-04-10', 5, 1, SELECT ID FROM DESTINATION WHERE nom_etablissement_accueil = 'European University Of Cyprus', SELECT ID FROM ETUDIANT WHERE nom = 'BEN' );
+    ('2023-04-10', 5, 1, SELECT ID FROM DESTINATION WHERE nom_etablissement_accueil = 'European University Of Cyprus', SELECT ID FROM ETUDIANT WHERE nom = 'BEN' ),
+    ('2022-04-10', 5, 1, SELECT ID FROM DESTINATION WHERE nom_etablissement_accueil = 'European University Of Cyprus', SELECT ID FROM ETUDIANT WHERE nom = 'MATTON' ),
+    ('2019-04-10', 5, 1, SELECT ID FROM DESTINATION WHERE nom_etablissement_accueil = 'Artic University', SELECT ID FROM ETUDIANT WHERE nom = 'VILLEDIEU' );
 
 /*
 INSERT INTO DOCUMENT (description, fichier, intitule) VALUES
