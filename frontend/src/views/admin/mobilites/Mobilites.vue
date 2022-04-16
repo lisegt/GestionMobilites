@@ -72,7 +72,8 @@
                 return diff.day;
     }
   const urlAllMobilites = `http://localhost:8989/api/mobilites`
-    function getMobilites(url){
+
+  function getMobilites(url){
         
         listeMobilites.splice(0,listeMobilites.length)         //On vide la liste des destinations avant de la remplir afin d'éviter les doublons
         listeMobilitesTab.splice(0,listeMobilitesTab.length) 
@@ -123,7 +124,7 @@
                   })  
             }
         })
-    }
+  }
 
     function deleteMobilite(id){
         console.log('delete',id)
@@ -219,28 +220,75 @@
     .catch((error) =>{ 
       console.log(error)
       window.alert(date)});
+  }
+
+function getMobilitesFiltrees(url){      
+        listeMobilitesTab.splice(0,listeMobilitesTab.length) //On vide la liste des mobilités avant de la remplir afin d'éviter les doublons
+
+        fetch(url)
+        .then((response)=>{return response.json()})
+        .then((dataJSON)=>{
+           
+            let dateActuel = new Date()
+
+            dataJSON.forEach((mobilite)=>{ // on parcourt toutes les mobilités de la base de données
+              
+              let etud = mobilite.etudiant //on récupère l'étudiant associé à chaque mobilité
+              let dest = mobilite.destination //on récupère la destination associé à chaque mobilité
+
+              if(dateActuel.getTime()<new Date(mobilite.dateDepart).getTime()){ 
+                //si la date actuelle se situe avant la date de départ, l'état de la mobilité est "Non Validée"
+                listeMobilitesTab.push([mobilite,etud,dest,"Non Validée"])
+              } else if (dateDiff(mobilite.dateDepart,mobilite.dureeEnMois)<0) { //si la mobilité est terminée
+                listeMobilitesTab.push([mobilite,etud,dest,"Validée"])
+              } else { //si la mobilité est en cours
+                listeMobilitesTab.push([mobilite,etud,dest,"En Cours"])
+              }
+            })
+            /*
+                    if(dateActuel.getTime()<new Date(d.dateDepart).getTime()){
+                      
+                      listeMobilites.push([d,etudiant,destination,"Non Validée"])
+                      listeMobilitesTab.push([d,etudiant,destination,"Non Validée"])
+                    }
+                    else{
+                      if(dateDiff(d.dateDepart,d.dureeEnMois)<0){
+                          
+                          listeMobilites.push([d,etudiant,destination,"Validée"])
+                          listeMobilitesTab.push([d,etudiant,destination,"Validée"])
+                      }
+                      else{
+                        
+                        listeMobilites.push([d,etudiant,destination,"En cours"])
+                        listeMobilitesTab.push([d,etudiant,destination,"En cours"])
+                      }}
+                    })
+                  })  
+            }
+            */
+        })
+  }
 
 /**
  * @param promo sélectionné dans la liste déroulante
  * fonction qui permet de récupérer toutes les mobilités concernant les étudiants de la promotion sélectionnée
  */
 function searchByPromo(promo){
-
-  /* A COMPLETER
   const fetchOptions = { method: "GET" }; //on utilise l'opération GET car on veut récupérer les mobilités filtrées par promotion
-  const url = '' //url permettant d'accéder aux mobilités filtrées par promo
+  const url = `/api/mobilites/findByPromo?promo=${promo}` //url permettant d'accéder aux mobilités filtrées par promo
 
   if(promo != 'tous'){ //si on sélectionne n'importe quelle promo de la liste déroulante, on filtre
     fetch(url, fetchOptions)
       .then((response) => { return response.json();})
       .then((dataJSON) => {
-          getMobilites(url)
+          getMobilitesFiltrees(url)
+          console.log(dataJSON);
       })
       .catch((error) => console.log(error));
   } else { // on sélectionne l'option permettant d'afficher toutes les mobilités
     getMobilites(urlAllMobilites)
+    console.log('test')
   }
-  */
 }
 
 /**
@@ -302,8 +350,7 @@ function searchDestination(inputUser){
   })
   */
 }
-    
-}
+  
 
     onMounted(()=>{
         getMobilites(urlAllMobilites)

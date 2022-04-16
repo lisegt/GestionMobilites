@@ -29,9 +29,6 @@ public class MobiliteController {
     //fonction qui renvoie une liste contenant toutes les promotions des étudiants ayant effectué une mobilité
     public Set<Integer> findAllPromo(){
 
-        //On initialise une liste qui va contenir tous les étudiants
-        List<Etudiant> etudiants = new ArrayList<>();
-
         //On initialise la liste de promotions qu'on renvoie, c'est une Set car on ne veut pas de doublons
         Set<Integer> promotions = new HashSet<>();
 
@@ -40,12 +37,7 @@ public class MobiliteController {
 
         //on parcourt chaque mobilité et on récupère les étudiants dans une liste
         for (Mobilite m : mobilites){
-            etudiants.add(m.getEtudiant());
-        }
-
-        //on parcourt chaque étudiants et on récupère les différentes promotions dans une Set
-        for (Etudiant e : etudiants){
-            promotions.add(e.getPromo());
+            promotions.add(m.getEtudiant().getPromo());
         }
 
         return promotions;
@@ -100,6 +92,27 @@ public class MobiliteController {
         
         return etatsMobilite;
     }
+
+    @GetMapping(value="/mobilites/findByPromo")
+    //fonction qui renvoie une liste contenant toutes les mobilités associées à une promotion
+    public List<Mobilite> findByPromo(Integer promo){
+
+        //On initialise la liste des mobilités qu'on renvoie
+        List<Mobilite> listeMobilitesByPromo = new ArrayList<>();
+
+        //On recupère toutes les moblités
+        List<Mobilite> allMobilites = mobiliteRepository.findAll();
+
+        //on parcourt chaque mobilité et on l'ajoute à listeMobilitesByPromo 
+        //si la promotion de l'étudiant associé à la mobilité correspond à la promotion sélectionnée
+        for (Mobilite mobilite : allMobilites){
+            if (mobilite.getEtudiant().getPromo() == promo.intValue()){
+                listeMobilitesByPromo.add(mobilite);
+            }
+        }
+        return listeMobilitesByPromo;
+    }
+
     /*
     @GetMapping(value="/destinations/findByStatutContrat")
     //fonction qui renvoie une liste contenant tous les pays des destinations existantes

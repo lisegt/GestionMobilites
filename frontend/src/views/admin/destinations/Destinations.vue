@@ -18,12 +18,6 @@
         </button>
     </div>
 
-  
-  
-  
-  
- 
-
   <TableDestinations 
               @set="setDestination" 
               @delete="deleteDestination" 
