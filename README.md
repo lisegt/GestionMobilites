@@ -52,6 +52,8 @@ A la racine du projet:
 mvn clean install
 ```
 Va construire le frontend, recopier les fichiers dans le backend.
+Le clean install risque d'échouer. Si c'est le cas, renommez le dossier "Accueil" en "accueil". Ce dossier est situé dans :
+/frontend/src/views/admin/accueil
 
 Exécution de l'application "fullstack":
 
