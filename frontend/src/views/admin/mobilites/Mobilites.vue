@@ -105,14 +105,14 @@
                     
                     if(dateActuel.getTime()<new Date(d.dateDepart).getTime()){
                       
-                      listeMobilites.push([d,etudiant,destination,"Pas commencée"])
-                      listeMobilitesTab.push([d,etudiant,destination,"Pas commencée"])
+                      listeMobilites.push([d,etudiant,destination,"Non Validée"])
+                      listeMobilitesTab.push([d,etudiant,destination,"Non Validée"])
                     }
                     else{
                       if(dateDiff(d.dateDepart,d.dureeEnMois)<0){
                           
-                          listeMobilites.push([d,etudiant,destination,"Terminée"])
-                          listeMobilitesTab.push([d,etudiant,destination,"Terminée"])
+                          listeMobilites.push([d,etudiant,destination,"Validée"])
+                          listeMobilitesTab.push([d,etudiant,destination,"Validée"])
                       }
                       else{
                         

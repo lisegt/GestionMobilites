@@ -69,7 +69,7 @@ public class MobiliteController {
     }
 
     
-    @GetMapping(value="/destinations/etatsMobilite")
+    @GetMapping(value="/mobilites/etatsMobilite")
     //fonction qui renvoie une liste contenant tous les états de mobilité des mobilités existantes
     public Set<String> findAllEtatsMobilite(){
 
@@ -89,10 +89,10 @@ public class MobiliteController {
 
         //on parcourt chaque état de mobilité et en fonction de sa valeur, on remplit la Set de String prédéfinis
         for (EtatMobilite e : etats){
-            if (e.equals("NON_VALIDEE")){
+            if (e == EtatMobilite.NON_VALIDEE){
                 etatsMobilite.add("Non Validée");
-            } else if (e.equals("EN_COURS")){
-                etatsMobilite.add("À Venir");
+            } else if (e == EtatMobilite.EN_COURS){
+                etatsMobilite.add("En Cours");
             } else {
                 etatsMobilite.add("Validée");
             }

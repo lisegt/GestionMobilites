@@ -40,7 +40,7 @@ public class Mobilite {
         LocalDate dateFin = dateDepart.plusMonths(dureeEnMois);
         //Si mobilité en cours
         if(LocalDate.now().isAfter(dateDepart) && LocalDate.now().isBefore(dateFin)){
-            //on renvoie etat en cour
+            //on renvoie etat en cours
             res = EtatMobilite.EN_COURS;
         }
         //Si mobilité fini

@@ -71,7 +71,6 @@ function recupererToutesDestinations(){
             listeDestinations.splice(0, listeDestinations.length) //on vide la liste avant de la reremplir
             dataJSON.forEach((destination) => {
             listeDestinations.push(destination) 
-            console.log(types)
             })
         })
         .catch((error) => console.log(error));
@@ -80,7 +79,7 @@ function recupererToutesDestinations(){
 //fonction qui permet de récupérer les statuts des contrats de toutes les destinations à partir de l'API
 function recupererTousEtatsMobilites(){
     const fetchOptions = { method: "GET" }; //on utilise l'opération GET car on veut récupérer le pays des destinations
-    fetch('/api/destinations/etatsMobilite', fetchOptions)
+    fetch('/api/mobilites/etatsMobilite', fetchOptions)
         .then((response) => { return response.json(); })
         .then((dataJSON) => {
             listeEtats.splice(0, listeEtats.length) //on vide la liste avant de la reremplir
