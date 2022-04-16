@@ -2,7 +2,7 @@
   <div class=" mt-5 container ">
   <div class="row h-25  align-items-center">
 
-    <div class="col-4 h-50  d-flex flex-column justify-content-around align-items-left">
+    <div class="col-4 h-50 d-flex flex-column">
       <SearchDestination v-bind:destinations="listeDestinationsTab" @searchDestination="searchDestination"/>
       
       <FiltreDestinations @searchByPays="searchByPays" @searchByTypeMobilite="searchByTypeMobilite" @searchByStatutContrat="searchByStatutContrat"/>

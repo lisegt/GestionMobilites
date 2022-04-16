@@ -1,19 +1,29 @@
 <template>
-<div class="h-100 container-fluid">
-    <div class="row h-25 align-items-center">
-        <h1 class="text-center">DÉCOUVREZ LES DESTINATIONS</h1>
+<div class="h-100 container">
+    <div class="row h-25  align-items-center">
+        <div class="col-2 d-flex fle-4x-column justify-content-center align-items-center">
+        <FiltreDestinations @searchByPays="searchByPays" @searchByTypeMobilite="searchByTypeMobilite"/>
+        </div>
+
+        <div class="col-8 text-center">
+            <h1 class="text-center">DÉCOUVREZ LES DESTINATIONS</h1>
+        </div>
     </div>
-    <div class="row border g-5 h-50 overflow-auto">
-        <Carte v-for="(destination,index) of listeDestinations" v-bind:index="destination.id"  v-bind:nom="destination.nomEtablissementAccueil" v-bind:ville="destination.ville" v-bind:pays="destination.pays" v-bind:type="destination.typeMobilite" v-bind:img="destination.image"/>
+    <div class="row g-5 h-50 overflow-auto justify-content-center">
+        <Carte @oppen="setDest" v-for="(destination,index) of listeDestinations" v-bind:destination="destination" v-bind:index="destination.id"  v-bind:nom="destination.nomEtablissementAccueil" v-bind:ville="destination.ville" v-bind:pays="destination.pays" v-bind:type="destination.typeMobilite" v-bind:img="destination.image"/>
     </div>
+    <Popup v-bind:destination="desti" v-for="(destination,index) of listeDestinations" v-bind:index="destination.id" v-bind:img="destination.image" v-bind:type="destination.typeMobilite"/>
 </div>
 </template>
 
 <script setup>
-import {reactive, onMounted,ref} from 'vue'
+import {reactive,onMounted,ref} from 'vue'
 import Carte from "../../../components/CarteDestinationsEtud.vue"
+import Popup from "./popupInfo/PopupInfo.vue"
+import FiltreDestinations from "./filtreDestinations/FiltreDestinations.vue"
 
 const listeDestinations = reactive([])
+let desti = ref({})
 
 const urlAllDestinations = '/api/destinations';
 
@@ -41,7 +51,7 @@ function Base64ToImage(base64img, callback) {
         callback(img);
     };
     img.src = base64img;
-    }
+}
 
 function getDestinations(url){
     listeDestinations.splice(0,listeDestinations.length) //On vide la liste des destinations avant de la remplir afin d'éviter les doublons
@@ -63,10 +73,57 @@ function getDestinations(url){
     })
 }
 
+function setDest(dest){
+    desti.value = dest
+}
+
+/**
+ * @param pays sélectionné dans la liste déroulante
+ * fonction qui permet de récupérer toutes les destinations dans le pays sélectionné
+ */
+function searchByPays(pays){
+
+  const fetchOptions = { method: "GET" }; //on utilise l'opération GET car on veut récupérer les destinations filtrées par pays
+  const url = '/api/destinations/search/findByPays?pays='+pays //url permettant d'accéder aux destinations filtrées par pays
+
+  if(pays != 'tous'){ //si on sélectionne n'importe quel pays de la liste déroulante, on filtre
+    fetch(url, fetchOptions)
+      .then((response) => { return response.json();})
+      .then((dataJSON) => {
+          getDestinations(url)
+      })
+      .catch((error) => console.log(error));
+  } else { // on sélectionne l'option permettant d'afficher toutes les destinations
+    getDestinations(urlAllDestinations)
+  }
+}
+
+/**
+ * @param type sélectionné dans la liste déroulante
+ * fonction qui permet de récupérer toutes les destinations associées à un type de mobilité sélectionné
+ */
+function searchByTypeMobilite(type){
+
+  const fetchOptions = { method: "GET" }; //on utilise l'opération GET car on veut récupérer les destinations filtrées par type de mobilité
+  const url = '/api/destinations/search/findByTypeMobilite?type='+type //url permettant d'accéder aux destinations filtrées par type de mobilité
+
+  if(type != 'tous'){ //si on sélectionne n'importe quel type de mobilité de la liste déroulante, on filtre
+    fetch(url, fetchOptions)
+      .then((response) => { return response.json();})
+      .then((dataJSON) => {
+          getDestinations(url)
+
+      })
+      .catch((error) => console.log(error));
+  } else { // on sélectionne l'option permettant d'afficher toutes les destinations
+    getDestinations(urlAllDestinations)
+  }
+}
+
 /**
  * lorsqu'on crée le composant Destinations, on exécute la fonction getDestinations(url) qui charge toutes les destinations de la BDD
  */
-onMounted(()=>{ getDestinations(urlAllDestinations) })
+onMounted(()=>{ getDestinations(urlAllDestinations)})
 </script>
 
 <style>
