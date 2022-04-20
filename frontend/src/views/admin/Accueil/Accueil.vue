@@ -45,12 +45,15 @@ import mobilites from "./img/img_mobilités.png"
 import doc from "./img/img_docsadmin.png"
 import { onMounted } from "@vue/runtime-core";
 
-//navabr active
-    let listeNav = ["accueilNav","etudiantNav","destinationsNav","mobilitesNav","docNav","siteNav"]
-    for(let l of listeNav){
-    document.getElementById(l).classList.remove("active")
-    }
-    document.getElementById("accueilNav").classList.add("active")
+/**
+ * Activer les items de la navbar selon la page consultée
+ * On retire l'attribut de tous les items de la nav et on le rajoute à l'item de la page concernée
+ **/
+let listeNav = ["accueilNav","etudiantNav","destinationsNav","mobilitesNav","docNav","siteNav"]
+for(let l of listeNav){
+document.getElementById(l).classList.remove("active")
+}
+document.getElementById("accueilNav").classList.add("active")
 
 </script>
 

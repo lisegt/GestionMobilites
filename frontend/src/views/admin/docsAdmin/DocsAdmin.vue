@@ -32,12 +32,15 @@ import { reactive,ref } from 'vue';
 
 import ajoutDoc from '../../../img/addDoc.png'
 
-//navabr active
-    let listeNav = ["accueilNav","etudiantNav","destinationsNav","mobilitesNav","docNav","siteNav"]
-    for(let l of listeNav){
-    document.getElementById(l).classList.remove("active")
-    }
-    document.getElementById("docNav").classList.add("active")
+/**
+ * Activer les items de la navbar selon la page consultée
+ * On retire l'attribut de tous les items de la nav et on le rajoute à l'item de la page concernée
+**/
+let listeNav = ["accueilNav","etudiantNav","destinationsNav","mobilitesNav","docNav","siteNav"]
+for(let l of listeNav){
+document.getElementById(l).classList.remove("active")
+}
+document.getElementById("docNav").classList.add("active")
 
 //Liste de documents
 const listeDocuments = reactive([]);
@@ -138,8 +141,8 @@ function setFile(event){
 
 function addDoc(event){
   event.preventDefault()
-  const urlPost = `/api/documents
-`
+  const urlPost = `/api/documents`
+
   let intitule = document.getElementById("addIntitule").value
   let desc = document.getElementById("addDescription").value
   
@@ -147,6 +150,7 @@ function addDoc(event){
   let myHeaders = new Headers();
 
   myHeaders.append("Content-Type", "application/json");
+  myHeaders.append("Authorization",localStorage.getItem('jwt'))
 
   const fetchOptions = {method:"POST", headers: myHeaders, body: JSON.stringify({
     intitule:intitule, 

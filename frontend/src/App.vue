@@ -36,6 +36,10 @@
     headerCache
   })
 
+  /**
+   * retirer l'attribut active de tous les items de la nav
+   */
+
 </script>
 
 
