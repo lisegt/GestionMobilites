@@ -25,8 +25,8 @@
                             <img src="../views/admin/accueil/img/utilisateur.png" alt="utilisateur" />
                         </button>
                         <div class="dropdown-menu dropdown-menu-right text-center" id="menuDeroulant" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="/login">Se connecter</a>
-                            </div>
+                            <a class="dropdown-item" href="/login"> <img src="../img/sign-in.svg" alt="logo connexion" height="20" class="mr-1"/> Se connecter</a>
+                        </div>
                     </div>
                 </li>
             </ul>
