@@ -24,14 +24,19 @@ const listePays = reactive([]); // liste qui contient les différents pays des d
 const types = reactive([]); // liste qui contient les différents types de mobilité des destinations
 
 //on definit les evenements
-    const emit = defineEmits(['searchByPays', 'searchByTypeMobilite'])
+const emit = defineEmits(['searchByPays', 'searchByTypeMobilite'])
 
+/**
+ * Lorsqu'on crée le composant FiltreDestinations, on exécute les fonctions recupererTousLesPays() et recupererTousTypesMobilite()
+ */
 onMounted(()=>{
         recupererTousLesPays()
         recupererTousTypesMobilite()
     })
 
-//fonction qui permet de récupérer les pays de toutes les destinations à partir de l'API
+/**
+ * Fonction qui permet de récupérer les pays de toutes les destinations à partir de l'API
+ */
 function recupererTousLesPays(){
 
     const fetchOptions = { method: "GET" }; //on utilise l'opération GET car on veut récupérer le pays des destinations
@@ -45,7 +50,9 @@ function recupererTousLesPays(){
         .catch((error) => console.log(error));
 }
 
-//fonction qui permet de récupérer les types de mobilité de toutes les destinations à partir de l'API
+/**
+ * Fonction qui permet de récupérer les types de mobilité de toutes les destinations à partir de l'API
+ */
 function recupererTousTypesMobilite(){
 
     const fetchOptions = { method: "GET" }; //on utilise l'opération GET car on veut récupérer le pays des destinations
@@ -61,7 +68,9 @@ function recupererTousTypesMobilite(){
         .catch((error) => console.log(error));
 }
 
-//Pour envoyer un evenement au parent en fonction du pays choisi
+/**
+ * Pour envoyer un evenement au parent en fonction du pays choisi
+ */
 function searchByPays(event){
     emit('searchByPays', event.target.value)
     //on désactive les 2 autres filtres si le filtre pays est activé
@@ -69,14 +78,15 @@ function searchByPays(event){
     document.getElementById('contratsTous').selected = true; 
 }
 
-//Pour envoyer un evenement au parent en fonction du type de mobilité
+/**
+ * Pour envoyer un evenement au parent en fonction du type de mobilité
+ */
 function searchByTypeMobilite(event){
     emit('searchByTypeMobilite', event.target.value)
     //on désactive les 2 autres filtres si le filtre type de mobilité est activé
     document.getElementById('paysTous').selected = true; 
     document.getElementById('contratsTous').selected = true; 
 }
-
 </script>
 
 <style>

@@ -27,6 +27,11 @@ let desti = ref({})
 
 const urlAllDestinations = '/api/destinations';
 
+/**
+ * @param date1
+ * @param date2
+ * Fonction qui permet de vérifier si une mobilité ou un contrat est valide
+ */
 function dateDiff(date1, date2){
     var diff = {}                           // Initialisation du retour
     var tmp = date2 - date1;
@@ -45,6 +50,11 @@ function dateDiff(date1, date2){
     return diff;
 }
 
+/**
+ * @param base64img
+ * @param callback
+ * Fonction qui convertit l'image en base 64 en image
+ */
 function Base64ToImage(base64img, callback) {
     var img = new Image();
     img.onload = function() {
@@ -53,6 +63,10 @@ function Base64ToImage(base64img, callback) {
     img.src = base64img;
 }
 
+/**
+ * @param url
+ * Fonction qui remplit la liste listeDestinations
+ */
 function getDestinations(url){
     listeDestinations.splice(0,listeDestinations.length) //On vide la liste des destinations avant de la remplir afin d'éviter les doublons
 
@@ -73,6 +87,9 @@ function getDestinations(url){
     })
 }
 
+/**
+ * Fonction qui permet de récupérer la destination de la carte sur laquelle on clique
+ */
 function setDest(dest){
     desti.value = dest
 }
@@ -99,7 +116,7 @@ function searchByPays(pays){
 }
 
 /**
- * @param type sélectionné dans la liste déroulante
+ * @param type
  * fonction qui permet de récupérer toutes les destinations associées à un type de mobilité sélectionné
  */
 function searchByTypeMobilite(type){

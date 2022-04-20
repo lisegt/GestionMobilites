@@ -33,8 +33,10 @@ document.getElementById("docNav").classList.add("active")
 const listeDocuments = reactive([]);
 let docu = ref({})
 
-
-
+/**
+ * @param url
+ * Fonction qui remplit la liste listeDocuments
+ */
 function getDoc(){
   const fetchOptions = {method:"GET"};
   fetch("/api/documents/",fetchOptions)
