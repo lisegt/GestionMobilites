@@ -1,6 +1,5 @@
 <template>
 <div class="main">
-    <h1>Gestion des mobilités</h1>
     <form @submit.prevent="signin">
         <div>
             <label>Username</label>
@@ -10,7 +9,7 @@
             <label>Password</label>
             <input type="password" v-model="password"/>
         </div>
-        <input type="submit" value="Login"/>
+        <input class="btn_submit" type="submit" value="Login"/>
     </form>
 </div>
 </template>
@@ -58,13 +57,13 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: 60vh;
+        height: 85vh;
     }
 
     form{
         display: flex;
         flex-direction: column;
-        padding: 50px;
+        padding: 20px 30px;
         border: 1px solid black;
     }
 
@@ -74,4 +73,15 @@
         align-items: flex-start;
         margin-bottom: 10px;
     }
+
+    .btn_submit{
+        background-color: #022e51;
+        color: white;
+        font-weight: bold;
+        border: none;
+        padding: 5px;
+        border-radius : 10px;
+        margin: 0 20px;
+    }
+
 </style>

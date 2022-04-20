@@ -4,6 +4,9 @@
     <div v-if="header">
        <HeaderAdmin />
     </div>
+    <div v-else style="width: 100%; height: 15vh; background-color: #022e51;">
+
+    </div>
     <router-view />
     <Footer class="footer" />
   </div>
