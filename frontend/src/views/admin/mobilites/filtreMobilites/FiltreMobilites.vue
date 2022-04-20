@@ -1,26 +1,28 @@
 <template>
     <div class="filtresEtudiants w-100 row m-auto py-2">
-        <div class="col px-0 text-center">
-            <select id="promoSelector" class="formSelect" @change="searchByPromo">
-                <option value="tous" id="promoTous">PROMOTION</option>
-                <option v-for="promo in listePromo" :key="promo" :value="promo">{{promo}}</option>
-            </select>
-        </div>
+        <div class="row">
+            <div class="col px-0 text-center">
+                <select id="promoSelector" class="formSelect" @change="searchByPromo">
+                    <option value="tous" id="promoTous">PROMOTION</option>
+                    <option v-for="promo in listePromo" :key="promo" :value="promo">{{promo}}</option>
+                </select>
+            </div>
 
-        <div class="col px-0  text-center">
-            <select id="destination" class="formSelect" @change="searchByDestination">
-                <option value="tous" id="destinationsTous">DESTINATION</option>
-                <option v-for="destination in listeDestinations" :key="destination" :value="destination">{{destination}}</option>
-            </select>
+            <div class="col px-0  text-center">
+                <select id="destination" class="formSelect" @change="searchByDestination">
+                    <option value="0" id="destinationsTous">DESTINATION</option>
+                    <option v-for="destination in listeDestinations" :key="destination" :value="destination.id">{{destination.nomEtablissementAccueil}} ({{destination.pays}})</option>
+                </select>
+            </div>
         </div>
-
-        <div class="col px-0 text-center">
-            <select id="etat_mobilite" class="formSelect" @change="searchByEtatMobilite">
-                <option value="tous" id="etatsTous">ETAT MOBILITE</option>
-                <option v-for="etat in listeEtats" :key="etat" :value="etat">{{etat}}</option>
-            </select>
+        <div class="row">
+            <div class="col px-0 ms-2">
+                <select id="etat_mobilite" class="formSelect" @change="searchByEtatMobilite">
+                    <option value="tous" id="etatsTous">ETAT MOBILITE</option>
+                    <option v-for="etat in listeEtats" :key="etat" :value="etat">{{etat}}</option>
+                </select>
+            </div>
         </div>
-
         
     </div>
 </template>
@@ -46,9 +48,8 @@ onMounted(()=>{
  * fonction qui permet de récupérer les promotions de toutes les mobilités à partir de l'API
 */
 function recupererToutesPromo(){
-    /* A COMPLETER
     const fetchOptions = { method: "GET" }; //on utilise l'opération GET car on veut récupérer les promotions des mobilités
-    fetch('', fetchOptions)
+    fetch('/api/mobilites/promotions', fetchOptions)
         .then((response) => { return response.json(); })
         .then((dataJSON) => {
             listePromo.splice(0, listePromo.length) //on vide la liste avant de la reremplir
@@ -56,33 +57,29 @@ function recupererToutesPromo(){
             listePromo.push(promo) })
         })
         .catch((error) => console.log(error));
-    */
+    
 }
 
 /** 
  * fonction qui permet de récupérer les types de mobilité de toutes les destinations à partir de l'API
 */
 function recupererToutesDestinations(){
-    /* A COMPLETER
     const fetchOptions = { method: "GET" }; //on utilise l'opération GET car on veut récupérer le pays des destinations
-    fetch('', fetchOptions)
+    fetch('/api/mobilites/destinations', fetchOptions)
         .then((response) => { return response.json(); })
         .then((dataJSON) => {
             listeDestinations.splice(0, listeDestinations.length) //on vide la liste avant de la reremplir
             dataJSON.forEach((destination) => {
             listeDestinations.push(destination) 
-            console.log(types)
             })
         })
         .catch((error) => console.log(error));
-    */
 }
 
 //fonction qui permet de récupérer les statuts des contrats de toutes les destinations à partir de l'API
 function recupererTousEtatsMobilites(){
-    /* A COMPLETER
     const fetchOptions = { method: "GET" }; //on utilise l'opération GET car on veut récupérer le pays des destinations
-    fetch('', fetchOptions)
+    fetch('/api/mobilites/etatsMobilite', fetchOptions)
         .then((response) => { return response.json(); })
         .then((dataJSON) => {
             listeEtats.splice(0, listeEtats.length) //on vide la liste avant de la reremplir
@@ -90,8 +87,7 @@ function recupererTousEtatsMobilites(){
             listeEtats.push(etat)
             })
         })
-        .catch((error) => console.log(error));
-    */
+        .catch((error) => console.log(error))
 }
 
 //Pour envoyer un evenement au parent en fonction du pays choisi

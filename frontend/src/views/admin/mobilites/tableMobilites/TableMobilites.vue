@@ -21,7 +21,7 @@
     <td class="text-center align-middle">{{mobilite[1].prenom}}</td>
     <td class="text-center align-middle">{{mobilite[1].promo}}</td>
     <td class="text-center align-middle">{{mobilite[2].typeMobilite}}</td>
-    <td class="text-center align-middle">{{mobilite[2].nomEtablissementAccueil}}</td>
+    <td class="text-center align-middle">{{mobilite[2].nomEtablissementAccueil}} ({{mobilite[2].pays}})</td>
     <td class="text-center align-middle">{{mobilite[0].dateDepart}}</td>
     <td class="text-center align-middle">{{mobilite[0].periode}}</td>
     <td class="text-center align-middle">{{mobilite[0].dureeEnMois}}</td>

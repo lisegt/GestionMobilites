@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import fr.jfc.ptut.entity.Etudiant;
+import fr.jfc.ptut.entity.Mobilite;
 
 public interface EtudiantRepository extends JpaRepository<Etudiant, Integer> {
     
@@ -16,4 +17,5 @@ public interface EtudiantRepository extends JpaRepository<Etudiant, Integer> {
      * à la chaine de caractères entrée par l'utilisateur
      */
     List<Etudiant> findByNomContainingIgnoreCaseOrPrenomContainingIgnoreCase(String nom, String prenom);
+
 }

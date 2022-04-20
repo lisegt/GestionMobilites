@@ -81,7 +81,7 @@ public class DestinationController {
     }
     
     @GetMapping(value="/destinations/findByStatutContrat")
-    //fonction qui renvoie une liste contenant tous les pays des destinations existantes
+    //fonction qui renvoie une liste contenant toutes les destinations filtrées selon le statut du contrat
     public List<Destination> findByStatutContrat(String statut){
 
         String statutContrat;

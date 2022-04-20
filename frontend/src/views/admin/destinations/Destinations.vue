@@ -2,7 +2,7 @@
   <div class=" mt-5 container ">
   <div class="row h-25  align-items-center">
 
-    <div class="col-4 h-50  d-flex flex-column justify-content-around align-items-left">
+    <div class="col-4 h-50 d-flex flex-column">
       <SearchDestination v-bind:destinations="listeDestinationsTab" @searchDestination="searchDestination"/>
       
       <FiltreDestinations @searchByPays="searchByPays" @searchByTypeMobilite="searchByTypeMobilite" @searchByStatutContrat="searchByStatutContrat"/>
@@ -18,18 +18,13 @@
         </button>
     </div>
 
-  
-  
-  
-  
- 
-
   <TableDestinations 
               @set="setDestination" 
               @delete="deleteDestination" 
               v-bind:destinations="listeDestinationsTab" 
               @updateImage="encodeImageFileAsURL"
-              @updateDestination="updateDestination"/>
+              @updateDestination="updateDestination"
+              class="mt-4"/>
   </div>
   <FormAddDestination @ajouter="postDestination" @changePicture="encodeImageFileAsURL" />
   </div>
@@ -178,7 +173,7 @@
         reader.onloadend = function() {
           
           img.value=reader.result
-          
+          console.log(img.value)
         }
         reader.readAsDataURL(file);
 

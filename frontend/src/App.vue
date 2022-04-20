@@ -107,7 +107,7 @@ html {
 }
 
 .scrollTableau{
-    height: 40em;
+    height: 32em;
     overflow-y: scroll ;
   }
 
