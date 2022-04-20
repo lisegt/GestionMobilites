@@ -36,7 +36,9 @@
             return response.json()
         })
         .then((dataJson)=>{
+            console.log(dataJson)
             localStorage.setItem('jwt','Bearer '+dataJson.accessToken)
+            localStorage.setItem('userInfos', 'MATTON Hugo')
         })
         .then(()=>{
             headerVisible()
