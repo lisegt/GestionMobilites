@@ -1,13 +1,12 @@
 <template>
 <div class="h-100 container ">
     <div class="row h-25 align-items-center">
-        <h1 class="text-center">DECOUVREZ LES DESTINATIONS</h1>
+        <h1 class="text-center">DOCUMENTS ADMINISTRATIFS</h1>
     </div>
     <div id="docAdmin" class=" row   ">
         <div id="docAdmin" class="col-12 ">
-            <div class="row   overflow-auto mt-0 mb-5 g-3 g-xl-5 text-center ">    
+            <div class="row mt-3 overflow-auto mt-0 mb-5 g-3 g-xl-5 text-center ">    
                 <Carte  @oppen="setDoc" v-for="(document) in listeDocuments" :key=[document.id]  v-bind:document="document" v-bind:chemin="doc"/>
-                
             </div>
         </div>
     </div>
@@ -34,7 +33,6 @@ const listeDocuments = reactive([]);
 let docu = ref({})
 
 /**
- * @param url
  * Fonction qui remplit la liste listeDocuments
  */
 function getDoc(){
@@ -49,13 +47,19 @@ function getDoc(){
   .catch((error) => console.log(error));
 }
 
+/**
+ * @param doc
+ * Fonction qui permet de récupérer le document de la carte sur laquelle on clique
+ */
 function setDoc(doc){
     docu.value = doc
     console.log(document)
 }
 
+/**
+ * Lorsqu'on crée le composant FiltreDestinations, on exécute la fonction getDoc()
+ */
 onMounted(()=>{
-
     getDoc()
     console.log(listeDocuments)
 })

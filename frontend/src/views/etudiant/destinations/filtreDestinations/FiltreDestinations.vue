@@ -69,6 +69,7 @@ function recupererTousTypesMobilite(){
 }
 
 /**
+ * @param event
  * Pour envoyer un evenement au parent en fonction du pays choisi
  */
 function searchByPays(event){
@@ -79,6 +80,7 @@ function searchByPays(event){
 }
 
 /**
+ * @param event
  * Pour envoyer un evenement au parent en fonction du type de mobilité
  */
 function searchByTypeMobilite(event){

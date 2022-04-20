@@ -88,6 +88,7 @@ function getDestinations(url){
 }
 
 /**
+ * @param dest
  * Fonction qui permet de récupérer la destination de la carte sur laquelle on clique
  */
 function setDest(dest){
