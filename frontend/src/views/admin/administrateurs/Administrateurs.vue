@@ -1,11 +1,11 @@
 <template>
    <div class="mt-5 container">
     <div class="row h-25 align-items-center">
+      <div class="col-4"></div>
 
+      <h1 class="col-4 text-center">GESTION DES ADMINISTRATEURS</h1>
 
-    <h1 class="col-9 text-center">GESTION DES ADMINISTRATEURS</h1>
-
-    <div class="col-3 text-right">
+    <div class="col-4 text-right">
         <button type="button" class="btnOrange" data-bs-toggle="modal" data-bs-target="#ajouter">
             <img img v-bind:src="userAdd" alt="admin" class="mr-1">
             Ajouter un admin

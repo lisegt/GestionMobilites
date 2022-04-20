@@ -2,11 +2,11 @@
 <div class="main">
     <form @submit.prevent="signin">
         <div>
-            <label>Username</label>
+            <label>Nom d'utilisateur</label>
             <input type="text" v-model="username"/>
         </div>
         <div>
-            <label>Password</label>
+            <label>Mot de passe</label>
             <input type="password" v-model="password"/>
         </div>
         <input class="btn_submit" type="submit" value="Login"/>
