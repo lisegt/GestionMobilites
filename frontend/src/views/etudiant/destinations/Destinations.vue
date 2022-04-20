@@ -1,15 +1,17 @@
 <template>
-<div class="h-100 container">
+<div class="mt-5 container">
     <div class="row h-25  align-items-center">
-        <div class="col-2 d-flex fle-4x-column justify-content-center align-items-center">
-        <FiltreDestinations @searchByPays="searchByPays" @searchByTypeMobilite="searchByTypeMobilite"/>
+        <div class="col-3 h-50 d-flex flex-column">
+            <FiltreDestinations @searchByPays="searchByPays" @searchByTypeMobilite="searchByTypeMobilite"/>
         </div>
 
-        <div class="col-8 text-center">
+        <div class="col-6 text-center">
             <h1 class="text-center">DÉCOUVREZ LES DESTINATIONS</h1>
         </div>
+
+        <div class="col-3"></div>
     </div>
-    <div class="row g-5 h-50 overflow-auto justify-content-center">
+    <div class="row g-5 h-50 overflow-auto justify-content-center mt-3">
         <Carte @oppen="setDest" v-for="(destination,index) of listeDestinations" v-bind:destination="destination" v-bind:index="destination.id"  v-bind:nom="destination.nomEtablissementAccueil" v-bind:ville="destination.ville" v-bind:pays="destination.pays" v-bind:type="destination.typeMobilite" v-bind:img="destination.image"/>
     </div>
     <Popup v-bind:destination="desti" v-for="(destination,index) of listeDestinations" v-bind:index="destination.id" v-bind:img="destination.image" v-bind:type="destination.typeMobilite"/>
