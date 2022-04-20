@@ -153,7 +153,7 @@
 
             const url = `/api/destinations/${idDestination.value}` // l’url de l'API
             const fetchOptions = {  method:"PUT", 
-                                    headers: {"Authorization": localStorage.getItem('jwt')}, 
+                                    headers: {"Authorization": localStorage.getItem('jwt'), "Content-Type":"application/json"}, 
                                     body: JSON.stringify({
                                         nomEtablissementAccueil:nomEtablissement,
                                         dateFinDeContratIsis:date,
@@ -203,7 +203,7 @@
     const url = `/api/destinations` // l’url de l'API
 
     const fetchOptions = {  method:"POST", 
-                            headers: {"Authorization": localStorage.getItem('jwt')}, 
+                            headers: {"Content-Type":"application/json","Authorization": localStorage.getItem('jwt')}, 
                             body: JSON.stringify({
                                 nomEtablissementAccueil:nomEtablissement,
                                 dateFinDeContratIsis:date,

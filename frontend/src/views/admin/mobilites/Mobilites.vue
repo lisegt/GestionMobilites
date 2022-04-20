@@ -127,12 +127,11 @@
 
     function deleteMobilite(id){
         console.log('delete',id)
-        let myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
+        
 
         const fetchOptions = {
                 method: "DELETE",
-                headers: {"Authorization": localStorage.getItem('jwt')}
+                headers: {"Authorization": localStorage.getItem('jwt'), "Content-Type":"application/json"}
                 };
         let url = `http://localhost:8989/api/mobilites/${id}`
         fetch(url,fetchOptions)
@@ -171,7 +170,7 @@
             const url = `http://localhost:8989/api/destinations/${destination[0].id}` // l’url de l'API
 
             const fetchOptions = {  method:"PUT", 
-                                    headers: {"Authorization": localStorage.getItem('jwt')},
+                                    headers: {"Authorization": localStorage.getItem('jwt'), "Content-Type" : "application/json"},
                                     body: JSON.stringify({
                                         nomEtablissementAccueil:nomEtablissement,
                                         dateFinDeContratIsis:date,
@@ -199,7 +198,7 @@
     
       
     const fetchOptions = {  method:"POST", 
-                            headers: {"Authorization": localStorage.getItem('jwt')},
+                            headers: {"Authorization": localStorage.getItem('jwt'), "Content-Type" : "application/json"},
                             body: JSON.stringify({
                                 dateDepart:date,
                                 dureeEnMois:duree,
@@ -209,7 +208,6 @@
                                 retourExperience:""
 
                                 })};
-    console.log("fetchOptions : ",fetchOptions.body)
     fetch("http://localhost:8989/api/mobilites",fetchOptions)
     .then(()=>{getMobilites()})
     .catch((error) =>{ 

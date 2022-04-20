@@ -13,7 +13,13 @@
     let body = JSON.stringify({username:username._value, email:email._value, password:password._value, role:['user','mod','admin']})
     fetch(url, {method: 'POST', headers: myHeaders, body: body})
     .then((response)=>{
-      console.log(response)
+      return response.json()
+    })
+    .then((dataJson)=>{
+      alert(dataJson.message)
+    })
+    .catch((error)=>{
+      console.log('error')
     })
   }
 </script>

@@ -54,7 +54,7 @@ public class EtudiantController {
     public Set<Etudiant> getEtudiantByEtatMobilite(@PathVariable String etat){
         Set<Etudiant> res = new HashSet<>();
         List<Etudiant> etudiants = etudiantRepository.findAll();
-        //Requete pour étudiantayant validé mobilté
+        //Requete pour étudiants ayant validé mobilté
         if(etat.equals("val")){
             for(Etudiant etud : etudiants){
                 if(!etud.getMobilites().isEmpty()){
@@ -62,7 +62,7 @@ public class EtudiantController {
                 }
             }
         }
-        //Requete pour étudiant n'ayant pas validé mobilité
+        //Requete pour étudiants n'ayant pas validé mobilité
         if(etat.equals("nVal")){
             for(Etudiant etud : etudiants){
                 if(etud.getMobilites().isEmpty()){

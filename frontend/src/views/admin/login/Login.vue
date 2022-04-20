@@ -1,5 +1,6 @@
 <template>
 <div class="main">
+    <h1>Gestion des mobilités</h1>
     <form @submit.prevent="signin">
         <div>
             <label>Username</label>
@@ -17,6 +18,9 @@
 <script setup>
     import {ref} from 'vue'
     import {useRouter} from 'vue-router'
+    import { inject } from 'vue'
+
+    const { header, headerVisible } = inject('header')
 
     const router = useRouter()
 
@@ -36,13 +40,14 @@
             localStorage.setItem('jwt','Bearer '+dataJson.accessToken)
         })
         .then(()=>{
+            headerVisible()
             router.push({name: 'Accueil'})
         })
         .catch((error)=>{
+            alert('mot de passe ou identifiant incorrect')
             console.log(error)
         })
     }
-
     
 
 </script>

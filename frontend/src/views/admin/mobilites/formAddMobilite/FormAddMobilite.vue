@@ -87,7 +87,7 @@
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { onMounted, reactive } from "vue";
 
 const listeEtudiants = reactive([])
 const listeEtudiantsFiltres = reactive([])
@@ -97,7 +97,7 @@ const listeDestinations = reactive([])
 const listeDestinationsFiltres = reactive([])
 
   function getEtud(){
-    const fetchOptions = {method:"GET"};
+    const fetchOptions = {method:"GET", headers:{"Authorization": localStorage.getItem('jwt')}};
     fetch("http://localhost:8989/api/etudiants/",fetchOptions)
     .then((response) => {return response.json()})
     .then((dataJSON) => {
@@ -124,13 +124,17 @@ const listeDestinationsFiltres = reactive([])
   }
 
   function getDestinations(){
+        const fetchOptions = {method:"GET", headers:{"Authorization": localStorage.getItem('jwt')}};
 
-      listeDestinations.splice(0,listeDestinations.length)         //On vide la liste des destinations avant de la remplir afin d'éviter les doublons
+        listeDestinations.splice(0,listeDestinations.length)         //On vide la liste des destinations avant de la remplir afin d'éviter les doublons
         listeDestinationsFiltres.splice(0,listeDestinationsFiltres.length) 
 
-        let url = `http://localhost:8989/api/destinations`
-        fetch(url)
-        .then((res)=>{return res.json()})
+        let url = `/api/destinations`
+
+        fetch(url, fetchOptions)
+        .then((res)=>{
+          return res.json()
+        })
         .then((json)=>{
             json._embedded.destinations.forEach((d)=>{
               listeDestinations.push(d)
@@ -142,8 +146,7 @@ const listeDestinationsFiltres = reactive([])
   }
 
 
-    getEtud()
-    getDestinations()
+   
   function setListeEtudiant(event){
     listeEtudiantsFiltres.splice(0,listeEtudiantsFiltres.length)
     listeEtudiants.forEach((e)=>{
@@ -161,9 +164,12 @@ const listeDestinationsFiltres = reactive([])
         listeDestinationsFiltres.push(d)
       }
     })
-    
-   
   }
+
+  onMounted(()=>{
+      getEtud()
+      getDestinations()
+  })
 </script>
 
 <style scoped>

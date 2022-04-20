@@ -1,5 +1,4 @@
 <template>
-
       <div id="accueil" class="overflow-auto mb-0 d-flex flex-column justify-content-around  ">
             <div class="col-12 col-md-6 m-auto hauteur">
                   <Carousel/>
@@ -14,7 +13,6 @@
                   </div>
             </div>
       </div>
-    
 </template>
 
 <style>
@@ -59,6 +57,7 @@ import { onMounted } from "@vue/runtime-core";
       if(window.innerWidth < window.innerHeight  ){
             nomDoc="DOCUMENTS"
       }
+
 
 </script>
 

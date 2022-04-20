@@ -60,6 +60,7 @@
      
         let myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Authorization", localStorage.getItem('jwt'))
         const fetchOptions = {method:"PUT", headers: myHeaders, body: JSON.stringify({nom:nom, numEtud:ine, prenom:prenom, promo:promotion})};
         fetch(url,fetchOptions)
         .then(()=>{emit('update_ok')})

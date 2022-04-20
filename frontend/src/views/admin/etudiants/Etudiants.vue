@@ -54,8 +54,9 @@
   let listeEtudiants = reactive([]);
 
   function addEtud(nom, prenom, promotion, ine){
+    console.log('ok')
     const url = `/api/etudiants` 
-    const fetchOptions = {method:"POST", headers:{"Authorization": localStorage.getItem('jwt')}, body: JSON.stringify({nom:nom, numEtud:ine, prenom:prenom, promo:promotion})};
+    const fetchOptions = {method:"POST", headers:{"Content-Type" : "application/json", "Authorization": localStorage.getItem('jwt')}, body: JSON.stringify({nom:nom, numEtud:ine, prenom:prenom, promo:promotion})};
     fetch(url,fetchOptions)
     .then((response) => getEtud())
     .catch((error) => console.log(error));

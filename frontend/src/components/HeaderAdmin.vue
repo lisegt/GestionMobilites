@@ -50,9 +50,12 @@
     import {useRouter} from 'vue-router'
     import {inject} from 'vue'
 
+    const {headerCache} = inject('header')
+
     const router = useRouter()
     function logout(){
             localStorage.removeItem('jwt')
+            headerCache()
             router.push({name:'Login'})
     }
 </script>

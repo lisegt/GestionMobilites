@@ -1,7 +1,9 @@
 <template>
   <!-- Authentification Branch -->
   <div class="container-fluid overflow-scroll h-100">
-    <HeaderAdmin/>
+    <div v-if="header">
+       <HeaderAdmin />
+    </div>
     <router-view />
     <Footer class="footer" />
   </div>
@@ -12,9 +14,23 @@
   import Accueil from './views/admin/accueil/Accueil.vue';
   import Footer from './components/Footer.vue';
 
-  import {ref} from 'vue'
-  
-  let jwt = ref(localStorage.getItem('jwt'))
+  import { provide, ref } from 'vue'
+
+  const header = ref(localStorage.getItem('jwt'))
+
+  function headerVisible() {
+    header.value = localStorage.getItem('jwt')
+  }
+
+  function headerCache() {
+    header.value = null
+  }
+
+  provide('header', {
+    header,
+    headerVisible,
+    headerCache
+  })
 
 </script>
 
