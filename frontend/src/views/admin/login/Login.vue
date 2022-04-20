@@ -66,7 +66,8 @@
         display: flex;
         flex-direction: column;
         padding: 20px 30px;
-        border: 1px solid black;
+        border: 2px solid #b74803;
+        border-radius: 10px;
     }
 
     form div{
