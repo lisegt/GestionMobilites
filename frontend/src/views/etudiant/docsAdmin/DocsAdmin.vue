@@ -15,20 +15,16 @@
 </template>
 
 <script setup>
+
 import Carte from "../../../components/CarteDocsAdminEtud.vue"
 import doc from "./img/img_docsadmin.png"
 import PopUp from './popUpDocsAdmin/PopUpDocsAdmin.vue'
 
 import { onMounted, reactive,ref } from "vue";
 
-
-//navabr active
-let listeNav = ["accueilNav","etudiantNav","destinationsNav","mobilitesNav","docNav","siteNav"]
-for(let l of listeNav){
-document.getElementById(l).classList.remove("active")
-}
-document.getElementById("docNav").classList.add("active")
-
+/*
+ * Liste des documents
+ */
 const listeDocuments = reactive([]);
 let docu = ref({})
 
@@ -63,6 +59,7 @@ onMounted(()=>{
     getDoc()
     console.log(listeDocuments)
 })
+
 </script>
 
 <style>
