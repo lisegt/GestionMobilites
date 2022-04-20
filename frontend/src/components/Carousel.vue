@@ -2,7 +2,9 @@
 <div class="col h-100">
  <div id="carouselExampleSlidesOnly" class="carousel slide h-100 " data-bs-ride="carousel">
   <div id="carouselImages" class="carousel-inner h-100 ">
-    
+    <div id="blockImageDefaut" class="carousel-item active d-none">
+      <img v-bind:src="imageDefault" class="d-block w-100" alt="...">
+    </div>
     
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="prev">
@@ -19,6 +21,7 @@
 </template>
 <script setup>
 import {reactive, onMounted} from 'vue'
+import imageDefault from '../img/image-defaut.jpg'
  //image base64 en image 
     const images = reactive([])
     function Base64ToImage(base64img, callback) {
@@ -36,6 +39,11 @@ import {reactive, onMounted} from 'vue'
       })
       .then((json)=>{
         let first=true
+        if(json._embedded.destinations.length==0){
+           let block = document.getElementById("blockImageDefaut")
+           block.classList.remove("d-none")
+        }
+        else{
         for(let d of json._embedded.destinations){
               
               Base64ToImage(d.image, function(img) {
@@ -54,12 +62,11 @@ import {reactive, onMounted} from 'vue'
               document.getElementById(`img${d.id}`).appendChild(img)
               console.log(img)
               images.push(img)
-              /*
-              var log = "w=" + img.width + " h=" + img.height;
-              document.getElementById('log').value = log;*/
+              
 
-    });
+          });
         }
+      }
       })
     })
 </script>

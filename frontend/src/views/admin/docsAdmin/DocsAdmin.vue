@@ -79,7 +79,7 @@ function setDoc(doc){
  
   document.getElementById("updateIntitule").value = doc.intitule
   document.getElementById("updateDescription").value = doc.description
-  
+  file.value=doc.fichier
 }
 
 function updateDoc(event){
