@@ -1,15 +1,25 @@
 <template>
-<div>
-  <h1>Gestion des documents administratifs</h1>
-  
+<div class=" mt-5 container ">
+  <div class="row h-25 align-items-center">
+    <div class="col-4"></div>
 
-  <button type="button" class="btnOrange " data-bs-toggle="modal" data-bs-target="#ajout">
-    Ajouter un document
-  </button>
-  <FormAddDocsAdmin @post="addDoc" @changeFile="setFile"/>
+    <h1 class="col-4 text-center">Gestion des documents administratifs</h1>
+    
+    <div class="col-4 text-right">
+      <button type="button" class="btnOrange " data-bs-toggle="modal" data-bs-target="#ajout">
+        <img img v-bind:src="ajoutDoc" alt="ajouter document" class="mr-1">
+        Ajouter un document
+      </button>
+    </div>
+    <FormAddDocsAdmin @post="addDoc" @changeFile="setFile"/>
 
-  <TableDocsAdmin @update="setDoc" @updateFile="setFile" @updateDoc="updateDoc" @delete="deleteDocument" v-bind:documents="listeDocuments"/>
-
+    <TableDocsAdmin @update="setDoc" 
+    @updateFile="setFile" 
+    @updateDoc="updateDoc" 
+    @delete="deleteDocument" 
+    v-bind:documents="listeDocuments"
+    class="mt-4"/>
+  </div>
 </div>
 </template>
 
@@ -19,6 +29,8 @@ import FormModifDocsAdmin from './formModifDocsAdmin/FormModifDocsAdmin.vue'
 import FormAddDocsAdmin from './formAddDocsAdmin/FormAddDocsAdmin.vue'
 import { onMounted, onUpdated } from "vue";
 import { reactive,ref } from 'vue';
+
+import ajoutDoc from '../../../img/addDoc.png'
 
 //navabr active
     let listeNav = ["accueilNav","etudiantNav","destinationsNav","mobilitesNav","docNav","siteNav"]

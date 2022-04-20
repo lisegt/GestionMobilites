@@ -1,15 +1,17 @@
 <template>
-<div class="h-100 container">
+<div class="mt-5 container">
     <div class="row h-25  align-items-center">
-        <div class="col-2 d-flex fle-4x-column justify-content-center align-items-center">
-        <FiltreDestinations @searchByPays="searchByPays" @searchByTypeMobilite="searchByTypeMobilite"/>
+        <div class="col-3 h-50 d-flex flex-column">
+            <FiltreDestinations @searchByPays="searchByPays" @searchByTypeMobilite="searchByTypeMobilite"/>
         </div>
 
-        <div class="col-8 text-center">
+        <div class="col-6 text-center">
             <h1 class="text-center">DÉCOUVREZ LES DESTINATIONS</h1>
         </div>
+
+        <div class="col-3"></div>
     </div>
-    <div class="row g-5 h-50 overflow-auto justify-content-center">
+    <div class="row g-5 h-50 overflow-auto justify-content-center mt-3">
         <Carte @oppen="setDest" v-for="(destination,index) of listeDestinations" v-bind:destination="destination" v-bind:index="destination.id"  v-bind:nom="destination.nomEtablissementAccueil" v-bind:ville="destination.ville" v-bind:pays="destination.pays" v-bind:type="destination.typeMobilite" v-bind:img="destination.image"/>
     </div>
     <Popup v-bind:destination="desti" v-for="(destination,index) of listeDestinations" v-bind:index="destination.id" v-bind:img="destination.image" v-bind:type="destination.typeMobilite"/>
@@ -27,6 +29,11 @@ let desti = ref({})
 
 const urlAllDestinations = '/api/destinations';
 
+/**
+ * @param date1
+ * @param date2
+ * Fonction qui permet de vérifier si une mobilité ou un contrat est valide
+ */
 function dateDiff(date1, date2){
     var diff = {}                           // Initialisation du retour
     var tmp = date2 - date1;
@@ -45,6 +52,11 @@ function dateDiff(date1, date2){
     return diff;
 }
 
+/**
+ * @param base64img
+ * @param callback
+ * Fonction qui convertit l'image en base 64 en image
+ */
 function Base64ToImage(base64img, callback) {
     var img = new Image();
     img.onload = function() {
@@ -53,6 +65,10 @@ function Base64ToImage(base64img, callback) {
     img.src = base64img;
 }
 
+/**
+ * @param url
+ * Fonction qui remplit la liste listeDestinations
+ */
 function getDestinations(url){
     listeDestinations.splice(0,listeDestinations.length) //On vide la liste des destinations avant de la remplir afin d'éviter les doublons
 
@@ -73,6 +89,10 @@ function getDestinations(url){
     })
 }
 
+/**
+ * @param dest
+ * Fonction qui permet de récupérer la destination de la carte sur laquelle on clique
+ */
 function setDest(dest){
     desti.value = dest
 }
@@ -99,7 +119,7 @@ function searchByPays(pays){
 }
 
 /**
- * @param type sélectionné dans la liste déroulante
+ * @param type
  * fonction qui permet de récupérer toutes les destinations associées à un type de mobilité sélectionné
  */
 function searchByTypeMobilite(type){
