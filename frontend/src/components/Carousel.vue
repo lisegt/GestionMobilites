@@ -2,16 +2,16 @@
 <div class="col h-100">
  <div id="carouselExampleSlidesOnly" class="carousel slide h-100 " data-bs-ride="carousel">
   <div id="carouselImages" class="carousel-inner round h-100 ">
-    <div id="blockImageDefaut" class="carousel-item active round d-none">
-      <img src="../img/image-defaut.jpg" class="d-block round  w-100" alt="...">
+    <div id="blockImageDefaut" class="carousel-item active  d-block">
+      <img id="imageDefaut" src="../img/image-defaut.jpg" class="d-block  h-100 w-100" alt="...">
     </div>
     
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="prev">
+  <button id="btnPrev" class="carousel-control-prev" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
   </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="next">
+  <button id="btnNext" class="carousel-control-next" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
@@ -20,6 +20,7 @@
 </div>
 </template>
 <script setup>
+import { when } from 'q';
 import {reactive, onMounted} from 'vue'
 import imageDefault from '../img/image-defaut.jpg'
  //image base64 en image 
@@ -57,17 +58,24 @@ import imageDefault from '../img/image-defaut.jpg'
               img.classList.add('h-100')
               img.classList.add('round')
               document.getElementById(`img${d.id}`).appendChild(img)
-              console.log(img)
+              console.log(images.length)
               images.push(img)
               
-
+              if(images.length>0 && document.getElementById("blockImageDefaut")){
+        
+                let block = document.getElementById("blockImageDefaut")
+                let image = document.getElementById("imageDefaut")
+                image.remove()
+                block.remove()
+                
+        }
+          
+          
           });
         }
-
-        if(images.length==0){
-           let block = document.getElementById("blockImageDefaut")
-           block.classList.remove("d-none")
-        }
+        
+        
+        
       
       })
     })
