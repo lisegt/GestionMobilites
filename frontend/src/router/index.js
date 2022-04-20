@@ -17,7 +17,7 @@ import DocsAdminEtud from "@/views/etudiant/docsAdmin/DocsAdmin.vue";
 
 const routes = [
   {
-    path: "/",
+    path: "/login",
     name: "Login",
     component: Login,
   },
@@ -51,7 +51,7 @@ const routes = [
     component: DocsAdmin,
   },
 
-  { path: "/etudiant",
+  { path: "/",
     name: "AccueilEtud",
     component: AccueilEtud,
   },

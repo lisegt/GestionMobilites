@@ -4,8 +4,8 @@
     <div v-if="header">
        <HeaderAdmin />
     </div>
-    <div v-else style="width: 100%; height: 15vh; background-color: #022e51;">
-
+    <div v-else >
+      <HeaderEtudiant/>
     </div>
     <router-view />
     <Footer class="footer" />
@@ -14,6 +14,7 @@
 
 <script setup>
   import HeaderAdmin from './components/HeaderAdmin.vue';
+  import HeaderEtudiant from './components/HeaderEtudiant.vue';
   import Accueil from './views/admin/accueil/Accueil.vue';
   import Footer from './components/Footer.vue';
 

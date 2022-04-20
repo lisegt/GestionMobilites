@@ -1,7 +1,7 @@
 <template>
 <div class="row">
     <nav class="navbar navbar-expand-lg col">
-        <a tag="img" class="navbar-brand col ms-4" href="/etudiant">
+        <a tag="img" class="navbar-brand col ms-4" href="/">
             <img src="../views/admin/accueil/img/ISIS-logo.png" alt=" w-50 h-50">
         </a>
         
@@ -16,7 +16,7 @@
             <a class="nav-item" href="#">Documents administratifs</a>
             -->
             <ul class="navbar-nav  align-items-center titres w-100 ">
-                <li class="flex-fill text-center"> <a class="nav-item active" id="accueilNav" href="/etudiant">Accueil</a> </li>
+                <li class="flex-fill text-center"> <a class="nav-item active" id="accueilNav" href="/">Accueil</a> </li>
                 <li class="flex-fill text-center"> <a class="nav-item" id="destinationsNav" href="/etudiant/destinations">Destinations</a> </li>
                 <li class="flex-fill text-center"> <a class="nav-item" id="docNav" href="/etudiant/documents">Documents administratifs</a> </li>
                 <li class=" flex-fill text-center">
@@ -25,12 +25,8 @@
                             <img src="../views/admin/accueil/img/utilisateur.png" alt="utilisateur" />
                         </button>
                         <div class="dropdown-menu dropdown-menu-right text-center" id="menuDeroulant" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Nom Prénom</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-wrap" href="/admin/docsAdmin"><img class="mr-2" src="../views/admin/accueil/img/ajoutAdmin.svg" alt="logo d'ajout d'un admin"/>Ajouter un administrateur</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#"><img class="mr-2" src="../views/admin/accueil/img/deconnexion.svg" alt="logo deconnexion"/>Déconnexion</a>
-                        </div>
+                            <a class="dropdown-item" href="/login">Se connecter</a>
+                            </div>
                     </div>
                 </li>
             </ul>

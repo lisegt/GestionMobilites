@@ -57,7 +57,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: 85vh;
+        height: 70vh;
     }
 
     form{

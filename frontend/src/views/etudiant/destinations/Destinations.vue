@@ -1,6 +1,4 @@
 <template>
-<<<<<<< HEAD
-=======
 <div class="h-100 container">
     <div class="row h-25  align-items-center">
         <div class="col-2 d-flex fle-4x-column justify-content-center align-items-center">
@@ -16,7 +14,6 @@
     </div>
     <Popup v-bind:destination="desti" v-for="(destination,index) of listeDestinations" v-bind:index="destination.id" v-bind:img="destination.image" v-bind:type="destination.typeMobilite"/>
 </div>
->>>>>>> master
 </template>
 
 <script setup>

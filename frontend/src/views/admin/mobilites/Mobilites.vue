@@ -219,7 +219,7 @@
 function getMobilitesFiltrees(url){      
         listeMobilitesTab.splice(0,listeMobilitesTab.length) //On vide la liste des mobilités avant de la remplir afin d'éviter les doublons
 
-        fetch(url)
+        fetch(url, {meyhod: 'GET', headers: {"Authorization": localStorage.getItem('jwt')}})
         .then((response)=>{return response.json()})
         .then((dataJSON)=>{
            

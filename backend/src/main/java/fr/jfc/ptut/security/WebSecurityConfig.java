@@ -73,6 +73,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and() //Configuration en session stateless
             .authorizeRequests().antMatchers("/api/auth/**").permitAll() //On definit les requêtes autorisés (Authentification)
 			.antMatchers("/api/test/**").permitAll()
+            .antMatchers("/api/destinations/**").permitAll()
 			.anyRequest().authenticated(); //Toutes les autres requêtes doivent être authentifiées
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 	}

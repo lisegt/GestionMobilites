@@ -56,7 +56,7 @@
     function logout(){
             localStorage.removeItem('jwt')
             headerCache()
-            router.push({name:'Login'})
+            router.push({name:'AccueilEtud'})
     }
 </script>
 
