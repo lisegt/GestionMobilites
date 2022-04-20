@@ -1,9 +1,9 @@
 <template>
 <div class="col h-100">
  <div id="carouselExampleSlidesOnly" class="carousel slide h-100 " data-bs-ride="carousel">
-  <div id="carouselImages" class="carousel-inner h-100 ">
-    <div id="blockImageDefaut" class="carousel-item active d-none">
-      <img v-bind:src="imageDefault" class="d-block w-100" alt="...">
+  <div id="carouselImages" class="carousel-inner round h-100 ">
+    <div id="blockImageDefaut" class="carousel-item active round d-none">
+      <img src="../img/image-defaut.jpg" class="d-block round  w-100" alt="...">
     </div>
     
   </div>
@@ -39,11 +39,8 @@ import imageDefault from '../img/image-defaut.jpg'
       })
       .then((json)=>{
         let first=true
-        if(json._embedded.destinations.length==0){
-           let block = document.getElementById("blockImageDefaut")
-           block.classList.remove("d-none")
-        }
-        else{
+        
+        
         for(let d of json._embedded.destinations){
               
               Base64ToImage(d.image, function(img) {
@@ -66,7 +63,12 @@ import imageDefault from '../img/image-defaut.jpg'
 
           });
         }
-      }
+
+        if(images.length==0){
+           let block = document.getElementById("blockImageDefaut")
+           block.classList.remove("d-none")
+        }
+      
       })
     })
 </script>
