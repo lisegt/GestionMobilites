@@ -136,7 +136,7 @@
                 };
         let url = `http://localhost:8989/api/mobilites/${id}`
         fetch(url,fetchOptions)
-        .then(()=>{getMobilites()})
+        .then(()=>{getMobilites(urlAllMobilites)})
         .catch((err)=>{
             window.alert("Vous ne pouvez pas supprimer une destination qui est liée à une ou plusieurs mobilités")
             console.log("message d'erreur : ",err)})

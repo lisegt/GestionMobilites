@@ -22,8 +22,6 @@
                 </div>
           </div>
       </div>
-      
-      
     </div>
   </div>
 </div>
@@ -38,28 +36,35 @@ const emits = defineEmits(['updateImage','updateDestination'])
 const props = defineProps(['document'])
 
 console.log(props.document.fichier)
+
+/**
+ * @param event
+ * Fonction qui met à jour l'image
+ */
 function changeImage(event){
   emits('updateImage', event )
 }
 
+/**
+ * @param event
+ * Fonction qui met à jour la destination
+ */
 function updateDestination(event){
-  
-    emits('updateDestination',event)
-
+  emits('updateDestination',event)
 }
 
+/**
+ * Fonction qui télécharge le fichier
+ */
 function download(){
+  const linkSource = `${props.document.fichier}`;
+  let btn = document.getElementById("btnDownLoad")
 
-    const linkSource = `${props.document.fichier}`;
-    let btn = document.getElementById("btnDownLoad")
-
-    const fileName = `${props.document.intitule}.pdf`
-    btn.href = linkSource;
-    btn.download = fileName;
-    btn.click();
-
+  const fileName = `${props.document.intitule}.pdf`
+  btn.href = linkSource;
+  btn.download = fileName;
+  btn.click();
 }
-
 </script>
 
 <style>

@@ -64,7 +64,7 @@
                 <div class="mb-3 row">
                     <div class="col">
                     <label for="image" class="form-label">CHOISIR/MODIFIER L'IMAGE:</label>
-                    <input type="file" @change="changeImage"  class="form-control " name="image" id="image">
+                    <input type="file" @change="changeImage"  class="form-control " name="image" id="imageModifier">
                     </div>
                 </div>
           
@@ -72,7 +72,7 @@
         </div>         
         <div class="modal-footer">
         <button type="button" class="btnOrange" data-bs-dismiss="modal">Close</button>
-        <button type="submit" id="btnSub" @click="updateDestination" data-bs-dismiss="modal" class="btnOrange">Save changes</button>
+        <button type="submit" id="btnSub" @click="updateDestination" data-bs-dismiss="modal" class="btnOrange">Modifier</button>
       </div>
     </form>
       
@@ -91,6 +91,7 @@ const emits = defineEmits(['updateImage','updateDestination'])
 
 function changeImage(event){
   emits('updateImage', event )
+  
 }
 
 function updateDestination(event){

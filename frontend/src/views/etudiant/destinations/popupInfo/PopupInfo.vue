@@ -40,6 +40,12 @@ import stage from '../img/stage.png'
 const props = defineProps(['destination', 'index', 'img', 'type'])
 let type = ref({})
 
+/**
+ * @param base64img
+ * Fonction qui ajoute l'image
+ * Prend en compte le fait si l'image existe ou non
+ * Sinon image par défaut selon le type de mobilité
+ */
 function Base64ToImage(base64img) {
     if(props.img==""){
         if(props.type=="STAGE"){
@@ -57,6 +63,9 @@ function Base64ToImage(base64img) {
     }
 }
 
+/**
+ * Lorsqu'on crée le composant PopupInfo, on exécute la fonction Base64ToImage(props.img)
+ */
 onMounted(()=>{Base64ToImage(props.img)})
 </script>
 

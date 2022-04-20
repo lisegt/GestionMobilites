@@ -1,19 +1,19 @@
 <template>
-<div class="container table-responsive">
-    <table class="table table-striped mh-75  table-bordered overflow-scroll ">
+<div class="container table-responsive scrollTableau">
+    <table class="table table-striped table-bordered">
         <thead>
             <tr>
-                <th class="text-center ">Nom du document</th>
-                <th class="text-center ">Description</th>
-                <th class="text-center ">Actions</th>
+                <th class="text-center align-middle">Nom du document</th>
+                <th class="text-center align-middle">Description</th>
+                <th class="text-center align-middle">Actions</th>
             </tr>
         </thead>
         <tbody>
-            <tr v-for="(document) in documents" :key=[document.id] >
-            <td class="text-center ">{{document.intitule}}</td>
-            <td class="text-center ">{{document.description}}</td>
-            <td class="text-center"> 
-                <div class="text-center d-flex flex-row w-75 justify-content-around ">
+            <tr v-for="(document) in documents" :key=[document.id] class="align-self-center" >
+            <td class="text-center align-middle">{{document.intitule}}</td>
+            <td class="text-center align-middle">{{document.description}}</td>
+            <td class="text-center align-middle"> 
+                <div class="text-center d-flex justify-content-around w-75 m-auto align-middle">
                 <a @click="$emit('update',document)" data-bs-toggle="modal" data-bs-target="#modif" class="btn" type="button" > <img v-bind:src="edit" alt="edit"></a>
                 <a @click="$emit('delete',document.id)" class="btn" type="button"> <img v-bind:src="poubelle" alt="trash"></a>
                 </div> 
