@@ -222,10 +222,22 @@
         else{
             toastDanger("La mobilité n'a pas pu être ajoutée")
         }
+        clear()
       })
       .catch((error) =>{ 
         console.log(error)
         window.alert(date)});
+  }
+
+  /**
+   * Fonction pour netoyer les champs de l'ajout précedent
+   */
+  function clear(){
+      let idDestination = document.getElementById("addDestination").value = ''
+      let idEtudiant = document.getElementById("selectEtud").value = ''
+      let date = document.getElementById("addDepart").value = ''
+      let duree = document.getElementById("addDuree").value = ''
+      let periode = document.getElementById("periode").value  = ''
   }
 
 function getMobilitesFiltrees(url){      

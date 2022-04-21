@@ -177,7 +177,7 @@ function addDoc(event){
   if(intitule && desc){
     fetch(urlPost,fetchOptions)
     .then((response) => {
-      if(response.status === 200){
+      if(response.status === 201){
         toastSuccess('Document ajouté')
         getDoc()
       }
@@ -190,6 +190,8 @@ function addDoc(event){
   else{
     toastDanger("Echec de l'ajout", 'Des champs sont manquants')
   }
+  document.getElementById("addIntitule").value = ''
+  document.getElementById("addDescription").value = ''
 }
 
 onMounted(() => {

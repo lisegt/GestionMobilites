@@ -235,6 +235,7 @@
               else{
                 getDestinations(urlAllDestinations)
                 toastSuccess('Destination ajoutée avec succès')
+                clear()
               }
             })
             .catch((error) => console.log(error));
@@ -245,6 +246,18 @@
         }
             
     }
+  /**
+   * Pour enlever les champs de l'ajout précedent
+   */
+  function clear(){
+    document.getElementById('addNomEtablissement').value=''
+    document.getElementById('addNomVille').value=''
+    document.getElementById('addNomPays').value=''
+    document.getElementById('addSemestres').value=''
+    document.getElementById('addNbPlaceAnnee').value=''
+    document.getElementById('addDateFinContrat').value=''
+    document.getElementById('addImage').value=''
+}
    
 /**
  * @param pays sélectionné dans la liste déroulante

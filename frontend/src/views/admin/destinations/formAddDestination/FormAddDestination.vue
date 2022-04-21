@@ -42,20 +42,20 @@
                             <div class="mb-3 row">
                                 <div class="col">
                                     <label for="semestres" class="form-label">NOMBRE DE PLACES PAR SEMESTRE:</label>
-                                    <input type="number"  min="0" class="form-control" name="addSemestres" id="addSemestres" placeholder="Entrez un chiffre ...">
+                                    <input type="number"  min="0" class="form-control" name="addSemestres" id="addSemestres" placeholder="(Facultatif)">
                                 </div>
                             </div>
                             <div class="mb-3 row">
                                 <div class="col">
                                     <label for="nbPlaceAnnee" class="form-label">NOMBRE DE PLACES PAR ANNEE:</label>
-                                    <input type="number"  min="0" class="form-control " name="addNbPlaceAnnee" id="addNbPlaceAnnee" placeholder="Entrez un chiffre ...">
+                                    <input type="number"  min="0" class="form-control " name="addNbPlaceAnnee" id="addNbPlaceAnnee" placeholder="(Facultatif)">
                                 </div>
                             </div>
 
                             <div class="mb-3 row">
                                 <div class="col">
                                     <label for="dateFinContrat" class="form-label">DATE DE FIN DE CONTRAT:</label>
-                                    <input type="date"   class="form-control " name="addDateFinContrat" id="addDateFinContrat" placeholder="Entrez une date ...">
+                                    <input type="date"   class="form-control " name="addDateFinContrat" id="addDateFinContrat" placeholder="Entrez une date ... (Facultatif)">
                                 </div>
                             </div>
 
@@ -83,11 +83,11 @@ import { defineEmits} from 'vue'
 
 const emit = defineEmits(['changePicture','ajouter'])
 
+
 function sendFile(event){
     emit('changePicture',event)
 }
 function addDestination(event){
- 
     emit('ajouter',event)
 }
 </script>
