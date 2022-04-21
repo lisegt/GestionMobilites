@@ -165,6 +165,7 @@
         document.getElementById("semestres").value= parseInt(destination[0].nbPlaceSemestre)
         document.getElementById("nbPlaceAnnee").value=parseInt(destination[0].nbPlaceAnnee)
         document.getElementById("dateFinContrat").value=destination[0].dateFinDeContratIsis
+        document.getElementById("imageModifier").value=""
         img.value=destination[0].image
       }
 
