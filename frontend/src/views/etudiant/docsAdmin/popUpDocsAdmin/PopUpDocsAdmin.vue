@@ -32,7 +32,7 @@ import {  defineEmits } from 'vue';
 const emits = defineEmits(['updateImage','updateDestination'])
 const props = defineProps(['document'])
 
-console.log(props.document.fichier)
+
 
 /**
  * Fonction qui télécharge le fichier

@@ -29,9 +29,7 @@ function oppenCard(){
 
 function Base64ToImage() {
     if(props.img==""){
-        console.log("on passe")
         if(props.type=="STAGE"){
-            console.log("on passe 2")
             document.getElementById(`${props.index}`).src=stage
             
         }

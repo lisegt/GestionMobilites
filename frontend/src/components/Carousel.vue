@@ -64,7 +64,6 @@ onMounted(()=>{
         img.classList.add('h-100')
         img.classList.add('round')
         document.getElementById(`img${d.id}`).appendChild(img)
-        console.log(images.length)
         images.push(img)
         
         if(images.length>0 && document.getElementById("blockImageDefaut")){

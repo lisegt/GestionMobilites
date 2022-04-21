@@ -109,10 +109,9 @@ function getDestinations(url){
  */
 function setDest(dest){
     desti.value = dest
-    console.log(desti.value)
     loadImage(desti.value.image)
     getMobilites()
-    console.log("mob", listeMobilites)
+    
 }
 
 /**
@@ -143,7 +142,7 @@ function loadImage(img) {
         imageState.value=img
         document.getElementById("popUpImg").style.display="inline"
     }
-   console.log(imageState)
+  
 }
 
 /**

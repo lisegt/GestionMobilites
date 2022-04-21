@@ -80,7 +80,7 @@
                 
                 tmp = Math.floor((tmp-diff.hour)/24);   // Nombre de jours restants
                 diff.day = tmp;
-                console.log(diff)
+               
                 return diff;
     }
 
@@ -216,12 +216,12 @@
     function encodeImageFileAsURL(event) {
         
         let file = event.target.files[0];
-        console.log(file)
+        
         let reader = new FileReader();
         reader.onloadend = function() {
           
           img.value=reader.result
-          console.log(img.value)
+         
         }
         reader.readAsDataURL(file);
 
@@ -243,7 +243,6 @@
         let date = document.getElementById("addDateFinContrat").value
         
         //Si les champs sont ok
-        console.log(nomEtablissement)
         if(nomEtablissement && nomVille && nomPays ){
           const url = `/api/destinations` // l’url de l'API
           const fetchOptions = {  method:"POST", 
