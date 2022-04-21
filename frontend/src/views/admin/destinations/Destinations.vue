@@ -134,7 +134,8 @@
         document.getElementById("semestres").value= parseInt(destination[0].nbPlaceSemestre)
         document.getElementById("nbPlaceAnnee").value=parseInt(destination[0].nbPlaceAnnee)
         document.getElementById("dateFinContrat").value=destination[0].dateFinDeContratIsis
-
+        img.value=destination[0].image
+        
     
       }
 
@@ -197,9 +198,9 @@
         let date = document.getElementById("addDateFinContrat").value
         
 
-            if(nomEtablissement==""|| nomVille==""||nomPays==""){
-            window.alert("Veuillez remplir les 4 premiers champs!")
-            console.log(date)
+            if(nomEtablissement==""|| nomVille==""||nomPays==""||date==""){
+            window.alert("Veuillez remplir les 4 premiers champs et la date!")
+            
     }
     else{
     const url = `/api/destinations` // l’url de l'API

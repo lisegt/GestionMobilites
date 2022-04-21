@@ -64,7 +64,7 @@
                 <div class="mb-3 row">
                     <div class="col">
                     <label for="image" class="form-label">CHOISIR/MODIFIER L'IMAGE:</label>
-                    <input type="file" @change="changeImage"  class="form-control " name="image" id="image">
+                    <input type="file" @change="changeImage"  class="form-control " name="image" id="imageModifier">
                     </div>
                 </div>
           
@@ -91,6 +91,7 @@ const emits = defineEmits(['updateImage','updateDestination'])
 
 function changeImage(event){
   emits('updateImage', event )
+  
 }
 
 function updateDestination(event){
