@@ -45,6 +45,9 @@
     let promotion=ref(null)
     let ine = ref(null)
 
+    /**
+     * Fonction permettant de clear le form après ajout
+     */
     function clear(){
         nom.value = null
         prenom.value = null

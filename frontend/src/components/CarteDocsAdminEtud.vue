@@ -17,7 +17,6 @@ const props = defineProps(["document","chemin"])
 const emits = defineEmits(['oppen'])
 function oppenCard(){
     emits('oppen',props.document)
-    console.log(props.document)
 }
 
 </script>

@@ -37,11 +37,23 @@
 </template>
 
 <script setup>
+
     const emits = defineEmits(['updateFile','updateMobilite'])
+    
+    /**
+     * 
+     * @param event  evenement lors de l'upload d'un fichier
+     * fonction qui renvoie l'evenement au composant parent
+     */
     function majFile(event){
         emits('updateFile',event)
     }
 
+    /**
+     * 
+     * @param event  evenement lors de la validation du formulaire
+     * fonction qui renvoie l'evenement au composant parent
+     */
     function updateMobilite(event){
         emits('updateMobilite',event)
     }

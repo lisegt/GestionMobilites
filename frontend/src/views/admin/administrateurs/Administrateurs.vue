@@ -24,7 +24,7 @@
   import FormAddAdmin from './formAddAdmin/FormAddAdmin.vue'
   import TableAdmin from './tableAdmin/TableAdmin.vue'
   import userAdd from '../../../img/user-add.png'
-
+  import { createToast } from 'mosha-vue-toastify';
 
   /**
    * Liste des administrateurs
@@ -41,11 +41,13 @@
     let body = JSON.stringify({username:username._value, email:email._value, password:password._value, role:['user','mod','admin']})
     fetch(url, {method: 'POST', headers: myHeaders, body: body})
     .then((response)=>{
-      return response.json()
-    })
-    .then((dataJson)=>{
-      getAdmins()
-      alert(dataJson.message)
+      if(response.status === 200){
+          getAdmins()
+          toastSuccess('Administrateur ajouté avec succès')
+      }
+      else{
+        toastDanger("Admin non enregistré", 'Certain champs sont incorrects')
+      }
     })
     .catch((error)=>{
       console.log('error')
@@ -71,8 +73,14 @@
    */
   function deleteAdmin(id){
     fetch(`/api/users/${id}`, {method: 'DELETE', headers: {"Authorization": localStorage.getItem('jwt')}})
-    .then(()=>{
-      getAdmins()
+    .then((response)=>{
+      if(response.status === 204){
+          getAdmins()
+          toastSuccess('Administrateur supprimé avec succès')
+      }
+      else{
+        toastSuccess('La suppression a echoué')
+      }
     })
   }
 
@@ -82,6 +90,18 @@
   onMounted(()=>{
     getAdmins()
   })
+
+  /**
+   * Fonction pour affichage de toast
+   */
+
+  function toastSuccess (message) {
+      createToast(message, {type: 'success'})
+  }
+
+  function toastDanger (title, message) {
+      createToast({ title: title, description: message}, {type: 'danger'})
+  }
 </script>
 
 <style>

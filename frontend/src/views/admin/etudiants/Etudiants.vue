@@ -1,27 +1,19 @@
 <template>
   <div class="mt-5 container">
     <div class="row h-25 align-items-center">
-
       <div class="col-4 h-50  d-flex flex-column justify-content-around align-items-left">
         <SearchEtud v-bind:etudiants="listeEtudiants" @searchEtud="searchEtud"/>
-        
         <FiltreEtud @searchByEtatMobilite="searchByEtatMobilite" @searchByPromo="searchByPromo"/>
-        
       </div>
-    <h1 class="col-4 text-center">GESTION DES ETUDIANTS</h1>
-    <div class="col-4 text-right">
-        <button type="button" class="btnOrange " data-bs-toggle="modal" data-bs-target="#ajout">
-          <img img v-bind:src="userAdd" alt="etudiant" class="mr-1">
-          Ajouter un étudiant
-        </button>
-    </div>
-
+      <h1 class="col-4 text-center">GESTION DES ETUDIANTS</h1>
+      <div class="col-4 text-right">
+          <button type="button" class="btnOrange " data-bs-toggle="modal" data-bs-target="#ajout">
+            <img img v-bind:src="userAdd" alt="etudiant" class="mr-1">
+            Ajouter un étudiant
+          </button>
+      </div>
     <TableEtud :etudiants="listeEtudiants" @delete="deleteEtud" @update="editEtud" class="mt-4"/>
-    
     </div>
-
-    
-      
     <FormAddEtud @post="addEtud"/>
     <FormModifEtud @update_ok="getEtud"/>
   </div>
@@ -43,6 +35,11 @@
   import 'mosha-vue-toastify/dist/style.css'
 
   /**
+   * Liste des étudiants que l'on affiche²
+   */
+  let listeEtudiants = reactive([]);
+
+  /**
    * Activer les items de la navbar selon la page consultée
    * On retire l'attribut de tous les items de la nav et on le rajoute à l'item de la page concernée
   **/
@@ -52,10 +49,9 @@
   }
   document.getElementById("etudiantNav").classList.add("active")
 
-
-  //Liste d'étudiants
-  let listeEtudiants = reactive([]);
-
+  /**
+   * Permet d'ajouter un étudiant dans la base de données
+   */
   function addEtud(nom, prenom, promotion, ine){
     const url = `/api/etudiants` 
     const fetchOptions = {method:"POST", headers:{"Content-Type" : "application/json", "Authorization": localStorage.getItem('jwt')}, body: JSON.stringify({nom:nom, numEtud:ine, prenom:prenom, promo:promotion})};
@@ -72,6 +68,9 @@
     .catch((error) => console.log("erreur"));
   }
 
+  /**
+   * Permet de supprimer un étudiant à partir de son id
+   */
   function deleteEtud(id){
     fetch(`/api/etudiants/${id}`,{method:'DELETE', headers: {"Authorization": localStorage.getItem('jwt')}})
     .then((response)=>{
@@ -88,7 +87,7 @@
   }
 
   /**
-   * Fonction pour récupérer les étudiants
+   * Fonction permettant de charger tout les étudiants de la bdd
    */
   function getEtud(){
     const fetchOptions = {method:"GET", headers: {"Authorization": localStorage.getItem('jwt')}};
@@ -102,6 +101,9 @@
   }
 
 
+  /**
+   * Fonction permettant de remplir le formulaire de modification avec les données de l'étudiant que l'on souhaite modifier
+   */
   function editEtud(etud){
     document.getElementById('nomEtudToEdit').value=etud.nom
     document.getElementById('prenomEtudToEdit').value=etud.prenom
@@ -110,12 +112,16 @@
     document.getElementById('idEtudToEdit').value= etud.id
   }
 
+  /**
+   * Fonction onMounted
+   */
   onMounted(() => {
       getEtud()
   });
 
-  //Fonction pour filtrage
-
+  /**
+   * Charge les étudiants selon l'état de mobilité demandé
+   */
   function searchByEtatMobilite(etat){
     if(etat === "val"){
       fetch('/api/findEtudiant/etatMobilite/val', {method: 'GET', headers: {"Authorization": localStorage.getItem('jwt')}})
@@ -142,6 +148,9 @@
     }
   }
 
+  /**
+   * Charge les étudiants de la promo demandée
+   */
   function searchByPromo(promo){
     if(promo != 0){
       fetch(`/api/findEtudiant/promo/${promo}`,{method: 'GET', headers: {"Authorization": localStorage.getItem('jwt')}})
@@ -185,7 +194,7 @@
   function toastDanger (title, message) {
       createToast({ title: title, description: message}, {type: 'danger'})
   }
-
+ 
 </script>
 
 <style>

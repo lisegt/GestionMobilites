@@ -63,8 +63,7 @@ function recupererTousTypesMobilite(){
         .then((dataJSON) => {
             types.splice(0, types.length) //on vide la liste avant de la reremplir
             dataJSON.forEach((type) => {
-            types.push(type) 
-            console.log(types)
+            types.push(type)
             })
         })
         .catch((error) => console.log(error));
@@ -104,7 +103,6 @@ function searchByTypeMobilite(event){
 //Pour envoyer un evenement au parent en fonction du statut du contrat
 function searchByStatutContrat(event){
     emit('searchByStatutContrat', event.target.value)
-    console.log(event.target.value)
     //on désactive les 2 autres filtres si le filtre statut du contrat est activé
     document.getElementById('paysTous').selected = true; 
     document.getElementById('typesTous').selected = true;

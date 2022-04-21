@@ -15,7 +15,7 @@
       </div>
       <div class="form-group">
         <label class="font-weight-bold">Email</label>
-        <input class="form-control" type="email" v-model="email"/>
+        <input class="form-control" type="text" v-model="email"/>
       </div>
       <div class="form-group">
         <label class="font-weight-bold">Password</label>
@@ -34,18 +34,22 @@
 </template>
 
 <script setup>
-    import { ref } from "vue";
-  
+import { ref } from "vue";
+const emit = defineEmits(['addAdmin'])
 
-    const emit = defineEmits(['addAdmin'])
+let username = ref('')
+let email = ref('')
+let password = ref('')
 
-    let username = ref('')
-    let email = ref('')
-    let password = ref('')
-
-    function addAdmin(){
-        emit('addAdmin',username,email,password)
-    }
+/**
+* Fonction qui permet d'ajouter un administrateur
+*/
+function addAdmin(){
+  emit('addAdmin',username,email,password)
+  username.value = ''
+  email.value = ''
+  password.value = ''
+}
 </script>
 
 <style scoped>

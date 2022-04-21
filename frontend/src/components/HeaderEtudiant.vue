@@ -1,6 +1,6 @@
 <template>
 <div class="row">
-    <nav class="navbar navbar-expand-lg col">
+    <nav class="navbar navbar-dark navbar-expand-lg col">
         <a tag="img" class="navbar-brand col ms-4" href="/">
             <img src="../views/admin/accueil/img/ISIS-logo.png" alt=" w-50 h-50">
         </a>
@@ -10,11 +10,7 @@
         </button>
         
         <div id="navbarContent" class="collapse navbar-collapse w-100 titres">
-            <!--
-            <a class="nav-item active" href="#">Accueil</a>
-            <a class="nav-item" href="#">Destinations</a>
-            <a class="nav-item" href="#">Documents administratifs</a>
-            -->
+           
             <ul class="navbar-nav  align-items-center titres w-100 ">
                 <li class="flex-fill text-center"> <a class="nav-item active" id="accueilNav" href="/">Accueil</a> </li>
                 <li class="flex-fill text-center"> <a class="nav-item" id="destinationsNav" href="/etudiant/destinations">Destinations</a> </li>

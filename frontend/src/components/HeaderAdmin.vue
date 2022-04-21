@@ -1,6 +1,6 @@
 <template>
 <div class="row">
-    <nav class="navbar navbar-expand-lg col">
+    <nav class="navbar navbar-dark navbar-expand-lg col">
         <a tag="img"  class="navbar-brand col ms-4" href="/admin">
             <img src="../views/admin/accueil/img/ISIS-logo.png"  alt=" w-50 h-50">
         </a>
@@ -28,10 +28,11 @@
                 <li class=" flex-fill text-center">
                     <div class="col text-center text-center dropdown btn-group">
                         <button class="btn dropdown-toggle text-center" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            
                             <img src="../views/admin/accueil/img/utilisateur.png" alt="utilisateur" />
                         </button>
                         <div class="dropdown-menu dropdown-menu-right text-center" id="menuDeroulant" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Test</a>
+                            <a class="dropdown-item" href="#">{{userInfos}}</a>
                             <div class="dropdown-divider"></div>
                             <a  class="dropdown-item text-wrap" href="/admin/administrateurs"><img class="mr-2" src="../views/admin/accueil/img/ajoutAdmin.svg" alt="logo d'ajout d'un admin"/>Ajouter un administrateur</a>
                             <div class="dropdown-divider"></div>
@@ -52,8 +53,10 @@
 
     const {headerCache} = inject('header')
 
-    const router = useRouter()
+    /*Pour gérer le pseudo de l'utilisateur dans le header*/
+    const {userInfos, setUserInfos} = inject('userInfos')
 
+    const router = useRouter()
     /**
      * Fonction permettant de se deconnecter
      */

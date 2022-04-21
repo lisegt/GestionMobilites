@@ -19,13 +19,23 @@
     import {useRouter} from 'vue-router'
     import { inject } from 'vue'
 
+    import { createToast } from 'mosha-vue-toastify';
+    import 'mosha-vue-toastify/dist/style.css'
+
+    /*Pour gérer l'affichage du header*/
     const { header, headerVisible } = inject('header')
+
+    /*Pour gérer le pseudo de l'utilisateur dans le header*/
+    const {userInfos, setUserInfos} = inject('userInfos')
 
     const router = useRouter()
 
     let username = ref('')
     let password = ref('')
 
+    /**
+     * Fonction permettant de s'authentifier
+     */
     function signin(){
         let url = '/api/auth/signin'
         let myHeaders = new Headers();
@@ -33,23 +43,35 @@
         let body = JSON.stringify({username:username._value, password:password._value})
         fetch(url, {method: 'POST', headers: myHeaders, body: body})
         .then((response)=>{
+            if(response.status != 200){
+                toastDanger("Mot de passe ou nom d'utilisateur incorrect")
+            }
             return response.json()
         })
         .then((dataJson)=>{
-            console.log(dataJson)
             localStorage.setItem('jwt','Bearer '+dataJson.accessToken)
-            localStorage.setItem('userInfos', 'MATTON Hugo')
+            localStorage.setItem('userInfos',dataJson.username)
+            setUserInfos(dataJson.username)
         })
         .then(()=>{
             headerVisible()
             router.push({name: 'Accueil'})
         })
         .catch((error)=>{
-            alert('mot de passe ou identifiant incorrect')
             console.log(error)
         })
     }
-    
+
+  /**
+   * Fonction pour affichage de toast
+   */
+  function toastSuccess (message) {
+      createToast(message, {type: 'success'})
+  }
+
+  function toastDanger (title, message) {
+      createToast({ title: title, description: message}, {type: 'danger'})
+  }
 
 </script>
 
@@ -66,8 +88,7 @@
         display: flex;
         flex-direction: column;
         padding: 20px 30px;
-        border: 2px solid #b74803;
-        border-radius: 10px;
+        border: 2px solid #022e51;
     }
 
     form div{
@@ -78,7 +99,7 @@
     }
 
     .btn_submit{
-        background-color: #022e51;
+        background-color: #b74803;
         color: white;
         font-weight: bold;
         border: none;

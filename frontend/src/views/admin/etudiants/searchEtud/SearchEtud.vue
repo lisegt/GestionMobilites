@@ -5,7 +5,6 @@
             <input id="search" class="form-control w-75" name="nom" type="text" v-model="etud" placeholder="Rechercher un étudiant..."/>
             <input id="boutonRecherche" type="submit" value="Rechercher" />
         </div>
-        
     </form>
 </div>
 </template>
@@ -15,8 +14,14 @@ import { ref, defineEmits } from 'vue';
 
 const emit = defineEmits(['searchEtud'])
 
+/**
+ * Chaine de caractère avec laquelle on effectue la recherche
+ */
 const etud = ref('');
 
+/**
+ * Fonction qui déclenche la fonction searchEtud du composant parent
+ */
 function search(){
     emit('searchEtud',etud._value)
 }

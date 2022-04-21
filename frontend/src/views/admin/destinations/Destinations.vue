@@ -59,6 +59,12 @@
     let img = ref("")
     let idDestination = ref(0)
     const url = 'api/destinations'
+
+    /**
+     * 
+     * @param  date1 date actuelle
+     * @param  date2 date de fin de contrat de la destination itérée
+     */
     function dateDiff(date1, date2){
                 var diff = {}                           // Initialisation du retour
                 var tmp = date2 - date1;
@@ -74,11 +80,17 @@
                 
                 tmp = Math.floor((tmp-diff.hour)/24);   // Nombre de jours restants
                 diff.day = tmp;
-                console.log(diff)
+               
                 return diff;
     }
 
     const urlAllDestinations = '/api/destinations';
+
+  /**
+   * 
+   * @param url vers lequel les requêtes fetch sont envoyées
+   * fonction qui permet de récuperer les destinations stockées en base de données
+   */
     function getDestinations(url){
            
         listeDestinationsTab.splice(0,listeDestinationsTab.length) //On vide la liste des destinations avant de la remplir afin d'éviter les doublons
@@ -112,7 +124,10 @@
     }
 
     /**
-     * Méthode pour supprimer une destination
+     * 
+     * @param id  de la destination à supprimer
+     * fonction qui permet de supprimer une destination 
+     * elle fait appel à la methode @function getDestination() afin de mettre à jour la liste des destinations
      */
     function deleteDestination(id){
          const fetchOptions = {
@@ -133,8 +148,12 @@
         .catch((err)=>{
             console.log("message d'erreur : ",err)})
     }
-    
 
+    /**
+     * 
+     * @param destination à intégrer au formulaire
+     * fonction qui permet d'integrer les valeurs de la destination en paramètre au formulaire de modification
+     */
     function setDestination(destination){
 
         idDestination.value = destination[0].id
@@ -147,10 +166,13 @@
         document.getElementById("nbPlaceAnnee").value=parseInt(destination[0].nbPlaceAnnee)
         document.getElementById("dateFinContrat").value=destination[0].dateFinDeContratIsis
         img.value=destination[0].image
-        
-    
       }
 
+    /**
+     * 
+     * @param event lors du clique sur le bouton de modification
+     * fonction qui met à jour la destination qui est dans le formulaire de modification
+     */
     function updateDestination(event){
           
            event.preventDefault()
@@ -186,20 +208,30 @@
 
     }
 
-    
+    /**
+     * 
+     * @param event lors de l'upload d'une image
+     * fonction qui permet de convertir une image en base64 
+     */
     function encodeImageFileAsURL(event) {
         
         let file = event.target.files[0];
+        
         let reader = new FileReader();
         reader.onloadend = function() {
           
           img.value=reader.result
-          console.log(img.value)
+         
         }
         reader.readAsDataURL(file);
 
       }
     
+    /**
+     * 
+     * @param event lors de la validation du formulaire
+     * fonction qui crée une destination en recuperant les attributs du formulaire d'ajout
+     */
     function postDestination(event){
         event.preventDefault()
         let nomEtablissement = document.getElementById("addNomEtablissement").value
@@ -211,7 +243,6 @@
         let date = document.getElementById("addDateFinContrat").value
         
         //Si les champs sont ok
-        console.log(nomEtablissement)
         if(nomEtablissement && nomVille && nomPays ){
           const url = `/api/destinations` // l’url de l'API
           const fetchOptions = {  method:"POST", 

@@ -83,10 +83,20 @@ import { defineEmits} from 'vue'
 
 const emit = defineEmits(['changePicture','ajouter'])
 
-
+/**
+ * 
+ * @param event  evenement lors de l'upload d'une image
+ * fonction qui renvoie l'evenement au composant parent
+ */
 function sendFile(event){
     emit('changePicture',event)
 }
+
+/**
+ * 
+ * @param event  evenement lors de la validation du formulaire
+ * fonction qui renvoie l'evenement au composant parent
+ */
 function addDestination(event){
     emit('ajouter',event)
 }
