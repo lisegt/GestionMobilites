@@ -1,7 +1,7 @@
 <template>
 <div class="container table-responsive scrollTableau">
     <table class="table table-striped table-bordered">
-        <thead>
+        <thead> 
             <tr>
                 <th class="text-center align-middle">Nom du document</th>
                 <th class="text-center align-middle">Description</th>

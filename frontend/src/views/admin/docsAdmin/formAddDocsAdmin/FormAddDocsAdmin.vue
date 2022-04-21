@@ -15,7 +15,7 @@
                 </div>
                 <div class="form-group">
                     <label for="addDescription" class="font-weight-bold">Description :</label>
-                    <input id="addDescription" class="form-control" name="addDescription" type="text" placeholder="Entrez une description du document ..." required/>
+                    <textarea id="addDescription" class="form-control" name="addDescription" rows="3" placeholder="Entrez une description du document ..." required></textarea>
                 </div>
                 <!--Upload de fichier :-->
                 <div>

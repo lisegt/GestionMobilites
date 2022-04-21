@@ -1,11 +1,11 @@
 <template>
-<div class="h-100 container ">
+<div class="mt-5 container ">
     <div class="row h-25 align-items-center">
         <h1 class="text-center">DOCUMENTS ADMINISTRATIFS</h1>
     </div>
-    <div id="docAdmin" class=" row   ">
-        <div id="docAdmin" class="col-12 ">
-            <div class="row mt-3 overflow-auto mt-0 mb-5 g-3 g-xl-5 text-center ">    
+    <div id="docAdmin" class=" row overflow-auto ">
+        <div class="col-12 ">
+            <div class="row mt-1 mt-0 mb-5 g-3 g-xl-5 text-center container scrollTableau">    
                 <Carte  @oppen="setDoc" v-for="(document) in listeDocuments" :key=[document.id]  v-bind:document="document" v-bind:chemin="doc"/>
             </div>
         </div>
@@ -21,6 +21,16 @@ import doc from "./img/img_docsadmin.png"
 import PopUp from './popUpDocsAdmin/PopUpDocsAdmin.vue'
 
 import { onMounted, reactive,ref } from "vue";
+
+/**
+ * Activer les items de la navbar selon la page consultée
+ * On retire l'attribut de tous les items de la nav et on le rajoute à l'item de la page concernée
+**/
+let listeNav = ["accueilNav","destinationsNav","docNav"]
+for(let l of listeNav){
+document.getElementById(l).classList.remove("active")
+}
+document.getElementById("docNav").classList.add("active")
 
 /*
  * Liste des documents

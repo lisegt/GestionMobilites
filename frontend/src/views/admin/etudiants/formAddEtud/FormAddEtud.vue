@@ -8,7 +8,7 @@
       </div>
       <div class="modal-body">
         <div id="form">
-            <form>
+            <form @submit.prevent="">
                 <div class="form-group">
                     <label for="nom" class="font-weight-bold">Nom :</label>
                     <input v-model="nom" id="nom" class="form-control" name="nom" type="text" placeholder="Entrez le nom de l'étudiant ..." required/>

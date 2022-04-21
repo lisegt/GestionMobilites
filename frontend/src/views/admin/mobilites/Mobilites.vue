@@ -34,7 +34,10 @@
     import FiltreMobilites from './filtreMobilites/FiltreMobilites.vue'
     import globe from '../../../img/globe.png'
 
-    //navabr active
+    /**
+     * Activer les items de la navbar selon la page consultée
+     * On retire l'attribut de tous les items de la nav et on le rajoute à l'item de la page concernée
+    **/
     let listeNav = ["accueilNav","etudiantNav","destinationsNav","mobilitesNav","docNav","siteNav"]
     for(let l of listeNav){
     document.getElementById(l).classList.remove("active")

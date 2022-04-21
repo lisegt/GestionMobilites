@@ -30,6 +30,16 @@ let desti = ref({})
 const urlAllDestinations = '/api/destinations';
 
 /**
+ * Activer les items de la navbar selon la page consultée
+ * On retire l'attribut de tous les items de la nav et on le rajoute à l'item de la page concernée
+**/
+let listeNav = ["accueilNav","destinationsNav","docNav"]
+for(let l of listeNav){
+document.getElementById(l).classList.remove("active")
+}
+document.getElementById("destinationsNav").classList.add("active")
+
+/**
  * @param date1
  * @param date2
  * Fonction qui permet de vérifier si une mobilité ou un contrat est valide
