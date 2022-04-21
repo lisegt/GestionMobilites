@@ -29,7 +29,7 @@
     <td class="text-center align-middle"> 
         <div class="text-center d-flex flex-row w-75 justify-content-around m-auto align-middle">
            
-        <a @click="$emit('set',mobilite)" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn" type="button" > <img v-bind:src="addDocument" alt="edit"></a>
+        <a @click="$emit('addDoc',mobilite)" data-bs-toggle="modal" data-bs-target="#exempleModalAddDoc" class="btn" type="button" > <img v-bind:src="addDocument" alt="edit"></a>
         
         <a @click="$emit('delete',mobilite[0].id)" class="btn" type="button"> <img v-bind:src="poubelle" alt="trash"></a>
         </div> 
