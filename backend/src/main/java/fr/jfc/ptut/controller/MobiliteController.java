@@ -188,5 +188,33 @@ public class MobiliteController {
 
         return listeMobilitesByEtat;
     }
+
+    @GetMapping(value="/mobilites/findByEtudiant")
+    /**
+     * 
+     * @param etudiant le nom ou prénom d'un étudiant saisi par l'utilisateur, servant à filtrer les mobilités
+     * @return une liste de toutes les mobilités associées à un étudiant
+     */
+    public List<Mobilite> findByEtudiant(String etudiant){
+
+        //On convertit la saisie en minuscule
+        String saisie = etudiant.toLowerCase();
+        //On initialise la liste des mobilités qu'on renvoie
+        List<Mobilite> listeMobilitesByEtudiant = new ArrayList<>();
+
+        //On recupère toutes les mobilités
+        List<Mobilite> mobilites = mobiliteRepository.findAll();
+
+        //on parcourt chaque mobilité et on l'ajoute à listeMobilitesByEtat 
+        //si le prénom ou nom de l'étudiant correpond à la saisie utilisateur
+        
+        for (Mobilite mobilite : mobilites){
+            if (mobilite.getEtudiant().getNom().toLowerCase().contains(saisie) || 
+            mobilite.getEtudiant().getPrenom().toLowerCase().contains(saisie)){
+                listeMobilitesByEtudiant.add(mobilite);
+            }
+        }
+        return listeMobilitesByEtudiant;
+    }
     
 }

@@ -97,6 +97,17 @@ html {
     padding: 10px;
 }
 
+.btnBleu{
+    background-color: #022E51;
+    border-radius: 30px;
+    font-family: 'Bebas Neue';
+    text-transform: uppercase;
+    color: white;
+    font-size: 24px;
+    border: 0px;
+    padding: 10px;
+}
+
 .inputFiltre{
   background-color: #A3B4C859;
   border-radius: 10px;
