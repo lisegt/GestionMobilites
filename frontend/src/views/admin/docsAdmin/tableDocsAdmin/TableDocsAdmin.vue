@@ -21,8 +21,6 @@
             </tr>
         </tbody>
     </table>
-
-    <!-- Modal -->
     <FormModifDocsAdmin @updateFile="updateFile" @updateDoc="updateDoc"/>
 </div>
 </template>
@@ -34,18 +32,24 @@
     import { defineEmits} from 'vue'
 import { emit } from 'process';
 
+defineProps(['documents'])
+const emits = defineEmits(['updateFile','updateDoc'])
 
-    defineProps(['documents'])
-    const emits = defineEmits(['updateFile','updateDoc'])
-    function updateFile(event){
-            emits('updateFile',event)
+/**
+ * @param event
+ * Fonction qui permet de mettre à jour un fichier
+ */
+function updateFile(event){
+    emits('updateFile',event)
+}
 
-    }
-
-    function updateDoc(event){
-        emits('updateDoc',event)
-
-    }
+/**
+ * @param event
+ * Fonction qui permet de mettre à jour un document
+ */
+function updateDoc(event){
+    emits('updateDoc',event)
+}
 </script>
 
 <style>

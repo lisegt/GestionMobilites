@@ -45,22 +45,24 @@
 </template>
 
 <script setup>
-
 import { defineEmits} from 'vue'
-
-
 const emit = defineEmits(['changeFile','post'])
 
+/**
+ * @param event
+ * Fonction qui permet d'ajouter un document
+ */
 function ajouter(event){
   emit('post',event)
 }
 
+/**
+ * @param event
+ * Fonction qui permet d'ajouter un fichier
+ */
 function majFile(event){
-    console.log("event",event)
-    emit('changeFile',event)
+  emit('changeFile',event)
 }
-
-
 </script>
 
 <style scoped>
