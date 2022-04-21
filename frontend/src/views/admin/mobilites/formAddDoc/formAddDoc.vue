@@ -16,7 +16,7 @@
                     </div>
                         <div class="form-group">
                             <label for="file" class="font-weight-bold">Fichier à télécharger :</label>
-                            <input class="form-control" @change="majFile" id="file" type="file" required name="file" />
+                            <input class="form-control" @change="majFile" id="file" type="file" required name="file" accept=".pdf"/>
                         </div>
                     </div>      
         
@@ -24,7 +24,7 @@
                 </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btnOrange" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btnBleu" data-bs-dismiss="modal">Annuler</button>
                     <input id="btnSubDoc" @click="updateMobilite" data-bs-dismiss="modal" type="submit" class="btnOrange" value="Ajouter" />
                  </div>
                  
