@@ -81,7 +81,6 @@
   const urlAllMobilites = `http://localhost:8989/api/mobilites`
 
   function getMobilites(url){
-        console.log('getmob')
         listeMobilites.splice(0,listeMobilites.length)         //On vide la liste des destinations avant de la remplir afin d'éviter les doublons
         listeMobilitesTab.splice(0,listeMobilitesTab.length) 
 
@@ -128,7 +127,6 @@
                         listeMobilitesTab.push([d,etudiant,destination,"En cours"])
                       }}
                     })
-                    console.log(listeMobilitesTab)
                   })  
             }
         })
@@ -170,7 +168,6 @@
 
   function addDoc(mobi){
       mobilite.value=mobi
-      console.log("mobilite select: ",mobilite.value)
   }
 
     function updateMobilite(event){
@@ -320,8 +317,6 @@ function searchByEtatMobilite(etat){
  */
 function searchMobilite(etudiant){
   const url = `/api/mobilites/findByEtudiant?etudiant=${etudiant}` //url permettant d'accéder aux mobilités filtrées par promo
-
-  console.log('test')
   if(etudiant != ''){ //si on sélectionne n'importe quelle promo de la liste déroulante, on filtre
 
     getMobilitesFiltrees(url) //on récupère les mobilités filtrées
