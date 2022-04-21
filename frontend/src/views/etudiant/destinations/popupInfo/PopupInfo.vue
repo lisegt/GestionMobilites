@@ -11,7 +11,7 @@
       </div>
       <div class="modal-body h-25 contenu">
           <div class="col text-center">
-            <img id="popUpImg" v-bind:src="image" class="img" width="170" height="190" alt="image ">
+            <img id="popUpImg" v-bind:src="image" class="img" width="420" height="440" alt="image ">
           </div>
           <div class="col justify-content-center my-4">
             <div class="row ">
@@ -83,6 +83,7 @@ h6{
     font-size: 20px;
 }
 img{
+  width: 80%;
   height: auto;
 }
 @media all and (orientation: portrait) {

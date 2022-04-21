@@ -8,9 +8,7 @@
         <FiltreEtud @searchByEtatMobilite="searchByEtatMobilite" @searchByPromo="searchByPromo"/>
         
       </div>
-
     <h1 class="col-4 text-center">GESTION DES ETUDIANTS</h1>
-
     <div class="col-4 text-right">
         <button type="button" class="btnOrange " data-bs-toggle="modal" data-bs-target="#ajout">
           <img img v-bind:src="userAdd" alt="etudiant" class="mr-1">
@@ -19,7 +17,7 @@
     </div>
 
     <TableEtud :etudiants="listeEtudiants" @delete="deleteEtud" @update="editEtud" class="mt-4"/>
-
+    
     </div>
 
     
@@ -41,6 +39,8 @@
 
   import { onMounted, onUpdated} from "vue";
   import { reactive } from 'vue';
+  import { createToast } from 'mosha-vue-toastify';
+  import 'mosha-vue-toastify/dist/style.css'
 
   /**
    * Activer les items de la navbar selon la page consultée
@@ -57,19 +57,39 @@
   let listeEtudiants = reactive([]);
 
   function addEtud(nom, prenom, promotion, ine){
-    console.log('ok')
     const url = `/api/etudiants` 
     const fetchOptions = {method:"POST", headers:{"Content-Type" : "application/json", "Authorization": localStorage.getItem('jwt')}, body: JSON.stringify({nom:nom, numEtud:ine, prenom:prenom, promo:promotion})};
     fetch(url,fetchOptions)
-    .then((response) => getEtud())
-    .catch((error) => console.log(error));
+    .then((response) => {
+      if(response.status === 400){
+        toastDanger('Champs manquants', "L'étudiant n'a pas pu être enregistré")
+      }
+      else{
+        getEtud()
+        toastSuccess('Etudiant ajouté avec succès')
+      }
+    })
+    .catch((error) => console.log("erreur"));
   }
 
   function deleteEtud(id){
     fetch(`/api/etudiants/${id}`,{method:'DELETE', headers: {"Authorization": localStorage.getItem('jwt')}})
-    .then(getEtud())
+    .then((response)=>{
+      //Quand on essaye de supprimer un étudiant qui a une mobilité
+      if(response.status === 409){
+        toastDanger('Echec de la suppression', 'Cet étudiant participe à une mobilité')
+      }
+      //Quand l'étudiant n'a pas de mobilité
+      else{
+        getEtud()
+        toastSuccess('Etudiant supprimé avec succés')
+      }
+    })
   }
 
+  /**
+   * Fonction pour récupérer les étudiants
+   */
   function getEtud(){
     const fetchOptions = {method:"GET", headers: {"Authorization": localStorage.getItem('jwt')}};
     fetch("/api/etudiants/",fetchOptions)
@@ -154,8 +174,18 @@
     })
   }
 
+  /**
+   * Fonction pour affichage de toast
+   */
 
+  function toastSuccess (message) {
+      createToast(message, {type: 'success'})
+  }
 
+  function toastDanger (title, message) {
+      createToast({ title: title, description: message}, {type: 'danger'})
+  }
+ 
 </script>
 
 <style>

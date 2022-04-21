@@ -8,7 +8,7 @@
       </div>
       
         <div id="form">
-            <form >
+            <form @submit.prevent="$emit('ajouter')">
                 <div class="modal-body">
                 <div class="w-75 row m-auto " >
                 <div class="mb-3 row">
@@ -75,9 +75,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btnBleu" data-bs-dismiss="modal">Annuler</button>
-                    <input id="Bouton" @click="$emit('ajouter')" type="submit" class="btnOrange" value="Ajouter" />
+                    <input id="Bouton" data-bs-dismiss="modal" type="submit" class="btnOrange" value="Ajouter" />
                  </div>
-                 
             </form>
         
       </div>

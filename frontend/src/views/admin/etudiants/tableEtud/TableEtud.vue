@@ -43,4 +43,8 @@
     font-size: 1.3em;
   }
 
+  td{
+    font-weight: bold;
+  }
+
 </style>

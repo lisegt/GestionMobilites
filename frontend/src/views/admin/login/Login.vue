@@ -19,7 +19,11 @@
     import {useRouter} from 'vue-router'
     import { inject } from 'vue'
 
+    /*Pour gérer l'affichage du header*/
     const { header, headerVisible } = inject('header')
+
+    /*Pour gérer le pseudo de l'utilisateur dans le header*/
+    const {userInfos, setUserInfos} = inject('userInfos')
 
     const router = useRouter()
 
@@ -38,7 +42,8 @@
         .then((dataJson)=>{
             console.log(dataJson)
             localStorage.setItem('jwt','Bearer '+dataJson.accessToken)
-            localStorage.setItem('userInfos', 'MATTON Hugo')
+            localStorage.setItem('userInfos',dataJson.username)
+            setUserInfos(dataJson.username)
         })
         .then(()=>{
             headerVisible()
@@ -66,8 +71,7 @@
         display: flex;
         flex-direction: column;
         padding: 20px 30px;
-        border: 2px solid #b74803;
-        border-radius: 10px;
+        border: 2px solid #022e51;
     }
 
     form div{
@@ -78,7 +82,7 @@
     }
 
     .btn_submit{
-        background-color: #022e51;
+        background-color: #b74803;
         color: white;
         font-weight: bold;
         border: none;

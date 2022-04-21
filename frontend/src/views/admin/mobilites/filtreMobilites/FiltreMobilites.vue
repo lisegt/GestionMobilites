@@ -1,14 +1,14 @@
 <template>
-    <div class="filtresEtudiants w-100 row m-auto py-2">
+    <div class="filtresEtudiants w-100 row m-auto p-2">
         <div class="row">
-            <div class="col px-0 text-center">
+            <div class="col-3 text-center ps-1">
                 <select id="promoSelector" class="formSelect" @change="searchByPromo">
                     <option value="tous" id="promoTous">PROMOTION</option>
                     <option v-for="promo in listePromo" :key="promo" :value="promo">{{promo}}</option>
                 </select>
             </div>
 
-            <div class="col px-0  text-center">
+            <div class="col-9 text-center ps-1">
                 <select id="destination" class="formSelect" @change="searchByDestination">
                     <option value="0" id="destinationsTous">DESTINATION</option>
                     <option v-for="destination in listeDestinations" :key="destination" :value="destination.id">{{destination.nomEtablissementAccueil}} ({{destination.pays}})</option>
@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col px-0 ms-2">
+            <div class="col ps-1 ">
                 <select id="etat_mobilite" class="formSelect" @change="searchByEtatMobilite">
                     <option value="tous" id="etatsTous">ETAT MOBILITE</option>
                     <option v-for="etat in listeEtats" :key="etat" :value="etat">{{etat}}</option>

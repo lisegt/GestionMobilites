@@ -15,7 +15,7 @@
       </div>
       <div class="form-group">
         <label class="font-weight-bold">Email</label>
-        <input class="form-control" type="email" v-model="email"/>
+        <input class="form-control" type="text" v-model="email"/>
       </div>
       <div class="form-group">
         <label class="font-weight-bold">Password</label>
@@ -45,6 +45,9 @@
 
     function addAdmin(){
         emit('addAdmin',username,email,password)
+        username.value = ''
+        email.value = ''
+        password.value = ''
     }
 </script>
 
