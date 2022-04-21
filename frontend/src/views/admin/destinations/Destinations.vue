@@ -41,6 +41,9 @@
 
     import world from '../../../img/world.png'
 
+    import { createToast } from 'mosha-vue-toastify';
+    import 'mosha-vue-toastify/dist/style.css'
+
     /**
      * Activer les items de la navbar selon la page consultée
      * On retire l'attribut de tous les items de la nav et on le rajoute à l'item de la page concernée
@@ -87,7 +90,6 @@
             let date;
             let actuelDate = new Date();
         
-            console.log(actuelDate)
             for(let d of json._embedded.destinations){
 
                     date=new Date(d.dateFinDeContratIsis)
@@ -109,6 +111,9 @@
         })
     }
 
+    /**
+     * Méthode pour supprimer une destination
+     */
     function deleteDestination(id){
          const fetchOptions = {
                 method: "DELETE",
@@ -116,9 +121,16 @@
                 };
         let url = `/api/destinations/${id}`
         fetch(url,fetchOptions)
-        .then(()=>{getDestinations(urlAllDestinations)})
+        .then((response)=>{
+          if(response.status === 409){
+            toastDanger('Echec de la suppression', 'Cette destination participe a des mobilités')
+          }
+          else{
+            getDestinations(urlAllDestinations)
+            toastSuccess('Destination supprimée avec succès')
+          }
+        })
         .catch((err)=>{
-            window.alert("Vous ne pouvez pas supprimer une destination qui est liée à une ou plusieurs mobilités")
             console.log("message d'erreur : ",err)})
     }
     
@@ -142,7 +154,6 @@
     function updateDestination(event){
           
            event.preventDefault()
-           alert(document.getElementById("nomEtablissement").value)
            let nomEtablissement = document.getElementById("nomEtablissement").value
            let nomVille = document.getElementById("nomVille").value
            let nomPays = document.getElementById("nomPays").value
@@ -165,7 +176,12 @@
                                         image:img.value
                                         })};
             fetch(url,fetchOptions)
-            .then(()=>{getDestinations(urlAllDestinations)})
+            .then((response)=>{
+              if(response.status === 200){
+                getDestinations(urlAllDestinations)
+                toastSuccess('Modification effectuée')
+              }
+            })
             .catch((error) => console.log(error));
 
     }
@@ -194,31 +210,40 @@
         let nbPlaceAnnee= document.getElementById("addNbPlaceAnnee").value
         let date = document.getElementById("addDateFinContrat").value
         
-
-            if(nomEtablissement==""|| nomVille==""||nomPays==""||date==""){
-            window.alert("Veuillez remplir les 4 premiers champs et la date!")
-            
-    }
-    else{
-    const url = `/api/destinations` // l’url de l'API
-
-    const fetchOptions = {  method:"POST", 
-                            headers: {"Content-Type":"application/json","Authorization": localStorage.getItem('jwt')}, 
-                            body: JSON.stringify({
-                                nomEtablissementAccueil:nomEtablissement,
-                                dateFinDeContratIsis:date,
-                                nbPlaceAnnee:nbPlaceAnnee,
-                                nbPlaceSemestre:nbPlaceSemestre,
-                                typeMobilite:typeMobilite,
-                                ville:nomVille,
-                                pays:nomPays,
-                                image:img.value
-                                
+        //Si les champs sont ok
+        console.log(nomEtablissement)
+        if(nomEtablissement && nomVille && nomPays ){
+          const url = `/api/destinations` // l’url de l'API
+          const fetchOptions = {  method:"POST", 
+                                  headers: {"Content-Type":"application/json","Authorization": localStorage.getItem('jwt')}, 
+                                  body: JSON.stringify({
+                                      nomEtablissementAccueil:nomEtablissement,
+                                      dateFinDeContratIsis:date,
+                                      nbPlaceAnnee:nbPlaceAnnee,
+                                      nbPlaceSemestre:nbPlaceSemestre,
+                                      typeMobilite:typeMobilite,
+                                      ville:nomVille,
+                                      pays:nomPays,
+                                      image:img.value
+                                      
                                 })};
-    fetch(url,fetchOptions)
-    .then(()=>{getDestinations(urlAllDestinations)})
-    .catch((error) => console.log(error));
-    }
+            fetch(url,fetchOptions)
+            .then((response)=>{
+              if(response.status === 400){
+                toastDanger("Echec de l'ajout", "Des champs sont manquants")
+              }
+              else{
+                getDestinations(urlAllDestinations)
+                toastSuccess('Destination ajoutée avec succès')
+              }
+            })
+            .catch((error) => console.log(error));
+        }
+        // Si les champs saisie ne sont pas valides
+        else{
+          toastDanger("Echec de l'ajout", "Des champs sont manquants")
+        }
+            
     }
    
 /**
@@ -322,6 +347,18 @@ function searchDestination(inputUser){
  * lorsqu'on crée le composant Destinations, on exécute la fonction getDestinations(url) qui charge toutes les destinations de la BDD
  */
 onMounted(()=>{ getDestinations(urlAllDestinations) })
+
+  /**
+   * Fonction pour affichage de toast
+   */
+
+  function toastSuccess (message) {
+      createToast(message, {type: 'success'})
+  }
+
+  function toastDanger (title, message) {
+      createToast({ title: title, description: message}, {type: 'danger'})
+  }
 </script>
 
 <style>
