@@ -50,7 +50,7 @@
     }
     document.getElementById("mobilitesNav").classList.add("active")
 
-    const listeMobilites =  reactive([])
+    
     const listeMobilitesTab = reactive([])
     let mobilite = ref({})
     let file =ref("")
@@ -90,8 +90,8 @@
    * fonction qui permet de récuperer les mobilités stockées en base de données
    */
   function getMobilites(url){
-        listeMobilites.splice(0,listeMobilites.length)         //On vide la liste des mobilités avant de la remplir afin d'éviter les doublons
-        listeMobilitesTab.splice(0,listeMobilitesTab.length) 
+              
+        listeMobilitesTab.splice(0,listeMobilitesTab.length) //On vide la liste des mobilités avant de la remplir afin d'éviter les doublons
 
         
         fetch(url, {method:'GET',headers: {"Authorization": localStorage.getItem('jwt')}})
@@ -121,18 +121,15 @@
                     
                     if(dateActuel.getTime()<new Date(d.dateDepart).getTime()){
                       
-                      listeMobilites.push([d,etudiant,destination,"Non Validée"])
                       listeMobilitesTab.push([d,etudiant,destination,"Non Validée"])
                     }
                     else{
                       if(dateDiff(d.dateDepart,d.dureeEnMois)<0){
                           
-                          listeMobilites.push([d,etudiant,destination,"Validée"])
                           listeMobilitesTab.push([d,etudiant,destination,"Validée"])
                       }
                       else{
                         
-                        listeMobilites.push([d,etudiant,destination,"En cours"])
                         listeMobilitesTab.push([d,etudiant,destination,"En cours"])
                       }}
                     })
