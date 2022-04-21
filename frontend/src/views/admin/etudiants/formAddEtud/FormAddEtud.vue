@@ -19,11 +19,11 @@
                 </div>
                 <div class="form-group">
                     <label for="ine" class="font-weight-bold">INE :</label>
-                    <input v-model="ine" id="ine" class="form-control" name="numEtud" type="number" placeholder="Entrez l'INE de l'étudiant ..." required/>
+                    <input v-model="ine" id="ine" class="form-control" name="numEtud" min="0" type="number" placeholder="Entrez l'INE de l'étudiant ..." required/>
                 </div>
                 <div class="form-group">
                     <label for="promotion" class="font-weight-bold">Promotion :</label>
-                    <input v-model="promotion" id="promotion_input" class="form-control" name="promo" type="number" placeholder="Sélectionnez une promotion ..." required/>
+                    <input v-model="promotion" id="promotion_input" class="form-control" name="promo" type="number" min="0" placeholder="Sélectionnez une promotion ..." required/>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btnBleu" data-bs-dismiss="modal">Annuler</button>

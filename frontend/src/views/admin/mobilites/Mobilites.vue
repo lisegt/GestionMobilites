@@ -188,6 +188,8 @@
    */
   function addDoc(mobi){
       mobilite.value=mobi
+      file.value=""
+      document.getElementById("file").value=""
   }
 
   /**
@@ -196,7 +198,9 @@
    * fonction qui met à jour la mobilité qui est dans le formulaire de modification
    */
   function updateMobilite(event){
+    
     event.preventDefault()
+    if(file.value!=""){
       const url = `http://localhost:8989/api/mobilites/${mobilite.value[0].id}` // l’url de l'API
       const fetchOptions = {  method:"PUT", 
                               headers: {"Authorization": localStorage.getItem('jwt'), "Content-Type" : "application/json"},
@@ -216,6 +220,10 @@
         }
       })
       .catch((error) => console.log(error));
+  }
+  else{
+    toastDanger("Retour d'expérience","Auncun fichier selectionné")
+  }
   }
   
   /**
