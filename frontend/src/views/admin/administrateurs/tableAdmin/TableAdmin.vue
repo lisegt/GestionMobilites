@@ -12,7 +12,7 @@
                 <tr v-for="admin in admins">
                     <td class="text-center align-middle">{{admin.username}}</td>
                     <td class="text-center align-middle">{{admin.email}}</td>
-                    <td class="text-center align-middle" v-if="admin.email != 'admin'"><a @click="$emit('deleteAdmin', admin.id)"><img :src="Poubelle" alt="à la poubelle l'admin"/></a></td>
+                    <td class="text-center align-middle" v-if="admin.email != 'admin@mail.com'"><a @click="$emit('deleteAdmin', admin.id)"><img :src="Poubelle" alt="à la poubelle l'admin"/></a></td>
                 </tr>
             </tbody>
       </table>
