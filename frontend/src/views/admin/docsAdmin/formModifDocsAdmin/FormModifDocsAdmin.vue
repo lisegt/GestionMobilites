@@ -23,7 +23,7 @@
                   <form method="POST" enctype="multipart/form-data" action="/upload">
                     <div class="form-group">
                       <label for="file" class="font-weight-bold">Fichier à télécharger :</label>
-                      <input class="form-control" @change="majFile" id="updateFile" type="file" required name="file" />
+                      <input class="form-control" @change="majFile" id="updateFile" type="file" required name="file" accept=".pdf"/>
                     </div>
                   </form>
                 </div>

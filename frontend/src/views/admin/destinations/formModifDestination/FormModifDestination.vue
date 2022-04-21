@@ -64,7 +64,7 @@
                 <div class="mb-3 row">
                     <div class="col">
                     <label for="image" class="form-label">CHOISIR/MODIFIER L'IMAGE:</label>
-                    <input type="file" @change="changeImage"  class="form-control " name="image" id="imageModifier">
+                    <input type="file" @change="changeImage"  class="form-control " name="image" id="imageModifier" accept="image/png, image/jpeg"/>
                     </div>
                 </div>
           

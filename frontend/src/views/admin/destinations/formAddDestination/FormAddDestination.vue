@@ -62,7 +62,7 @@
                             <div class="mb-3 row">
                                 <div class="col">
                                     <label for="image" class="form-label">CHOISIR L'IMAGE:</label>
-                                    <input type="file"  @change="sendFile" class="form-control " name="addImage" id="addImage">
+                                    <input type="file"  @change="sendFile" class="form-control " name="addImage" id="addImage" accept="image/png, image/jpeg"/>
                                 </div>
                             </div>
                         </div>
