@@ -186,6 +186,9 @@
                                         
                                         })};
             fetch(url,fetchOptions)
+            .then(()=>{
+              getMobilites(urlAllMobilites)
+            })
             .catch((error) => console.log(error));
 
     }
