@@ -4,11 +4,9 @@
         <div class="col-6 col-xl-3 h-50 d-flex flex-column">
             <FiltreDestinations @searchByPays="searchByPays" @searchByTypeMobilite="searchByTypeMobilite"/>
         </div>
-
         <div class="col-6 text-center">
             <h1 class="text-center">DÉCOUVREZ LES DESTINATIONS</h1>
         </div>
-
         <div class="col-0 col-xl-3"></div>
     </div>
     <div class="row overflow-auto">
@@ -27,7 +25,6 @@
         </div>
     </div>
    <Popup v-bind:destination="desti" v-bind:image="imageState" v-bind:mobilites="listeMobilites"/> 
-
 </div>
 </template>
 
@@ -82,8 +79,6 @@ function dateDiff(date1, date2){
     return diff;
 }
 
-
-
 /**
  * @param url
  * Fonction qui remplit la liste listeDestinations
@@ -120,6 +115,9 @@ function setDest(dest){
     console.log("mob", listeMobilites)
 }
 
+/**
+ * Fonction qui remplit la liste listeMobilites
+ */
 function getMobilites(){
     fetch(desti.value._links.mobilites.href)
     .then((response)=>{return response.json()})
@@ -133,12 +131,15 @@ function getMobilites(){
     })
 }
 
+/**
+ * @param img
+ * Fonction qui charge l'image
+ */
 function loadImage(img) {
     if(img==""){
       document.getElementById("popUpImg").style.display="none"
     }
     else{
-        
         imageState.value=img
         document.getElementById("popUpImg").style.display="inline"
     }
