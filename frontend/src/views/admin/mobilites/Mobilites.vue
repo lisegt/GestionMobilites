@@ -218,6 +218,7 @@
         if(response.status === 201){
             toastSuccess('Mobilité ajoutée')
             getMobilites()
+            window.location.reload() //Grosse fraude (mais ça marche)
         }
         else{
             toastDanger("La mobilité n'a pas pu être ajoutée")
