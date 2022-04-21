@@ -29,6 +29,8 @@ import FormModifDocsAdmin from './formModifDocsAdmin/FormModifDocsAdmin.vue'
 import FormAddDocsAdmin from './formAddDocsAdmin/FormAddDocsAdmin.vue'
 import { onMounted, onUpdated } from "vue";
 import { reactive,ref } from 'vue';
+import { createToast } from 'mosha-vue-toastify';
+import 'mosha-vue-toastify/dist/style.css'
 
 import ajoutDoc from '../../../img/addDoc.png'
 
@@ -76,7 +78,15 @@ function deleteDocument(id){
   
   const fetchOptions = {method: "DELETE", headers: {"Authorization": localStorage.getItem('jwt')}};
   fetch(url+`${id}`,fetchOptions)
-  .then(()=>{getDoc()})
+  .then((response)=>{
+    if(response.status === 204){
+      toastSuccess('Document supprimé avec succès')
+      getDoc()
+    }
+    else{
+      toastDanger('Impossible de supprimer le document')
+    }
+  })
   .catch((error)=>{console.log(error)})
 }
 
@@ -111,8 +121,14 @@ function updateDoc(event){
                                         fichier: file.value
                                         })};
   fetch(`/api/documents/${idDoc.value}`,fetchOptions)
-  .then(()=>{
-    getDoc()
+  .then((response)=>{
+    if(response.status === 200){
+      getDoc()
+      toastSuccess("Document modifié avec succès")
+    }
+    else{
+      toastDanger("Impossible de modifier ce document")
+    }
   })   
   .catch((err)=>{ console.log("erreur: ",err)}) 
 
@@ -158,14 +174,39 @@ function addDoc(event){
     description:desc,
     fichier:file.value})};
 
-  fetch(urlPost,fetchOptions)
-  .then((response) => getDoc())
-  .catch((error) => console.log(error));
+  if(intitule && desc){
+    fetch(urlPost,fetchOptions)
+    .then((response) => {
+      if(response.status === 200){
+        toastSuccess('Document ajouté')
+        getDoc()
+      }
+      else{
+        toastDanger("Impossible d'ajouter ce document")
+      }
+    })
+    .catch((error) => console.log(error));
+  }
+  else{
+    toastDanger("Echec de l'ajout", 'Des champs sont manquants')
+  }
 }
 
 onMounted(() => {
   getDoc()
 });
+
+/**
+   * Fonction pour affichage de toast
+   */
+
+  function toastSuccess (message) {
+      createToast(message, {type: 'success'})
+  }
+
+  function toastDanger (title, message) {
+      createToast({ title: title, description: message}, {type: 'danger'})
+  }
 </script>
 
 <style>

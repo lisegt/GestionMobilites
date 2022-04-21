@@ -154,7 +154,6 @@
     function updateDestination(event){
           
            event.preventDefault()
-           alert(document.getElementById("nomEtablissement").value)
            let nomEtablissement = document.getElementById("nomEtablissement").value
            let nomVille = document.getElementById("nomVille").value
            let nomPays = document.getElementById("nomPays").value
@@ -177,7 +176,12 @@
                                         image:img.value
                                         })};
             fetch(url,fetchOptions)
-            .then(()=>{getDestinations(urlAllDestinations)})
+            .then((response)=>{
+              if(response.status === 200){
+                getDestinations(urlAllDestinations)
+                toastSuccess('Modification effectuée')
+              }
+            })
             .catch((error) => console.log(error));
 
     }

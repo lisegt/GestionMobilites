@@ -37,6 +37,9 @@
     import FiltreMobilites from './filtreMobilites/FiltreMobilites.vue'
     import globe from '../../../img/globe.png'
 
+    import { createToast } from 'mosha-vue-toastify';
+    import 'mosha-vue-toastify/dist/style.css'
+
     /**
      * Activer les items de la navbar selon la page consultée
      * On retire l'attribut de tous les items de la nav et on le rajoute à l'item de la page concernée
@@ -78,7 +81,7 @@
   const urlAllMobilites = `http://localhost:8989/api/mobilites`
 
   function getMobilites(url){
-        
+        console.log('getmob')
         listeMobilites.splice(0,listeMobilites.length)         //On vide la liste des destinations avant de la remplir afin d'éviter les doublons
         listeMobilitesTab.splice(0,listeMobilitesTab.length) 
 
@@ -131,96 +134,98 @@
         })
   }
 
+  /**
+   * Fonction permettant de supprimer une mobilité
+   */
   function deleteMobilite(id){
-      
-      
-
       const fetchOptions = {
               method: "DELETE",
               headers: {"Authorization": localStorage.getItem('jwt'), "Content-Type":"application/json"}
               };
       let url = `http://localhost:8989/api/mobilites/${id}`
       fetch(url,fetchOptions)
-      .then(()=>{getMobilites(urlAllMobilites)})
+      .then((response)=>{
+        if(response.status === 204){
+            getMobilites(urlAllMobilites)
+            toastSuccess('Mobilité supprimée')
+        }
+        else{
+            toastDanger('Echec de la suppression')
+        }
+      })
       .catch((err)=>{
           window.alert("Vous ne pouvez pas supprimer une destination qui est liée à une ou plusieurs mobilités")
           console.log("message d'erreur : ",err)})
   }
     
   function setFile(event){
-  
-  
-  let reader = new FileReader();
-  reader.onloadend = function() {
-        
-        file.value=reader.result
-        
-      }
-  reader.readAsDataURL(event.target.files[0]);
-
-}
+    let reader = new FileReader();
+    reader.onloadend = function() {
+          
+          file.value=reader.result
+          
+        }
+    reader.readAsDataURL(event.target.files[0]);
+  }
 
   function addDoc(mobi){
-      
       mobilite.value=mobi
       console.log("mobilite select: ",mobilite.value)
-      
   }
 
     function updateMobilite(event){
-
-           event.preventDefault()
-
-            const url = `http://localhost:8989/api/mobilites/${mobilite.value[0].id}` // l’url de l'API
-
-            const fetchOptions = {  method:"PUT", 
-                                    headers: {"Authorization": localStorage.getItem('jwt'), "Content-Type" : "application/json"},
-                                    body: JSON.stringify({
-                                        dateDepart:mobilite.value[0].dateDepart,
-                                        retourExperience:file.value,
-                                        dureeEnMois:mobilite.value[0].dureeEnMois,
-                                        periode:mobilite.value[0].periode,
-                                        destination:`http://localhost:8989/api/destinations/${mobilite.value[2].id}`,
-                                        etudiant:`http://localhost:8989/api/etudiants/${mobilite.value[1].id}`
-
-                                        
-                                        })};
-            fetch(url,fetchOptions)
-            .then(()=>{
-              getMobilites(urlAllMobilites)
-            })
-            .catch((error) => console.log(error));
-
+      event.preventDefault()
+        const url = `http://localhost:8989/api/mobilites/${mobilite.value[0].id}` // l’url de l'API
+        const fetchOptions = {  method:"PUT", 
+                                headers: {"Authorization": localStorage.getItem('jwt'), "Content-Type" : "application/json"},
+                                body: JSON.stringify({
+                                    dateDepart:mobilite.value[0].dateDepart,
+                                    retourExperience:file.value,
+                                    dureeEnMois:mobilite.value[0].dureeEnMois,
+                                    periode:mobilite.value[0].periode,
+                                    destination:`http://localhost:8989/api/destinations/${mobilite.value[2].id}`,
+                                    etudiant:`http://localhost:8989/api/etudiants/${mobilite.value[1].id}`                                        
+                              })};
+        fetch(url,fetchOptions)
+        .then((response)=>{
+          if(response.status === 200){
+            getMobilites(urlAllMobilites)
+            toastSuccess('Mobilité complétée')
+          }
+        })
+        .catch((error) => console.log(error));
     }
   
     function addMobilite() {
-    
-    
-    const url = `http://localhost:8989/api/` // l’url de l'API
-    let idDestination = document.getElementById("addDestination").value
-    let idEtudiant = document.getElementById("selectEtud").value
-  
-    let date = document.getElementById("addDepart").value
-    let duree = document.getElementById("addDuree").value
-    let periode = document.getElementById("periode").value
-    
-      
-    const fetchOptions = {  method:"POST", 
-                            headers: {"Authorization": localStorage.getItem('jwt'), "Content-Type" : "application/json"},
-                            body: JSON.stringify({
-                                dateDepart:date,
-                                dureeEnMois:duree,
-                                periode:periode,
-                                destination:`http://localhost:8989/api/destinations/${idDestination}`,
-                                etudiant:`http://localhost:8989/api/etudiants/${idEtudiant}`,
-                                retourExperience:""
-
-                                })};
-    fetch("http://localhost:8989/api/mobilites",fetchOptions)
-    .then(()=>{getMobilites()})
-    .catch((error) =>{ 
-      console.log(error)
-      window.alert(date)});
+      const url = `http://localhost:8989/api/` // l’url de l'API
+      let idDestination = document.getElementById("addDestination").value
+      let idEtudiant = document.getElementById("selectEtud").value
+      let date = document.getElementById("addDepart").value
+      let duree = document.getElementById("addDuree").value
+      let periode = document.getElementById("periode").value 
+      const fetchOptions = {  method:"POST", 
+                              headers: {"Authorization": localStorage.getItem('jwt'), "Content-Type" : "application/json"},
+                              body: JSON.stringify({
+                                  dateDepart:date,
+                                  dureeEnMois:duree,
+                                  periode:periode,
+                                  destination:`http://localhost:8989/api/destinations/${idDestination}`,
+                                  etudiant:`http://localhost:8989/api/etudiants/${idEtudiant}`,
+                                  retourExperience:""
+                            })};
+      fetch("http://localhost:8989/api/mobilites",fetchOptions)
+      .then((response)=>{
+        if(response.status === 201){
+            toastSuccess('Mobilité ajoutée')
+            getMobilites()
+        }
+        else{
+            toastDanger("La mobilité n'a pas pu être ajoutée")
+        }
+      })
+      .catch((error) =>{ 
+        console.log(error)
+        window.alert(date)});
   }
 
 function getMobilitesFiltrees(url){      
@@ -318,6 +323,14 @@ onMounted(()=>{
     getMobilites(urlAllMobilites)
     
 })
+
+function toastSuccess (message) {
+      createToast(message, {type: 'success'})
+  }
+
+  function toastDanger (title, message) {
+      createToast({ title: title, description: message}, {type: 'danger'})
+  }
 </script>
 
 <style>

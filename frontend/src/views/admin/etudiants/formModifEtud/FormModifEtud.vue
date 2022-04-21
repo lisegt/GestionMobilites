@@ -67,10 +67,12 @@
         fetch(url,fetchOptions)
         .then((response)=>{
             if(response.status === 400){
-                toastDanger('Modification refusé')
+                toastDanger('Modification refusée')
             }
-            console.log(response.status)
-            emit('update_ok')
+            else{
+                toastSuccess('Modification effectuée')
+                emit('update_ok')
+            }
         })
         .catch((error) => console.log(error));
     }
@@ -78,6 +80,10 @@
     function toastDanger (title, message) {
       createToast({ title: title, description: message}, {type: 'danger'})
     }
+
+    function toastSuccess (message) {
+      createToast(message, {type: 'success'})
+  }
 </script>
 
 <style scoped>
