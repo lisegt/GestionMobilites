@@ -10,7 +10,7 @@
       <div class="modal-body h-25 justify-content-center">
           <div class="row h-50 overflow-y-auto">
               <div class="h4 text-left col-2">Description :</div>
-              <div class="col-10 text-left h-100 overflow-auto" style="word-wrap:break-word;">{{document.description}}</div>
+              <div class="col-10 text-left h-100 overflow-auto font-weight-bold" style="word-wrap:break-word;">{{document.description}}</div>
           </div>
           <div class="row mt-3 h-25 align-items-center justify-content-start">
               <div class="col-4 h4 text-left">Lien de telechargement : </div>
