@@ -75,6 +75,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
             .authorizeRequests().antMatchers("/api/auth/**").permitAll() //On definit les requêtes autorisés (Authentification)
 			.antMatchers("/api/test/**").permitAll()
             .antMatchers(HttpMethod.GET, "/api/destinations/**").permitAll()
+            .antMatchers(HttpMethod.GET, "/api/mobilites/**").permitAll()
             .antMatchers(HttpMethod.GET, "/api/documents/**").permitAll()
 			.anyRequest().authenticated(); //Toutes les autres requêtes doivent être authentifiées
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

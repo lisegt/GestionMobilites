@@ -46,10 +46,6 @@ import {defineEmits} from 'vue'
 
 const props = defineProps(['destination'])
 
-const emits = defineEmits(['oppen'])
-function oppenCard(){
-    emits('oppen',props.destination)
-}
 
 /**
  * @param base64img
@@ -58,7 +54,6 @@ function oppenCard(){
  * Sinon image par défaut selon le type de mobilité
  */
 function Base64ToImage(base64img) {
-    console.log("test :",props.destination)
   if(props.destination.image==""){
     if(props.destination.typeMobilite=="STAGE"){
       document.getElementById(`${props.destination.id}`).src=stage
@@ -79,7 +74,6 @@ function Base64ToImage(base64img) {
  * Lorsqu'on crée le composant PopupInfo, on exécute la fonction Base64ToImage(props.img)
  */
 onMounted(()=>{
-  
   Base64ToImage(props.destination.image)})
 </script>
 
