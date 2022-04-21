@@ -31,12 +31,6 @@ Ils devront également pouvoir y retrouver l’ensemble des documents administra
 
 Le rapport technique, le support de présentation, le manuel d'utilisation ainsi que les documents générés tout au long de ce projet (outils de gestion de projet, otuils techniques et méthodologiques d'ingénierie) sont disponibles dans le dossier doc, à la racine de notre dépôt GIT.
 
-## Tester l'application web
-
-```
-Lancez les commandes ci-dessous sur la branche authentification.
-```
-
 ## Architecture Logicielle
 
 ```
@@ -52,7 +46,7 @@ gestionDesMobilites
 
 ## Pour exécuter le projet
 
-A la racine du projet: 
+A la racine du projet, sur la branche authentification: 
 
 ```
 mvn clean install
