@@ -23,14 +23,14 @@
                   <form method="POST" enctype="multipart/form-data" action="/upload">
                     <div class="form-group">
                       <label for="file" class="font-weight-bold">Fichier à télécharger :</label>
-                      <input class="form-control" @change="majFile" id="updateFile" type="file" required name="file" />
+                      <input class="form-control" @change="majFile" id="updateFile" type="file" required name="file" accept=".pdf"/>
                     </div>
                   </form>
                 </div>
               
                 <!---->
                 <div class="modal-footer">
-                    <button type="button" class="btnOrange" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btnBleu" data-bs-dismiss="modal">Annuler</button>
                     <input id="btnSub" type="submit" @click="majDoc" class="btnOrange" value="Modifier" data-bs-dismiss="modal"/>
                 </div>
             </form>

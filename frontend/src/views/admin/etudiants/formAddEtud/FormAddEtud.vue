@@ -26,7 +26,7 @@
                     <input v-model="promotion" id="promotion_input" class="form-control" name="promo" type="number" placeholder="Sélectionnez une promotion ..." required/>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btnOrange" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btnBleu" data-bs-dismiss="modal">Annuler</button>
                     <input @click="$emit('post', nom, prenom, promotion, ine)" id="Bouton" type="submit" class="btnOrange" value="Ajouter"  data-bs-dismiss="modal"/>
                  </div>
             </form>

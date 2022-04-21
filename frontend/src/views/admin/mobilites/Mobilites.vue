@@ -16,20 +16,23 @@
         </button>
     </div>
 
-  <TableMobilites @set="setMobilite" @delete="deleteMobilite" v-bind:mobilites="listeMobilitesTab" class="mt-4"/>
-
+  <TableMobilites @addDoc="addDoc" @delete="deleteMobilite" v-bind:mobilites="listeMobilitesTab" class="mt-4"/>
+  
   </div>
   
   <FormAddMobilites @ajouter="addMobilite" />
+  <FormAddDoc v-bind:mobilite="mobilite" @updateMobilite="updateMobilite" @updateFile="setFile"/>
   </div>
   
 </template>
 
 <script setup>
 
-    import {reactive, onMounted} from 'vue'
+    import {reactive, onMounted, ref} from 'vue'
+
     import TableMobilites from './tableMobilites/TableMobilites.vue'
     import FormAddMobilites from './formAddMobilite/FormAddMobilite.vue';
+    import FormAddDoc from './formAddDoc/formAddDoc.vue'
     import SearchMobilite from './searchMobilite/SearchMobilite.vue'
     import FiltreMobilites from './filtreMobilites/FiltreMobilites.vue'
     import globe from '../../../img/globe.png'
@@ -46,16 +49,14 @@
 
     const listeMobilites =  reactive([])
     const listeMobilitesTab = reactive([])
-
+    let mobilite = ref({})
+    let file =ref("")
 
    function dateDiff(date1, duree){
                 var diff = {}  
                 
-                let dateRetour = new Date(date1)
-                console.log("date depart",duree)         
-                          // Initialisation du retour
-                console.log(dateRetour.setMonth(dateRetour.getMonth()+ 5))
-                console.log("date retour",dateRetour) 
+                let dateRetour = new Date(date1) // Initialisation du retour
+               
                 let actuelDate= new Date()
                 
                 var tmp = dateRetour - actuelDate;
@@ -71,7 +72,7 @@
                 
                 tmp = Math.floor((tmp-diff.hour)/24);   // Nombre de jours restants
                 diff.day = tmp;
-                console.log(diff)
+              
                 return diff.day;
     }
   const urlAllMobilites = `http://localhost:8989/api/mobilites`
@@ -91,7 +92,7 @@
             
            
             for(let d of json._embedded.mobilites){
-                  console.log(d)
+              
                   
                   fetch(d._links.etudiant.href, {method:'GET',headers: {"Authorization": localStorage.getItem('jwt')}})
                   .then((res)=>{return res.json()})
@@ -99,7 +100,7 @@
                     return json
                   })
                   .then((etudiant)=>{
-                    console.log(etudiant)
+                    
                     fetch(d._links.destination.href, {method:'GET',headers: {"Authorization": localStorage.getItem('jwt')}})
                     .then((res)=>{return res.json()})
                     .then((destination)=>{
@@ -124,67 +125,70 @@
                         listeMobilitesTab.push([d,etudiant,destination,"En cours"])
                       }}
                     })
+                    console.log(listeMobilitesTab)
                   })  
             }
         })
   }
 
-    function deleteMobilite(id){
-        console.log('delete',id)
-        
+  function deleteMobilite(id){
+      
+      
 
-        const fetchOptions = {
-                method: "DELETE",
-                headers: {"Authorization": localStorage.getItem('jwt'), "Content-Type":"application/json"}
-                };
-        let url = `http://localhost:8989/api/mobilites/${id}`
-        fetch(url,fetchOptions)
-        .then(()=>{getMobilites(urlAllMobilites)})
-        .catch((err)=>{
-            window.alert("Vous ne pouvez pas supprimer une destination qui est liée à une ou plusieurs mobilités")
-            console.log("message d'erreur : ",err)})
-    }
+      const fetchOptions = {
+              method: "DELETE",
+              headers: {"Authorization": localStorage.getItem('jwt'), "Content-Type":"application/json"}
+              };
+      let url = `http://localhost:8989/api/mobilites/${id}`
+      fetch(url,fetchOptions)
+      .then(()=>{getMobilites(urlAllMobilites)})
+      .catch((err)=>{
+          window.alert("Vous ne pouvez pas supprimer une destination qui est liée à une ou plusieurs mobilités")
+          console.log("message d'erreur : ",err)})
+  }
     
+  function setFile(event){
+  
+  
+  let reader = new FileReader();
+  reader.onloadend = function() {
+        
+        file.value=reader.result
+        
+      }
+  reader.readAsDataURL(event.target.files[0]);
 
-    function setMobilite(mobilite){
-        document.getElementById("nomEtablissement").value=destination[0].nomEtablissementAccueil
-        document.getElementById("nomVille").value=destination[0].ville
-        document.getElementById("nomPays").value=destination[0].pays
-        document.getElementById(`${destination[0].typeMobilite}`).selected = true
-        document.getElementById("semestres").value= parseInt(destination[0].nbPlaceSemestre)
-        document.getElementById("nbPlaceAnnee").value=parseInt(destination[0].nbPlaceAnnee)
-        document.getElementById("dateFinContrat").value=destination[0].dateFinDeContratIsis
+}
 
-        document.getElementById("btnSub").addEventListener('click',()=>{
-            console.log(destination)
-            updateMobilite(destination)
-        })
-    }
+  function addDoc(mobi){
+      
+      mobilite.value=mobi
+      console.log("mobilite select: ",mobilite.value)
+      
+  }
 
-    function updateMobilite(mobilite){
+    function updateMobilite(event){
 
-           let nomEtablissement = document.getElementById("nomEtablissement").value
-           let nomVille = document.getElementById("nomVille").value
-           let nomPays = document.getElementById("nomPays").value
-           let typeMobilite = document.getElementById("typeMobilite").value
-           let nbPlaceSemestre = document.getElementById("semestres").value
-           let nbPlaceAnnee= document.getElementById("nbPlaceAnnee").value
-           let date = document.getElementById("dateFinContrat").value
+           event.preventDefault()
 
-            const url = `http://localhost:8989/api/destinations/${destination[0].id}` // l’url de l'API
+            const url = `http://localhost:8989/api/mobilites/${mobilite.value[0].id}` // l’url de l'API
 
             const fetchOptions = {  method:"PUT", 
                                     headers: {"Authorization": localStorage.getItem('jwt'), "Content-Type" : "application/json"},
                                     body: JSON.stringify({
-                                        nomEtablissementAccueil:nomEtablissement,
-                                        dateFinDeContratIsis:date,
-                                        nbPlaceAnnee:nbPlaceAnnee,
-                                        nbPlaceSemestre:nbPlaceSemestre,
-                                        typeMobilite:typeMobilite,
-                                        ville:nomVille,
-                                        pays:nomPays
+                                        dateDepart:mobilite.value[0].dateDepart,
+                                        retourExperience:file.value,
+                                        dureeEnMois:mobilite.value[0].dureeEnMois,
+                                        periode:mobilite.value[0].periode,
+                                        destination:`http://localhost:8989/api/destinations/${mobilite.value[2].id}`,
+                                        etudiant:`http://localhost:8989/api/etudiants/${mobilite.value[1].id}`
+
+                                        
                                         })};
             fetch(url,fetchOptions)
+            .then(()=>{
+              getMobilites(urlAllMobilites)
+            })
             .catch((error) => console.log(error));
 
     }
@@ -288,6 +292,24 @@ function searchByEtatMobilite(etat){
   if (etat != 'tous'){ //si on sélectionne n'importe quel état de la liste déroulante, on filtre
     getMobilitesFiltrees(url)
   } else { // on sélectionne l'option permettant d'afficher toutes les mobilités
+    getMobilites(urlAllMobilites)
+  }
+}
+
+/**
+ * @param etudiant : nom ou prénom d'un étudiant saisi par l'utilisateur
+ * fonction qui permet de récupérer toutes les mobilités concernant un étudiant saisi
+ */
+function searchMobilite(etudiant){
+  const url = `/api/mobilites/findByEtudiant?etudiant=${etudiant}` //url permettant d'accéder aux mobilités filtrées par promo
+
+  console.log('test')
+  if(etudiant != ''){ //si on sélectionne n'importe quelle promo de la liste déroulante, on filtre
+
+    getMobilitesFiltrees(url) //on récupère les mobilités filtrées
+
+  } else { // on sélectionne l'option permettant d'afficher toutes les mobilités
+
     getMobilites(urlAllMobilites)
   }
 }

@@ -46,35 +46,6 @@ import {defineEmits} from 'vue'
 
 const props = defineProps(['destination'])
 
-
-/**
- * @param base64img
- * Fonction qui ajoute l'image
- * Prend en compte le fait si l'image existe ou non
- * Sinon image par défaut selon le type de mobilité
- */
-function Base64ToImage(base64img) {
-  if(props.destination.image==""){
-    if(props.destination.typeMobilite=="STAGE"){
-      document.getElementById(`${props.destination.id}`).src=stage
-    }
-    if(props.type=="ETUDE"){
-      document.getElementById(`${props.destination.id}`).src=etude
-    }
-    if(props.type=="HUMANITAIRE"){
-      document.getElementById(`${props.destination.id}`).src=humanitaire
-    }
-  }
-  else{
-     // document.getElementById(`${props.destination.id}`).src=props.destination.img
-  }
-}
-
-/**
- * Lorsqu'on crée le composant PopupInfo, on exécute la fonction Base64ToImage(props.img)
- */
-onMounted(()=>{
-  Base64ToImage(props.destination.image)})
 </script>
 
 <style scoped>
