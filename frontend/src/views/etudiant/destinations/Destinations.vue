@@ -11,10 +11,18 @@
 
         <div class="col-3"></div>
     </div>
-    <div class="row overflow-auto border">
-        <div class="col-12 border d-flex justify-content-center">
-            <div class="border row mt-1 mb-5 g-3 g-xl-5 d-flex justify-content-center container scrollTableau">
-                <Carte @oppen="setDest" v-for="(destination,index) of listeDestinations" v-bind:destination="destination" v-bind:index="destination.id"  v-bind:nom="destination.nomEtablissementAccueil" v-bind:ville="destination.ville" v-bind:pays="destination.pays" v-bind:type="destination.typeMobilite" v-bind:img="destination.image"/>
+    <div class="row overflow-auto">
+        <div class="col-12 d-flex justify-content-center">
+            <div class="row mt-1 mb-5 g-3 g-xl-5 d-flex justify-content-center align-items-start container scrollTableau">
+                <Carte @oppen="setDest" 
+                v-for="(destination,index) of listeDestinations" 
+                v-bind:destination="destination" 
+                v-bind:index="destination.id"  
+                v-bind:nom="destination.nomEtablissementAccueil" 
+                v-bind:ville="destination.ville" 
+                v-bind:pays="destination.pays" 
+                v-bind:type="destination.typeMobilite" 
+                v-bind:img="destination.image" />
             </div>
         </div>
     </div>
