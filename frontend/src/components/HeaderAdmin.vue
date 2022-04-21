@@ -1,6 +1,6 @@
 <template>
 <div class="row">
-    <nav class="navbar navbar-expand-lg col">
+    <nav class="navbar navbar-dark navbar-expand-lg col">
         <a tag="img"  class="navbar-brand col ms-4" href="/admin">
             <img src="../views/admin/accueil/img/ISIS-logo.png"  alt=" w-50 h-50">
         </a>
