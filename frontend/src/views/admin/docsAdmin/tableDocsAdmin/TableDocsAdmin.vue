@@ -52,4 +52,8 @@ import { emit } from 'process';
 th{
     text-transform: uppercase;
 }
+
+td{
+    font-weight: bold;
+  }
 </style>

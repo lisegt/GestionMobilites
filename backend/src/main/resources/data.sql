@@ -18,7 +18,7 @@ INSERT INTO DESTINATION (date_fin_de_contrat_isis,image,nb_place_annee,nb_place_
     ('2025-07-01', '', 4, 2, 'University of Applied Sciences', 2,'Krefeld','Allemagne'),
     ('2026-11-01', '', 2, 1, 'Universidad de Antioquia', 1,'Medellin','Colombie'),
     ('2024-06-12', '', 2, 1, 'Alice Project', 3,'Bodhgaya','Inde'),
-    ('2025-04-10', '', 5, 1, 'Universitat Politecnica de Mataro', 3,'Mataro','Espagne'),
+    ('2025-04-10', '', 5, 1, 'Universitat Politecnica de Mataro', 2,'Mataro','Espagne'),
     ('2022-09-02', '', 6, 3, 'European University Of Cyprus', 2,'Nicosia','Chypre'),
     ('2026-09-03', '', 2, 1, 'Saint Francis University', 2,'Loretto - Pensylvanie','Etats-Unis');
 
