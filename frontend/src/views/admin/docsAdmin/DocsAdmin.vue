@@ -50,9 +50,6 @@ let file = ref("")
 let idDoc = ref(0)
 
 /**
- * 
- * @param
- * @return
  * Fonction qui remplit la liste listeDocuments
  */
 function getDoc(){
@@ -67,9 +64,7 @@ function getDoc(){
 }
 
 /**
- * 
  * @param id
- * @return
  * Fonction qui permet de supprimer un document à partir de son id
  */
 function deleteDocument(id){
@@ -90,9 +85,7 @@ function deleteDocument(id){
 }
 
 /**
- * 
  * @param doc
- * @return
  * Fonction qui modifie les données
  */
 function setDoc(doc){
@@ -103,6 +96,10 @@ function setDoc(doc){
   file.value=doc.fichier
 }
 
+/**
+ * @param event
+ * Fonction qui permet de modifier un document (ajout d'un nouveau)
+ */
 function updateDoc(event){
   event.preventDefault()
   let intitule = document.getElementById("updateIntitule").value 
@@ -111,13 +108,7 @@ function updateDoc(event){
   let myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
   myHeaders.append("Authorization", localStorage.getItem('jwt'));
-  const fetchOptions = {  method:"PUT", 
-                                    headers: myHeaders, 
-                                    body: JSON.stringify({
-                                        intitule:intitule,
-                                        description:description,
-                                        fichier: file.value
-                                        })};
+  const fetchOptions = {  method:"PUT", headers: myHeaders, body: JSON.stringify({intitule:intitule,description:description,fichier: file.value})};
   fetch(`/api/documents/${idDoc.value}`,fetchOptions)
   .then((response)=>{
     if(response.status === 200){
@@ -129,37 +120,31 @@ function updateDoc(event){
     }
   })   
   .catch((err)=>{ console.log("erreur: ",err)}) 
-
 }
 
 /**
- * 
  * @param event 
  * evenement du @change
  * Fonction qui convertis un fichier pdf en string base64
  */
-
 function setFile(event){
-  
-  
   let reader = new FileReader();
   reader.onloadend = function() {
         file.value=reader.result
       }
   reader.readAsDataURL(event.target.files[0]);
-
 }
 
-
-
+/**
+ * @param event
+ * Fonction qui permet d'ajouter un document
+ */
 function addDoc(event){
   event.preventDefault()
   const urlPost = `/api/documents`
 
   let intitule = document.getElementById("addIntitule").value
   let desc = document.getElementById("addDescription").value
-  
-
   let myHeaders = new Headers();
 
   myHeaders.append("Content-Type", "application/json");
@@ -190,21 +175,28 @@ function addDoc(event){
   document.getElementById("addDescription").value = ''
 }
 
+/**
+ * Lorsqu'on crée le composant DocsAdmin, on exécute la fonction getDoc()
+ */
 onMounted(() => {
   getDoc()
 });
 
 /**
-   * Fonction pour affichage de toast
-   */
+* Fonction pour affichage de toast
+*/
+function toastSuccess (message) {
+    createToast(message, {type: 'success'})
+}
 
-  function toastSuccess (message) {
-      createToast(message, {type: 'success'})
-  }
-
-  function toastDanger (title, message) {
-      createToast({ title: title, description: message}, {type: 'danger'})
-  }
+/**
+ * @param title
+ * @param message
+* Fonction pour affichage de toast
+*/
+function toastDanger (title, message) {
+    createToast({ title: title, description: message}, {type: 'danger'})
+}
 </script>
 
 <style>

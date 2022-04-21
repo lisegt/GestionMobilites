@@ -23,6 +23,10 @@ public class DestinationController {
     @Autowired
     private DestinationRepository destinationRepository;
 
+    /**
+     * Pour remplir le select dans le frontend
+     * @return une liste contenant les pays 
+     */
     @GetMapping(value="/destinations/pays")
     //fonction qui renvoie une liste contenant tous les pays des destinations existantes
     public Set<String> findAllPays(){
@@ -39,6 +43,10 @@ public class DestinationController {
         return pays;
     }
 
+    /**
+     * Pour remplir le select dans le frontend
+     * @return une liste contenat les différents types de mobilité
+     */
     @GetMapping(value="/destinations/typesMobilite")
     //fonction qui renvoie une liste contenant tous les types de mobilité des destinations existantes
     public Set<Type> findAllTypesMobilite(){
@@ -55,6 +63,10 @@ public class DestinationController {
         return typesMobilite;
     }
 
+    /**
+     * Pour remplir le select dans le frontend
+     * @return liste contenant les stataus de contrat
+     */
     @GetMapping(value="/destinations/statutsContrat")
     //fonction qui renvoie une liste contenant tous les statuts de contrat des destinations existantes
     public Set<String> findAllStatutsContrat(){
@@ -80,6 +92,11 @@ public class DestinationController {
         return statutsContrat;
     }
     
+    /**
+     * 
+     * @param statut
+     * @return les destinations ayant le status de contrat demandé
+     */
     @GetMapping(value="/destinations/findByStatutContrat")
     //fonction qui renvoie une liste contenant toutes les destinations filtrées selon le statut du contrat
     public List<Destination> findByStatutContrat(String statut){

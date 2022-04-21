@@ -42,13 +42,21 @@
 </template>
 
 <script setup>
-
 import {defineEmits} from 'vue'
 const emits = defineEmits(['updateFile','updateDoc'])
+
+/**
+ * @param event
+ * Fonction qui permet de mettre à jour un fichier
+ */
 function majFile(event){
     emits('updateFile',event)
 }
 
+/**
+ * @param event
+ * Fonction qui permet de mettre à jour document
+ */
 function majDoc(event){
     emits('updateDoc',event)
 }

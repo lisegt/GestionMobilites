@@ -34,21 +34,22 @@
 </template>
 
 <script setup>
-    import { ref } from "vue";
-  
+import { ref } from "vue";
+const emit = defineEmits(['addAdmin'])
 
-    const emit = defineEmits(['addAdmin'])
+let username = ref('')
+let email = ref('')
+let password = ref('')
 
-    let username = ref('')
-    let email = ref('')
-    let password = ref('')
-
-    function addAdmin(){
-        emit('addAdmin',username,email,password)
-        username.value = ''
-        email.value = ''
-        password.value = ''
-    }
+/**
+* Fonction qui permet d'ajouter un administrateur
+*/
+function addAdmin(){
+  emit('addAdmin',username,email,password)
+  username.value = ''
+  email.value = ''
+  password.value = ''
+}
 </script>
 
 <style scoped>
