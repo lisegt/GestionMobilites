@@ -16,23 +16,27 @@
         </button>
     </div>
 
-  <TableMobilites @set="setMobilite" @delete="deleteMobilite" v-bind:mobilites="listeMobilitesTab" class="mt-4"/>
-
+  <TableMobilites @addDoc="addDoc" @delete="deleteMobilite" v-bind:mobilites="listeMobilitesTab" class="mt-4"/>
+  
   </div>
   
   <FormAddMobilites @ajouter="addMobilite" />
+  <FormAddDoc v-bind:mobilite="mobilite" @updateFile="setFile"/>
   </div>
   
 </template>
 
 <script setup>
 
-    import {reactive, onMounted} from 'vue'
+    import {reactive, onMounted, ref} from 'vue'
+
     import TableMobilites from './tableMobilites/TableMobilites.vue'
     import FormAddMobilites from './formAddMobilite/FormAddMobilite.vue';
+    import FormAddDoc from './formAddDoc/formAddDoc.vue'
     import SearchMobilite from './searchMobilite/SearchMobilite.vue'
     import FiltreMobilites from './filtreMobilites/FiltreMobilites.vue'
     import globe from '../../../img/globe.png'
+
 
     //navabr active
     let listeNav = ["accueilNav","etudiantNav","destinationsNav","mobilitesNav","docNav","siteNav"]
@@ -43,7 +47,8 @@
 
     const listeMobilites =  reactive([])
     const listeMobilitesTab = reactive([])
-
+    let mobilite = ref({})
+    let file =ref("")
 
    function dateDiff(date1, duree){
                 var diff = {}  
@@ -126,60 +131,55 @@
         })
   }
 
-    function deleteMobilite(id){
-        console.log('delete',id)
-        
+  function deleteMobilite(id){
+      console.log('delete',id)
+      
 
-        const fetchOptions = {
-                method: "DELETE",
-                headers: {"Authorization": localStorage.getItem('jwt'), "Content-Type":"application/json"}
-                };
-        let url = `http://localhost:8989/api/mobilites/${id}`
-        fetch(url,fetchOptions)
-        .then(()=>{getMobilites(urlAllMobilites)})
-        .catch((err)=>{
-            window.alert("Vous ne pouvez pas supprimer une destination qui est liée à une ou plusieurs mobilités")
-            console.log("message d'erreur : ",err)})
-    }
+      const fetchOptions = {
+              method: "DELETE",
+              headers: {"Authorization": localStorage.getItem('jwt'), "Content-Type":"application/json"}
+              };
+      let url = `http://localhost:8989/api/mobilites/${id}`
+      fetch(url,fetchOptions)
+      .then(()=>{getMobilites(urlAllMobilites)})
+      .catch((err)=>{
+          window.alert("Vous ne pouvez pas supprimer une destination qui est liée à une ou plusieurs mobilités")
+          console.log("message d'erreur : ",err)})
+  }
     
+  function setFile(event){
+  
+  
+  let reader = new FileReader();
+  reader.onloadend = function() {
+        
+        file.value=reader.result
+        console.log(file.value)
+      }
+  reader.readAsDataURL(event.target.files[0]);
 
-    function setMobilite(mobilite){
-        document.getElementById("nomEtablissement").value=destination[0].nomEtablissementAccueil
-        document.getElementById("nomVille").value=destination[0].ville
-        document.getElementById("nomPays").value=destination[0].pays
-        document.getElementById(`${destination[0].typeMobilite}`).selected = true
-        document.getElementById("semestres").value= parseInt(destination[0].nbPlaceSemestre)
-        document.getElementById("nbPlaceAnnee").value=parseInt(destination[0].nbPlaceAnnee)
-        document.getElementById("dateFinContrat").value=destination[0].dateFinDeContratIsis
+}
 
-        document.getElementById("btnSub").addEventListener('click',()=>{
-            console.log(destination)
-            updateMobilite(destination)
-        })
-    }
+  function addDoc(mobi){
+      mobilite.value=mobi
+
+      document.getElementById("btnSubDoc").addEventListener('click',()=>{
+          
+          updateMobilite(mobi)
+      })
+  }
 
     function updateMobilite(mobilite){
 
-           let nomEtablissement = document.getElementById("nomEtablissement").value
-           let nomVille = document.getElementById("nomVille").value
-           let nomPays = document.getElementById("nomPays").value
-           let typeMobilite = document.getElementById("typeMobilite").value
-           let nbPlaceSemestre = document.getElementById("semestres").value
-           let nbPlaceAnnee= document.getElementById("nbPlaceAnnee").value
-           let date = document.getElementById("dateFinContrat").value
+           
 
-            const url = `http://localhost:8989/api/destinations/${destination[0].id}` // l’url de l'API
+            const url = `http://localhost:8989/api/mobilite/${mobilite.id}` // l’url de l'API
 
             const fetchOptions = {  method:"PUT", 
                                     headers: {"Authorization": localStorage.getItem('jwt'), "Content-Type" : "application/json"},
                                     body: JSON.stringify({
-                                        nomEtablissementAccueil:nomEtablissement,
-                                        dateFinDeContratIsis:date,
-                                        nbPlaceAnnee:nbPlaceAnnee,
-                                        nbPlaceSemestre:nbPlaceSemestre,
-                                        typeMobilite:typeMobilite,
-                                        ville:nomVille,
-                                        pays:nomPays
+                                        dateDepart:mobilite.dateDepart,
+                                        
                                         })};
             fetch(url,fetchOptions)
             .catch((error) => console.log(error));
