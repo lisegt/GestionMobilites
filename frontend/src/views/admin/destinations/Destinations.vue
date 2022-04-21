@@ -174,6 +174,7 @@
     function encodeImageFileAsURL(event) {
         
         let file = event.target.files[0];
+        console.log(file)
         let reader = new FileReader();
         reader.onloadend = function() {
           

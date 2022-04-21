@@ -1,5 +1,5 @@
 <template>
-<div class="col-3">
+<div class="col-6 col-xl-3">
     <a type="button" v-bind:href="lien"  class="text-white py-3 px-md-0 bg-color d-flex flex-column justify-content-center align-items-center">
         <img v-bind:src="chemin" width="120" height="80" alt="image ">
         <div class="h4 mt-3"> {{nom}}</div>

@@ -40,21 +40,6 @@ const props = defineProps(['document'])
 
 console.log(props.document.fichier)
 
-/**
- * @param event
- * Fonction qui met à jour l'image
- */
-function changeImage(event){
-  emits('updateImage', event )
-}
-
-/**
- * @param event
- * Fonction qui met à jour la destination
- */
-function updateDestination(event){
-  emits('updateDestination',event)
-}
 
 /**
  * Fonction qui télécharge le fichier

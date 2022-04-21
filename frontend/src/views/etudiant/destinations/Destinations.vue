@@ -1,7 +1,7 @@
 <template>
 <div class="mt-5 container">
     <div class="row h-25  align-items-center">
-        <div class="col-3 h-50 d-flex flex-column">
+        <div class="col-6 col-xl-3 h-50 d-flex flex-column">
             <FiltreDestinations @searchByPays="searchByPays" @searchByTypeMobilite="searchByTypeMobilite"/>
         </div>
 
@@ -9,11 +9,11 @@
             <h1 class="text-center">DÉCOUVREZ LES DESTINATIONS</h1>
         </div>
 
-        <div class="col-3"></div>
+        <div class="col-0 col-xl-3"></div>
     </div>
     <div class="row overflow-auto">
         <div class="col-12 d-flex justify-content-center">
-            <div class="row mt-1 mb-5 g-3 g-xl-5 d-flex justify-content-center align-items-start container scrollTableau">
+            <div class="row mt-1 w-100  mb-5 g-3 g-xl-5 d-flex justify-content-start align-items-start  scrollTableau">
                 <Carte @oppen="setDest" 
                 v-for="(destination,index) of listeDestinations" 
                 v-bind:destination="destination" 
@@ -26,18 +26,26 @@
             </div>
         </div>
     </div>
-    <Popup v-bind:destination="desti"/>
+   <Popup v-bind:destination="desti" v-bind:image="imageState" v-bind:mobilites="listeMobilites"/> 
+
 </div>
 </template>
 
 <script setup>
 import {reactive,onMounted,ref} from 'vue'
+
 import Carte from "../../../components/CarteDestinationsEtud.vue"
 import Popup from "./popupInfo/PopupInfo.vue"
 import FiltreDestinations from "./filtreDestinations/FiltreDestinations.vue"
 
+import etude from './img/etude.png'
+import humanitaire from './img/humanitaire.png'
+import stage from './img/stage.png'
+
 const listeDestinations = reactive([])
+const listeMobilites = reactive([])
 let desti = ref({})
+let imageState = ref("")
 
 const urlAllDestinations = '/api/destinations';
 
@@ -74,18 +82,7 @@ function dateDiff(date1, date2){
     return diff;
 }
 
-/**
- * @param base64img
- * @param callback
- * Fonction qui convertit l'image en base 64 en image
- */
-function Base64ToImage(base64img, callback) {
-    var img = new Image();
-    img.onload = function() {
-        callback(img);
-    };
-    img.src = base64img;
-}
+
 
 /**
  * @param url
@@ -117,6 +114,35 @@ function getDestinations(url){
  */
 function setDest(dest){
     desti.value = dest
+    console.log(desti.value)
+    loadImage(desti.value.image)
+    getMobilites()
+    console.log("mob", listeMobilites)
+}
+
+function getMobilites(){
+    fetch(desti.value._links.mobilites.href)
+    .then((response)=>{return response.json()})
+    .then((json)=>{
+        listeMobilites.splice(0,listeMobilites.length)
+        for(let m of json._embedded.mobilites){
+            if(m.retourExperience && m.retourExperience!=""){
+                listeMobilites.push(m)
+            }
+        }
+    })
+}
+
+function loadImage(img) {
+    if(img==""){
+      document.getElementById("popUpImg").style.display="none"
+    }
+    else{
+        
+        imageState.value=img
+        document.getElementById("popUpImg").style.display="inline"
+    }
+   console.log(imageState)
 }
 
 /**
