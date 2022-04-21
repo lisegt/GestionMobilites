@@ -20,6 +20,7 @@
 
   import { provide, ref } from 'vue'
 
+  /*Pour gérer l'affichage du header*/
   const header = ref(localStorage.getItem('jwt'))
 
   function headerVisible() {
@@ -36,9 +37,17 @@
     headerCache
   })
 
-  /**
-   * retirer l'attribut active de tous les items de la nav
-   */
+  /*Pour gérer l'affichage du nom de l'utilisateur dans le header */
+  const userInfos = ref(localStorage.getItem('userInfos'))
+
+  function setUserInfos(name){
+    userInfos.value = name
+  }
+
+  provide('userInfos', {
+    userInfos,
+    setUserInfos,
+  })
 
 </script>
 
