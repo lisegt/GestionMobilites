@@ -10,14 +10,14 @@
         </thead>
         <tbody>
             <tr v-for="(document) in documents" :key=[document.id] class="align-self-center" >
-            <td class="text-center align-middle">{{document.intitule}}</td>
-            <td class="text-center align-middle">{{document.description}}</td>
-            <td class="text-center align-middle"> 
-                <div class="text-center d-flex justify-content-around w-75 m-auto align-middle">
-                <a @click="$emit('update',document)" data-bs-toggle="modal" data-bs-target="#modif" class="btn" type="button" > <img v-bind:src="edit" alt="edit"></a>
-                <a @click="$emit('delete',document.id)" class="btn" type="button"> <img v-bind:src="poubelle" alt="trash"></a>
-                </div> 
-            </td>
+                <td class="col-md-3 text-center align-middle">{{document.intitule}}</td>
+                <td class="col-md-7 text-center align-middle">{{document.description}}</td>
+                <td class="col-md-2 text-center align-middle">
+                    <div class="text-center d-flex justify-content-around w-75 m-auto align-middle">
+                    <a @click="$emit('update',document)" data-bs-toggle="modal" data-bs-target="#modif" class="btn" type="button" > <img v-bind:src="edit" alt="edit"></a>
+                    <a @click="$emit('delete',document.id)" class="btn" type="button"> <img v-bind:src="poubelle" alt="trash"></a>
+                    </div> 
+                </td>
             </tr>
         </tbody>
     </table>
