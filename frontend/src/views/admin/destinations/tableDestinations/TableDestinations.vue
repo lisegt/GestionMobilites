@@ -65,11 +65,14 @@
 </script>
 
 <style>
-
     thead{
         font-family: 'Bebas Neue', sans-serif;
         color: white;
         background-color: #022e51;
         font-size: 1.3em;
+    }
+
+    td{
+        font-weight: bold;
     }
 </style>
