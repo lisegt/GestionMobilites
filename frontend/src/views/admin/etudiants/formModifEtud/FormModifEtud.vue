@@ -77,6 +77,9 @@
         .catch((error) => console.log(error));
     }
 
+    /**
+     * Fonctions pour les toasts
+     */
     function toastDanger (title, message) {
       createToast({ title: title, description: message}, {type: 'danger'})
     }
