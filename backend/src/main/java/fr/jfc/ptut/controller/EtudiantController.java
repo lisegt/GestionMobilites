@@ -25,6 +25,10 @@ public class EtudiantController {
     @Autowired
     EtudiantRepository etudiantRepository;
     
+    /**
+     * 
+     * @return
+     */
     @GetMapping("/etudiant/promo")
     public Set<Integer> getPromo(){
         Set<Integer> res = new HashSet<>();
@@ -37,6 +41,11 @@ public class EtudiantController {
         return res;
     }
 
+    /**
+     * 
+     * @param promo
+     * @return
+     */
     @GetMapping("/findEtudiant/promo/{promo}")
     public Set<Etudiant> getEtudiantByPromo(@PathVariable String promo){
         Integer promoEtud = Integer.valueOf(promo);
@@ -50,6 +59,11 @@ public class EtudiantController {
         return res;
     }
 
+    /**
+     * 
+     * @param etat
+     * @return
+     */
     @GetMapping("/findEtudiant/etatMobilite/{etat}")
     public Set<Etudiant> getEtudiantByEtatMobilite(@PathVariable String etat){
         Set<Etudiant> res = new HashSet<>();

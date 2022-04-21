@@ -33,6 +33,9 @@
     let username = ref('')
     let password = ref('')
 
+    /**
+     * Fonction permettant de s'authentifier
+     */
     function signin(){
         let url = '/api/auth/signin'
         let myHeaders = new Headers();
@@ -59,10 +62,9 @@
         })
     }
 
-    /**
+  /**
    * Fonction pour affichage de toast
    */
-
   function toastSuccess (message) {
       createToast(message, {type: 'success'})
   }

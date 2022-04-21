@@ -52,6 +52,11 @@ public class AuthController {
     @Autowired
     JwtUtils jwtUtils;
 
+	/**
+	 * Permet de se connecter avec un username et un mdp
+	 * @param loginRequest
+	 * @return
+	 */
     @PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         //Contexte spring à partir de username et password
@@ -74,6 +79,11 @@ public class AuthController {
 												 roles));
 	}
 
+	/**
+	 *  Permet de créer un nouvel utilisateur
+	 * @param signUpRequest
+	 * @return
+	 */
     @PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         //Si l'username est déjà utilisé
