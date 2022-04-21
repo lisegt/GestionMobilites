@@ -16,7 +16,7 @@
         </button>
     </div>
 
-  <TableMobilites @addDoc="addDoc" @delete="deleteMobilite" v-bind:mobilites="listeMobilitesTab" class="mt-4"/>
+  <TableMobilites @addDoc="addDoc" @delete="deleteMobilite" v-bind:mobilites="listeMobilitesTab" class="mt-4 mb-5"/>
   
   </div>
   

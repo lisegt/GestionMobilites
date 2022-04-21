@@ -1,5 +1,5 @@
 <template>
-<div class="container table-responsive scrollTableau ">
+<div class="container table-responsive scrollTableau">
   <table class="table table-striped table-bordered ">
    <thead>
     <tr>
