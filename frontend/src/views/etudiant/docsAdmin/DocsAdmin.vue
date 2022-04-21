@@ -48,7 +48,6 @@ function getDoc(){
   .then((dataJSON) => {
   listeDocuments.splice(0,listeDocuments.length)
   dataJSON._embedded.documents.forEach((d)=>listeDocuments.push(d))
-  console.log(listeDocuments)
   })
   .catch((error) => console.log(error));
 }
@@ -59,7 +58,6 @@ function getDoc(){
  */
 function setDoc(doc){
     docu.value = doc
-    console.log(document)
 }
 
 /**
@@ -67,7 +65,6 @@ function setDoc(doc){
  */
 onMounted(()=>{
     getDoc()
-    console.log(listeDocuments)
 })
 
 </script>

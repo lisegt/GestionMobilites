@@ -28,6 +28,7 @@
                 <li class=" flex-fill text-center">
                     <div class="col text-center text-center dropdown btn-group">
                         <button class="btn dropdown-toggle text-center" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            
                             <img src="../views/admin/accueil/img/utilisateur.png" alt="utilisateur" />
                         </button>
                         <div class="dropdown-menu dropdown-menu-right text-center" id="menuDeroulant" aria-labelledby="dropdownMenuButton">

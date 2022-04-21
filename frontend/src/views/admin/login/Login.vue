@@ -19,6 +19,9 @@
     import {useRouter} from 'vue-router'
     import { inject } from 'vue'
 
+    import { createToast } from 'mosha-vue-toastify';
+    import 'mosha-vue-toastify/dist/style.css'
+
     /*Pour gérer l'affichage du header*/
     const { header, headerVisible } = inject('header')
 
@@ -37,10 +40,12 @@
         let body = JSON.stringify({username:username._value, password:password._value})
         fetch(url, {method: 'POST', headers: myHeaders, body: body})
         .then((response)=>{
+            if(response.status != 200){
+                toastDanger("Mot de passe ou nom d'utilisateur incorrect")
+            }
             return response.json()
         })
         .then((dataJson)=>{
-            console.log(dataJson)
             localStorage.setItem('jwt','Bearer '+dataJson.accessToken)
             localStorage.setItem('userInfos',dataJson.username)
             setUserInfos(dataJson.username)
@@ -50,11 +55,21 @@
             router.push({name: 'Accueil'})
         })
         .catch((error)=>{
-            alert('mot de passe ou identifiant incorrect')
             console.log(error)
         })
     }
-    
+
+    /**
+   * Fonction pour affichage de toast
+   */
+
+  function toastSuccess (message) {
+      createToast(message, {type: 'success'})
+  }
+
+  function toastDanger (title, message) {
+      createToast({ title: title, description: message}, {type: 'danger'})
+  }
 
 </script>
 
