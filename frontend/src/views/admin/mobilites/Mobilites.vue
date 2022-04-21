@@ -54,8 +54,12 @@
     const listeMobilitesTab = reactive([])
     let mobilite = ref({})
     let file =ref("")
-
-   function dateDiff(date1, duree){
+    /**
+     * 
+     * @param  date1 date actuelle
+     * fonction qui permet de calculer le nombre de jours entre la date actuel et la date de retour de l'etudiant
+     */
+   function dateDiff(date1){
                 var diff = {}  
                 
                 let dateRetour = new Date(date1) // Initialisation du retour
@@ -80,8 +84,13 @@
     }
   const urlAllMobilites = `http://localhost:8989/api/mobilites`
 
+  /**
+   * 
+   * @param url vers lequel les requêtes fetch sont envoyées
+   * fonction qui permet de récuperer les mobilités stockées en base de données
+   */
   function getMobilites(url){
-        listeMobilites.splice(0,listeMobilites.length)         //On vide la liste des destinations avant de la remplir afin d'éviter les doublons
+        listeMobilites.splice(0,listeMobilites.length)         //On vide la liste des mobilités avant de la remplir afin d'éviter les doublons
         listeMobilitesTab.splice(0,listeMobilitesTab.length) 
 
         
@@ -133,8 +142,11 @@
   }
 
   /**
-   * Fonction permettant de supprimer une mobilité
-   */
+     * 
+     * @param id  de la mobilité à supprimer
+     * fonction qui permet de supprimer une mobilité 
+     * elle fait appel à la methode @function getMobilites() afin de mettre à jour la liste des mobilités
+     */
   function deleteMobilite(id){
       const fetchOptions = {
               method: "DELETE",
@@ -156,6 +168,11 @@
           console.log("message d'erreur : ",err)})
   }
     
+  /**
+     * 
+     * @param event lors de l'upload d'un fichier
+     * fonction qui permet de convertir un fichier en base64 
+     */
   function setFile(event){
     let reader = new FileReader();
     reader.onloadend = function() {
@@ -166,34 +183,48 @@
     reader.readAsDataURL(event.target.files[0]);
   }
 
+  /**
+   * 
+   * @param mobi : mobilité selectionné
+   * fonctionne qui assigne à l'objet ref la mobilité en paramètre afin de la recupérer 
+   * dans le formulaire permetant d'ajouter un document
+   */
   function addDoc(mobi){
       mobilite.value=mobi
   }
 
-    function updateMobilite(event){
-      event.preventDefault()
-        const url = `http://localhost:8989/api/mobilites/${mobilite.value[0].id}` // l’url de l'API
-        const fetchOptions = {  method:"PUT", 
-                                headers: {"Authorization": localStorage.getItem('jwt'), "Content-Type" : "application/json"},
-                                body: JSON.stringify({
-                                    dateDepart:mobilite.value[0].dateDepart,
-                                    retourExperience:file.value,
-                                    dureeEnMois:mobilite.value[0].dureeEnMois,
-                                    periode:mobilite.value[0].periode,
-                                    destination:`http://localhost:8989/api/destinations/${mobilite.value[2].id}`,
-                                    etudiant:`http://localhost:8989/api/etudiants/${mobilite.value[1].id}`                                        
-                              })};
-        fetch(url,fetchOptions)
-        .then((response)=>{
-          if(response.status === 200){
-            getMobilites(urlAllMobilites)
-            toastSuccess('Mobilité complétée')
-          }
-        })
-        .catch((error) => console.log(error));
-    }
+  /**
+   * 
+   * @param event lors du clique sur le bouton de modification
+   * fonction qui met à jour la mobilité qui est dans le formulaire de modification
+   */
+  function updateMobilite(event){
+    event.preventDefault()
+      const url = `http://localhost:8989/api/mobilites/${mobilite.value[0].id}` // l’url de l'API
+      const fetchOptions = {  method:"PUT", 
+                              headers: {"Authorization": localStorage.getItem('jwt'), "Content-Type" : "application/json"},
+                              body: JSON.stringify({
+                                  dateDepart:mobilite.value[0].dateDepart,
+                                  retourExperience:file.value,
+                                  dureeEnMois:mobilite.value[0].dureeEnMois,
+                                  periode:mobilite.value[0].periode,
+                                  destination:`http://localhost:8989/api/destinations/${mobilite.value[2].id}`,
+                                  etudiant:`http://localhost:8989/api/etudiants/${mobilite.value[1].id}`                                        
+                            })};
+      fetch(url,fetchOptions)
+      .then((response)=>{
+        if(response.status === 200){
+          getMobilites(urlAllMobilites)
+          toastSuccess('Mobilité complétée')
+        }
+      })
+      .catch((error) => console.log(error));
+  }
   
-    function addMobilite() {
+  /**
+   * fonction qui ajoute une mobilité à la base de donnée, lorsque le formulaire d'ajout est validé
+   */
+  function addMobilite() {
       const url = `http://localhost:8989/api/` // l’url de l'API
       let idDestination = document.getElementById("addDestination").value
       let idEtudiant = document.getElementById("selectEtud").value
@@ -237,6 +268,7 @@
       let duree = document.getElementById("addDuree").value = ''
       let periode = document.getElementById("periode").value  = ''
   }
+
 
 function getMobilitesFiltrees(url){      
         listeMobilitesTab.splice(0,listeMobilitesTab.length) //On vide la liste des mobilités avant de la remplir afin d'éviter les doublons
@@ -332,13 +364,24 @@ onMounted(()=>{
     
 })
 
+/**
+ * 
+ * @param  message lors d'un evenement
+ * fonction qui retourne un message à l'utilisateur lors d'une requête qui a fonctionnée
+ */
 function toastSuccess (message) {
       createToast(message, {type: 'success'})
   }
 
-  function toastDanger (title, message) {
-      createToast({ title: title, description: message}, {type: 'danger'})
-  }
+/**
+ * 
+ * @param  title lors d'un evement
+ * @param  message lors d'un evenement
+ * fonction qui retourne un message à l'utilisateur lors d'une requête qui n'a pas fonctionnée
+ */
+function toastDanger (title, message) {
+    createToast({ title: title, description: message}, {type: 'danger'})
+}
 </script>
 
 <style>

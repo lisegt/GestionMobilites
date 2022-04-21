@@ -95,6 +95,10 @@ const listePromo = reactive([])
 const listeDestinations = reactive([])
 const listeDestinationsFiltres = reactive([])
 
+
+  /**
+   * fonction qui récupère les etudiants dans la base de données
+   */
   function getEtud(){
     const fetchOptions = {method:"GET", headers:{"Authorization": localStorage.getItem('jwt')}};
     fetch("http://localhost:8989/api/etudiants/",fetchOptions)
@@ -122,6 +126,9 @@ const listeDestinationsFiltres = reactive([])
     .catch((error) => console.log(error));
   }
 
+  /**
+   * fonction qui recupère les destinations dans la base de données 
+   */
   function getDestinations(){
         const fetchOptions = {method:"GET", headers:{"Authorization": localStorage.getItem('jwt')}};
 
@@ -144,8 +151,11 @@ const listeDestinationsFiltres = reactive([])
 
   }
 
-
-   
+  /**
+   * 
+   * @param event evenement lorsque que l'année de promotion change
+   * fonction qui ajout les etudiants de la promo selectionnée à la liste @constant listeEtudiantsFiltres
+   */
   function setListeEtudiant(event){
     listeEtudiantsFiltres.splice(0,listeEtudiantsFiltres.length)
     listeEtudiants.forEach((e)=>{
@@ -156,6 +166,11 @@ const listeDestinationsFiltres = reactive([])
    
   }
 
+  /**
+   * 
+   * @param event evenement lorsque que le type de mobilité change
+   * fonction qui ajoute les destinations ayant pour type, le type selectionné à la liste @constant listeDestinationsFiltres
+   */
   function setListeDestinations(event){
     listeDestinationsFiltres.splice(0,listeDestinationsFiltres.length)
     listeDestinations.forEach((d)=>{

@@ -148,12 +148,12 @@
         .catch((err)=>{
             console.log("message d'erreur : ",err)})
     }
+
     /**
      * 
      * @param destination à intégrer au formulaire
      * fonction qui permet d'integrer les valeurs de la destination en paramètre au formulaire de modification
      */
-
     function setDestination(destination){
 
         idDestination.value = destination[0].id
@@ -171,7 +171,7 @@
     /**
      * 
      * @param event lors du clique sur le bouton de modification
-     * fonction qui met à jour la destination qui est dans le formulair de modification
+     * fonction qui met à jour la destination qui est dans le formulaire de modification
      */
     function updateDestination(event){
           

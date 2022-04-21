@@ -93,10 +93,10 @@ function sendFile(event){
 }
 
 /**
-     * 
-     * @param event  evenement lors de la validation du formulaire
-     * fonction qui renvoie l'evenement au composant parent
-     */
+ * 
+ * @param event  evenement lors de la validation du formulaire
+ * fonction qui renvoie l'evenement au composant parent
+ */
 function addDestination(event){
     emit('ajouter',event)
 }
