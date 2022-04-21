@@ -59,6 +59,12 @@
     let img = ref("")
     let idDestination = ref(0)
     const url = 'api/destinations'
+
+    /**
+     * 
+     * @param  date1 date actuelle
+     * @param  date2 date de fin de contrat de la destination itérée
+     */
     function dateDiff(date1, date2){
                 var diff = {}                           // Initialisation du retour
                 var tmp = date2 - date1;
