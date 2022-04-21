@@ -8,7 +8,6 @@
             <Carte v-bind:nom="'DESTINATIONS'" v-bind:lien="'/etudiant/destinations'" v-bind:chemin="destinations"/>
             <Carte v-bind:nom="'DOCUMENTS'" v-bind:lien="'/etudiant/documents'" v-bind:chemin="doc"/>
         </div>
-        
     </div>
 </div>
 </template>

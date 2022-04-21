@@ -6,16 +6,12 @@
           <div class="col-1"></div>
           <div class="modal-title text-center col-10 h3" >{{document.intitule}}</div>
           <button type="button" class="btn-close col-1 me-3" data-bs-dismiss="modal" aria-label="Close"></button>
-        
       </div>
       <div class="modal-body h-25 justify-content-center">
           <div class="row h-50 overflow-y-auto">
               <div class="h4 text-left col-2">Description :</div>
               <div class="col-10 text-left h-100 overflow-auto" style="word-wrap:break-word;">{{document.description}}</div>
-            
-              
           </div>
-
           <div class="row mt-3 h-25 align-items-center justify-content-start">
               <div class="col-4 h4 text-left">Lien de telechargement : </div>
               <div  class="col-8 text-left h-100   align-items-center ">
@@ -31,15 +27,12 @@
 </template>
 
 <script setup>
-
-
 import {  defineEmits } from 'vue';
 
 const emits = defineEmits(['updateImage','updateDestination'])
 const props = defineProps(['document'])
 
 console.log(props.document.fichier)
-
 
 /**
  * Fonction qui télécharge le fichier

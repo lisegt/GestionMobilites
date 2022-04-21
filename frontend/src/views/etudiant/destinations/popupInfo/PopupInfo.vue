@@ -23,7 +23,6 @@
             <div class="row">
               <div class="col titre align-items-center">Retour(s) d'expérience :</div>
               <span>
-               
                 <ul class="list-group">
                     <li v-for="(mobilite,index) of mobilites" v-bind:key="index" class=" row font-weight-bold d-flex align-items-center justify-content-start">
               
@@ -53,18 +52,16 @@ import stage from '../img/stage.png'
 
 const props=defineProps(['destination','image','mobilites'])
 /**
+ * @param mobilite
  * Fonction qui télécharge le fichier
  */
 function download(mobilite){
-  console.log(mobilite)
-  
   const linkSource = mobilite.retourExperience;
   let btn = document.getElementById("btnDownLoad")
-
   const fileName = `retour_experience.pdf`
   btn.href = linkSource;
   btn.download = fileName;
-  btn.click(); 
+  btn.click();
 }
 </script>
 
