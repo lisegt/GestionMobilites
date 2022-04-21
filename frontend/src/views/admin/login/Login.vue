@@ -40,7 +40,6 @@
             return response.json()
         })
         .then((dataJson)=>{
-            console.log(dataJson)
             localStorage.setItem('jwt','Bearer '+dataJson.accessToken)
             localStorage.setItem('userInfos',dataJson.username)
             setUserInfos(dataJson.username)

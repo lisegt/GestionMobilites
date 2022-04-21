@@ -147,8 +147,6 @@
         document.getElementById("nbPlaceAnnee").value=parseInt(destination[0].nbPlaceAnnee)
         document.getElementById("dateFinContrat").value=destination[0].dateFinDeContratIsis
         img.value=destination[0].image
-        
-    
       }
 
     function updateDestination(event){

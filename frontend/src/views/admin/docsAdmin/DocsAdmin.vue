@@ -62,7 +62,6 @@ function getDoc(){
   .then((dataJSON) => {
   listeDocuments.splice(0,listeDocuments.length)
   dataJSON._embedded.documents.forEach((d)=>listeDocuments.push(d))
-  console.log(listeDocuments)
   })
   .catch((error) => console.log(error));
 }
@@ -97,7 +96,6 @@ function deleteDocument(id){
  * Fonction qui modifie les données
  */
 function setDoc(doc){
-  console.log(doc)
   idDoc.value = doc.id
  
   document.getElementById("updateIntitule").value = doc.intitule
@@ -146,9 +144,7 @@ function setFile(event){
   
   let reader = new FileReader();
   reader.onloadend = function() {
-        
         file.value=reader.result
-        console.log(file.value)
       }
   reader.readAsDataURL(event.target.files[0]);
 

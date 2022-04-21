@@ -63,8 +63,7 @@ function recupererTousTypesMobilite(){
         .then((dataJSON) => {
             types.splice(0, types.length) //on vide la liste avant de la reremplir
             dataJSON.forEach((type) => {
-            types.push(type) 
-            console.log(types)
+            types.push(type)
             })
         })
         .catch((error) => console.log(error));
