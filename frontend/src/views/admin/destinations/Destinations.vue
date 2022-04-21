@@ -1,31 +1,31 @@
 <template>
   <div class=" mt-5 container ">
-  <div class="row h-25  align-items-center">
+    <div class="row h-25  align-items-center">
 
-    <div class="col-4 h-50 d-flex flex-column">
-      <SearchDestination v-bind:destinations="listeDestinationsTab" @searchDestination="searchDestination"/>
-      
-      <FiltreDestinations @searchByPays="searchByPays" @searchByTypeMobilite="searchByTypeMobilite" @searchByStatutContrat="searchByStatutContrat"/>
-      
+      <div class="col-4 h-50 d-flex flex-column">
+        <SearchDestination v-bind:destinations="listeDestinationsTab" @searchDestination="searchDestination"/>
+        
+        <FiltreDestinations @searchByPays="searchByPays" @searchByTypeMobilite="searchByTypeMobilite" @searchByStatutContrat="searchByStatutContrat"/>
+        
+      </div>
+
+      <h1 class="col-4 text-center">GESTION DES DESTINATIONS</h1>
+
+      <div class="col-4 text-right">
+          <button type="button" class="btnOrange " data-bs-toggle="modal" data-bs-target="#exempleModalD">
+              <img img v-bind:src="world" alt="world" class="mr-1">
+              Ajouter une destination
+          </button>
+      </div>
+
+    <TableDestinations 
+                @set="setDestination" 
+                @delete="deleteDestination" 
+                v-bind:destinations="listeDestinationsTab" 
+                @updateImage="encodeImageFileAsURL"
+                @updateDestination="updateDestination"
+                class="mt-4"/>
     </div>
-
-    <h1 class="col-4 text-center">GESTION DES DESTINATIONS</h1>
-
-    <div class="col-4 text-right">
-        <button type="button" class="btnOrange " data-bs-toggle="modal" data-bs-target="#exempleModalD">
-            <img img v-bind:src="world" alt="world" class="mr-1">
-            Ajouter une destination
-        </button>
-    </div>
-
-  <TableDestinations 
-              @set="setDestination" 
-              @delete="deleteDestination" 
-              v-bind:destinations="listeDestinationsTab" 
-              @updateImage="encodeImageFileAsURL"
-              @updateDestination="updateDestination"
-              class="mt-4"/>
-  </div>
   <FormAddDestination @ajouter="postDestination" @changePicture="encodeImageFileAsURL" />
   </div>
   
@@ -41,8 +41,12 @@
 
     import world from '../../../img/world.png'
 
-    //navabr active
+    /**
+     * Activer les items de la navbar selon la page consultée
+     * On retire l'attribut de tous les items de la nav et on le rajoute à l'item de la page concernée
+    **/
     let listeNav = ["accueilNav","etudiantNav","destinationsNav","mobilitesNav","docNav","siteNav"]
+
     for(let l of listeNav){
     document.getElementById(l).classList.remove("active")
     }
@@ -136,7 +140,7 @@
       }
 
     function updateDestination(event){
-          console.log("cc")
+          
            event.preventDefault()
            alert(document.getElementById("nomEtablissement").value)
            let nomEtablissement = document.getElementById("nomEtablissement").value

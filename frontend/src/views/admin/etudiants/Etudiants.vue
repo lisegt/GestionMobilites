@@ -42,12 +42,15 @@
   import { onMounted, onUpdated} from "vue";
   import { reactive } from 'vue';
 
-  //navabr active
-    let listeNav = ["accueilNav","etudiantNav","destinationsNav","mobilitesNav","docNav","siteNav"]
-    for(let l of listeNav){
-    document.getElementById(l).classList.remove("active")
-    }
-    document.getElementById("etudiantNav").classList.add("active")
+  /**
+   * Activer les items de la navbar selon la page consultée
+   * On retire l'attribut de tous les items de la nav et on le rajoute à l'item de la page concernée
+  **/
+  let listeNav = ["accueilNav","etudiantNav","destinationsNav","mobilitesNav","docNav","siteNav"]
+  for(let l of listeNav){
+  document.getElementById(l).classList.remove("active")
+  }
+  document.getElementById("etudiantNav").classList.add("active")
 
 
   //Liste d'étudiants

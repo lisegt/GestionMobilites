@@ -18,5 +18,6 @@ public class Document {
     @NonNull
     private String intitule;
 
+    @Column(columnDefinition="LONGTEXT")
     private String description;
 }

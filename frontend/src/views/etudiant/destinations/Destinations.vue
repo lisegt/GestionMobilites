@@ -14,7 +14,7 @@
     <div class="row g-5 h-50 overflow-auto justify-content-center mt-3">
         <Carte @oppen="setDest" v-for="(destination,index) of listeDestinations" v-bind:destination="destination" v-bind:index="destination.id"  v-bind:nom="destination.nomEtablissementAccueil" v-bind:ville="destination.ville" v-bind:pays="destination.pays" v-bind:type="destination.typeMobilite" v-bind:img="destination.image"/>
     </div>
-    <Popup v-bind:destination="desti" v-for="(destination,index) of listeDestinations" v-bind:index="destination.id" v-bind:img="destination.image" v-bind:type="destination.typeMobilite"/>
+    <Popup v-bind:destination="desti"/>
 </div>
 </template>
 
@@ -28,6 +28,16 @@ const listeDestinations = reactive([])
 let desti = ref({})
 
 const urlAllDestinations = '/api/destinations';
+
+/**
+ * Activer les items de la navbar selon la page consultée
+ * On retire l'attribut de tous les items de la nav et on le rajoute à l'item de la page concernée
+**/
+let listeNav = ["accueilNav","destinationsNav","docNav"]
+for(let l of listeNav){
+document.getElementById(l).classList.remove("active")
+}
+document.getElementById("destinationsNav").classList.add("active")
 
 /**
  * @param date1

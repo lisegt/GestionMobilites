@@ -11,7 +11,7 @@
       </div>
       <div class="modal-body h-25 contenu">
           <div class="col text-center">
-            <img v-bind:id="index" v-bind:src="img" class="img" width="170" height="190" alt="image ">
+            <img v-bind:id="destination.id" v-bind:src="destination.image" class="img" width="170" height="190" alt="image ">
           </div>
           <div class="col justify-content-center my-4">
             <div class="row">
@@ -23,7 +23,7 @@
             <div class="row">
               <div class="col titre">Retour(s) d'expérience :</div>
               <span>
-                <ul>
+                <ul class="list-unstyled">
                     <li>
                     </li>
                 </ul>
@@ -37,13 +37,15 @@
 </template>
 
 <script setup>
-import {onMounted, ref} from 'vue'
+import {onMounted} from 'vue'
 import etude from '../img/etude.png'
 import humanitaire from '../img/humanitaire.png'
 import stage from '../img/stage.png'
 
-const props = defineProps(['destination', 'index', 'img', 'type'])
-let type = ref({})
+import {defineEmits} from 'vue'
+
+const props = defineProps(['destination'])
+
 
 /**
  * @param base64img
@@ -52,28 +54,27 @@ let type = ref({})
  * Sinon image par défaut selon le type de mobilité
  */
 function Base64ToImage(base64img) {
-  if(props.img==""){
-    
-    if(props.type=="STAGE"){
-      console.log(props.type)
-      document.getElementById(`${props.index}`).src=stage
+  if(props.destination.image==""){
+    if(props.destination.typeMobilite=="STAGE"){
+      document.getElementById(`${props.destination.id}`).src=stage
     }
     if(props.type=="ETUDE"){
-      document.getElementById(`${props.index}`).src=etude
+      document.getElementById(`${props.destination.id}`).src=etude
     }
     if(props.type=="HUMANITAIRE"){
-      document.getElementById(`${props.index}`).src=humanitaire
+      document.getElementById(`${props.destination.id}`).src=humanitaire
     }
   }
   else{
-      document.getElementById(`${props.index}`).src=props.img
+     // document.getElementById(`${props.destination.id}`).src=props.destination.img
   }
 }
 
 /**
  * Lorsqu'on crée le composant PopupInfo, on exécute la fonction Base64ToImage(props.img)
  */
-onMounted(()=>{Base64ToImage(props.img)})
+onMounted(()=>{
+  Base64ToImage(props.destination.image)})
 </script>
 
 <style scoped>

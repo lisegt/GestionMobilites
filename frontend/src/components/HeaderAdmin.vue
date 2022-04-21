@@ -31,7 +31,7 @@
                             <img src="../views/admin/accueil/img/utilisateur.png" alt="utilisateur" />
                         </button>
                         <div class="dropdown-menu dropdown-menu-right text-center" id="menuDeroulant" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Nom Prénom</a>
+                            <a class="dropdown-item" href="#">Test</a>
                             <div class="dropdown-divider"></div>
                             <a  class="dropdown-item text-wrap" href="/admin/administrateurs"><img class="mr-2" src="../views/admin/accueil/img/ajoutAdmin.svg" alt="logo d'ajout d'un admin"/>Ajouter un administrateur</a>
                             <div class="dropdown-divider"></div>
@@ -53,6 +53,10 @@
     const {headerCache} = inject('header')
 
     const router = useRouter()
+
+    /**
+     * Fonction permettant de se deconnecter
+     */
     function logout(){
             localStorage.removeItem('jwt')
             headerCache()

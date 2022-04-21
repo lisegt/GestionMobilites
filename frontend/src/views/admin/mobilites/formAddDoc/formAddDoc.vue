@@ -25,7 +25,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btnOrange" data-bs-dismiss="modal">Close</button>
-                    <input id="btnSubDoc" @click="$emit('ajouter')" type="submit" class="btnOrange" value="Ajouter" />
+                    <input id="btnSubDoc" @click="updateMobilite" data-bs-dismiss="modal" type="submit" class="btnOrange" value="Ajouter" />
                  </div>
                  
             </form>
@@ -37,13 +37,13 @@
 </template>
 
 <script setup>
-    const emits = defineEmits(['updateFile','updateDoc'])
+    const emits = defineEmits(['updateFile','updateMobilite'])
     function majFile(event){
         emits('updateFile',event)
     }
 
-    function majDoc(event){
-        emits('updateDoc',event)
+    function updateMobilite(event){
+        emits('updateMobilite',event)
     }
 
 </script>

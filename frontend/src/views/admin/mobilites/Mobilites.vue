@@ -21,7 +21,7 @@
   </div>
   
   <FormAddMobilites @ajouter="addMobilite" />
-  <FormAddDoc v-bind:mobilite="mobilite" @updateFile="setFile"/>
+  <FormAddDoc v-bind:mobilite="mobilite" @updateMobilite="updateMobilite" @updateFile="setFile"/>
   </div>
   
 </template>
@@ -37,8 +37,10 @@
     import FiltreMobilites from './filtreMobilites/FiltreMobilites.vue'
     import globe from '../../../img/globe.png'
 
-
-    //navabr active
+    /**
+     * Activer les items de la navbar selon la page consultée
+     * On retire l'attribut de tous les items de la nav et on le rajoute à l'item de la page concernée
+    **/
     let listeNav = ["accueilNav","etudiantNav","destinationsNav","mobilitesNav","docNav","siteNav"]
     for(let l of listeNav){
     document.getElementById(l).classList.remove("active")
@@ -53,11 +55,8 @@
    function dateDiff(date1, duree){
                 var diff = {}  
                 
-                let dateRetour = new Date(date1)
-                console.log("date depart",duree)         
-                          // Initialisation du retour
-                console.log(dateRetour.setMonth(dateRetour.getMonth()+ 5))
-                console.log("date retour",dateRetour) 
+                let dateRetour = new Date(date1) // Initialisation du retour
+               
                 let actuelDate= new Date()
                 
                 var tmp = dateRetour - actuelDate;
@@ -73,7 +72,7 @@
                 
                 tmp = Math.floor((tmp-diff.hour)/24);   // Nombre de jours restants
                 diff.day = tmp;
-                console.log(diff)
+              
                 return diff.day;
     }
   const urlAllMobilites = `http://localhost:8989/api/mobilites`
@@ -93,7 +92,7 @@
             
            
             for(let d of json._embedded.mobilites){
-                  console.log(d)
+              
                   
                   fetch(d._links.etudiant.href, {method:'GET',headers: {"Authorization": localStorage.getItem('jwt')}})
                   .then((res)=>{return res.json()})
@@ -101,7 +100,7 @@
                     return json
                   })
                   .then((etudiant)=>{
-                    console.log(etudiant)
+                    
                     fetch(d._links.destination.href, {method:'GET',headers: {"Authorization": localStorage.getItem('jwt')}})
                     .then((res)=>{return res.json()})
                     .then((destination)=>{
@@ -126,13 +125,14 @@
                         listeMobilitesTab.push([d,etudiant,destination,"En cours"])
                       }}
                     })
+                    console.log(listeMobilitesTab)
                   })  
             }
         })
   }
 
   function deleteMobilite(id){
-      console.log('delete',id)
+      
       
 
       const fetchOptions = {
@@ -154,31 +154,35 @@
   reader.onloadend = function() {
         
         file.value=reader.result
-        console.log(file.value)
+        
       }
   reader.readAsDataURL(event.target.files[0]);
 
 }
 
   function addDoc(mobi){
+      
       mobilite.value=mobi
-
-      document.getElementById("btnSubDoc").addEventListener('click',()=>{
-          
-          updateMobilite(mobi)
-      })
+      console.log("mobilite select: ",mobilite.value)
+      
   }
 
-    function updateMobilite(mobilite){
+    function updateMobilite(event){
 
-           
+           event.preventDefault()
 
-            const url = `http://localhost:8989/api/mobilite/${mobilite.id}` // l’url de l'API
+            const url = `http://localhost:8989/api/mobilites/${mobilite.value[0].id}` // l’url de l'API
 
             const fetchOptions = {  method:"PUT", 
                                     headers: {"Authorization": localStorage.getItem('jwt'), "Content-Type" : "application/json"},
                                     body: JSON.stringify({
-                                        dateDepart:mobilite.dateDepart,
+                                        dateDepart:mobilite.value[0].dateDepart,
+                                        retourExperience:file.value,
+                                        dureeEnMois:mobilite.value[0].dureeEnMois,
+                                        periode:mobilite.value[0].periode,
+                                        destination:`http://localhost:8989/api/destinations/${mobilite.value[2].id}`,
+                                        etudiant:`http://localhost:8989/api/etudiants/${mobilite.value[1].id}`
+
                                         
                                         })};
             fetch(url,fetchOptions)
