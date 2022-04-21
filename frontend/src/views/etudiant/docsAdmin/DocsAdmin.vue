@@ -5,7 +5,7 @@
     </div>
     <div id="docAdmin" class=" row overflow-auto ">
         <div class="col-12 ">
-            <div class="row mt-1 mt-0 mb-5 g-3 g-xl-5 text-center container scrollTableau">    
+            <div class="row mt-1 mb-5 g-3 g-xl-5 text-center container scrollTableau">    
                 <Carte  @oppen="setDoc" v-for="(document) in listeDocuments" :key=[document.id]  v-bind:document="document" v-bind:chemin="doc"/>
             </div>
         </div>

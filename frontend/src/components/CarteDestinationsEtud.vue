@@ -48,7 +48,6 @@ onMounted(()=>{Base64ToImage(props.img)})
 .carte{
     background-color: #B74803;
     border-radius: 30px;
-    height: 70%;
 }
 .txt{
     color: #FFFFFF;
