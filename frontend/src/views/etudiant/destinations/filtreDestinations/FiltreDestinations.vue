@@ -6,7 +6,6 @@
                 <option v-for="pays in listePays" :key="pays" :value="pays">{{pays}}</option>
             </select>
         </div>
-
         <div class="col px-0 text-center">
             <select id="type_mobilite" class="formSelect" @change="searchByTypeMobilite">
                 <option value="tous" id="typesTous">TYPE MOBILITE</option>
@@ -17,7 +16,6 @@
 </template>
 
 <script setup>
-
 import {reactive, onMounted, defineEmits } from 'vue'
 
 const listePays = reactive([]); // liste qui contient les différents pays des destinations

@@ -25,7 +25,6 @@
   import TableAdmin from './tableAdmin/TableAdmin.vue'
   import userAdd from '../../../img/user-add.png'
   import { createToast } from 'mosha-vue-toastify';
-  import 'mosha-vue-toastify/dist/style.css'
 
   /**
    * Liste des administrateurs

@@ -79,6 +79,12 @@
     }
 
     const urlAllDestinations = '/api/destinations';
+
+  /**
+   * 
+   * @param url vers lequel les requêtes fetch sont envoyées
+   * fonction qui permet de récuperer les destinations stockées en base de données
+   */
     function getDestinations(url){
            
         listeDestinationsTab.splice(0,listeDestinationsTab.length) //On vide la liste des destinations avant de la remplir afin d'éviter les doublons
@@ -112,7 +118,10 @@
     }
 
     /**
-     * Méthode pour supprimer une destination
+     * 
+     * @param id  de la destination à supprimer
+     * fonction qui permet de supprimer une destination 
+     * elle fait appel à la methode @function getDestination() afin de mettre à jour la liste des destinations
      */
     function deleteDestination(id){
          const fetchOptions = {
@@ -133,7 +142,11 @@
         .catch((err)=>{
             console.log("message d'erreur : ",err)})
     }
-    
+    /**
+     * 
+     * @param destination à intégrer au formulaire
+     * fonction qui permet d'integrer les valeurs de la destination en paramètre au formulaire de modification
+     */
 
     function setDestination(destination){
 
@@ -149,6 +162,11 @@
         img.value=destination[0].image
       }
 
+    /**
+     * 
+     * @param event lors du clique sur le bouton de modification
+     * fonction qui met à jour la destination qui est dans le formulair de modification
+     */
     function updateDestination(event){
           
            event.preventDefault()
@@ -184,10 +202,15 @@
 
     }
 
-    
+    /**
+     * 
+     * @param event lors de l'upload d'une image
+     * fonction qui permet de convertir une image en base64 
+     */
     function encodeImageFileAsURL(event) {
         
         let file = event.target.files[0];
+        console.log(file)
         let reader = new FileReader();
         reader.onloadend = function() {
           
@@ -198,6 +221,11 @@
 
       }
     
+    /**
+     * 
+     * @param event lors de la validation du formulaire
+     * fonction qui crée une destination en recuperant les attributs du formulaire d'ajout
+     */
     function postDestination(event){
         event.preventDefault()
         let nomEtablissement = document.getElementById("addNomEtablissement").value

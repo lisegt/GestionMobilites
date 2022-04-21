@@ -1,29 +1,39 @@
 <template>
-    <a type="button" @click="oppenCard" data-bs-toggle="modal" data-bs-target="#exampleModal" class="carte col-12 w-25 col-xl-4 px-md-0 mx-2 bg-color d-flex flex-column pt-3 align-items-center border-0 justify-content-center">
-        <img v-bind:id="index" v-bind:src="img" class="img" height="100" alt="image ">
-        <div  class="h4 mt-3 txt"> {{nom}} <br> <div id="lieu">{{ville}}, {{pays}}</div></div>
-    </a>
+    <div class="col-12   col-xl-4">
+        <a type="button" @click="oppenCard" data-bs-toggle="modal" data-bs-target="#exampleModalLabel" class="carte  px-md-0 w-100 m-0 bg-color d-flex flex-column pt-3 align-items-center border-0">
+            <img v-bind:id="index" v-bind:src="img" class="img"  height="140" alt="image ">
+            <div  class="h4 mt-3 txt"> {{nom}} <br> <div id="lieu">{{ville}}, {{pays}}</div></div>
+        </a>
+
+    </div>
 </template>
 
 <script setup>
-import {onMounted} from 'vue'
+import {onMounted, defineEmits} from 'vue'
+
+import Popup from "../views/etudiant/destinations/popupInfo/PopupInfo.vue"
+
 import etude from '../views/etudiant/destinations/img/etude.png'
 import humanitaire from '../views/etudiant/destinations/img/humanitaire.png'
 import stage from '../views/etudiant/destinations/img/stage.png'
 
-import {defineEmits} from 'vue'
 
 const props = defineProps(["img","nom","ville","pays","index","type","destination"])
 
 const emits = defineEmits(['oppen'])
 function oppenCard(){
+    
     emits('oppen',props.destination)
+    
 }
 
-function Base64ToImage(base64img) {
+function Base64ToImage() {
     if(props.img==""){
+        console.log("on passe")
         if(props.type=="STAGE"){
+            console.log("on passe 2")
             document.getElementById(`${props.index}`).src=stage
+            
         }
         if(props.type=="ETUDE"){
             document.getElementById(`${props.index}`).src=etude
