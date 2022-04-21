@@ -185,7 +185,7 @@
   function toastDanger (title, message) {
       createToast({ title: title, description: message}, {type: 'danger'})
   }
-
+ 
 </script>
 
 <style>
