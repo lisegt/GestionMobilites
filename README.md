@@ -46,7 +46,7 @@ gestionDesMobilites
 
 ## Pour exécuter le projet
 
-A la racine du projet: 
+A la racine du projet sur la branche authentification : 
 
 ```
 mvn clean install
