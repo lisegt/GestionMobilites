@@ -14,8 +14,8 @@
                     <input id="updateIntitule" class="form-control" name="updateIntitule" type="text" v-model="intitule" placeholder="Entrez le nom du document ..." required/>
                 </div>
                 <div class="form-group">
-                    <label for="updateDescription" class="font-weight-bold">Desciption :</label>
-                    <input id="updateDescription" class="form-control" name="updateDescription" type="text" v-model="description" placeholder="Entrez une description du document ..." required/>
+                    <label for="updateDescription" class="font-weight-bold">Description :</label>
+                    <textarea id="updateDescription" class="form-control" name="updateDescription" type="text" v-model="description" rows="3" placeholder="Entrez une description du document ..." required></textarea>
                 </div>
                 <input id="idDocToEdit" style="display: none;"/>
                 <!--Upload de fichier :-->

@@ -51,6 +51,7 @@ import stage from '../img/stage.png'
 
 
 const props=defineProps(['destination','image','mobilites'])
+
 /**
  * @param mobilite
  * Fonction qui télécharge le fichier
@@ -58,7 +59,7 @@ const props=defineProps(['destination','image','mobilites'])
 function download(mobilite){
   const linkSource = mobilite.retourExperience;
   let btn = document.getElementById("btnDownLoad")
-  const fileName = `retour_experience.pdf`
+  const fileName = `retour_experience_${props.destination.nomEtablissementAccueil}.pdf`
   btn.href = linkSource;
   btn.download = fileName;
   btn.click();
