@@ -27,7 +27,7 @@
                 </div>
                 <input id="idEtudToEdit" style="display: none;"/>
                 <div class="modal-footer">
-                    <button type="button" class="btnOrange" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btnBleu" data-bs-dismiss="modal">Annuler</button>
                     <input id="Bouton" type="submit" class="btnOrange" value="Modifier" data-bs-dismiss="modal"/>
                  </div>
             </form>
