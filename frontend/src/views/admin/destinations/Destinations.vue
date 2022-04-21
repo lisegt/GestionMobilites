@@ -140,7 +140,7 @@
       }
 
     function updateDestination(event){
-          console.log("cc")
+          
            event.preventDefault()
            alert(document.getElementById("nomEtablissement").value)
            let nomEtablissement = document.getElementById("nomEtablissement").value

@@ -18,6 +18,7 @@ public class Mobilite {
     @NonNull
     private LocalDate dateDepart;
     
+    @Column(columnDefinition="LONGTEXT")
     private String retourExperience;
 
     private int dureeEnMois;

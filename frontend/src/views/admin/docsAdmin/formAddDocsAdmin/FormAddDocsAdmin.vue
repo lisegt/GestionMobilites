@@ -22,7 +22,7 @@
                   <form method="POST" enctype="multipart/form-data" action="/upload">
                     <div class="form-group">
                       <label for="file" class="font-weight-bold">Fichier à télécharger :</label>
-                      <input class="form-control" @change="majFile" id="file" type="file" name="file" />
+                      <input class="form-control" @change="majFile" id="file" type="file" name="file" accept=".pdf" />
                     </div>
                   </form>
                 </div>
@@ -33,7 +33,7 @@
                 </div>
                 <!---->
                 <div class="modal-footer">
-                    <button type="button" class="btnOrange" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btnBleu" data-bs-dismiss="modal">Annuler</button>
                     <input @click="ajouter" id="bouton" type="submit"  class="btnOrange" value="Ajouter"  data-bs-dismiss="modal"/>
                  </div>
             </form>

@@ -62,13 +62,13 @@
                             <div class="mb-3 row">
                                 <div class="col">
                                     <label for="image" class="form-label">CHOISIR L'IMAGE:</label>
-                                    <input type="file"  @change="sendFile" class="form-control " name="addImage" id="addImage">
+                                    <input type="file"  @change="sendFile" class="form-control " name="addImage" id="addImage" accept="image/png, image/jpeg"/>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btnOrange" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btnBleu" data-bs-dismiss="modal">Annuler</button>
                         <input id="Bouton" @click="addDestination" data-bs-dismiss="modal" type="submit" class="btnOrange" value="Ajouter" />
                     </div>
                 </form>

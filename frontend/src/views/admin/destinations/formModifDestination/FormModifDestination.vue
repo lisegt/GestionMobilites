@@ -64,14 +64,14 @@
                 <div class="mb-3 row">
                     <div class="col">
                     <label for="image" class="form-label">CHOISIR/MODIFIER L'IMAGE:</label>
-                    <input type="file" @change="changeImage"  class="form-control " name="image" id="imageModifier">
+                    <input type="file" @change="changeImage"  class="form-control " name="image" id="imageModifier" accept="image/png, image/jpeg"/>
                     </div>
                 </div>
           
           </div>
         </div>         
         <div class="modal-footer">
-        <button type="button" class="btnOrange" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btnBleu" data-bs-dismiss="modal">Annuler</button>
         <button type="submit" id="btnSub" @click="updateDestination" data-bs-dismiss="modal" class="btnOrange">Modifier</button>
       </div>
     </form>

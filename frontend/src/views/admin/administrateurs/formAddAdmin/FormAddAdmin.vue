@@ -22,7 +22,7 @@
         <input class="form-control" type="password" v-model="password"/>
       </div>
        <div class="modal-footer">
-          <button type="button" class="btnOrange" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btnBleu" data-bs-dismiss="modal">Annuler</button>
           <input type="submit" value="ajouter" class="btnOrange" data-bs-dismiss="modal"/>
        </div>
     </form>
