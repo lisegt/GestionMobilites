@@ -292,6 +292,24 @@ function searchByEtatMobilite(etat){
   }
 }
 
+/**
+ * @param etudiant : nom ou prénom d'un étudiant saisi par l'utilisateur
+ * fonction qui permet de récupérer toutes les mobilités concernant un étudiant saisi
+ */
+function searchMobilite(etudiant){
+  const url = `/api/mobilites/findByEtudiant?etudiant=${etudiant}` //url permettant d'accéder aux mobilités filtrées par promo
+
+  console.log('test')
+  if(etudiant != ''){ //si on sélectionne n'importe quelle promo de la liste déroulante, on filtre
+
+    getMobilitesFiltrees(url) //on récupère les mobilités filtrées
+
+  } else { // on sélectionne l'option permettant d'afficher toutes les mobilités
+
+    getMobilites(urlAllMobilites)
+  }
+}
+
 onMounted(()=>{
     getMobilites(urlAllMobilites)
     

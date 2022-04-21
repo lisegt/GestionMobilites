@@ -102,6 +102,7 @@ function updateDoc(event){
 
   let myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
+  myHeaders.append("Authorization", localStorage.getItem('jwt'));
   const fetchOptions = {  method:"PUT", 
                                     headers: myHeaders, 
                                     body: JSON.stringify({
