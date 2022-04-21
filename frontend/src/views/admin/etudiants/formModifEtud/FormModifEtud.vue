@@ -11,19 +11,19 @@
             <form @submit.prevent="updateEtud">
                 <div class="form-group">
                     <label for="nom" class="font-weight-bold">Nom :</label>
-                    <input id="nomEtudToEdit" class="form-control" name="nom" type="text" v-model="nom" placeholder="Entrez le nom de l'étudiant ..." required/>
+                    <input id="nomEtudToEdit" class="form-control" name="nom" type="text" v-model="nom" placeholder="Entrez le nom de l'étudiant ..." />
                 </div>
                 <div class="form-group">
                     <label for="prenom" class="font-weight-bold">Prénom :</label>
-                    <input id="prenomEtudToEdit" class="form-control" name="prenom" type="text" v-model="prenom" placeholder="Entrez le prénom de l'étudiant ..." required/>
+                    <input id="prenomEtudToEdit" class="form-control" name="prenom" type="text" v-model="prenom" placeholder="Entrez le prénom de l'étudiant ..." />
                 </div>
                 <div class="form-group">
                     <label for="ine" class="font-weight-bold">INE :</label>
-                    <input id="ineEtudToEdit" class="form-control" name="numEtud" type="number" v-model="ine" placeholder="Entrez l'INE de l'étudiant ..." required/>
+                    <input id="ineEtudToEdit" class="form-control" name="numEtud" type="number" v-model="ine" placeholder="Entrez l'INE de l'étudiant ..." />
                 </div>
                 <div class="form-group">
                     <label for="promotion" class="font-weight-bold">Promotion :</label>
-                    <input id="promotionEtudToEdit" class="form-control" name="promo" type="number" v-model="promotion" placeholder="Saisir une promotion ..." required/>
+                    <input id="promotionEtudToEdit" class="form-control" name="promo" type="number" v-model="promotion" placeholder="Saisir une promotion ..." />
                 </div>
                 <input id="idEtudToEdit" style="display: none;"/>
                 <div class="modal-footer">
@@ -40,6 +40,8 @@
 
 <script setup>
     import {ref, defineEmits} from 'vue'
+    import { createToast } from 'mosha-vue-toastify';
+    import 'mosha-vue-toastify/dist/style.css'
 
     defineProps(["etudiant"]);
     const emit = defineEmits(['update_ok'])
@@ -63,8 +65,18 @@
         myHeaders.append("Authorization", localStorage.getItem('jwt'))
         const fetchOptions = {method:"PUT", headers: myHeaders, body: JSON.stringify({nom:nom, numEtud:ine, prenom:prenom, promo:promotion})};
         fetch(url,fetchOptions)
-        .then(()=>{emit('update_ok')})
+        .then((response)=>{
+            if(response.status === 400){
+                toastDanger('Modification refusé')
+            }
+            console.log(response.status)
+            emit('update_ok')
+        })
         .catch((error) => console.log(error));
+    }
+
+    function toastDanger (title, message) {
+      createToast({ title: title, description: message}, {type: 'danger'})
     }
 </script>
 

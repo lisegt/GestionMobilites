@@ -8,7 +8,7 @@
       </div>
       <div class="modal-body">
         <div id="form">
-            <form @submit.prevent="">
+            <form @submit.prevent="clear">
                 <div class="form-group">
                     <label for="nom" class="font-weight-bold">Nom :</label>
                     <input v-model="nom" id="nom" class="form-control" name="nom" type="text" placeholder="Entrez le nom de l'étudiant ..." required/>
@@ -23,7 +23,7 @@
                 </div>
                 <div class="form-group">
                     <label for="promotion" class="font-weight-bold">Promotion :</label>
-                    <input v-model="promotion" id="promotion" class="form-control" name="promo" type="number" placeholder="Sélectionnez une promotion ..." required/>
+                    <input v-model="promotion" id="promotion_input" class="form-control" name="promo" type="number" placeholder="Sélectionnez une promotion ..." required/>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btnOrange" data-bs-dismiss="modal">Close</button>
@@ -40,10 +40,17 @@
 <script setup>
     import {ref} from 'vue'
 
-    let nom = ref('')
-    let prenom = ref('')
-    let promotion=ref()
-    let ine = ref()
+    let nom = ref(null)
+    let prenom = ref(null)
+    let promotion=ref(null)
+    let ine = ref(null)
+
+    function clear(){
+        nom.value = null
+        prenom.value = null
+        promotion.value = null
+        ine.value = null
+    }
 
 </script>
 
